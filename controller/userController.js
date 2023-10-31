@@ -60,7 +60,7 @@ const loadLanding = async (req, res) => {
     if (req.session.id && req.session.role == "user") {
         res.redirect("/user/home")
     } else {
-        res.redirect("user/landing")
+        res.render("user/landing")
     }
 }
 

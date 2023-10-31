@@ -1,8 +1,9 @@
 const { compareSync } = require("bcrypt")
 const adminModel = require("../model/categoryModel")
 const categoryModel = require("../model/categoryModel")
+const { render } = require("../routes/adminRoute")
 
-
+//......................category..................................
 const loadCategory = async (req, res) => {
     try {
         const categoryData = await categoryModel.find({})
@@ -72,43 +73,72 @@ const editCategory = async (req, res) => {
         res.json({ status: true })
 
     } catch (error) {
-        console.log(error.message +" editCategory")
+        console.log(error.message + " editCategory")
         return res.json({ err: "An error occurred while editing the category." });
     }
 }
-const deleteCategory=async(req,res)=>{
+const deleteCategory = async (req, res) => {
     try {
-        const id=req.query.id;
-        await categoryModel.updateOne({_id:id},{
+        const id = req.query.id;
+        await categoryModel.updateOne({ _id: id }, {
             $set:
             {
-                categorystatus:false
+                categorystatus: false
             }
         })
         res.redirect("/admin/category");
     } catch (error) {
-       console.log(error.message+" deleteCategory") 
+        console.log(error.message + " deleteCategory")
     }
 }
-const recoverCategory=async(req,res)=>{
+const recoverCategory = async (req, res) => {
     try {
-        const id=req.query.id;
-        await categoryModel.updateOne({_id:id},{
+        const id = req.query.id;
+        await categoryModel.updateOne({ _id: id }, {
             $set:
             {
-                categorystatus:true
+                categorystatus: true
             }
         })
         res.redirect("/admin/category");
     } catch (error) {
-       console.log(error.message+" recoverCategory") 
+        console.log(error.message + " recoverCategory")
+    }
+}
+
+//..................................product..................
+const loadProduct = async (req, res) => {
+try {
+    res.render("admin/product")
+} catch (error) {
+    console.log(error.message+" loadProduct")
+}
+}
+const loadAddProduct=async(req,res)=>{
+    try {
+       res.render("admin/addProduct") 
+    } catch (error) {
+       console.log(error.message+ "loadAddProduct") 
+    }
+}
+
+const loadAddProductTest=async(req,res)=>{
+    try {
+        res.render("admin/addProductTest")
+    } catch (error) {
+        console.log(error.message+ " loadAddProductTest")
     }
 }
 module.exports = {
+//....category......
     loadCategory,
     insertCategory,
     getEditCategoryId,
     editCategory,
     deleteCategory,
-    recoverCategory
+    recoverCategory,
+//.....product......
+    loadProduct,
+    loadAddProduct,
+    loadAddProductTest
 }

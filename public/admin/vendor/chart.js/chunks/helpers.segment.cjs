@@ -1,9 +1,4 @@
-/*!
- * Chart.js v4.4.0
- * https://www.chartjs.org
- * (c) 2023 Chart.js Contributors
- * Released under the MIT License
- */
+
 'use strict';
 
 var color$1 = require('@kurkle/color');
