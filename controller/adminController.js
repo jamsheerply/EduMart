@@ -3,6 +3,7 @@ const adminModel = require("../model/categoryModel")
 const categoryModel = require("../model/categoryModel")
 const { render } = require("../routes/adminRoute")
 
+
 //......................category..................................
 const loadCategory = async (req, res) => {
     try {
@@ -15,7 +16,7 @@ const loadCategory = async (req, res) => {
 }
 const insertCategory = async (req, res) => {
     try {
-        const categoryData = await categoryModel.find({});
+        // const categoryData = await categoryModel.find({});
         const categoryName = req.body.categoryName;
 
         if (!categoryName || categoryName.trim() === "") {
@@ -106,29 +107,8 @@ const recoverCategory = async (req, res) => {
     }
 }
 
-//..................................product..................
-const loadProduct = async (req, res) => {
-try {
-    res.render("admin/product")
-} catch (error) {
-    console.log(error.message+" loadProduct")
-}
-}
-const loadAddProduct=async(req,res)=>{
-    try {
-       res.render("admin/addProduct") 
-    } catch (error) {
-       console.log(error.message+ "loadAddProduct") 
-    }
-}
 
-const loadAddProductTest=async(req,res)=>{
-    try {
-        res.render("admin/addProductTest")
-    } catch (error) {
-        console.log(error.message+ " loadAddProductTest")
-    }
-}
+
 module.exports = {
 //....category......
     loadCategory,
@@ -137,8 +117,4 @@ module.exports = {
     editCategory,
     deleteCategory,
     recoverCategory,
-//.....product......
-    loadProduct,
-    loadAddProduct,
-    loadAddProductTest
 }

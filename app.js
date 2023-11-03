@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const cors = require('cors');
 require('dotenv').config();
 const app = express();
+require("./config/dataBase")
   
 const corsOptions = {
     origin: 'http://127.0.0.1:8080', // Replace with your frontend's URL
@@ -15,12 +16,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
-try {
-    mongoose.connect(process.env.DB).then(()=>console.log("Connected to MongoDB"))
-} catch (error) {
-    console.error("Mongoose connection error:", error);
-}
 
 
 // Initialization

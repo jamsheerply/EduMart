@@ -1,7 +1,9 @@
 const express=require("express")
 const adminRoute=express()
 const adminController=require("../controller/adminController")
+const productController=require("../controller/productController")
 const path = require("path");
+const upload=require("../midddleware/multer")
 
 
 //middleWare
@@ -22,11 +24,17 @@ adminRoute.post("/category/edit-Category/:id",adminController.editCategory)
 adminRoute.get("/category/delete-category",adminController.deleteCategory)
 adminRoute.get("/category/recover-category",adminController.recoverCategory)
 
-//.............................product............................................
-adminRoute.get("/product",adminController.loadProduct)
-adminRoute.get("/add-product",adminController.loadAddProduct)
-adminRoute.get("/add-product-test",adminController.loadAddProductTest)
-// adminRoute.get("/product/single-product",adminController.loadSingleProduct)
+//.............................productRoute............................................
+adminRoute.get("/product",productController.loadProduct)
+adminRoute.get("/add-product",productController.loadAddProduct)
+// const uploadFields= [
+//     { name: 'productImage1', maxCount: 1 },
+//     { name: 'productImage2', maxCount: 1 },
+//     { name: 'productImage3', maxCount: 1 },
+//     { name: 'productImage4', maxCount: 1 } 
+// ];
+adminRoute.post("/add-product",upload.any(),productController.insertAddProduct)
+
 
 
 module.exports=adminRoute

@@ -37,7 +37,7 @@
   <!-- Template Main CSS File -->
   <link href="admin/css/style.css" rel="stylesheet">
   <link href="StyleSheet/addProduct.css" rel="stylesheet">
-  <script  src="javaScript/product.js"></script>
+
 </head>
 
 <body>
@@ -216,15 +216,14 @@
         </style>
     </head>
     <body>
-        <form   onsubmit="addProduct(event)">
+        <form action="/admin/add-product" method="post" enctype="multipart/form-data">
             <div class="container">
                 <div class="grid product">
                     <div class="column-xs-12 column-md-7">
                         <div class="product-gallery">
                             <label class="product-image" style="width: 650px; height: 400px; padding-bottom: 5px; display: flex; align-items: center; justify-content: center;">
-                              <input type="file" id="productImage1" accept="image/*" class="input-hidden" onchange="previewImage(this, 'imagePreview1')" name="productImage1">
-                              <img id="imagePreview1" class="image-preview" ><br>
-                              <p id="productImage1Error" style="color: red;"></p>
+                              <input type="file" id="productImage1" accept="image/*" class="input-hidden" onchange="previewImage(this, 'imagePreview1')" name="productMainImage">
+                              <img id="imagePreview1" class="image-preview" >
                             </label>
                             <br>
                             <div style="width: 650px; height: 220px; display: flex; align-items: center; justify-content: center;" id="childMain">
@@ -232,25 +231,22 @@
                                     <li style="width: 620px; height: 220px;">
                                       <!-- <input type="file" class="form-control"  id="childOne" style="display: none;" > -->
                                       <label class="preview-container">
-                                            <input type="file" id="productImage2" accept="image/*" class="input-hidden" onchange="previewImage(this, 'imagePreview2')" name="productImage2">
+                                            <input type="file" id="productImage2" accept="image/*" class="input-hidden" onchange="previewImage(this, 'imagePreview2')" name="productChildOneImage">
                                             <img id="imagePreview2" class="image-preview" >
-                                            <p id="productImage2Error" style="color: red;"></p>
                                         </label>
                                     </li>
                                     <li style="width: 620px; height: 220px;">
                                       <!-- <input type="file" class="form-control" id="childTwo" style="display: none;" > -->
                                       <label class="preview-container">
-                                            <input type="file" id="productImage3" accept="image/*" class="input-hidden" onchange="previewImage(this, 'imagePreview3')" name="productImage3">
+                                            <input type="file" id="productImage3" accept="image/*" class="input-hidden" onchange="previewImage(this, 'imagePreview3')" name="productChildTwoImage">
                                             <img id="imagePreview3" class="image-preview" >
-                                            <p id="productImage3Error" style="color: red;"></p>
                                         </label>
                                     </li>
                                     <li style="width: 620px; height: 220px;">
                                       <!-- <input type="file" class="form-control" id="childThree" style="display: none ;"> -->
                                       <label class="preview-container">
-                                            <input type="file" id="productImage4" accept="image/*" class="input-hidden" onchange="previewImage(this, 'imagePreview4')" name="productImage4">
+                                            <input type="file" id="productImage4" accept="image/*" class="input-hidden" onchange="previewImage(this, 'imagePreview4')" name="productChildThreeImage">
                                             <img id="imagePreview4" class="image-preview" >
-                                            <p id="productImage4Error" style="color: red;"></p>
                                         </label>
                                     </li>
                                 </ul>
@@ -261,22 +257,18 @@
                         <div class="form-group">
                             <label for="productName" class="label-left">Product Name</label>
                             <input type="text" id="productName" class="input-right" style="width: 100%; " name="productName">
-                            <p id="productNameError" style="color: red;"></p>
                         </div>
                         <div class="form-group">
                             <label for="productDescription" class="label-left">Product Description</label>
                             <textarea id="productDescription" class="input-right" style="width: 100%;" rows="4" name="productDescription"></textarea>
-                            <p id="productDescriptionError" style="color: red;"></p>
                         </div>
                         <div class="form-group">
                             <label for="publisher" class="label-left">Publisher</label>
                             <input type="text" id="publisher" class="input-right" style="width: 100%;" name="publisher">
-                            <p id="publisherError" style="color: red;"></p>
                         </div>
                         <div class="form-group">
                             <label for="language" class="label-left">Language</label>
                             <input type="text" id="language" class="input-right" style="width: 100%;" name="language">
-                            <p id="languageError" style="color: red;"></p>
                         </div>
                         <div class="form-group">
                             <label for="price" class="label-left">Category</label>
@@ -287,7 +279,7 @@
                                 </option>
                                 <%})%>
                             </select>
-                            <p id="categoryError" style="color: red;"></p>
+                            <!-- <input type="text" id="price" class="input-right" style="width: 100%;" name="category"> -->
                         </div>
                         <div class="form-group">
                             <label for="status" class="label-left" >Status</label>
@@ -297,12 +289,11 @@
                               <option value="outofstock">Out of stock</option>
                               <!-- <option value="lowquantity">Low quantity</option> -->
                             </select>
-                            <p id="statusError" style="color: red;"></p>
+                            <!-- <input type="text" id="status" class="input-right" style="width: 100%;" name="status"> -->
                         </div>
                         <div class="form-group">
                             <label for="category" class="label-left">Price</label>
-                            <input type="text" id="price" class="input-right" style="width: 100%;" name="price">
-                            <p id="priceError" style="color: red;"></p>
+                            <input type="text" id="category" class="input-right" style="width: 100%;" name="price">
                         </div>
                         <div class="form-group ">
                             <button class="btn btn-success" type="submit">Save</button>
@@ -312,7 +303,73 @@
             </div>
         </form>
         <script>
-          
+            function previewImage(input, imageId) {
+    const file = input.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            document.getElementById(imageId).src = event.target.result;
+            input.style.display = "none"; // Hide the input tag
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+const dropArea = document.getElementById("dropArea");
+const fileInput = document.getElementById("fileInput");
+let imageAdded = false; // Add this flag
+
+dropArea.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    dropArea.classList.add("dragging");
+});
+
+dropArea.addEventListener("dragleave", () => {
+    dropArea.classList.remove("dragging");
+});
+
+dropArea.addEventListener("drop", (e) => {
+    e.preventDefault();
+    dropArea.classList.remove("dragging");
+
+    // Check if an image has already been added
+    if (!imageAdded) {
+        const file = e.dataTransfer.files[0];
+        handleImage(file);
+        imageAdded = true;
+    }
+});
+
+fileInput.addEventListener("change", (e) => {
+    // Check if an image has already been added
+    if (!imageAdded) {
+        const file = e.target.files[0];
+        handleImage(file);
+        imageAdded = true;
+    }
+});
+
+function handleImage(file) {
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            dropArea.style.backgroundImage = `url(${e.target.result})`;
+            dropArea.textContent = ''; // Hide the text
+        };
+
+        reader.readAsDataURL(file);
+    } else {
+        dropArea.style.backgroundImage = "none";
+        dropArea.textContent = 'Drag & Drop or Click to Select'; // Show the text
+    }
+}
+
+// Open file input when clicking on the drop area
+dropArea.addEventListener("click", () => {
+    fileInput.click();
+});
+
     </script>
   <!-- ======= Footer ======= -->
 
@@ -339,7 +396,7 @@
   <script src="admin/js/main.js"></script>
 
   <!-------validation------>
-  
+  <script src="javaScript/product.js"></script
 </body>
 
 </html>
