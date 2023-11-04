@@ -1,7 +1,7 @@
 const { compareSync } = require("bcrypt")
 const adminModel = require("../model/categoryModel")
 const categoryModel = require("../model/categoryModel")
-const { render } = require("../routes/adminRoute")
+// const { render } = require("../routes/adminRoute")
 
 
 //......................category..................................
@@ -30,7 +30,7 @@ const insertCategory = async (req, res) => {
         const existingCategory = await categoryModel.findOne({ $or: [{ category: up }, { category: low }] });
 
         if (existingCategory) {
-            return res.json({ err: "Category already exists." });
+            return res.json({ err: "Category already exists."});
         }
 
         const timestamp = Date.now();
@@ -48,7 +48,7 @@ const insertCategory = async (req, res) => {
         return res.json({ status: "Category added successfully." });
     } catch (error) {
         console.error(error.message);
-        return res.json({ err: "An error occurred while adding the category." });
+        return res.json({ err: "Category already exists." });
     }
 };
 const getEditCategoryId = async (req, res) => {
@@ -75,7 +75,7 @@ const editCategory = async (req, res) => {
 
     } catch (error) {
         console.log(error.message + " editCategory")
-        return res.json({ err: "An error occurred while editing the category." });
+        return res.json({ err: "Category already exists." });
     }
 }
 const deleteCategory = async (req, res) => {

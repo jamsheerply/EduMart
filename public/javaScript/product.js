@@ -132,12 +132,12 @@ function addProduct(event) {
       .then((response) => response.json())
       .then((res) => {
         if (res.status) {
-          // Redirect to a success page or take appropriate action
+          location.href = "/admin/product";
         }
         if (res.err) {
-          // Handle the error, e.g., display an error message
+        document.getElementById("productNameError").textContent = res.err;
         }
-      }); // Rest of your code for submitting the form
+      });
   }
 }
 
@@ -153,6 +153,51 @@ function previewImage(input, imageId) {
       input.style.display = "none"; // Hide the input tag
     };
     reader.readAsDataURL(file);
+  }
+}
+
+function editProduct(event) {
+  event.preventDefault();
+  if (validateProductForm()) {
+    const productImage1 = document.getElementById("productImage1").files[0];
+    const productImage2 = document.getElementById("productImage2").files[0];
+    const productImage3 = document.getElementById("productImage3").files[0];
+    const productImage4 = document.getElementById("productImage4").files[0];
+    const productName = document.getElementById("productName").value;
+    const productDescription = document.getElementById("productDescription").value;
+    const publisher = document.getElementById("publisher").value;
+    const language = document.getElementById("language").value;
+    const category = document.getElementById("category").value;
+    const status = document.getElementById("status").value;
+    const price = document.getElementById("price").value;
+
+    const formData = new FormData();
+    formData.append("productImage1", productImage1);
+    formData.append("productImage2", productImage2);
+    formData.append("productImage3", productImage3);
+    formData.append("productImage4", productImage4);
+    formData.append("productName", productName);
+    formData.append("productDescription", productDescription);
+    formData.append("publisher", publisher);
+    formData.append("language", language);
+    formData.append("category", category);
+    formData.append("status", status);
+    formData.append("price", price);
+
+    // Make a POST request to the server
+    fetch("/admin/edit-product", {
+      method: "POST",
+      body: formData
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.status) {
+          location.href = "/admin/product";
+        }
+        if (res.err) {
+        document.getElementById("productNameError").textContent = res.err;
+        }
+      });
   }
 }
 

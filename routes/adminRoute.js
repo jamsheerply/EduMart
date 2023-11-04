@@ -27,14 +27,8 @@ adminRoute.get("/category/recover-category",adminController.recoverCategory)
 //.............................productRoute............................................
 adminRoute.get("/product",productController.loadProduct)
 adminRoute.get("/add-product",productController.loadAddProduct)
-// const uploadFields= [
-//     { name: 'productImage1', maxCount: 1 },
-//     { name: 'productImage2', maxCount: 1 },
-//     { name: 'productImage3', maxCount: 1 },
-//     { name: 'productImage4', maxCount: 1 } 
-// ];
 adminRoute.post("/add-product",upload.any(),productController.insertAddProduct)
-
-
+adminRoute.get("/edit-product",productController.EditProductLoad)
+adminRoute.post("/edit-product",upload.any(),productController.updateProduct)
 
 module.exports=adminRoute
