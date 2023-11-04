@@ -95,7 +95,7 @@ function validateImageFiles() {
   return valid;
 }
 
-// Function to handle product form submission
+//............add product........
 function addProduct(event) {
   event.preventDefault();
   if (validateProductForm() && validateImageFiles()) {
@@ -141,22 +141,8 @@ function addProduct(event) {
   }
 }
 
-
-
-//..............image preview.........
-function previewImage(input, imageId) {
-  const file = input.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function (event) {
-      document.getElementById(imageId).src = event.target.result;
-      input.style.display = "none"; // Hide the input tag
-    };
-    reader.readAsDataURL(file);
-  }
-}
-
-function editProduct(event) {
+//..........edit product...........
+function editProduct(id) {
   event.preventDefault();
   if (validateProductForm()) {
     const productImage1 = document.getElementById("productImage1").files[0];
@@ -185,7 +171,7 @@ function editProduct(event) {
     formData.append("price", price);
 
     // Make a POST request to the server
-    fetch("/admin/edit-product", {
+    fetch(`/admin/edit-product/${id}`, {
       method: "POST",
       body: formData
     })
@@ -200,5 +186,21 @@ function editProduct(event) {
       });
   }
 }
+
+
+
+//..............image preview.........
+function previewImage(input, imageId) {
+  const file = input.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      document.getElementById(imageId).src = event.target.result;
+      input.style.display = "none"; // Hide the input tag
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
 
 

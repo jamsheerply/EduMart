@@ -29,6 +29,6 @@ adminRoute.get("/product",productController.loadProduct)
 adminRoute.get("/add-product",productController.loadAddProduct)
 adminRoute.post("/add-product",upload.any(),productController.insertAddProduct)
 adminRoute.get("/edit-product",productController.EditProductLoad)
-adminRoute.post("/edit-product",upload.any(),productController.updateProduct)
+adminRoute.post("/edit-product/:id",upload.any(),productController.updateProduct)
 
 module.exports=adminRoute

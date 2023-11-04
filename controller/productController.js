@@ -62,10 +62,10 @@ const EditProductLoad = async (req, res) => {
         const id = req.query.id;
         // console.log(id)
         const productData = await productModel.findById(id)
-        const categoryData=await categoryModel.find({})
+        const categoryData = await categoryModel.find({})
         // console.log(productData)
-        if (productData&&categoryData) {
-            res.render("admin/editProduct",{product:productData,category:categoryData})
+        if (productData && categoryData) {
+            res.render("admin/editProduct", { product: productData, category: categoryData })
         } else {
             res.redirect("admin/product")
         }
@@ -74,14 +74,81 @@ const EditProductLoad = async (req, res) => {
     }
 }
 
-const updateProduct=async(req,res)=>{
+const updateProduct = async (req, res) => {
     try {
-        const id=req.query.id;
-        console.log(id)
-        const productData=await productModel.findById({_id:id})
-        
+        const id = req.params.id;
+        // console.log(id)
+        const productData = await productModel.findById({ _id: id })
+        // console.log(req.body)
+        console.log(req.files)
+        await productModel.updateOne({ _id: id }, {
+            $set:
+            {
+                productName: req.body.productName,
+                productDescription: req.body.productDescription,
+                publisher: req.body.publisher,
+                language: req.body.language,
+                category: req.body.category,
+                status: req.body.status,
+                price: req.body.price
+            }
+        })
+        if (req.files) {
+            const imageFiles = req.files;
+            for (const element of imageFiles) {
+                //   console.log(element.fieldname);
+                if (element.fieldname === "productImage1") {
+                    try {
+                        const updateQuery = {
+                            $set: {
+                                "imageURL.0.productImage1": "/imageUpload/products/" + element.filename
+                            }
+                        };
+                        await productModel.updateOne({ _id: id }, updateQuery);
+                    } catch (error) {
+                        console.error(error.message + " productImage1");
+                    }
+                } else if (element.fieldname === "productImage2") {
+                    try {
+                        const updateQuery = {
+                            $set: {
+                                "imageURL.0.productImage2": "/imageUpload/products/" + element.filename
+                            }
+                        };
+                        await productModel.updateOne({ _id: id }, updateQuery);
+                    } catch (error) {
+                        console.error(error.message + " productImage2");
+                    }
+                } else if (element.fieldname === "productImage3") {
+                    try {
+                        const updateQuery = {
+                            $set: {
+                                "imageURL.0.productImage3": "/imageUpload/products/" + element.filename
+                            }
+                        };
+                        await productModel.updateOne({ _id: id }, updateQuery);
+                    } catch (error) {
+                        console.error(error.message + " productImage3");
+                    }
+                } else if (element.fieldname === "productImage4") {
+                    try {
+                        const updateQuery = {
+                            $set: {
+                                "imageURL.0.productImage4": "/imageUpload/products/" + element.filename
+                            }
+                        };
+                        await productModel.updateOne({ _id: id }, updateQuery);
+                    } catch (error) {
+                        console.error(error.message + " productImage4");
+                    }
+                }
+            }
+        }
+
+        return res.json({ status: true })
     } catch (error) {
-       console.log(error.message+ " updateProduct") 
+        console.log(error.message + " updateProduct")
+        return res.json({ err: "Product name already exists." });
     }
 }
 module.exports = {

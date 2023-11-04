@@ -197,7 +197,7 @@
         </style>
     </head>
     <body>
-        <form   onsubmit="editProduct(event)">
+        <form   onsubmit="editProduct('<%=product._id%>')">
             <div class="container">
                 <div class="grid product">
                     <div class="column-xs-12 column-md-7">
@@ -256,7 +256,7 @@
                         </div>
                         <div class="form-group">
                             <label for="language" class="label-left">Language</label>
-                            <input type="text" id="language" class="input-right" style="width: 100%;" name="language" value="<%=product.price%>">
+                            <input type="text" id="language" class="input-right" style="width: 100%;" name="language" value="<%=product.language%>">
                             <p id="languageError" style="color: red;"></p>
                         </div>
                         <div class="form-group">
