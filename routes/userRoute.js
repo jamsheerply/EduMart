@@ -2,12 +2,12 @@ const express = require("express")
 const userRoute = express()
 const userController = require("../controller/userController")
 const userAuth=require("../midddleware/UserAuth")
-const morgan=require("morgan")
+// const morgan=require("morgan")
 
 //middleWare
 userRoute.use(express.json());
 userRoute.use(express.urlencoded({ extended: true }));
-userRoute.use(morgan("tiny"))
+// userRoute.use(morgan("tiny"))
 
 // const path = require("path")
 // const multer = require("multer")
@@ -39,9 +39,15 @@ userRoute.get("/logout",userAuth.isLogin,(req, res) => {
     res.setHeader("Cache-Control", "no-store");
     userController.userLogout(req, res);
 })
+
+//...................productList..........................
+userRoute.get("/product-list",userController.loadProductList)
+
+//...................singleProudct.......................
+userRoute.get("/product-detail",userController.loadProductDetail)
+
+
+
 userRoute.post("/admin/insert",userController.adminInsert)
-// userRoute.post("/register",upload.single("profileImage"),userController.insertUser) 
-
-
 
 module.exports = userRoute

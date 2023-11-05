@@ -151,11 +151,37 @@ const updateProduct = async (req, res) => {
         return res.json({ err: "Product name already exists." });
     }
 }
+const deleteProduct=async(req,res)=>{
+    try {
+        const id=req.query.id
+        // console.log(id)
+        await productModel.updateOne({_id:id},{
+            $set:{
+                isdeleted:false
+            }
+        })
+        res.redirect("/admin/product")
+    } catch (error) {
+        console.log(error.message+ " deleteProduct")
+    }
+}
+const recoverProduct=async(req,res)=>{
+    const id=req.query.id
+    // console.log(id)
+    await productModel.updateOne({_id:id},{
+        $set:{
+            isdeleted:true
+        }
+    })
+    res.redirect("/admin/product")
+}
 module.exports = {
     loadProduct,
     loadAddProduct,
     insertAddProduct,
     EditProductLoad,
-    updateProduct
+    updateProduct,
+    deleteProduct,
+    recoverProduct
 
 }

@@ -386,65 +386,23 @@ textarea:focus {
 /*----------------------------------------*/
 /*Home One | Slider Background Image*/
 .bg-1, .bg-2, .bg-3 {
-	background-image: url(user/images/slider/1.jpg);
+
+	background-image: url("/user/images/userBanner/banner-1.jpg");
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: cover;
 	min-height: 475px;
-	width: 100%;
+	/* width: 100%; */
 }
 .bg-2 {
-	background-color: #000;
-	background-image: url(user/images/slider/2.jpg);
+
+	background-image: url(/user/images/userBanner/banner-2.jpg);
 }
 .bg-3 {
-	background-image: url(user/images/slider/3.jpg);
+	
+	background-image: url(/user/images/userBanner/banner-3.jpg);
 }
-/*Home Two | Slider Background Image*/
-.bg-4, .bg-5, .bg-6 {
-	background-image: url(user/images/slider/4.jpg);
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-size: cover;
-	min-height: 475px;
-	width: 100%;
-}
-.bg-5 {
-	background-image: url(user/images/slider/5.jpg);
-}
-.bg-6 {
-	background-image: url(user/images/slider/6.jpg);
-}
-/*Home Three | Slider Background Image*/
-.bg-7, .bg-8, .bg-9 {
-	background-image: url(user/images/slider/7.jpg);
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-size: cover;
-	min-height: 425px;
-	width: 100%;
-}
-.bg-8 {
-	background-image: url(user/images/slider/8.jpg);
-}
-.bg-9 {
-	background-image: url(user/images/slider/9.jpg);
-}
-/*Home Four | Slider Background Image*/
-.bg-10, .bg-11, .bg-12 {
-	background-image: url(user/images/slider/10.jpg);
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-size: cover;
-	min-height: 770px;
-	width: 100%;
-}
-.bg-11 {
-	background-image: url(user/images/slider/11.jpg);
-}
-.bg-12 {
-	background-image: url(user/images/slider/12.jpg);
-}
+
 /*----------------------------------------*/
 /*  li's Background Variation Set 
 /*----------------------------------------*/

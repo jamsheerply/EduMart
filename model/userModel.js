@@ -13,7 +13,8 @@ const userSchema = new mongoose.Schema({
         type: String,required: true,
     },
     status: {
-        type: String,enum: ["block", "unBlock"]
+        type: String,enum: ["block", "unblock"],
+        default:"unblock"
     },
     role: {
         type: String,required: true,enum: ["user"],default:"user"

@@ -1,6 +1,7 @@
 const userModel = require("../model/userModel");
 const otpVerification = require("../model/otpVerification")
 const adminModel = require("../model/adminModel")
+const productModel=require("../model/productModel")
 const jwt = require("jsonwebtoken")
 require('dotenv').config();
 
@@ -57,10 +58,12 @@ const sendVerifyMail = async (name, email) => {
 
 //............loadLanding..........................
 const loadLanding = async (req, res) => {
+    const productData=await productModel.find({})
+    console.log(productData)
     if (req.session.id && req.session.role == "user") {
         res.redirect("/user/home")
     } else {
-        res.render("user/landing")
+        res.render("user/landing",{product:productData})
     }
 }
 
@@ -209,6 +212,27 @@ const userLogout = async (req, res) => {
     }
 }
 
+const loadProductList=async(req,res)=>{
+    try {
+        const productData=await productModel.find({isdeleted: true})
+        // console.log(productData)
+        res.render("user/productList",{product:productData})
+    } catch (error) {
+       console.log(error.message+ " loadProductList") 
+    }
+}
+
+const loadProductDetail=async(req,res)=>{
+    try {
+        const id=req.query.id
+        // console.log(id)
+        const productData=await productModel.findById(id)
+        // console.log(productData)
+        res.render("user/productDetail",{product:productData})
+    } catch (error) {
+        console.log(error.message+ " loadProductDetails")
+    }
+}
 module.exports = {
     loadLanding,
     loadRegister,
@@ -219,5 +243,7 @@ module.exports = {
     loadLogin,
     verifyLogin,
     adminInsert,
-    userLogout
+    userLogout,
+    loadProductList,
+    loadProductDetail
 };
