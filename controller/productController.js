@@ -49,6 +49,7 @@ const insertAddProduct = async (req, res) => {
             }]
 
         })
+      
         await newProduct.save()
         return res.json({ status: true });
     } catch (error) {

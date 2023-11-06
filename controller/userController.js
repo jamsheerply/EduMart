@@ -58,12 +58,13 @@ const sendVerifyMail = async (name, email) => {
 
 //............loadLanding..........................
 const loadLanding = async (req, res) => {
-    const productData=await productModel.find({})
-    console.log(productData)
+    const productData=await productModel.find({isdeleted: true,status:"published"})
+    const biographiesData=await productModel.find({isdeleted: true,category:"Biographies",status:"published"})
+    const crimeAndThrillerData=await productModel.find({isdeleted: true,category:"Crime and Thriller",status:"published"})
     if (req.session.id && req.session.role == "user") {
-        res.redirect("/user/home")
+        res.redirect("/user/home",{product:productData,biographies:biographiesData,crimeAndThriller:crimeAndThrillerData})
     } else {
-        res.render("user/landing",{product:productData})
+        res.render("user/landing",{product:productData,biographies:biographiesData,crimeAndThriller:crimeAndThrillerData})
     }
 }
 
@@ -145,8 +146,11 @@ const verifyOtp = async (req, res) => {
 // .......................loadHome....................
 const loadHome = async (req, res) => {
     try {
+        const productData=await productModel.find({isdeleted: true,status:"published"})
+    const biographiesData=await productModel.find({isdeleted: true,category:"Biographies",status:"published"})
+    const crimeAndThrillerData=await productModel.find({isdeleted: true,category:"Crime and Thriller",status:"published"})
         res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
-        res.render("user/home")
+        res.render("user/home",{product:productData,biographies:biographiesData,crimeAndThriller:crimeAndThrillerData})
     } catch (error) {
         console.log(error.message + "loadHome")
     }

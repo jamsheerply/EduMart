@@ -6,11 +6,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Home</title>
+    <title>Landing Page</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <base href="/"> 
+    <base href="/">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="user/images/favicon.png">
     <!-- Material Design Iconic Font-V2.2.0 -->
@@ -69,7 +69,7 @@
                         <!-- Begin Header Logo Area -->
                         <div class="col-lg-3">
                             <div class="logo pb-sm-30 pb-xs-30">
-                                <a >
+                                <a>
                                     <img src="user/images/menu/logo/1.jpg" alt="">
                                 </a>
                             </div>
@@ -91,7 +91,7 @@
                                 <ul class="hm-menu">
                                     <!-- Begin Header Middle Wishlist Area -->
                                     <li class="hm-wishlist">
-                                        <a >
+                                        <a>
                                             <span class="cart-item-count wishlist-item-count">0</span>
                                             <i class="fa fa-heart-o"></i>
                                         </a>
@@ -99,7 +99,7 @@
                                     <!-- Header Middle Wishlist Area End Here -->
                                     <!-- Begin Header Mini Cart Area -->
                                     <li class="hm-wishlist">
-                                        <a href="shopping-cart.html">
+                                        <a >
                                             <span class="cart-item-count wishlist-item-count">0</span>
                                             <i class="fa-solid fa-cart-shopping"></i>
                                         </a>
@@ -130,7 +130,7 @@
                             <div class="hb-menu">
                                 <nav>
                                     <ul>
-                                        <li class="dropdown-holder"><a href="index.html">Home</a></li>
+                                        <li class="dropdown-holder"><a href="/">Home</a></li>
                                         <!-- <li class="megamenu-holder"><a href="contact.html">Contact</a></li>
                                         <li class="dropdown-holder"><a href="about-us.html">About Us</a></li> -->
                                     </ul>
@@ -208,13 +208,15 @@
                     <!-- Begin Li Banner Area -->
                     <div class="col-lg-4 col-md-4 text-center pt-xs-30">
                         <div class="li-banner" style="height: 230px;">
-                            <a >
-                                <img src="https://www.adorebooks.in/wp-content/uploads/2022/06/Untitled-design-43.png" alt="">
+                            <a>
+                                <img src="https://www.adorebooks.in/wp-content/uploads/2022/06/Untitled-design-43.png"
+                                    alt="">
                             </a>
                         </div>
                         <div class="li-banner mt-15 mt-sm-30 mt-xs-30" style="height: 230px;">
-                            <a >
-                                <img src="https://www.adorebooks.in/wp-content/uploads/2022/06/Untitled-design-44.png" alt="">
+                            <a>
+                                <img src="https://www.adorebooks.in/wp-content/uploads/2022/06/Untitled-design-44.png"
+                                    alt="">
                             </a>
                         </div>
                     </div>
@@ -239,67 +241,74 @@
                         <!-- Begin Li's Tab Menu Content Area -->
                     </div>
                 </div>
-                <div class="tab-content">
-                   
 
-                     
+                <div class="tab-content">
+
                     <div id="li-new-product" class="tab-pane active show" role="tabpanel">
+
                         <div class="row">
+
                             <div class="product-active owl-carousel">
-                                <div class="col-lg-12">
-                                    <%if(product.length>0){
-                                        product.forEach((element)=>{%>
-                                    <!-- single-product-wrap start -->
-                                    <div class="single-product-wrap">
-                                        <div class="product-image">
-                                            <a href="single-product.html">
-                                                <img src="<%=element.imageURL[0].productImage1%>" alt="Li's Product Image">
-                                            </a>
-                                            <span class="sticker">New</span>
-                                        </div>
-                                        <div class="product_desc">
-                                            <div class="product_desc_info">
-                                                <div class="product-review">
-                                                    <h5 class="manufacturer">
-                                                        <a href="shop-left-sidebar.html"><%=element.category%></a>
-                                                    </h5>
-                                                    <div class="rating-box">
-                                                        <ul class="rating">
-                                                            <li><i class="fa fa-star-o"></i></li>
-                                                            <li><i class="fa fa-star-o"></i></li>
-                                                            <li><i class="fa fa-star-o"></i></li>
-                                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                        </ul>
+                                <%if(product.length>0){
+                                    product.forEach((element)=>{%>
+                                    <div class="col-lg-12">
+
+                                        <!-- single-product-wrap start -->
+                                        <div class="single-product-wrap">
+
+                                            <div class="product-image">
+                                                <a href="single-product.html">
+                                                    <img src="<%=element.imageURL[0].productImage1%>"
+                                                        alt="Li's Product Image">
+                                                </a>
+                                                <span class="sticker">New</span>
+                                            </div>
+                                            <div class="product_desc">
+                                                <div class="product_desc_info">
+                                                    <div class="product-review">
+                                                        <h5 class="manufacturer">
+                                                            <%=element.category%>
+                                                        </h5>
+                                                        <div class="rating-box">
+                                                            <ul class="rating">
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                                <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                                <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <h4><a class="product_name">
+                                                            <%=element.productName%>
+                                                        </a></h4>
+                                                    <div class="price-box">
+                                                        <span class="new-price">&#8377;<%=element.price%></span>
                                                     </div>
                                                 </div>
-                                                <h4><a class="product_name" href="single-product.html"><%=element.productName%></a></h4>
-                                                <div class="price-box">
-                                                    <span class="new-price">&#8377;<%=element.price%></span>
-                                                </div>
-                                            </div>
-                                            <div class="add-actions">
-                                                <ul class="add-actions-link">
-                                                    <li class="add-cart active"><a >Add to cart</a></li>
-                                                    <li><a class="links-details" href="wishlist.html"><i
-                                                                class="fa fa-heart-o"></i></a></li>
-                                                    <!-- <li><a  title="quick view" class="quick-view-btn"
+                                                <div class="add-actions">
+                                                    <ul class="add-actions-link">
+                                                        <li class="add-cart active"><a>Add to cart</a></li>
+                                                        <li><a class="links-details" ><i
+                                                                    class="fa fa-heart-o"></i></a></li>
+                                                        <!-- <li><a  title="quick view" class="quick-view-btn"
                                                             data-toggle="modal" data-target="#exampleModalCenter"><i
                                                                 class="fa fa-eye"></i></a></li> -->
-                                                </ul>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
+                                        <!-- single-product-wrap end -->
+
                                     </div>
-                                    <!-- single-product-wrap end -->
                                     <% })}%>
-                                </div>
                             </div>
                         </div>
                     </div>
-                   
-                    <!--- one above -->    
 
-            
+                    <!--- one above -->
+
+
                 </div>
             </div>
         </div>
@@ -310,17 +319,17 @@
                 <div class="row">
                     <!-- Begin Single Banner Area -->
                     <div class="col-lg-4 col-md-4 text-center">
-                        
+
                     </div>
                     <!-- Single Banner Area End Here -->
                     <!-- Begin Single Banner Area -->
                     <div class="col-lg-4 col-md-4 text-center pt-xs-30">
-                        
+
                     </div>
                     <!-- Single Banner Area End Here -->
                     <!-- Begin Single Banner Area -->
                     <div class="col-lg-4 col-md-4 text-center pt-xs-30">
-                        
+
                     </div>
                     <!-- Single Banner Area End Here -->
                 </div>
@@ -335,57 +344,63 @@
                     <div class="col-lg-12">
                         <div class="li-section-title">
                             <h2>
-                                <span>Action & Adventure</span>
+                                <span>Biographies</span>
                             </h2>
                         </div>
                         <div class="row">
                             <div class="product-active owl-carousel">
-                                <div class="col-lg-12">
-                                    <!-- single-product-wrap start -->
-                                    <div class="single-product-wrap">
-                                        <div class="product-image">
-                                            <a href="single-product.html">
-                                                <img src="user/images/product/large-size/1.jpg" alt="Li's Product Image">
-                                            </a>
-                                            <span class="sticker">New</span>
-                                        </div>
-                                        <div class="product_desc">
-                                            <div class="product_desc_info">
-                                                <div class="product-review">
-                                                    <h5 class="manufacturer">
-                                                        <a href="shop-left-sidebar.html">Graphic Corner</a>
-                                                    </h5>
-                                                    <div class="rating-box">
-                                                        <ul class="rating">
-                                                            <li><i class="fa fa-star-o"></i></li>
-                                                            <li><i class="fa fa-star-o"></i></li>
-                                                            <li><i class="fa fa-star-o"></i></li>
-                                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                        </ul>
+                                <%if(biographies.length>0){
+                                    biographies.forEach((element)=>{%>
+                                    <div class="col-lg-12">
+                                        <!-- single-product-wrap start -->
+                                        <div class="single-product-wrap">
+                                            <div class="product-image">
+                                                <a href="single-product.html">
+                                                    <img src="<%=element.imageURL[0].productImage1%>"
+                                                        alt="Li's Product Image">
+                                                </a>
+                                                <!-- <span class="sticker">New</span> -->
+                                            </div>
+                                            <div class="product_desc">
+                                                <div class="product_desc_info">
+                                                    <div class="product-review">
+                                                        <h5 class="manufacturer">
+                                                            <%=element.category%>
+                                                        </h5>
+                                                        <div class="rating-box">
+                                                            <ul class="rating">
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                                <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                                <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <h4><a class="product_name">
+                                                            <%=element.productName%>
+                                                        </a></h4>
+                                                    <div class="price-box">
+                                                        <span class="new-price">&#8377;<%=element.price%>
+                                                                </span>
                                                     </div>
                                                 </div>
-                                                <h4><a class="product_name" href="single-product.html">Accusantium
-                                                        dolorem1</a></h4>
-                                                <div class="price-box">
-                                                    <span class="new-price">$46.80</span>
-                                                </div>
-                                            </div>
-                                            <div class="add-actions">
-                                                <ul class="add-actions-link">
-                                                    <li class="add-cart active"><a >Add to cart</a></li>
-                                                    <li><a class="links-details" href="wishlist.html"><i
-                                                                class="fa fa-heart-o"></i></a></li>
-                                                    <!-- <li><a  title="quick view" class="quick-view-btn"
+                                                <div class="add-actions">
+                                                    <ul class="add-actions-link">
+                                                        <li class="add-cart active"><a>Add to cart</a></li>
+                                                        <li><a class="links-details" ><i
+                                                                    class="fa fa-heart-o"></i></a></li>
+                                                        <!-- <li><a  title="quick view" class="quick-view-btn"
                                                             data-toggle="modal" data-target="#exampleModalCenter"><i
                                                                 class="fa fa-eye"></i></a></li> -->
-                                                </ul>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
+                                        <!-- single-product-wrap end -->
                                     </div>
-                                    <!-- single-product-wrap end -->
-                                </div>
-                                <!--two above-->
+                                    <% })}%>
+                                        <!--two above-->
                             </div>
                         </div>
                     </div>
@@ -402,59 +417,60 @@
                     <div class="col-lg-12">
                         <div class="li-section-title">
                             <h2>
-                                <span>TV & Audio</span>
+                                <span>Crime and Thriller</span>
                             </h2>
                         </div>
                         <div class="row">
                             <div class="product-active owl-carousel">
-                                <div class="col-lg-12">
-                                    <!-- single-product-wrap start -->
-                                    <div class="single-product-wrap">
-                                        <div class="product-image">
-                                            <a href="single-product.html">
-                                                <img src="user/images/product/large-size/3.jpg" alt="Li's Product Image">
-                                            </a>
-                                            <span class="sticker">New</span>
-                                        </div>
-                                        <div class="product_desc">
-                                            <div class="product_desc_info">
-                                                <div class="product-review">
-                                                    <h5 class="manufacturer">
-                                                        <a href="shop-left-sidebar.html">Graphic Corner</a>
-                                                    </h5>
-                                                    <div class="rating-box">
-                                                        <ul class="rating">
-                                                            <li><i class="fa fa-star-o"></i></li>
-                                                            <li><i class="fa fa-star-o"></i></li>
-                                                            <li><i class="fa fa-star-o"></i></li>
-                                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                        </ul>
+                                <%if(crimeAndThriller.length>0){
+                                    crimeAndThriller.forEach((element)=>{%>
+                                    <div class="col-lg-12">
+                                        <!-- single-product-wrap start -->
+                                        <div class="single-product-wrap">
+                                            <div class="product-image">
+                                                <a href="single-product.html">
+                                                    <img src="<%=element.imageURL[0].productImage1%>"
+                                                        alt="Li's Product Image">
+                                                </a>
+                                                <!-- <span class="sticker">New</span> -->
+                                            </div>
+                                            <div class="product_desc">
+                                                <div class="product_desc_info">
+                                                    <div class="product-review">
+                                                        <h5 class="manufacturer"><%=element.category%></h5>
+                                                        <div class="rating-box">
+                                                            <ul class="rating">
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                                <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                                <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <h4><a class="product_name" > <%=element.productName%></a></h4>
+                                                    <div class="price-box">
+                                                        <span class="new-price">&#8377;<%=element.price%></span>
                                                     </div>
                                                 </div>
-                                                <h4><a class="product_name" href="single-product.html">Accusantium
-                                                        dolorem1</a></h4>
-                                                <div class="price-box">
-                                                    <span class="new-price">$46.80</span>
-                                                </div>
-                                            </div>
-                                            <div class="add-actions">
-                                                <ul class="add-actions-link">
-                                                    <li class="add-cart active"><a >Add to cart</a></li>
-                                                    <li><a class="links-details" href="wishlist.html"><i
-                                                                class="fa fa-heart-o"></i></a></li>
-                                                    <!-- <li><a  title="quick view" class="quick-view-btn"
+                                                <div class="add-actions">
+                                                    <ul class="add-actions-link">
+                                                        <li class="add-cart active"><a>Add to cart</a></li>
+                                                        <li><a class="links-details" ><i
+                                                                    class="fa fa-heart-o"></i></a></li>
+                                                        <!-- <li><a  title="quick view" class="quick-view-btn"
                                                             data-toggle="modal" data-target="#exampleModalCenter"><i
                                                                 class="fa fa-eye"></i></a></li> -->
-                                                </ul>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
+                                        <!-- single-product-wrap end -->
                                     </div>
-                                    <!-- single-product-wrap end -->
-                                </div>
-                                <!--three above-->
-                              
-                               
+
+                                    <!--three above-->
+
+                                    <% })}%>
                             </div>
                         </div>
                     </div>
@@ -543,14 +559,15 @@
                                 <div class="footer-logo">
                                     <img src="user/images/menu/logo/1.jpg" alt="Footer Logo">
                                     <p class="info">
-                                        We are a team of designers and developers that create high quality HTML Template
-                                        & Woocommerce, Shopify Theme.
+                                        We are a dedicated team of designers and developers specializing in crafting
+                                        top-tier HTML templates and WooCommerce as well as Shopify themes, perfectly
+                                        tailored for an exceptional online book-selling experience."
                                     </p>
                                 </div>
                                 <ul class="des">
                                     <li>
                                         <span>Address: </span>
-                                       PAYYOLI,KOZHIKODE,KERALA,INDAI,673522
+                                        PAYYOLI,KOZHIKODE,KERALA,INDAI,673522
                                     </li>
                                     <li>
                                         <span>Phone: </span>
@@ -558,7 +575,7 @@
                                     </li>
                                     <li>
                                         <span>Email: </span>
-                                        <a >jamsheerpayyoli@gmail.com</a>
+                                        <a>jamsheerpayyoli@gmail.com</a>
                                     </li>
                                 </ul>
                             </div>
@@ -568,10 +585,10 @@
                                 <div class="footer-block">
                                     <h3 class="footer-block-title">Product</h3>
                                     <ul>
-                                        <li><a >Prices drop</a></li>
-                                        <li><a >New products</a></li>
-                                        <li><a >Best sales</a></li>
-                                        <li><a >Contact us</a></li>
+                                        <li><a>Prices drop</a></li>
+                                        <li><a>New products</a></li>
+                                        <li><a>Best sales</a></li>
+                                        <li><a>Contact us</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -581,10 +598,10 @@
                                 <div class="footer-block">
                                     <h3 class="footer-block-title">Our company</h3>
                                     <ul>
-                                        <li><a >Delivery</a></li>
-                                        <li><a >Legal Notice</a></li>
-                                        <li><a >About us</a></li>
-                                        <li><a >Contact us</a></li>
+                                        <li><a>Delivery</a></li>
+                                        <li><a>Legal Notice</a></li>
+                                        <li><a>About us</a></li>
+                                        <li><a>Contact us</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -600,7 +617,7 @@
                                                 <i class="fa fa-facebook"></i>
                                             </a>
                                         </li>
-                                      
+
                                         <li class="instagram">
                                             <a href="https://www.instagram.com/" data-toggle="tooltip" target="_blank"
                                                 title="Instagram">
@@ -612,7 +629,7 @@
                                 <!-- Begin Footer Newsletter Area -->
                                 <div class="footer-newsletter">
                                     <h4>Sign up to newsletter</h4>
-                                    <form action="#" method="post" id="mc-embedded-subscribe-form"
+                                    <form   id="mc-embedded-subscribe-form"
                                         name="mc-embedded-subscribe-form" class="footer-subscribe-form validate"
                                         target="_blank" novalidate>
                                         <div id="mc_embed_signup_scroll">
@@ -704,8 +721,8 @@
                                             <li><i class="fa fa-star-o"></i></li>
                                             <li class="no-star"><i class="fa fa-star-o"></i></li>
                                             <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                            <li class="review-item"><a >Read Review</a></li>
-                                            <li class="review-item"><a >Write Review</a></li>
+                                            <li class="review-item"><a>Read Review</a></li>
+                                            <li class="review-item"><a>Write Review</a></li>
                                         </ul>
                                     </div>
                                     <div class="price-box pt-20">
@@ -748,14 +765,13 @@
                                             wishlist</a>
                                         <div class="product-social-sharing pt-25">
                                             <ul>
-                                                <li class="facebook"><a ><i
-                                                            class="fa fa-facebook"></i>Facebook</a></li>
-                                                <li class="twitter"><a ><i class="fa fa-twitter"></i>Twitter</a>
+                                                <li class="facebook"><a><i class="fa fa-facebook"></i>Facebook</a></li>
+                                                <li class="twitter"><a><i class="fa fa-twitter"></i>Twitter</a>
                                                 </li>
-                                                <li class="google-plus"><a ><i
-                                                            class="fa fa-google-plus"></i>Google +</a></li>
-                                                <li class="instagram"><a ><i
-                                                            class="fa fa-instagram"></i>Instagram</a></li>
+                                                <li class="google-plus"><a><i class="fa fa-google-plus"></i>Google +</a>
+                                                </li>
+                                                <li class="instagram"><a><i class="fa fa-instagram"></i>Instagram</a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
