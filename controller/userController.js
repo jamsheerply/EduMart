@@ -80,26 +80,25 @@ const loadRegister = async (req, res) => {
 //.................insertuser..........................
 const insertUser = async (req, res) => {
     try {
+        const email=req.body.email.toLowerCase()
         const spassword = await securePassword(req.body.password);
         const userData = new userModel({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            email: req.body.email,
+            email: email,
             password: spassword
         });
 
         if (userData) {
-            // Use req.body.email here instead of undefined 'email'
-            let exist = await userModel.findOne({ email: req.body.email });
+            let exist = await userModel.findOne({ email: email});
 
             if (exist) {
                 return res.json({ err: "User Already Exists" });
             } else {
-                sendVerifyMail(req.body.firstName, req.body.email)
+                sendVerifyMail(req.body.firstName, email)
                 req.session.userData = userData
                 return res.json({ status: true });
             }
-            console.log(userData);
         } else {
             console.log("Data insertion in user failed");
         }
@@ -125,15 +124,17 @@ const verifyOtp = async (req, res) => {
         const digitThree = req.body.digitThree;
         const digitFour = req.body.digitFour;
         const strOtp = digitOne + digitTwo + digitThree + digitFour;
-        console.log(strOtp + "strOtp");
+        // console.log(strOtp + "strOtp");
         const email = req.session.userData.email;
         let storedOtp = await otpVerification.findOne({ email: email });
         const { otp, emailstored } = storedOtp;
-        console.log(otp + " stored");
+        // console.log(otp + " stored");
         if (strOtp == otp) {
             const userData = req.session.userData;
             const saveData = new userModel(userData);
             await saveData.save();
+            req.session.email= userData.email
+            req.session.userLogged = true
             res.redirect("/user/home");
         } else {
             res.render("user/otp", { message: "invalid otp" })
@@ -171,17 +172,26 @@ const verifyLogin = async (req, res) => {
     try {
         res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
         const { email, password } = req.body
-        const userData = await userModel.findOne({ email: email })
+        const userData = await userModel.findOne({ email: email,status:'unblock'})
+        const adminData = await adminModel.findOne({ email: email })
         if (userData) {
             const passwordCompare = await bcrypt.compare(password, userData.password)
             if (passwordCompare) {
-                req.session.id = userData._id
-                req.session.role = userData.role
+                req.session.email= userData.email
+                req.session.userLogged = true
                 res.redirect("/user/home")
             } else {
                 res.render("user/login", { message: "Email and password is incorrect" })
             }
-        } else {
+        } else if(adminData) {
+            if(req.password===adminData.password){
+                // req.session.email= userData.email
+                req.session.adminLogged = true
+                res.redirect("/admin/product")
+            }else{
+                res.render("user/login", { message: "Email and password is incorrect" })
+            }
+        }else{
             res.render("user/login", { message: "User not found" })
         }
     } catch (error) {
@@ -190,25 +200,26 @@ const verifyLogin = async (req, res) => {
 }
 
 //................adminInsert.......................
-const adminInsert = async (req, res) => {
-    try {
-        const adminData = new adminModel({
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password
-        })
-        adminData.save()
-        if (adminData) {
-            res.send("inserted")
-        }
-    } catch (error) {
-        console.log(error.message + " adiminInsert")
-    }
-}
+// const adminInsert = async (req, res) => {
+//     try {
+//         const adminData = new adminModel({
+//             name: req.body.name,
+//             email: req.body.email,
+//             password: req.body.password
+//         })
+//         adminData.save()
+//         if (adminData) {
+//             res.send("inserted")
+//         }
+//     } catch (error) {
+//         console.log(error.message + " adiminInsert")
+//     }
+// }
 
 //..............logOut.......................
 const userLogout = async (req, res) => {
     try {
+        // console.log("hi")
         req.session.destroy();
         res.redirect("/");
     } catch (error) {
@@ -219,7 +230,6 @@ const userLogout = async (req, res) => {
 const loadProductList=async(req,res)=>{
     try {
         const productData=await productModel.find({isdeleted: true})
-        // console.log(productData)
         res.render("user/productList",{product:productData})
     } catch (error) {
        console.log(error.message+ " loadProductList") 
@@ -229,9 +239,7 @@ const loadProductList=async(req,res)=>{
 const loadProductDetail=async(req,res)=>{
     try {
         const id=req.query.id
-        // console.log(id)
         const productData=await productModel.findById(id)
-        // console.log(productData)
         res.render("user/productDetail",{product:productData})
     } catch (error) {
         console.log(error.message+ " loadProductDetails")
@@ -246,7 +254,7 @@ module.exports = {
     loadHome,
     loadLogin,
     verifyLogin,
-    adminInsert,
+    // adminInsert,
     userLogout,
     loadProductList,
     loadProductDetail

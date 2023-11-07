@@ -4,7 +4,6 @@ const productModel = require("../model/productModel")
 const loadProduct = async (req, res) => {
     try {
         const productData = await productModel.find({})
-        // console.log(productData)
         res.render("admin/product", { product: productData })
     } catch (error) {
         console.log(error.message + " loadProduct")
@@ -13,7 +12,6 @@ const loadProduct = async (req, res) => {
 const loadAddProduct = async (req, res) => {
     try {
         const categoryData = await categoryModel.find({})
-        // console.log(categoryData)
         res.render("admin/addProduct", { category: categoryData })
     } catch (error) {
         console.log(error.message + "loadAddProduct")
@@ -49,7 +47,7 @@ const insertAddProduct = async (req, res) => {
             }]
 
         })
-      
+
         await newProduct.save()
         return res.json({ status: true });
     } catch (error) {
@@ -61,10 +59,8 @@ const insertAddProduct = async (req, res) => {
 const EditProductLoad = async (req, res) => {
     try {
         const id = req.query.id;
-        // console.log(id)
         const productData = await productModel.findById(id)
         const categoryData = await categoryModel.find({})
-        // console.log(productData)
         if (productData && categoryData) {
             res.render("admin/editProduct", { product: productData, category: categoryData })
         } else {
@@ -78,10 +74,24 @@ const EditProductLoad = async (req, res) => {
 const updateProduct = async (req, res) => {
     try {
         const id = req.params.id;
-        // console.log(id)
-        const productData = await productModel.findById({ _id: id })
-        // console.log(req.body)
-        console.log(req.files)
+        const productName = req.body.productName;
+
+        const productData = await productModel.find({
+            $and: [
+              { productName: { $regex: new RegExp(productName, 'i') } },
+              { _id: { $ne: id } }
+            ]
+          });          
+        if (productData.length > 0) {
+            for (element of productData) {
+                const dbProduct = element.productName.toLowerCase();
+                const inputproduct = productName.toLowerCase()
+                if (dbProduct === inputproduct) {
+                    return res.json({ err: "Product already exists." });
+                }
+            }
+        }
+
         await productModel.updateOne({ _id: id }, {
             $set:
             {
@@ -97,7 +107,6 @@ const updateProduct = async (req, res) => {
         if (req.files) {
             const imageFiles = req.files;
             for (const element of imageFiles) {
-                //   console.log(element.fieldname);
                 if (element.fieldname === "productImage1") {
                     try {
                         const updateQuery = {
@@ -152,26 +161,24 @@ const updateProduct = async (req, res) => {
         return res.json({ err: "Product name already exists." });
     }
 }
-const deleteProduct=async(req,res)=>{
+const deleteProduct = async (req, res) => {
     try {
-        const id=req.query.id
-        // console.log(id)
-        await productModel.updateOne({_id:id},{
-            $set:{
-                isdeleted:false
+        const id = req.query.id
+        await productModel.updateOne({ _id: id }, {
+            $set: {
+                isdeleted: false
             }
         })
         res.redirect("/admin/product")
     } catch (error) {
-        console.log(error.message+ " deleteProduct")
+        console.log(error.message + " deleteProduct")
     }
 }
-const recoverProduct=async(req,res)=>{
-    const id=req.query.id
-    // console.log(id)
-    await productModel.updateOne({_id:id},{
-        $set:{
-            isdeleted:true
+const recoverProduct = async (req, res) => {
+    const id = req.query.id
+    await productModel.updateOne({ _id: id }, {
+        $set: {
+            isdeleted: true
         }
     })
     res.redirect("/admin/product")

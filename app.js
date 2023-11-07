@@ -46,7 +46,8 @@ app.use("/admin",adminRoute)
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+const userAuth=require("./midddleware/UserAuth")
+const adminAuth=require("./midddleware/adminAuth")
 const userController = require("./controller/userController");
-app.get("/", userController.loadLanding)
+app.get("/",userAuth.userExist,adminAuth.adminExist,userController.loadLanding)
 

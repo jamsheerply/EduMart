@@ -2,52 +2,37 @@ const express = require("express")
 const userRoute = express()
 const userController = require("../controller/userController")
 const userAuth=require("../midddleware/UserAuth")
-// const morgan=require("morgan")
+const adminAuth=require("../midddleware/adminAuth")
 
-//middleWare
+//.............middleWare........................
 userRoute.use(express.json());
 userRoute.use(express.urlencoded({ extended: true }));
-// userRoute.use(morgan("tiny"))
 
-// const path = require("path")
-// const multer = require("multer")
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         cb(null, path.join(__dirname, "../public/userImage"))
-//     },
-//     filename: function (req, file, cb) {
-//         const name = Date.now() + "-" + file.originalname
-//         cb(null, name)
-//     }
-// })
-// const upload=multer({storage:storage})
-
+//....................view engine......................
 userRoute.set('view engine', 'ejs');
 userRoute.use(express.static("public"));
 
-userRoute.get("/register",userAuth.isLogOut,userController.loadRegister)
+//...................userSide..........................................
+userRoute.get("/register",userAuth.userExist,userController.loadRegister)
 userRoute.post("/register",userController.insertUser)
-userRoute.get("/otp",userAuth.isLogOut,userController.loadOtp)
+userRoute.get("/otp",userAuth.userExist,userController.loadOtp)
 userRoute.post("/otp",userController.verifyOtp)
-userRoute.get("/home",userAuth.isLogin,userController.loadHome)
-userRoute.get("/login", userAuth.isLogOut, (req, res) => {
+userRoute.get("/home",userAuth.verifyUser,userController.loadHome)
+userRoute.get("/login", userAuth.userExist,adminAuth.adminExist,(req, res) => {
     res.setHeader("Cache-Control", "no-store");
     userController.loadLogin(req, res);
 });
 userRoute.post("/login",userController.verifyLogin)
-userRoute.get("/logout",userAuth.isLogin,(req, res) => {
-    res.setHeader("Cache-Control", "no-store");
-    userController.userLogout(req, res);
-})
+userRoute.get("/logout",userController.userLogout)
 
 //...................productList..........................
-userRoute.get("/product-list",userController.loadProductList)
+userRoute.get("/product-list",userAuth.verifyUser,userController.loadProductList)
 
 //...................singleProudct.......................
-userRoute.get("/product-detail",userController.loadProductDetail)
+userRoute.get("/product-detail",userAuth.verifyUser,userController.loadProductDetail)
 
 
 
-userRoute.post("/admin/insert",userController.adminInsert)
+// userRoute.post("/admin/insert",userController.adminInsert)
 
 module.exports = userRoute
