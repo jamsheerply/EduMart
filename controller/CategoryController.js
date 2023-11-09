@@ -13,6 +13,17 @@ const loadCategory = async (req, res) => {
 const insertCategory = async (req, res) => {
     try {
         const categoryName = req.body.categoryName;
+        
+        const categoryData = await categoryModel.find({ category: { $regex: new RegExp(req.body.category, 'i') } });
+        if (categoryData.length > 0) {
+            for(element of categoryData){
+            const dbCategory = element.category.toLowerCase();
+            const inputCategory=categoryName.toLowerCase()
+                if(dbCategory===inputCategory){
+                    return res.json({err:"Category already exists."});
+                }
+            }
+        }
 
         if (!categoryName || categoryName.trim() === "") {
             return res.json({ err: "Category name is required." });

@@ -17,6 +17,7 @@ userRoute.get("/register",userAuth.userExist,userController.loadRegister)
 userRoute.post("/register",userController.insertUser)
 userRoute.get("/otp",userAuth.userExist,userController.loadOtp)
 userRoute.post("/otp",userController.verifyOtp)
+userRoute.get("/resend-otp",userController.resendOtp)
 userRoute.get("/home",userAuth.verifyUser,userController.loadHome)
 userRoute.get("/login", userAuth.userExist,adminAuth.adminExist,(req, res) => {
     res.setHeader("Cache-Control", "no-store");

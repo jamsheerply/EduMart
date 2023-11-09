@@ -50,4 +50,3 @@ const userAuth=require("./midddleware/UserAuth")
 const adminAuth=require("./midddleware/adminAuth")
 const userController = require("./controller/userController");
 app.get("/",userAuth.userExist,adminAuth.adminExist,userController.loadLanding)
-

@@ -212,35 +212,40 @@
                 <div class="grid product">
                     <div class="column-xs-12 column-md-7">
                         <div class="product-gallery">
-                            <label class="product-image" style="width: 650px; height: 400px; padding-bottom: 5px; display: flex; align-items: center; justify-content: center;">
+                          <div>
+                            <label class="product-image" style="width: 650px; height: 400px; padding-bottom: 5px; display: flex; align-items: center; justify-content: center;position: relative;">
                               <input type="file" id="productImage1" accept="image/*" class="input-hidden" onchange="previewImage(this, 'imagePreview1')" name="productImage1">
                               <img id="imagePreview1" class="image-preview" ><br>
-                              <p id="productImage1Error" style="color: red;"></p>
+                              <button style="position: absolute;bottom: 20px;right: 0px;" onclick="deleteImgAddProduct('productImage1','imagePreview1')"><i class="fa-solid fa-trash"></i></button>
                             </label>
-                            <br>
+                          </div>
+                            <p id="productImage1Error" style="color: red; text-align: center;"></p>
                             <div style="width: 650px; height: 220px; display: flex; align-items: center; justify-content: center;" id="childMain">
                                 <ul class="image-list">
                                     <li style="width: 620px; height: 220px;">
                                       <!-- <input type="file" class="form-control"  id="childOne" style="display: none;" > -->
-                                      <label class="preview-container">
+                                      <label class="preview-container" style="position: relative;">
                                             <input type="file" id="productImage2" accept="image/*" class="input-hidden" onchange="previewImage(this, 'imagePreview2')" name="productImage2">
                                             <img id="imagePreview2" class="image-preview" >
+                                            <button style="position: absolute;bottom: 60px;right: 0px;" onclick="deleteImgAddProduct('productImage2','imagePreview2')"><i class="fa-solid fa-trash"></i></button>
                                             <p id="productImage2Error" style="color: red;"></p>
                                         </label>
                                     </li>
                                     <li style="width: 620px; height: 220px;">
                                       <!-- <input type="file" class="form-control" id="childTwo" style="display: none;" > -->
-                                      <label class="preview-container">
+                                      <label class="preview-container"style="position: relative;">
                                             <input type="file" id="productImage3" accept="image/*" class="input-hidden" onchange="previewImage(this, 'imagePreview3')" name="productImage3">
                                             <img id="imagePreview3" class="image-preview" >
-                                            <p id="productImage3Error" style="color: red;"></p>
+                                            <button style="position: absolute;bottom: 60px;right: 0px;" onclick="deleteImgAddProduct('productImage3','imagePreview3')"><i class="fa-solid fa-trash"></i></button>
+                                            <p id="productImage3Error" style="color: red; "></p>
                                         </label>
                                     </li>
                                     <li style="width: 620px; height: 220px;">
                                       <!-- <input type="file" class="form-control" id="childThree" style="display: none ;"> -->
-                                      <label class="preview-container">
-                                            <input type="file" id="productImage4" accept="image/*" class="input-hidden" onchange="previewImage(this, 'imagePreview4')" name="productImage4">
+                                      <label class="preview-container" style="position: relative;">
+                                            <input type="file" id="productImage4"  accept="image/*" class="input-hidden" onchange="previewImage(this, 'imagePreview4')" name="productImage4">
                                             <img id="imagePreview4" class="image-preview" >
+                                            <button style="position: absolute;bottom: 60px;right: 0px;" type="button" onclick="deleteImgAddProduct('productImage4','imagePreview4')"><i class="fa-solid fa-trash"></i></button>
                                             <p id="productImage4Error" style="color: red;"></p>
                                         </label>
                                     </li>
@@ -283,8 +288,8 @@
                         <div class="form-group">
                             <label for="status" class="label-left" >Status</label>
                             <select name="status" id="status">
-                              <option value="draft">Draft</option>
                               <option value="published">Published</option>
+                              <option value="draft">Draft</option>
                               <option value="outofstock">Out of stock</option>
                               <!-- <option value="lowquantity">Low quantity</option> -->
                             </select>

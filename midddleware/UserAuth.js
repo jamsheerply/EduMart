@@ -1,28 +1,35 @@
-const verifyUser= async (req, res, next) => {
+const userModel = require("../model/userModel")
+
+const verifyUser = async (req, res, next) => {
     try {
-        if (req.session.userLogged) {
-            next()
+        const email = req.session.emailVerifyUser;
+        const userData = await userModel.findOne({ email: email });
+        if (userData && req.session.userLogged && userData.status === "unblock") {
+            next();
         } else {
-            res.redirect("/")
+            res.redirect("/");
         }
     } catch (error) {
-        console.log(error.message+ "isLogin")
+        console.log(error.message + " isLogin");
     }
-    
 }
-const userExist= async (req, res, next) => {
+
+const userExist = async (req, res, next) => {
     try {
-        if (req.session.userLogged) {
+        const email = req.session.emailVerifyUser;
+        const userData = await userModel.findOne({ email: email });
+        if (userData && req.session.userLogged && userData.status === "unblock") {
             res.redirect("/user/home")
         } else {
             next()
         }
     } catch (error) {
-        console.log(error.message+ "isLogOut")
+        console.log(error.message + "isLogOut")
     }
-   
+
 }
-module.exports={
+module.exports = {
     verifyUser,
-    userExist
+    userExist,
+
 }

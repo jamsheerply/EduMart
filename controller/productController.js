@@ -19,6 +19,23 @@ const loadAddProduct = async (req, res) => {
 }
 const insertAddProduct = async (req, res) => {
     try {
+
+
+        const productName = req.body.productName;
+
+        const productData = await productModel.find({  
+         productName: { $regex: new RegExp(productName, 'i') } ,   
+          });          
+        if (productData.length > 0) {
+            for (element of productData) {
+                const dbProduct = element.productName.toLowerCase();
+                const inputproduct = productName.toLowerCase()
+                if (dbProduct === inputproduct) {
+                    return res.json({ err: "Product already exists." });
+                }
+            }
+        }
+
         const [file1, file2, file3, file4] = req.files
 
         const main = "/imageUpload/products/" + file1.filename

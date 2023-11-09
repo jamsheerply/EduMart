@@ -177,19 +177,19 @@
                             <div class="shop-bar-inner">
                                 <div class="product-view-mode">
                                     <!-- shop-item-filter-list start -->
-                                    <!-- <ul class="nav shop-item-filter-list" role="tablist">
+                                    <ul class="nav shop-item-filter-list" role="tablist">
                                             <li role="presentation"><a data-toggle="tab" role="tab" aria-controls="grid-view" href="#grid-view"><i class="fa fa-th"></i></a></li>
                                             <li class="active" role="presentation"><a aria-selected="true" class="active show" data-toggle="tab" role="tab" aria-controls="list-view" href="#list-view"><i class="fa fa-th-list"></i></a></li>
-                                        </ul> -->
+                                        </ul>
                                     <!-- shop-item-filter-list end -->
                                 </div>
-                                <!-- <div class="toolbar-amount">
+                                <div class="toolbar-amount">
                                         <span>Showing 1 to 9 of 15</span>
-                                    </div> -->
+                                    </div>
                             </div>
                             <!-- product-select-box start -->
                             <div class="product-select-box">
-                                <!-- <div class="product-short">
+                                <div class="product-short">
                                         <p>Sort By:</p>
                                         <select class="nice-select">
                                             <option value="trending">Relevance</option>
@@ -200,31 +200,34 @@
                                             <option value="price-asc">Model (A - Z)</option>
                                             <option value="price-asc">Model (Z - A)</option>
                                         </select>
-                                    </div> -->
+                                    </div>
                             </div>
                             <!-- product-select-box end -->
                         </div>
                         <!-- shop-top-bar end -->
                         <!-- shop-products-wrapper start -->
+                        
                         <div class="shop-products-wrapper">
                             <div class="tab-content">
-                                <div id="grid-view" class="tab-pane fade" role="tabpanel">
+                                <div id="grid-view" class="tab-pane fade active" role="tabpanel">
                                     <div class="product-area shop-product-area">
                                         <div class="row">
+                                            <%if(product.length>0){
+                                                product.forEach((element)=>{%>
                                             <div class="col-lg-4 col-md-4 col-sm-6 mt-40">
                                                 <!-- single-product-wrap start -->
-                                                <!-- <div class="single-product-wrap">
+                                                <div class="single-product-wrap">
                                                         <div class="product-image">
-                                                            <a href="single-product.html">
-                                                                <img src="user/images/product/large-size/1.jpg" alt="Li's Product Image">
+                                                            <a href="/user/product-detail?id=<%=element._id%>">
+                                                                <img src="<%=element.imageURL[0].productImage1%>" alt="">
                                                             </a>
-                                                            <span class="sticker">New</span>
+                                                            <!-- <span class="sticker">New</span> -->
                                                         </div>
                                                         <div class="product_desc">
                                                             <div class="product_desc_info">
                                                                 <div class="product-review">
                                                                     <h5 class="manufacturer">
-                                                                        <a href="product-details.html">colors and Paint</a>
+                                                                        <a><%=element.category%></a>
                                                                     </h5>
                                                                     <div class="rating-box">
                                                                         <ul class="rating">
@@ -236,33 +239,35 @@
                                                                         </ul>
                                                                     </div>
                                                                 </div>
-                                                                <h4><a class="product_name" href="single-product.html">Accusantium dolorem1</a></h4>
+                                                                <h4><a class="product_name"><%=element.productName%></a></h4>
                                                                 <div class="price-box">
-                                                                    <span class="new-price">$16.80</span>
+                                                                    <span class="new-price">&#8377;<%=element.price%></span>
                                                                 </div>
                                                             </div>
                                                             <div class="add-actions">
                                                                 <ul class="add-actions-link">
                                                                     <li class="add-cart active"><a href="shopping-cart.html">Add to cart</a></li>
-                                                                    <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
+                                                                    <!-- <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li> -->
                                                                     <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
-                                                    </div> -->
+                                                    </div>
                                                 <!-- single-product-wrap end -->
                                             </div>
+                                            <%})}%>
                                         </div>
                                     </div>
                                 </div>
-                                <%if(product.length>0){
-                                    product.forEach((element)=>{%>
+                                
 
-
-                                    <div id="list-view" class="tab-pane fade product-list-view active show"
+                                    <div id="list-view" class="tab-pane fade product-list-view  show"
                                         role="tabpanel">
                                         <div class="row">
                                             <div class="col">
+                                                <%if(product.length>0){
+                                                    product.forEach((element)=>{%>
+                
                                                 <div class="row product-layout-list">
                                                     <div class="col-lg-3 col-md-5 ">
                                                         <div class="product-image">
@@ -291,12 +296,11 @@
                                                                         </ul>
                                                                     </div>
                                                                 </div>
-                                                                <h4><a class="product_name"
-                                                                        ><%=element.productName%></a></h4>
+                                                                <h4><a class="product_name"><%=element.productName%></a></h4>
                                                                 <div class="price-box">
-                                                                    <span class="new-price"><%=element.price%></span>
+                                                                    <span class="new-price">&#8377;<%=element.price%></span>
                                                                 </div>
-                                                                <p><%=element.productDescription%></p>
+                                                                <!-- <p><%=element.productDescription%></p> -->
                                                             </div>
                                                         </div>
                                                     </div>
@@ -311,14 +315,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                                <%})}%>
                                                 <!---end of productList -->
                                             </div>
                                         </div>
                                     </div>
 
-                                    <%})}%>
-                                        <!-- <div class="paginatoin-area">
+                                   
+                                        <div class="paginatoin-area">
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6">
                                                 <p>Showing 1-12 of 13 item(s)</p>
@@ -327,16 +331,16 @@
                                                 <ul class="pagination-box">
                                                     <li><a href="#" class="Previous"><i class="fa fa-chevron-left"></i> Previous</a>
                                                     </li>
-                                                    <li class="active"><a href="#">1</a></li>
-                                                    <li><a href="#">2</a></li>
-                                                    <li><a href="#">3</a></li>
+                                                    <li class="active"><a>1</a></li>
+                                                    <li><a >2</a></li>
+                                                    <li><a >3</a></li>
                                                     <li>
-                                                      <a href="#" class="Next"> Next <i class="fa fa-chevron-right"></i></a>
+                                                      <a  class="Next"> Next <i class="fa fa-chevron-right"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
-                                    </div> -->
+                                    </div>
                             </div>
                         </div>
                         <!-- shop-products-wrapper end -->
@@ -354,9 +358,9 @@
                             <!-- <button class="btn-clear-all mb-sm-30 mb-xs-30">Clear all</button> -->
                             <!-- btn-clear-all end -->
                             <!-- filter-sub-area start -->
-                            <div class="filter-sub-area">
-                                <!-- <h5 class="filter-sub-titel">Brand</h5> -->
-                                <!-- <div class="categori-checkbox">
+                            <!-- <div class="filter-sub-area">
+                                <h5 class="filter-sub-titel">Brand</h5>
+                                <div class="categori-checkbox">
                                         <form action="#">
                                             <ul>
                                                 <li><input type="checkbox" name="product-categori"><a href="#">Prime Video (13)</a></li>
@@ -364,12 +368,12 @@
                                                 <li><input type="checkbox" name="product-categori"><a href="#">Electronics (11)</a></li>
                                             </ul>
                                         </form>
-                                    </div> -->
-                            </div>
+                                    </div>
+                            </div> -->
                             <!-- filter-sub-area end -->
                             <!-- filter-sub-area start -->
                             <div class="filter-sub-area pt-sm-10 pt-xs-10">
-                                <!-- <h5 class="filter-sub-titel">Categories</h5>
+                                <h5 class="filter-sub-titel">Categories</h5>
                                 <div class="categori-checkbox">
                                     <form>
                                         <ul>
@@ -379,12 +383,12 @@
                                                     Design (6)</a></li>
                                         </ul>
                                     </form>
-                                </div> -->
+                                </div>
                             </div>
                             <!-- filter-sub-area end -->
                             <!-- filter-sub-area start -->
                             <div class="filter-sub-area pt-sm-10 pt-xs-10">
-                                <!-- <h5 class="filter-sub-titel">price</h5>
+                                <h5 class="filter-sub-titel">price</h5>
                                     <div class="size-checkbox">
                                         <form action="#">
                                             <ul>
@@ -392,7 +396,7 @@
                                                 <li><input type="checkbox" name="product-size"><a href="#">M (3)</a></li>
                                             </ul>
                                         </form>
-                                    </div> -->
+                                    </div>
                             </div>
                             <!-- filter-sub-area end -->
                             <!-- filter-sub-area start -->

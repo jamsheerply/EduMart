@@ -47,7 +47,7 @@ const sendVerifyMail = async (name, email) => {
             if (error) {
                 console.log(error)
             } else {
-                console.log("email has been sent", info.response)
+                // console.log("email has been sent", info.response)
             }
         })
 
@@ -61,12 +61,8 @@ const loadLanding = async (req, res) => {
     const productData=await productModel.find({isdeleted: true,status:"published"})
     const biographiesData=await productModel.find({isdeleted: true,category:"Biographies",status:"published"})
     const crimeAndThrillerData=await productModel.find({isdeleted: true,category:"Crime and Thriller",status:"published"})
-    if (req.session.id && req.session.role == "user") {
-        res.redirect("/user/home",{product:productData,biographies:biographiesData,crimeAndThriller:crimeAndThrillerData})
-    } else {
         res.render("user/landing",{product:productData,biographies:biographiesData,crimeAndThriller:crimeAndThrillerData})
     }
-}
 
 // ...............loadRegister......................
 const loadRegister = async (req, res) => {
@@ -82,8 +78,9 @@ const insertUser = async (req, res) => {
     try {
         const email=req.body.email.toLowerCase()
         const spassword = await securePassword(req.body.password);
+        const firstName=req.body.firstName
         const userData = new userModel({
-            firstName: req.body.firstName,
+            firstName: firstName,
             lastName: req.body.lastName,
             email: email,
             password: spassword
@@ -95,7 +92,7 @@ const insertUser = async (req, res) => {
             if (exist) {
                 return res.json({ err: "User Already Exists" });
             } else {
-                sendVerifyMail(req.body.firstName, email)
+                sendVerifyMail(firstName, email)
                 req.session.userData = userData
                 return res.json({ status: true });
             }
@@ -124,12 +121,11 @@ const verifyOtp = async (req, res) => {
         const digitThree = req.body.digitThree;
         const digitFour = req.body.digitFour;
         const strOtp = digitOne + digitTwo + digitThree + digitFour;
-        // console.log(strOtp + "strOtp");
+
         const email = req.session.userData.email;
         let storedOtp = await otpVerification.findOne({ email: email });
-        const { otp, emailstored } = storedOtp;
-        // console.log(otp + " stored");
-        if (strOtp == otp) {
+        
+        if (strOtp == storedOtp.otp) {
             const userData = req.session.userData;
             const saveData = new userModel(userData);
             await saveData.save();
@@ -144,9 +140,27 @@ const verifyOtp = async (req, res) => {
     }
 }
 
+
+//............................resendOtp..................
+const resendOtp=async (req,res)=>{
+    try {
+        const email = req.session.userData.email;
+        const firstName=req.session.userData.firstName
+        let storedOtp = await otpVerification.findOne({ email: email });
+        if(!storedOtp){
+            sendVerifyMail(firstName, email)
+            res.render("user/otp", { message: "New  otp has been sent to email" })
+        }
+    } catch (error) {
+       console.log(error.message+ " resendOtp") 
+    }
+}
+
 // .......................loadHome....................
 const loadHome = async (req, res) => {
     try {
+        // req.session.email=req.session.userData.email
+
         const productData=await productModel.find({isdeleted: true,status:"published"})
     const biographiesData=await productModel.find({isdeleted: true,category:"Biographies",status:"published"})
     const crimeAndThrillerData=await productModel.find({isdeleted: true,category:"Crime and Thriller",status:"published"})
@@ -177,7 +191,8 @@ const verifyLogin = async (req, res) => {
         if (userData) {
             const passwordCompare = await bcrypt.compare(password, userData.password)
             if (passwordCompare) {
-                req.session.email= userData.email
+                req.session.emailVerifyUser= req.body.email
+                console.log(req.session.emailVerifyUser)
                 req.session.userLogged = true
                 res.redirect("/user/home")
             } else {
@@ -251,6 +266,7 @@ module.exports = {
     insertUser,
     loadOtp,
     verifyOtp,
+    resendOtp,
     loadHome,
     loadLogin,
     verifyLogin,

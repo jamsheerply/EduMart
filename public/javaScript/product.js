@@ -195,6 +195,7 @@ function previewImage(input, imageId) {
   if (file) {
     const reader = new FileReader();
     reader.onload = function (event) {
+      // document.getElementById(imageId).style.display='block'
       document.getElementById(imageId).src = event.target.result;
       input.style.display = "none"; // Hide the input tag
     };
@@ -202,5 +203,10 @@ function previewImage(input, imageId) {
   }
 }
 
+function deleteImgAddProduct(input,image){
+  document.getElementById(input).value=''
+  document.getElementById(image).src=''
+  // document.getElementById(image).style.display='none'
+}
 
 

@@ -1,100 +1,274 @@
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - codingnepalweb.com -->
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OTP Verification Form</title>
-  <link rel="stylesheet" href="styleSheet/otp.css">
-  <!-- Boxicons CSS -->
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <script src="script.js" defer></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OTP</title>
+    <!--Google Fonts and Icons-->
+    <link
+        href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone"
+        rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Foldit:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 </head>
+<style>
+    body {
+        width: 100%;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+
+    .center {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgb(244, 254, 232);
+    }
+
+    form {
+        width: 450px;
+        height: 320px;
+        border-radius: 3mm;
+        border: 0.4mm solid rgb(28, 58, 64);
+        background: rgb(255, 255, 255);
+        padding: 20px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+        position: relative;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+            rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    }
+
+    .icon {
+        width: 100%;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .icon span {
+        font-size: 40px;
+        color: rgb(233, 126, 81);
+    }
+
+    .head {
+        width: 100%;
+        text-align: center;
+    }
+
+    .title {
+        font-family: poppins;
+        font-size: 20px;
+        color: rgb(28, 58, 64);
+        font-weight: 500;
+        margin-bottom: 3px;
+    }
+
+    .subtitle {
+        font-family: poppins;
+        font-size: 13px;
+        color: rgb(98, 98, 98);
+    }
+
+    .input-fields {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .inputs {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .inputs input {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        outline: 0.4mm solid rgba(28, 58, 64, 0.7);
+        text-align: center;
+        font-family: poppins;
+        background: white;
+        font-size: 18px;
+    }
+
+    .inputs input:focus {
+        outline: 0.4mm solid rgba(130, 190, 87);
+    }
+
+    .inputs input:valid {
+        background: rgb(130, 190, 87);
+        color: white;
+        outline: 0.4mm solid rgb(130, 190, 87);
+    }
+
+    .timer {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: poppins;
+        font-size: 14px;
+        color: rgb(98, 98, 98);
+        margin: 10px 0;
+    }
+
+    .timer button {
+        background: none;
+        outline: none;
+        border: none;
+        color: rgb(98, 98, 98);
+        font-family: poppins;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .timer button:disabled {
+        color: rgb(200, 200, 200);
+        cursor: auto;
+    }
+
+    .timer .time {
+        width: 30px;
+    }
+
+    .btn {
+        width: 100%;
+        background: rgb(28, 58, 64);
+        color: white;
+        padding: 5px 0;
+        font-family: poppins;
+        font-size: 16px;
+        border-radius: 1mm;
+        cursor: pointer;
+    }
+
+    .status {
+        position: absolute;
+        width: 0;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: rgb(28, 58, 64);
+        border-radius: 2mm;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        overflow: hidden;
+        transition: 0.35s;
+    }
+
+    .status span {
+        font-size: 80px;
+        width: 80px;
+        color: rgb(249, 244, 60);
+    }
+
+    .success {
+        color: white;
+    }
+</style>
 
 <body>
-    <!-- <div class="toast">
-      <div class="toast-content">
-        <i class="fas fa-solid fa-check check"></i>
-        <div class="message">
-          <span class="text text-1">
-          </span>
-          <span class="text text-2"> Please try again</span>
-        </div>
-      </div>
-      <i class="fa-solid fa-xmark close"></i>
-      <div class="progress"></div>
-    </div> -->
-      <div class="container">
-        <header>
-          <i class="bx bxs-check-shield"></i>
-        </header>
-        <h4>Enter OTP Code</h4>
-        <% if(typeof message !=="undefined" ){%>
-          <div class="alert alert-danger text-center">
-              <%= message %>
-          </div>
-          <%}%>
+    <div class="center">
         <form action="/user/otp" method="POST">
-          <div class="input-field">
-            <input type="number" name="digitOne" />
-            <input type="number" name="digitTwo" disabled />
-            <input type="number" name="digitThree" disabled />
-            <input type="number" name="digitFour" disabled />
-          </div>
-          <button>Verify OTP</button>
+            <div class="icon">
+                <img img src="admin/logo/2.png" alt="" width="200px" height="50px">
+            </div>
+            <div class="head">
+                <div class="title">Please check your email</div>
+                <div class="subtitle">We've sent a code to snippets@gmail.com</div>
+            </div>
+            <% if(typeof message !=="undefined" ){%>
+                <div class="alert alert-danger text-center" style="text-align: center; width: 100%; color: red;">
+                    <%= message %>
+                </div>
+                <%}%>
+            <span class="input-fields">
+                <span class="inputs">
+                    <input type="text" class="input" required pattern="[0-9]*" maxlength="1" name="digitOne"/>
+                    <input type="text" class="input" required pattern="[0-9]*" maxlength="1" name="digitTwo"/>
+                    <input type="text" class="input" required pattern="[0-9]*" maxlength="1" name="digitThree"/>
+                    <input type="text" class="input" required pattern="[0-9]*" maxlength="1"  name="digitFour"/>
+                </span>
+                <div class="timer">
+                    Didn't recieve code
+                    <a href="/user/resend-otp">
+                        <button type="button" id="resend">Click to Resend</button></a>
+                    <span class="time"></span>
+                </div>
+            </span>
+            <button type="submit" class="btn">Submit</button>
+<!-- 
+            <div class="status" id="status">
+                <span class="material-icons"> done_outlined </span>
+                <div class="title success">Hooray!</div>
+                <div class="subtitle success">Verification Successful</div>
+            </div> -->
         </form>
-      </div>
-
-      <script src="javaScript/otp.js"></script>
-      <!-- <script>
-        const toast = document.querySelector(".toast");
-        const closeIcon = document.querySelector(".close");
-        const progress = document.querySelector(".progress");
-        let timer1, timer2;
-
-        // Function to show the toast
-        function showToast(message) {
-          toast.classList.add("active");
-          progress.classList.add("active");
-
-          timer1 = setTimeout(() => {
-            toast.classList.remove("active");
-          }, 5000); // 1s = 1000 milliseconds
-
-          timer2 = setTimeout(() => {
-            progress.classList.remove("active");
-          }, 5300);
-
-          // Update the message text
-          document.querySelector(".text-2").textContent = message;
+    </div>
+    <script>
+        function timer(n) {
+            document.getElementById("resend").disabled = true;
+            const interval = setInterval(() => {
+                if (n == 0) {
+                    clearInterval(interval);
+                    document.getElementById("resend").disabled = false;
+                }
+                document.querySelector(".time").innerHTML = n;
+                n = n - 1;
+            }, 1000);
         }
+        timer(120);
+        document.getElementById("resend").onclick = function () {
+            timer(120);
+        };
 
-        // Function to hide the toast
-        function hideToast() {
-          toast.classList.remove("active");
+        let inputs = document.querySelectorAll(".input");
+        inputs.forEach((input) => {
+            input.addEventListener("keyup", (e) => {
+                let key = e.key;
+                if (Number.isInteger(Number(key))) {
+                    if (input.nextElementSibling) {
+                        input.nextElementSibling.focus();
+                    }
+                }
+            });
 
-          setTimeout(() => {
-            progress.classList.remove("active");
-          }, 300);
+            input.addEventListener("keydown", (e) => {
+                let key = e.key;
+                if (input.value == "" && key === "Backspace") {
+                    if (input.previousElementSibling) {
+                        input.previousElementSibling.focus();
+                    }
+                }
+            });
+        });
 
-          clearTimeout(timer1);
-          clearTimeout(timer2);
-        }
-
-        // Example usage
-        // Show the toast with a custom message
-        showToast("Please try again");
-
-        // Hide the toast after a certain time (e.g., 3 seconds)
-        setTimeout(() => {
-          hideToast();
-          toast.classList.add('disableView')
-        }, 5500); // Hide after 3 seconds
-
-      </script> -->
+        // document.querySelector(".btn").onclick = function () {
+        //     document.getElementById("status").style.width = "100%";
+        // };
+    </script>
 </body>
 
 </html>

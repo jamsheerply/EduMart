@@ -226,16 +226,52 @@
                           </td>
                           <% if (element.status=="unblock") { %>
                             <td>
-                              <a href="/admin/block-user/?id=<%= element._id %>">
-                                <i class="fa-solid fa-lock"></i>
-                              </a>
+                                <i class="fa-solid fa-lock" data-toggle="modal" data-target="#exampleModalCenterdelete"></i>
                             </td>
+                             <!-- Modal -->
+                             <div class="modal fade" id="exampleModalCenterdelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Block User</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    Are you sure you want to Block this User?
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+                                    <a href="/admin/block-user/?id=<%= element._id %>"><button type="button" class="btn btn-danger">Block</button></a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           <% } else { %>
                             <td>
-                              <a href="/admin/unblock-user/?id=<%= element._id %>">
-                                <i class="fa-solid fa-unlock"></i>
-                              </a>
+                                <i class="fa-solid fa-unlock" data-toggle="modal" data-target="#exampleModalCenterrecover"></i>
                             </td>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModalCenterrecover" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Unblock User</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    Are you sure you want to Unlock this User?
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                    <a href="/admin/unblock-user/?id=<%= element._id %>"><button type="button" class="btn btn-success">Unblock</button></a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           <% } %>
                         </tr>
                       <% })} else { %>

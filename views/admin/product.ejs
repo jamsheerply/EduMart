@@ -8,6 +8,7 @@
   <title>Products</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
+
   <base href="/"> 
   <!-- Favicons -->
   <link href="admin/img/favicon.png" rel="icon">
@@ -239,9 +240,49 @@
                       <a href="/admin/edit-product?id=<%=element._id%>"><i class="fa-solid fa-pen-to-square"></i></a>
                     </td>
                     <%if(element.isdeleted){%>
-                      <td><a href="/admin/delete-product?id=<%=element._id%>"><i class="fa-solid fa-trash-can"></i></a></td>
+                      <td><i class="fa-solid fa-trash-can" data-toggle="modal" data-target="#exampleModalCenterdelete"></i></td>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenterdelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Product</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            Are you sure you want to Delete this Product?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+                            <a href="/admin/delete-product?id=<%=element._id%>"><button type="button" class="btn btn-danger">Delete</button></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                       <%}else{%>
-                        <td><a href="/admin/recover-product?id=<%=element._id%>"><i class="fa-solid fa-rotate-right"></i></a></td>
+                        <td><a ><i class="fa-solid fa-rotate-right" data-toggle="modal" data-target="#exampleModalCenterrecover"></i></a></td>
+                        <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenterrecover" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Recover Product</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            Are you sure you want to Recover this Product?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            <a href="/admin/recover-product?id=<%=element._id%>"><button type="button" class="btn btn-success">Recover</button></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                         <%}%>
                   </tr>
                   <%})}else{%>
@@ -287,13 +328,14 @@
   <script src="admin/vendor/tinymce/tinymce.min.js"></script>
   <script src="admin/vendor/php-email-form/validate.js"></script>
 
-  <!---    bootstrap   -->
-  <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
-
+  
   <!-- Template Main JS File -->
   <script src="admin/js/main.js"></script>
+  
+  <!---    bootstrap   -->
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
   <!-------validation------>
   <script src="javaScript/product.js"></script
