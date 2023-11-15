@@ -1,6 +1,7 @@
 const express = require("express")
 const userRoute = express()
 const userController = require("../controller/userController")
+const cartconstroller=require("../controller/cartController")
 const userAuth=require("../midddleware/UserAuth")
 const adminAuth=require("../midddleware/adminAuth")
 
@@ -26,12 +27,18 @@ userRoute.get("/login", userAuth.userExist,adminAuth.adminExist,(req, res) => {
 userRoute.post("/login",userController.verifyLogin)
 userRoute.get("/logout",userController.userLogout)
 
-//...................productList..........................
+//...................productList.............................
 userRoute.get("/product-list",userAuth.verifyUser,userController.loadProductList)
 
-//...................singleProudct.......................
+//...................singleProudct...........................
 userRoute.get("/product-detail",userAuth.verifyUser,userController.loadProductDetail)
 
+//...................shopping-cart...........................
+userRoute.get("/shopping-cart",userAuth.verifyUser,cartconstroller.loadShopingCart)
+userRoute.post("/shopping-cart",userAuth.verifyUser,cartconstroller.insertTOShopingCart)
+
+//.......................check-out............................
+userRoute.get("/check-out",userController.loadCheckOut)
 
 
 // userRoute.post("/admin/insert",userController.adminInsert)

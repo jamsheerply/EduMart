@@ -3,19 +3,19 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const path=require("path")
 const cookieParser = require("cookie-parser");
-const cors = require('cors');
+// const cors = require('cors');
 require('dotenv').config();
 const app = express();
 require("./config/dataBase")
   
-const corsOptions = {
-    origin: 'http://127.0.0.1:8080', // Replace with your frontend's URL
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true, // If you're using cookies or sessions
-    optionsSuccessStatus: 204, // Some legacy browsers choke on 204
-};
+// const corsOptions = {
+//     origin: 'http://127.0.0.1:8080', // Replace with your frontend's URL
+//     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//     credentials: true, // If you're using cookies or sessions
+//     optionsSuccessStatus: 204, // Some legacy browsers choke on 204
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 
 // Initialization
@@ -50,3 +50,7 @@ const userAuth=require("./midddleware/UserAuth")
 const adminAuth=require("./midddleware/adminAuth")
 const userController = require("./controller/userController");
 app.get("/",userAuth.userExist,adminAuth.adminExist,userController.loadLanding)
+
+app.all('*', (req, res) => { 
+    res.render("user/404") 
+  });

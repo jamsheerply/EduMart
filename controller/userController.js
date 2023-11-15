@@ -2,7 +2,6 @@ const userModel = require("../model/userModel");
 const otpVerification = require("../model/otpVerification")
 const adminModel = require("../model/adminModel")
 const productModel=require("../model/productModel")
-const jwt = require("jsonwebtoken")
 require('dotenv').config();
 
 
@@ -159,7 +158,7 @@ const resendOtp=async (req,res)=>{
 // .......................loadHome....................
 const loadHome = async (req, res) => {
     try {
-        // req.session.email=req.session.userData.email
+        req.session.email=req.session.userData.email
 
         const productData=await productModel.find({isdeleted: true,status:"published"})
     const biographiesData=await productModel.find({isdeleted: true,category:"Biographies",status:"published"})
@@ -192,8 +191,9 @@ const verifyLogin = async (req, res) => {
             const passwordCompare = await bcrypt.compare(password, userData.password)
             if (passwordCompare) {
                 req.session.emailVerifyUser= req.body.email
-                console.log(req.session.emailVerifyUser)
+                // console.log(req.session.emailVerifyUser)
                 req.session.userLogged = true
+                req.session.userData=userData
                 res.redirect("/user/home")
             } else {
                 res.render("user/login", { message: "Email and password is incorrect" })
@@ -214,6 +214,18 @@ const verifyLogin = async (req, res) => {
     }
 }
 
+
+//..............logOut.......................
+const userLogout = async (req, res) => {
+    try {
+        // console.log("hi")
+        req.session.destroy();
+        res.redirect("/");
+    } catch (error) {
+        console.log(error.message + " userLogout")
+    }
+}
+
 //................adminInsert.......................
 // const adminInsert = async (req, res) => {
 //     try {
@@ -231,17 +243,7 @@ const verifyLogin = async (req, res) => {
 //     }
 // }
 
-//..............logOut.......................
-const userLogout = async (req, res) => {
-    try {
-        // console.log("hi")
-        req.session.destroy();
-        res.redirect("/");
-    } catch (error) {
-        console.log(error.message + " userLogout")
-    }
-}
-
+//..................loadProductList...............................
 const loadProductList=async(req,res)=>{
     try {
         const productData=await productModel.find({isdeleted: true})
@@ -251,6 +253,7 @@ const loadProductList=async(req,res)=>{
     }
 }
 
+//...................loadProductDetail..............................
 const loadProductDetail=async(req,res)=>{
     try {
         const id=req.query.id
@@ -258,6 +261,15 @@ const loadProductDetail=async(req,res)=>{
         res.render("user/productDetail",{product:productData})
     } catch (error) {
         console.log(error.message+ " loadProductDetails")
+    }
+}
+
+
+const loadCheckOut=(req,res)=>{
+    try {
+        res.render("user/checkout")
+    } catch (error) {
+        console.log(error.message+ " loadCheckOut")
     }
 }
 module.exports = {
@@ -270,8 +282,9 @@ module.exports = {
     loadHome,
     loadLogin,
     verifyLogin,
-    // adminInsert,
     userLogout,
+    // adminInsert,
     loadProductList,
-    loadProductDetail
+    loadProductDetail,
+    loadCheckOut
 };

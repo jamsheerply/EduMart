@@ -97,7 +97,7 @@
                                     <!-- Header Middle Wishlist Area End Here -->
                                     <!-- Begin Header Mini Cart Area -->
                                     <li class="hm-wishlist">
-                                            <a >
+                                            <a href="/user/shopping-cart">
                                                 <span class="cart-item-count wishlist-item-count">0</span>
                                                 <i class="fa-solid fa-cart-shopping"></i>
                                             </a>
@@ -310,20 +310,20 @@
                                 </div>
                                 <div class="single-add-to-cart">
                                     <div  class="cart-quantity">
-                                        <div class="quantity">
+                                        <!-- <div class="quantity">
                                             <label>Quantity</label>
                                             <div class="cart-plus-minus">
                                                 <input class="cart-plus-minus-box" value="1" type="text">
                                                 <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                                 <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                             </div>
-                                        </div>
-                                        <button class="add-to-cart" >Add to cart</button>
+                                        </div> -->
+                                        <button class="add-to-cart" onclick="addToCart('<%=product._id%>')">Add to cart</button>
                                     <!-- </form> -->
                                 </div>
-                                <div class="product-additional-info pt-25">
-                                    <a class="wishlist-btn" ><i class="fa fa-heart-o"></i>Add to
-                                        wishlist</a>
+                                <!-- <div class="product-additional-info pt-25"> -->
+                                    <!-- <a class="wishlist-btn" ><i class="fa fa-heart-o"></i>Add to
+                                        wishlist</a> -->
                                     <!-- <div class="product-social-sharing pt-25">
                                         <ul>
                                             <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a>
@@ -332,7 +332,7 @@
                                                         class="fa fa-instagram"></i>Instagram</a></li>
                                         </ul>
                                     </div> -->
-                                </div>
+                                <!-- </div> -->
                                 <div class="block-reassurance">
                                     <ul>
                                         <!-- <li>
@@ -863,6 +863,8 @@
     <script src="user/js/scrollUp.min.js"></script>
     <!-- Main/Activator js -->
     <script src="user/js/main.js"></script>
+    <!--custom js-->
+    <script src="javaScript/productDetails.js"></script
 </body>
 
 <!-- single-product31:32-->

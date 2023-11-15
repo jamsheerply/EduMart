@@ -7,7 +7,7 @@ const verifyUser = async (req, res, next) => {
         if (userData && req.session.userLogged && userData.status === "unblock") {
             next();
         } else {
-            res.redirect("/");
+            res.redirect("/user/login");
         }
     } catch (error) {
         console.log(error.message + " isLogin");

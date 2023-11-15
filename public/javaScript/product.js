@@ -49,10 +49,11 @@ function validateProductForm() {
     valid = false;
   }
 
-  if (isNaN(price) || parseFloat(price) <= 0) {
+  if (isNaN(parseFloat(price)) || parseFloat(price) <= 0) {
     document.getElementById("priceError").textContent = "Price must be a number greater than 0";
     valid = false;
-  }
+}
+
 
   return valid;
 }
@@ -205,7 +206,7 @@ function previewImage(input, imageId) {
 
 function deleteImgAddProduct(input,image){
   document.getElementById(input).value=''
-  document.getElementById(image).src=''
+  document.getElementById(image).src='admin/testi-no-image.png'
   // document.getElementById(image).style.display='none'
 }
 

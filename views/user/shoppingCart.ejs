@@ -1,23 +1,23 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
     
-<!-- login-register31:27-->
+<!-- shopping-cart31:32-->
 <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Login</title>
+        <title>Shopping Cart</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+
         <base href="/"> 
         <!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="user/images/favicon.png">
         <!-- Material Design Iconic Font-V2.2.0 -->
-        <link rel="stylesheet" href="user/css/material-design-iconic-font.min.css">
         <!--font awesome cdn-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+           crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="user/css/material-design-iconic-font.min.css">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="user/css/font-awesome.min.css">
         <!-- Font Awesome Stars-->
@@ -46,7 +46,6 @@
         <link rel="stylesheet" href="styleSheet/style.css">
         <!-- Responsive CSS -->
         <link rel="stylesheet" href="user/css/responsive.css">
-        
         <!-- Modernizr js -->
         <script src="user/js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
@@ -58,6 +57,9 @@
         <div class="body-wrapper">
             <!-- Begin Header Area -->
             <header>
+                <!-- Begin Header Top Area -->
+               
+                <!-- Header Top Area End Here -->
                 <!-- Begin Header Middle Area -->
                 <div class="header-middle pl-sm-0 pr-sm-0 pl-xs-0 pr-xs-0">
                     <div class="container">
@@ -76,7 +78,7 @@
                                 <!-- Begin Header Middle Searchbox Area -->
                                 <!-- <form action="#" class="hm-searchbox">
                                     <select class="nice-select select-search-category">
-                                        <option value="0">All</option>
+                                        <option value="0">All</option>                         
                                     </select>
                                     <input type="text" placeholder="Enter your search key ...">
                                     <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
@@ -86,28 +88,28 @@
                                 <div class="header-middle-right">
                                     <ul class="hm-menu">
                                         <!-- Begin Header Middle Wishlist Area -->
-                                        <li class="hm-wishlist">
-                                            <a >
+                                        <!-- <li class="hm-wishlist">
+                                            <a>
                                                 <span class="cart-item-count wishlist-item-count">0</span>
                                                 <i class="fa fa-heart-o"></i>
                                             </a>
-                                        </li>
+                                        </li> -->
                                         <!-- Header Middle Wishlist Area End Here -->
                                         <!-- Begin Header Mini Cart Area -->
-                                    <li class="hm-wishlist">
-                                        <a >
-                                            <span class="cart-item-count wishlist-item-count">0</span>
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </a>
-                                    </li>
-                                    <!-- Header Mini Cart Area End Here -->
-                                    <!-- Begin user Area -->
-                                    <li class="hm-wishlist">
-                                        <a href="/user/login">
-                                            <i class="fa-solid fa-user"></i>
-                                        </a>
-                                    </li>
-                                    <!-- Header user Area Area End Here -->
+                                        <li class="hm-wishlist">
+                                            <a href="/user/shopping-cart">
+                                                <span class="cart-item-count wishlist-item-count">0</span>
+                                                <i class="fa-solid fa-cart-shopping"></i>
+                                            </a>
+                                        </li>
+                                        <!-- Header Mini Cart Area End Here -->
+                                        <!-- Begin user Area -->
+                                        <li class="hm-wishlist">
+                                            <a href="user/logout">
+                                                <i class="fa-solid fa-right-from-bracket"></i>
+                                            </a>
+                                        </li>
+                                        <!-- Header Mini Cart Area End Here -->
                                     </ul>
                                 </div>
                                 <!-- Header Middle Right Area End Here -->
@@ -127,8 +129,9 @@
                                     <nav>
                                         <ul>
                                             <li class="dropdown-holder"><a href="/">Home</a></li>
-                                            <!-- <li><a href="about-us.html">About Us</a></li>
-                                            <li><a href="contact.html">Contact</a></li> -->
+                                            <!-- <li><a href="about-us.html">Contact</a></li>
+                                            <li><a href="contact.html">About Us</a></li>
+                                            <li><a href="#">My Account</a></li> -->
                                         </ul>
                                     </nav>
                                 </div>
@@ -156,49 +159,72 @@
                     <div class="breadcrumb-content">
                         <ul>
                             <li><a href="/">Home</a></li>
-                            <li class="active">Login</li>
+                            <li class="active">Shopping Cart</li>
                         </ul>
                     </div>
                 </div>
             </div>
             <!-- Li's Breadcrumb Area End Here -->
-            <!-- Begin Login Content Area -->
-            <div class="page-section mb-60">
+            <!--Shopping Cart Area Strat-->
+            <div class="Shopping-cart-area pt-60 pb-60">
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6 mb-30">
-                            <!-- Login Form s-->
-                            <form action="/user/login" method="post">
-                                <div class="login-form">
-                                    <h4 class="login-title">Login</h4>
-                                    <% if(typeof message !=="undefined" ){%>
-                                        <div class="alert alert-danger text-center">
-                                            <%= message %>
-                                        </div>
-                                        <%}%>
-                                    <div class="row">
-                                        <div class="col-md-12 col-12 mb-20">
-                                            <label>Email Address*</label>
-                                            <input class="mb-0" type="email" placeholder="Email Address" name="email" autocomplete="email">
-                                        </div>
-                                        <div class="col-12 mb-20">
-                                            <label>Password</label>
-                                            <input class="mb-0" type="password" placeholder="Password" name="password" autocomplete="current-password">
-                                        </div>
-                                        <!-- <div class="col-md-8">
-                                            <div class="check-box d-inline-block ml-0 ml-md-2 mt-10">
-                                                <input type="checkbox" id="remember_me">
-                                                <label for="remember_me">Remember me</label>
+                        <div class="col-12">
+                            <form >
+                                <div class="table-content table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="li-product-remove">remove</th>
+                                                <th class="li-product-thumbnail">images</th>
+                                                <th class="cart-product-name">Product</th>
+                                                <th class="li-product-price">Unit Price</th>
+                                                <th class="li-product-quantity">Quantity</th>
+                                                <th class="li-product-subtotal">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="li-product-remove"><a ><i class="fa fa-times"></i></a></td>
+                                                <td class="li-product-thumbnail"><a ><img src="user/images/product/small-size/5.jpg" alt="Li's Product Image"></a></td>
+                                                <td class="li-product-name"><a >Accusantium dolorem1</a></td>
+                                                <td class="li-product-price"><span class="amount">$46.80</span></td>
+                                                <td class="quantity">
+                                                    <label>Quantity</label>
+                                                    <div class="cart-plus-minus">
+                                                        <input class="cart-plus-minus-box" value="1" type="text">
+                                                        <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
+                                                        <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
+                                                    </div>
+                                                </td>
+                                                <td class="product-subtotal"><span class="amount">$70.00</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <!-- <div class="col-12">
+                                        <div class="coupon-all">
+                                            <div class="coupon">
+                                                <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code" type="text">
+                                                <input class="button" name="apply_coupon" value="Apply coupon" type="submit">
                                             </div>
-                                        </div> -->
-                                        <div class="col-md-4 mt-10 mb-20 text-left text-md-right">
-                                            <!-- <a href="#"> Forgotten pasward?</a> -->
+                                            <div class="coupon2">
+                                                <input class="button" name="update_cart" value="Update cart" type="submit">
+                                            </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <button class="register-button mt-0">Login</button><br><br><br>
-                                            <span>not a member?<a href="/user/register"> Register now</a></span>
+                                    </div> -->
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5 ml-auto">
+                                        <div class="cart-page-total">
+                                            <h2>Cart totals</h2>
+                                            <ul>
+                                                <li>Subtotal <span>$130.00</span></li>
+                                                <li>Total <span>$130.00</span></li>
+                                            </ul>
+                                            <a >Proceed to checkout</a>
                                         </div>
-                                        
                                     </div>
                                 </div>
                             </form>
@@ -206,7 +232,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Login Content Area End Here -->
+            <!--Shopping Cart Area End-->
             <!-- Begin Footer Area -->
             <div class="footer">
                 <!-- Begin Footer Static Top Area -->
@@ -281,7 +307,7 @@
                                 <!-- Begin Footer Logo Area -->
                                 <div class="col-lg-4 col-md-6">
                                     <div class="footer-logo">
-                                        <img img src="admin/logo/2.png" alt="" width="200px" height="50px">
+                                        <img src="user/images/menu/logo/1.jpg" alt="Footer Logo">
                                         <p class="info">
                                             We are a team of designers and developers that create high quality HTML Template & Woocommerce, Shopify Theme.
                                         </p>
@@ -293,7 +319,7 @@
                                         </li>
                                         <li>
                                             <span>Phone: </span>
-                                            <a >+91 9020-432-432</a>
+                                            <a >+91 90204342432</a>
                                         </li>
                                         <li>
                                             <span>Email: </span>
@@ -348,7 +374,7 @@
                                     <!-- Begin Footer Newsletter Area -->
                                     <div class="footer-newsletter">
                                         <h4>Sign up to newsletter</h4>
-                                        <form  id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="footer-subscribe-form validate" target="_blank" novalidate>
+                                        <form action="#" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="footer-subscribe-form validate" target="_blank" novalidate>
                                            <div id="mc_embed_signup_scroll">
                                               <div id="mc-form" class="mc-form subscribe-form form-group" >
                                                 <input id="mc-email" type="email" autocomplete="off" placeholder="Enter your email" />
@@ -393,7 +419,7 @@
         <script src="user/js/jquery.magnific-popup.min.js"></script>
         <!-- Isotope js -->
         <script src="user/js/isotope.pkgd.min.js"></script>
-        <!--"user/imagesloaded js -->
+        <!-- Imagesloaded js -->
         <script src="user/js/imagesloaded.pkgd.min.js"></script>
         <!-- Mixitup js -->
         <script src="user/js/jquery.mixitup.min.js"></script>
@@ -417,5 +443,5 @@
         <script src="user/js/main.js"></script>
     </body>
 
-<!-- login-register31:27-->
+<!-- shopping-cart31:32-->
 </html>
