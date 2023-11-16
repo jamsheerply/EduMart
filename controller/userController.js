@@ -134,6 +134,7 @@ const verifyOtp = async (req, res) => {
         } else {
             res.render("user/otp", { message: "invalid otp" })
         }
+        req.session.userData._id;
     } catch (error) {
         console.log(error.message);
     }

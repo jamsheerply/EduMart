@@ -36,6 +36,8 @@ userRoute.get("/product-detail",userAuth.verifyUser,userController.loadProductDe
 //...................shopping-cart...........................
 userRoute.get("/shopping-cart",userAuth.verifyUser,cartconstroller.loadShopingCart)
 userRoute.post("/shopping-cart",userAuth.verifyUser,cartconstroller.insertTOShopingCart)
+userRoute.post("/shopping-cart/update",userAuth.verifyUser,cartconstroller.updateShopingCart)
+userRoute.get("/shopping-cart/delete/:cartId/:productId",userAuth.verifyUser,cartconstroller.deleteShopingCart)
 
 //.......................check-out............................
 userRoute.get("/check-out",userController.loadCheckOut)
