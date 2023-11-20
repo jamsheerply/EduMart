@@ -1,16 +1,16 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
 
-<!-- login-register31:27-->
+<!-- 40432:14-->
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Register</title>
+    <title>ORDER DETAILS</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <base href="/"> 
+    <base href="/">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="user/images/favicon.png">
     <!-- Material Design Iconic Font-V2.2.0 -->
@@ -47,11 +47,14 @@
     <link rel="stylesheet" href="styleSheet/style.css">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="user/css/responsive.css">
-
     <!-- Modernizr js -->
     <script src="user/js/vendor/modernizr-2.8.3.min.js"></script>
 
+    <!---------BOOTSRAP CDN----------->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
+</head>
 
 <body>
     <!--[if lt IE 8]>
@@ -61,6 +64,8 @@
     <div class="body-wrapper">
         <!-- Begin Header Area -->
         <header>
+            <!-- Begin Header Top Area -->
+            <!-- Header Top Area End Here -->
             <!-- Begin Header Middle Area -->
             <div class="header-middle pl-sm-0 pr-sm-0 pl-xs-0 pr-xs-0">
                 <div class="container">
@@ -68,7 +73,7 @@
                         <!-- Begin Header Logo Area -->
                         <div class="col-lg-3">
                             <div class="logo pb-sm-30 pb-xs-30">
-                                <a >
+                                <a href="/">
                                     <img img src="admin/logo/2.png" alt="" width="200px" height="50px">
                                 </a>
                             </div>
@@ -78,19 +83,19 @@
                         <div class="col-lg-9 pl-0 ml-sm-15 ml-xs-15">
                             <!-- Begin Header Middle Searchbox Area -->
                             <!-- <form action="#" class="hm-searchbox">
-                                <select class="nice-select select-search-category">
-                                    <option value="0">All</option>
-                                </select>
-                                <input type="text" placeholder="Enter your search key ...">
-                                <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
-                            </form> -->
+                                    <select class="nice-select select-search-category">
+                                        <option value="0">All</option>                         
+                                    </select>
+                                    <input type="text" placeholder="Enter your search key ...">
+                                    <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
+                                </form> -->
                             <!-- Header Middle Searchbox Area End Here -->
                             <!-- Begin Header Middle Right Area -->
                             <div class="header-middle-right">
                                 <ul class="hm-menu">
                                     <!-- Begin Header Middle Wishlist Area -->
                                     <li class="hm-wishlist">
-                                        <a >
+                                        <a>
                                             <span class="cart-item-count wishlist-item-count">0</span>
                                             <i class="fa fa-heart-o"></i>
                                         </a>
@@ -98,7 +103,7 @@
                                     <!-- Header Middle Wishlist Area End Here -->
                                     <!-- Begin Header Mini Cart Area -->
                                     <li class="hm-wishlist">
-                                        <a >
+                                        <a href="/user/shopping-cart">
                                             <span class="cart-item-count wishlist-item-count">0</span>
                                             <i class="fa-solid fa-cart-shopping"></i>
                                         </a>
@@ -106,11 +111,11 @@
                                     <!-- Header Mini Cart Area End Here -->
                                     <!-- Begin user Area -->
                                     <li class="hm-wishlist">
-                                        <a href="/user/login">
+                                        <a>
                                             <i class="fa-solid fa-user"></i>
                                         </a>
                                     </li>
-                                    <!-- Header user Area Area End Here -->
+                                    <!-- Header Mini Cart Area End Here -->
                                 </ul>
                             </div>
                             <!-- Header Middle Right Area End Here -->
@@ -131,7 +136,9 @@
                                     <ul>
                                         <li class="dropdown-holder"><a href="/">Home</a></li>
                                         <!-- <li><a href="about-us.html">About Us</a></li>
-                                        <li><a href="contact.html">Contact</a></li> -->
+                                            <li><a href="contact.html">Contact</a></li>
+                                            <li><a >My PROFILE</a></li>
+                                            <li><a >MY ORDERS</a></li> -->
                                     </ul>
                                 </nav>
                             </div>
@@ -159,71 +166,89 @@
                 <div class="breadcrumb-content">
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li class="active">Register</li>
+                        <li class="active">Order Details</li>
                     </ul>
                 </div>
             </div>
         </div>
         <!-- Li's Breadcrumb Area End Here -->
-        <!-- Begin Login Content Area -->
-        <div class="page-section mb-60">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12">
-                        <!-----------------start registeration form-------------------->
-                        <form onsubmit="postData(event)">
-                            <div class="login-form">
-                                <h4 class="login-title">Register</h4>
-                                <div class="row">
-                                    <div class="col-md-6 col-12 mb-20">
-                                        <label>First Name</label>
-                                        <input class="mb-0" type="text" placeholder="First Name" name="firstName"
-                                            id="firstName">
-                                        <p id="firstNameError" style="color: red;"></p>
-                                    </div>
-                                    <div class="col-md-6 col-12 mb-20">
-                                        <label>Last Name</label>
-                                        <input class="mb-0" type="text" placeholder="Last Name" name="lastName" id="lastName">
-                                        <p id="lastNameError" style="color: red;"></p>
-                                    </div>
-                                    <div class="col-md-12 mb-20">
-                                        <label>Email Address</label>
-                                        <input class="mb-0" type="email" placeholder="Email Address" id="email">
-                                        <p id="emailError" style="color: red;"></p>
-                                    </div>
-                                    <div class="col-md-6 mb-20">
-                                        <label>Password</label>
-                                        <input class="mb-0" type="password" placeholder="Password" name="password"
-                                            id="password">
-                                        <p id="passwordError" style="color: red;"></p>
-                                    </div>
-                                    <div class="col-md-6 mb-20">
-                                        <label>Confirm Password</label>
-                                        <input class="mb-0" type="password" placeholder="Confirm Password"
-                                            id="confirmPassword">
-                                        <p id="confirmPasswordError" style="color: red;"></p>
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="register-button mt-0">Register</button>
-                                        <br><br><br>
-                                        <span>Already a member?<a href="/user/login"> Login now</a></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                        <!-----------------End registeration form-------------------->
+        <!-- Error 404 Area Start -->
+        <div class="container">
+            <div class="row ">
+
+                <div class="col-4  d-flex align-items-center"><span>ORDER ID:</span><span>000</span></div>
+                <div class="col-4  d-flex align-items-center justify-content-center"><span>STATUS:</span><span>pending</span></div>
+                <div class="col-4 d-flex justify-content-end"> <button class="btn btn-success">Cancel</button></div>
+            </div>
+            <div class="row bg-warning d-flex justify-content-center mt-4">
+                <div class="col-3  d-flex align-items-center p-0"> 
+                    <div style="width: 100%;height: 6px;display: flex;align-items: center;"><span style="height: 30px;width: 30px;border-radius: 50%;background-color: rgb(93, 33, 5);display: block;">
+                        </span>
                     </div>
+                     </div>
+                <div class="col-3  d-flex align-items-center p-0"> 
+                    <div style="width: 100%;height: 6px;display: flex;align-items: center;"><span style="height: 30px;width: 30px;border-radius: 50%;background-color: aqua;display: block;"></span></div>
+                     </div>
+                <div class="col-3  d-flex align-items-center p-0"> 
+                    <div style="width: 100%;height: 6px;display: flex;align-items: center;"><span style="height: 30px;width: 30px;border-radius: 50%;background-color: aqua;display: block;"></span></div>
+                     </div>
+                <div class="  d-flex align-items-center p-0"> 
+                    <div style="width: 100%;height: 6px;display: flex;align-items: center;"><span style="height: 30px;width: 30px;border-radius: 50%;background-color: aqua;display: block;"></span></div>
+                     </div>
+            </div>
+            <div class="row  d-flex justify-content-center  mt-3">
+                <div class="col-3  d-flex align-items-center p-0"> 
+                    <div>Confirmed
+                    </div>
+                </div>
+                <div class="col-3  d-flex align-items-center p-0"> 
+                    <div >Pending</div>
+                     </div>
+                     <div class="col-3  d-flex align-items-center p-0"> 
+                        <div >Pending</div>
+                         </div>
+                <div class=" d-flex align-items-center p-0"> 
+                    <div style="width: 100%;height: 6px;display: flex;align-items: center;">Pending</div>
+                     </div>
+            </div>
+            <div class="row mt-4">
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">Details</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quanity</th>
+                        <th scope="col">Sub-Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12  border">
+                    <h3>Delivery Address</h3>
+                    <h4><span>jamsheer</span><span> m c</span></h4>
+                    <h5><span>Phone number:</span><span> 9020432432</span></h5>
                 </div>
             </div>
         </div>
-        <!-- Login Content Area End Here -->
+        <!-- Error 404 Area End -->
         <!-- Begin Footer Area -->
         <div class="footer">
             <!-- Begin Footer Static Top Area -->
             <div class="footer-static-top">
                 <div class="container">
                     <!-- Begin Footer Shipping Area -->
-                    <div class="footer-shipping pt-60 pb-55 pb-xs-25">
+                    <div class="footer-shipping pt-60 pb-25">
                         <div class="row">
                             <!-- Begin Li's Shipping Inner Box Area -->
                             <div class="col-lg-3 col-md-6 col-sm-6 pb-sm-55 pb-xs-55">
@@ -304,11 +329,11 @@
                                     </li>
                                     <li>
                                         <span>Phone: </span>
-                                        <a >+91 9020432432</a>
+                                        <a>+91 9020432432</a>
                                     </li>
                                     <li>
                                         <span>Email: </span>
-                                        <a >jamsheerpayyoli@gmail.com</a>
+                                        <a>jamsheerpayyoli@gmail.com</a>
                                     </li>
                                 </ul>
                             </div>
@@ -318,10 +343,10 @@
                                 <div class="footer-block">
                                     <h3 class="footer-block-title">Product</h3>
                                     <ul>
-                                        <li><a >Prices drop</a></li>
-                                        <li><a >New products</a></li>
-                                        <li><a >Best sales</a></li>
-                                        <li><a >Contact us</a></li>
+                                        <li><a>Prices drop</a></li>
+                                        <li><a>New products</a></li>
+                                        <li><a>Best sales</a></li>
+                                        <li><a>Contact us</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -331,10 +356,10 @@
                                 <div class="footer-block">
                                     <h3 class="footer-block-title">Our company</h3>
                                     <ul>
-                                        <li><a >Delivery</a></li>
-                                        <li><a >Legal Notice</a></li>
-                                        <li><a >About us</a></li>
-                                        <li><a >Contact us</a></li>
+                                        <li><a>Delivery</a></li>
+                                        <li><a>Legal Notice</a></li>
+                                        <li><a>About us</a></li>
+                                        <li><a>Contact us</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -361,7 +386,7 @@
                                 <!-- Begin Footer Newsletter Area -->
                                 <div class="footer-newsletter">
                                     <h4>Sign up to newsletter</h4>
-                                    <form  id="mc-embedded-subscribe-form"
+                                    <form action="#" method="post" id="mc-embedded-subscribe-form"
                                         name="mc-embedded-subscribe-form" class="footer-subscribe-form validate"
                                         target="_blank" novalidate>
                                         <div id="mc_embed_signup_scroll">
@@ -409,7 +434,7 @@
     <script src="user/js/jquery.magnific-popup.min.js"></script>
     <!-- Isotope js -->
     <script src="user/js/isotope.pkgd.min.js"></script>
-    <!-- user/imagesloaded js -->
+    <!-- Imagesloaded js -->
     <script src="user/js/imagesloaded.pkgd.min.js"></script>
     <!-- Mixitup js -->
     <script src="user/js/jquery.mixitup.min.js"></script>
@@ -431,10 +456,8 @@
     <script src="user/js/scrollUp.min.js"></script>
     <!-- Main/Activator js -->
     <script src="user/js/main.js"></script>
-    <!-------validation------>
-    <script src="javaScript/register.js"></script>
 </body>
 
-<!--register31:27-->
+<!-- 40432:14-->
 
 </html>

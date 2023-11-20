@@ -14,6 +14,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="user/images/favicon.png">
     <!-- Material Design Iconic Font-V2.2.0 -->
     <link rel="stylesheet" href="user/css/material-design-iconic-font.min.css">
+
     <!--font awesome cdn-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
@@ -48,6 +49,13 @@
     <link rel="stylesheet" href="user/css/responsive.css">
     <!-- Modernizr js -->
     <script src="user/js/vendor/modernizr-2.8.3.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.7.4/css/uikit.min.css" rel="stylesheet">
+
+    <!---------BOOTSRAP CDN----------->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 </head>
 
 <body>
@@ -169,229 +177,90 @@
         </div>
         <!-- Li's Breadcrumb Area End Here -->
         <!--Checkout Area Strat-->
-        <div class="checkout-area pt-60 pb-30">
+        <div class="checkout-area">
             <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="coupon-accordion">
-                            <!--Accordion Start-->
-                            <!--Accordion End-->
-                            <!--Accordion Start-->
-                            <!-- <h3>Have a coupon? <span id="showcoupon">Click here to enter your code</span></h3>
-                                <div id="checkout_coupon" class="coupon-checkout-content">
-                                    <div class="coupon-info">
-                                        <form action="#">
-                                            <p class="checkout-coupon">
-                                                <input placeholder="Coupon code" type="text">
-                                                <input value="Apply Coupon" type="submit">
-                                            </p>
-                                        </form>
-                                    </div>
-                                </div> -->
-                            <!--Accordion End-->
-                        </div>
+                <div class="row justify-content-between">
+                    <style>
+                        #clickableDiv {
+                            cursor: pointer;
+                            height: 400px; 
+                        }
+                        .dynamicDiv {
+                            cursor: pointer;
+                            height: 400px; 
+                        }
+                    
+                        .dynamicDIv p {
+                            font-size: 22px !important;
+                            color: #131212;
+                        }
+                    
+                        #clickableDiv:hover {
+                            background-color: rgb(178, 190, 181)
+                        }
+                        .dynamicDiv:hover {
+                            background-color: rgb(178, 190, 181)
+                        }
+                    </style>
+                    
+                    <div id="clickableDiv"
+                        class="col-12 col-md-5 mb-5 d-flex flex-column align-items-center justify-content-center rounded">
+                        <span style="font-size: 150px; text-align: center;">+</span>
+                        <span style="font-size: 30px;">Add Address</span>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 col-12">
-                        <form action="#">
-                            <div class="checkbox-form">
-                                <h3>Delivery Details</h3>
-                                <%if(addressData){%>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>First Name <span class="required">*</span></label>
-                                                <input type="text" id="firstName" value="<%=addressData.firstName%>">
-                                                <p id="firstNameError" style="color: red;"></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>Last Name <span class="required">*</span></label>
-                                                <input type="text" id="lastName" value="<%=addressData.lastName%>" >
-                                                <p id="lastNameError" style="color: red;"></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                                <label>Address <span class="required">*</span></label>
-                                                <textarea style="
-                                                    width: 100%;
-                                                    height: 130px;
-                                                " id="address"><%=addressData.address%></textarea>
-                                                <p id="addressError" style="color: red;"></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                                <label>Town / City <span class="required">*</span></label>
-                                                <input type="text" id="city" value="<%=addressData.city%>">
-                                                <p id="cityError" style="color: red;"></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>State<span class="required">*</span></label>
-                                                <input type="text" id="state" value="<%=addressData.state%>">
-                                                <p id="stateError" style="color: red;"></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>Postcode<span class="required">*</span></label>
-                                                <input type="text" id="postCode" value="<%=addressData.postCode%>">
-                                                <p id="postCodeError" style="color: red;"></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>Email Address <span class="required">*</span></label>
-                                                <input type="email" id="email" value="<%=addressData.email%>">
-                                                <p id="emailError" style="color: red;"></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>Phone <span class="required">*</span></label>
-                                                <input type="text" id="phone" value="<%=addressData.phone%>">
-                                                <p id="phoneError" style="color: red;"></p>
-                                            </div>
-                                        </div>
-                                    </div>                                 
-                                <%}else{%>
-                                    <div class="row">
-                                        <!-- New address fields -->
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>First Name <span class="required">*</span></label>
-                                                <input type="text" id="firstName">
-                                                <p id="firstNameError" style="color: red;"></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>Last Name <span class="required">*</span></label>
-                                                <input type="text" id="lastName">
-                                                <p id="lastNameError" style="color: red;"></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                                <label>Address <span class="required">*</span></label>
-                                                <textarea style="
-                                                    width: 100%;
-                                                    height: 130px;
-                                                " id="address"></textarea>
-                                                <p id="addressError" style="color: red;"></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                                <label>Town / City <span class="required">*</span></label>
-                                                <input type="text" id="city">
-                                                <p id="cityError" style="color: red;"></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>State <span class="required">*</span></label>
-                                                <input type="text" id="state">
-                                                <p id="stateError" style="color: red;"></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>Postcode <span class="required">*</span></label>
-                                                <input type="text" id="postCode">
-                                                <p id="postCodeError" style="color: red;"></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>Email Address <span class="required">*</span></label>
-                                                <input type="email" id="email">
-                                                <p id="emailError" style="color: red;"></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>Phone <span class="required">*</span></label>
-                                                <input type="text" id="phone">
-                                                <p id="phoneError" style="color: red;"></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <%}%>
+                    <script>
+                        document.getElementById("clickableDiv").addEventListener("click", function () {
+                            window.location.href = "/user/check-out/null";
+                        });
+                    </script>
+                    <% if (typeof userData !=='undefined' ) { %>
+                        <% userData.address.forEach((element)=> { %>
+                            <div id="dynamicDiv_<%=element._id%>" class="col-12 col-md-5 mb-5 rounded dynamicDiv">
+                                <h1>
+                                    <span name>
+                                        <%=element.firstName%>
+                                    </span>
+                                    <span>
+                                        <%=element.lastName%>
+                                    </span>
+                                </h1>
+                                <p>
+                                    <%=element.address%>
+                                </p>
+                                <p>
+                                    <%=element.city%>
+                                </p>
+                                <p>
+                                    <%=element.state%>
+                                </p>
+                                <p>
+                                    <%=element.postCode%>
+                                </p>
+                                <p>
+                                    <%=element.email%>
+                                </p>
+                                <p>
+                                    <%=element.phone%>
+                                </p>
+                                <!-- <button>edit</button>
+                            <button>delete</button> -->
+                            </div>
+                            <% }) %>
+                                <% } %>
+                                <script>
+                                    // Add event listener using event delegation to document.body
+                                    document.body.addEventListener('click', function (event) {
+                                        const clickedElement = event.target.closest('.dynamicDiv');
+                                        if (clickedElement) {
+                                            const elementId = clickedElement.id.split('_')[1];
+                                            window.location.href = `/user/check-out/${elementId}`;
+                                        }
+                                    });
+                                </script>
 
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-lg-6 col-12">
-                        <div class="your-order">
-                            <h3>Your order</h3>
-                            <div class="your-order-table table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th class="cart-product-name">Product</th>
-                                            <th class="cart-product-total">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <% if (cartData && cartData.items.length> 0) {%>
-                                        <%cartData.items.forEach((element)=> {%>
-                                            <tbody>
-                                                <tr class="cart_item">
-                                                    <td class="cart-product-name">
-                                                        <%= element.productId.productName %><strong
-                                                                class="product-quantity"> ×<%=element.quantity%>
-                                                            </strong>
-                                                    </td>
-                                                    <td class="cart-product-total"><span class="amount">&#8377
-                                                            <%=element.productId.price*element.quantity %>
-                                                        </span></td>
-                                                </tr>
-                                            </tbody>
-                                            <% }) }%>
-                                                <tfoot>
-                                                    <tr class="cart-subtotal">
-                                                        <th>Cart Subtotal</th>
-                                                        <td><span class="amount">&#8377 <%=subtotal%></span></td>
-                                                    </tr>
-                                                    <tr class="order-total">
-                                                        <th>Order Total</th>
-                                                        <td><strong><span class="amount">&#8377 <%=subtotal%>
-                                                                </span></strong></td>
-                                                    </tr>
-                                                </tfoot>
-                                </table>
-                            </div>
-                            <div class="payment-method">
-                                <div class="payment-accordion">
-                                    <div id="accordion">
-                                        <div class="card">
-                                            <div class="card-header" id="#payment-1" style="display: flex; align-items: center;">
-                                                <input type="radio" name="paymentMethod" value="COD" class="paymentMethod" style="flex-shrink: 0; margin-right: 10px; width: 4% !important;">
-                                                <h5 class="panel-title" style="margin: 0;">Cash on Delivery</h5>
-                                            </div>
-                                            <div class="card-header" id="#payment-2" style="display: flex; align-items: center;">
-                                                <input type="radio" name="paymentMethod" value="online" class="paymentMethod" style="flex-shrink: 0; margin-right: 10px; width: 4% !important;">
-                                                <h5 class="panel-title" style="margin: 0;">Online Payment</h5>
-                                            </div>
-                                            <div>
-                                                <p id="paymentMethodError" style="color: red;"></p>
-                                            </div> 
-                                        </div>
-                                        <div class="order-button-payment">
-                                            <input value="Place Order" type="submit" onclick="insertAddress()">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
+
             <!--Checkout Area End-->
             <!-- Begin Footer Area -->
             <div class="footer">
@@ -607,8 +476,6 @@
         <script src="user/js/scrollUp.min.js"></script>
         <!-- Main/Activator js -->
         <script src="user/js/main.js"></script>
-        <!-------validation------>
-        <script src="javaScript/checkout.js"></script>
 </body>
 
 <!-- checkout31:27-->

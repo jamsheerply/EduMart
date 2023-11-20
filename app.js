@@ -22,7 +22,7 @@ require("./config/dataBase")
 app.use(cookieParser());
 app.use(session({
     secret: process.env.SESSION_SECRET,
-    saveUninitialized: true,
+    saveUninitialized: false,
     resave: true
 }));
 

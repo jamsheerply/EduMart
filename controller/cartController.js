@@ -6,18 +6,29 @@ const loadShopingCart = async (req, res) => {
         const userId = req.session.userData._id;
         const cartData = await cartModel.findOne({ userId: userId }).populate("items.productId");
 
-        //.....subTotal price....
-        let subtotal = cartData.items.reduce((acc, element) => {
-            return acc + (element.productId.price * element.quantity);
-        }, 0);
+if (cartData && cartData.items) {
+    let subtotal = cartData.items.reduce((acc, element) => {
+        return acc + (element.productId.price * element.quantity);
+    }, 0);
 
-        res.render("user/shoppingCart", { cartData: cartData, subtotal: subtotal });
+    res.render("user/shoppingCart", { cartData: cartData, subtotal: subtotal });
+    req.session.subtotal = subtotal;
+    req.session.cartData = cartData;
+    // console.log(cartData.items)
+    // req.session.cartItemData=cartData.items
+    req.session.save();
+} else {
+    // Handle the case when cartData or cartData.items is null or undefined
+    res.render("user/shoppingCart", { cartData: null, subtotal: 0 });
+}
+
+
     } catch (error) {
         console.log(error.message + " loadShopingCart");
     }
 };
 
-const insertTOShopingCart = async (req, res) => {
+const insertShopingCart = async (req, res) => {
     try {
         const userId = req.session.userData._id;
         const productId = req.body.productId;
@@ -45,9 +56,10 @@ const insertTOShopingCart = async (req, res) => {
         await cart.save();
         return res.json({ status: true })
     } catch (error) {
-        console.log(error.message + " insertTOShopingCart");
+        console.log(error.message + " insertShopingCart");
     }
 };
+
 const updateShopingCart = async (req, res) => {
     try {
         const { cartId, productId, count } = req.body;
@@ -67,7 +79,11 @@ const updateShopingCart = async (req, res) => {
         }, 0);
 
         res.json({ subtotal: subtotal })
-
+        req.session.subtotal=subtotal
+        req.session.cartData=cartData
+        // console.log(cart.items)
+        req.session.cartItemData=cart.items
+        req.session.save()
     } catch (error) {
         console.log(error.message + " updateShopingCart")
     }
@@ -105,7 +121,7 @@ const deleteShopingCart = async (req, res) => {
 
 module.exports = {
     loadShopingCart,
-    insertTOShopingCart,
+    insertShopingCart,
     updateShopingCart,
     deleteShopingCart
 }
