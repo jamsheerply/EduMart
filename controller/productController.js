@@ -55,6 +55,7 @@ const insertAddProduct = async (req, res) => {
             category: req.body.category,
             productAdded: formattedDate,
             status: req.body.status,
+            quantity: req.body.quantity,
             price: req.body.price,
             imageURL: [{
                 productImage1: main,
@@ -118,6 +119,7 @@ const updateProduct = async (req, res) => {
                 language: req.body.language,
                 category: req.body.category,
                 status: req.body.status,
+                quantity: req.body.quantity,
                 price: req.body.price
             }
         })

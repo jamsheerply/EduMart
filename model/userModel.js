@@ -12,6 +12,9 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,required: true,
     },
+    phone:{
+        type:String
+    },
     status: {
         type: String,enum: ["block", "unblock"],
         default:"unblock"

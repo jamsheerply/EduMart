@@ -1,4 +1,5 @@
-const cartModel = require("../model/cartModel")
+const cartModel = require("../model/cartModel");
+const productModel = require("../model/productModel");
 const produdctModel = require("../model/productModel")
 
 const loadShopingCart = async (req, res) => {
@@ -6,21 +7,19 @@ const loadShopingCart = async (req, res) => {
         const userId = req.session.userData._id;
         const cartData = await cartModel.findOne({ userId: userId }).populate("items.productId");
 
-if (cartData && cartData.items) {
-    let subtotal = cartData.items.reduce((acc, element) => {
-        return acc + (element.productId.price * element.quantity);
-    }, 0);
+        if (cartData && cartData.items) {
+            let subtotal = cartData.items.reduce((acc, element) => {
+                return acc + (element.productId.price * element.quantity);
+            }, 0);
 
-    res.render("user/shoppingCart", { cartData: cartData, subtotal: subtotal });
-    req.session.subtotal = subtotal;
-    req.session.cartData = cartData;
-    // console.log(cartData.items)
-    // req.session.cartItemData=cartData.items
-    req.session.save();
-} else {
-    // Handle the case when cartData or cartData.items is null or undefined
-    res.render("user/shoppingCart", { cartData: null, subtotal: 0 });
-}
+            res.render("user/shoppingCart", { cartData: cartData, subtotal: subtotal });
+            req.session.subtotal = subtotal;
+            req.session.cartData = cartData;
+            req.session.save();
+        } else {
+            // Handle the case when cartData or cartData.items is null or undefined
+            res.render("user/shoppingCart", { cartData: null, subtotal: 0 });
+        }
 
 
     } catch (error) {
@@ -44,7 +43,6 @@ const insertShopingCart = async (req, res) => {
         }
 
         const existingCartItem = cart.items.find(item => item.productId.toString() === productId);
-
         if (existingCartItem) {
             existingCartItem.quantity += 1;
         } else {
@@ -66,11 +64,26 @@ const updateShopingCart = async (req, res) => {
         const cart = await cartModel.findById(cartId)
         // const productID=await produdctModel.findById(productId)
         const existingCartItem = cart.items.find(item => item.productId.toString() === productId);
-        if (existingCartItem) {
-            existingCartItem.quantity += count;
+        const productData = await productModel.findById(productId)
+        // console.log(productData.quantity)
+        // console.log(existingCartItem.quantity)
+        console.log(count)
+        if (count === -1) {
+            if (existingCartItem) {
+                existingCartItem.quantity += count;
+            }
+            cart.totalQuantity += count;
+            await cart.save();
+        } else if (productData.quantity > existingCartItem.quantity && count === 1) {
+            console.log("sucess")
+            if (existingCartItem) {
+                existingCartItem.quantity += count;
+            }
+            cart.totalQuantity += count;
+            await cart.save();
+        } else {
+           return res.json({error:"limit exceeded"})
         }
-        cart.totalQuantity += count;
-        await cart.save();
 
         // Calculate subtotal from the updated cart directly
         const cartData = await cartModel.findById(cartId).populate("items.productId");
@@ -79,10 +92,10 @@ const updateShopingCart = async (req, res) => {
         }, 0);
 
         res.json({ subtotal: subtotal })
-        req.session.subtotal=subtotal
-        req.session.cartData=cartData
+        req.session.subtotal = subtotal
+        req.session.cartData = cartData
         // console.log(cart.items)
-        req.session.cartItemData=cart.items
+        req.session.cartItemData = cart.items
         req.session.save()
     } catch (error) {
         console.log(error.message + " updateShopingCart")
@@ -93,7 +106,7 @@ const deleteShopingCart = async (req, res) => {
     try {
         const cart = await cartModel.findById(req.params.cartId);
         const productIdToFind = req.params.productId; // Define productIdToFind
-        
+
         const item = cart.items.find(item => item.productId.toString() === productIdToFind);
         if (item) {
             const quantityToRemove = item.quantity;

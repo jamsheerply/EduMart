@@ -108,7 +108,7 @@
       </li><!-- End Forms Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tables-nav" href="/admin/order">
+        <a class="nav-link collapsed" data-bs-target="#tables-nav"  href="/admin/order">
           <i class="bi bi-layout-text-window-reverse"></i><span>Orders</span>
         </a>
       </li>
@@ -178,23 +178,12 @@
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a >Home</a></li>
-          <li class="breadcrumb-item active">products</li>
+          <li class="breadcrumb-item active">orders</li>
         </ol>
       </nav>
     </div>
     <!-- End Page Title -->
     <div class="row">
-      <div class="col-12 col-md-2 mb-3 mb-md-0">
-        <!-- Left Button -->
-        <!-- Button trigger modal -->
-        <a href="admin/add-product">
-          <button type="button" class="btn bg-success ">
-            <span class="add">Add Product</span>
-          </button>
-        </a>
-
-      </div>
-
     </div>
     <section class="section dashboard mt-4">
       <div class="row">
@@ -203,87 +192,36 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">PRODUCT NAME</th>
-                  <th scope="col">IMAGE</th>
-                  <th scope="col">CATEGORY</th>
-                  <th scope="col">PRICE</th>
+                  <th scope="col">ORDER ID</th>
+                  <th scope="col">USER NAME</th>
                   <th scope="col">STATUS</th>
-                  <th scope="col">ADDED ON</th>
-                  <th scope="col">EDIT</th>
-                  <th scope="col">DELETE</th>
+                  <th scope="col">PAYMENT METHOD</th>
+                  <th scope="col">DATE</th>
+                  <th scope="col">DETAILS</th>
                 </tr>
               </thead>
               <tbody>
-                <%if(product.length>0){
-                  product.forEach((element)=>{%>
-
-
+                <%if(orderData.length>0){
+                  orderData.forEach((element)=>{%>
                   <tr>
                     <td>
-                      <%=element.productName%>
-                    </td>
-                    <td><img src="http://localhost:8080/<%= element.imageURL[0].productImage1%>"
-                        style="height: 50px; width:50px;" alt=""></td>
-                    <td>
-                      <%=element.category%>
+                      <%=element._id%>
                     </td>
                     <td>
-                      <%=element.price%>
+                      <%=element.userId.firstName%>
                     </td>
                     <td>
-                      <%=element.status%>
+                      <%=element.orderStatus%>
                     </td>
                     <td>
-                      <%=element.productAdded%>
+                      <%=element.paymentMethod%>
                     </td>
                     <td>
-                      <a href="/admin/edit-product?id=<%=element._id%>"><i class="fa-solid fa-pen-to-square"></i></a>
+                      <%=element.orderDate%>
                     </td>
-                    <%if(element.isdeleted){%>
-                      <td><i class="fa-solid fa-trash-can" data-toggle="modal" data-target="#exampleModalCenterdelete"></i></td>
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModalCenterdelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Product</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            Are you sure you want to Delete this Product?
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
-                            <a href="/admin/delete-product?id=<%=element._id%>"><button type="button" class="btn btn-danger">Delete</button></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                      <%}else{%>
-                        <td><a ><i class="fa-solid fa-rotate-right" data-toggle="modal" data-target="#exampleModalCenterrecover"></i></a></td>
-                        <!-- Modal -->
-                    <div class="modal fade" id="exampleModalCenterrecover" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Recover Product</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            Are you sure you want to Recover this Product?
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                            <a href="/admin/recover-product?id=<%=element._id%>"><button type="button" class="btn btn-success">Recover</button></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                        <%}%>
+                    <td>
+                      <a href="admin/order/detail/<%=element._id%>">view details</a>
+                    </td>
                   </tr>
                   <%})}else{%>
                     <td colspan="5">Product Not Found</td>

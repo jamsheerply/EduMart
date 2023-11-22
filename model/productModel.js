@@ -23,8 +23,11 @@ const productSchema = new mongoose.Schema({
         type: String,
         enum: ['draft', 'published', 'out_of_stock', 'low_quantity']
     },
+    quantity: {
+        type: Number
+    },
     price: {
-        type: String
+        type: Number
     },
     isdeleted:{
         type:Boolean,

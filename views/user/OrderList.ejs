@@ -89,17 +89,17 @@
                             <div class="header-middle-right">
                                 <ul class="hm-menu">
                                     <!-- Begin Header Middle Wishlist Area -->
-                                    <li class="hm-wishlist">
+                                    <!-- <li class="hm-wishlist">
                                         <a>
                                             <span class="cart-item-count wishlist-item-count">0</span>
                                             <i class="fa fa-heart-o"></i>
                                         </a>
-                                    </li>
+                                    </li> -->
                                     <!-- Header Middle Wishlist Area End Here -->
                                     <!-- Begin Header Mini Cart Area -->
                                     <li class="hm-wishlist">
                                         <a href="/user/shopping-cart">
-                                            <span class="cart-item-count wishlist-item-count">0</span>
+                                            <!-- <span class="cart-item-count wishlist-item-count">0</span> -->
                                             <i class="fa-solid fa-cart-shopping"></i>
                                         </a>
                                     </li>
@@ -130,6 +130,8 @@
                                 <nav>
                                     <ul>
                                         <li class="dropdown-holder"><a href="/">Home</a></li>
+                                        <li class="dropdown-holder"><a href="user/my-profile">My Profile</a></li>
+                                        <li class="dropdown-holder"><a href="user/order/list">My Order</a></li>
                                         <!-- <li><a href="about-us.html">About Us</a></li>
                                             <li><a href="contact.html">Contact</a></li>
                                             <li><a >My PROFILE</a></li>
@@ -161,7 +163,7 @@
                 <div class="breadcrumb-content">
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li class="active">404 Error</li>
+                        <li class="active">MY ORDERS</li>
                     </ul>
                 </div>
             </div>
@@ -170,33 +172,36 @@
         <!-- Error 404 Area Start -->
         <div class="container">
             <div class="row">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">PRODUCT</th>
-                            <th scope="col">STATUS</th>
-                            <th scope="col">DATE</th>
-                            <th scope="col">QUANTITY</th>
-                            <th scope="col">ACTION</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% if (orderData) {
-                            orderData.forEach(element1 => {
-                                element1.products.forEach(element => { %>
+                <% if (orderData && orderData.length > 0) { %>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">ORDER ID</th>
+                                <th scope="col">STATUS</th>
+                                <th scope="col">DATE</th>
+                                <th scope="col">QUANTITY</th>
+                                <th scope="col">ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% orderData.forEach(order => {
+                                order.products.forEach(product => { %>
                                     <tr>
-                                        <th scope="row"><%= element.productId.productName%></th>
-                                        <td><%= element1.orderStatus %></td>
-                                        <td><%= element1.orderDate %></td>
-                                        <td><%= element.quantity %></td>
-                                        <td><a href="/user/order/details/<%=element._id%>" style="color: black !important">Action Link</a></td>
+                                        <th scope="row"><%= order._id %></th>
+                                        <td><%= order.orderStatus %></td>
+                                        <td><%= order.orderDate %></td>
+                                        <td><%= product.quantity %></td>
+                                        <td><a href="/user/order/detail/<%= order._id %>" style="color: black !important">View Details</a></td>
                                     </tr>
-                                <% })
-                            })
-                        } %>
-                    </tbody>
-                    
-                </table>
+                                <% });
+                            }); %>
+                        </tbody>
+                    </table>
+                <% } else { %>
+                    <!-- Handle case when orderData is empty or undefined -->
+                    <h1>No orders found</h1>
+                <% } %>
+                
             </div>
         </div>
         <!-- Error 404 Area End -->
@@ -344,9 +349,7 @@
                                 <!-- Begin Footer Newsletter Area -->
                                 <div class="footer-newsletter">
                                     <h4>Sign up to newsletter</h4>
-                                    <form action="#" method="post" id="mc-embedded-subscribe-form"
-                                        name="mc-embedded-subscribe-form" class="footer-subscribe-form validate"
-                                        target="_blank" novalidate>
+                                    
                                         <div id="mc_embed_signup_scroll">
                                             <div id="mc-form" class="mc-form subscribe-form form-group">
                                                 <input id="mc-email" type="email" autocomplete="off"
@@ -354,7 +357,7 @@
                                                 <button class="btn" id="mc-submit">Subscribe</button>
                                             </div>
                                         </div>
-                                    </form>
+                                
                                 </div>
                                 <!-- Footer Newsletter Area End Here -->
                             </div>

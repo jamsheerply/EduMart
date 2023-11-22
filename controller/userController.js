@@ -255,12 +255,14 @@ const userLogout = async (req, res) => {
 //..................loadProductList...............................
 const loadProductList = async (req, res) => {
     try {
-        const productData = await productModel.find({ isdeleted: true })
-        res.render("user/productList", { product: productData })
+        const productData = await productModel.find({ isdeleted: true, quantity: { $gt: 0 } });
+        console.log(productData);
+        res.render("user/productList", { product: productData });
     } catch (error) {
-        console.log(error.message + " loadProductList")
+        console.log(error.message + " loadProductList");
     }
-}
+};
+
 
 //...................loadProductDetail..............................
 const loadProductDetail = async (req, res) => {
@@ -276,8 +278,10 @@ const loadProductDetail = async (req, res) => {
 const loadAddress = async (req, res) => {
     try {
         const userId = req.session.userData._id;
-        const userData = await userModel.findById(userId)
 
+        const userData = await userModel.findById(userId)
+        req.session.userData=userData
+        req.session.save()
 
         res.render("user/address", { userData: userData })
 
@@ -332,7 +336,9 @@ const insertAddress = async (req, res) => {
             const products = cartData.items.map(item => ({
                 productId: item.productId,
                 quantity: item.quantity
+
             }));
+            
 
             // Define the shipping address object
             const shippingAddress = {
@@ -362,7 +368,14 @@ const insertAddress = async (req, res) => {
             });
 
             // Save orderData to the database
+
             const savedOrder = await orderData.save();
+
+            //storing in session in for orderConfirmations
+            req.session.orderId = orderData._id
+            req.session.shippingAddress = shippingAddress
+            req.session.save()
+           
 
             // Check if the order was successfully saved
             if (savedOrder) {
@@ -371,14 +384,90 @@ const insertAddress = async (req, res) => {
                     { _id: req.session.cartData._id },
                     { $set: { items: [], totalQuantity: 0 } }
                 );
-                return res.json({ status: true });
+                for (const element of products) {
+                    try {
+                        await productModel.findByIdAndUpdate(
+                            element.productId,
+                            { $inc: { quantity: -element.quantity } }
+                        );
+                        console.log(element.productId + " " + element.quantity);
+                    } catch (updateError) {
+                        console.error(`Error updating product quantity for ID ${element.productId}: ${updateError.message}`);
+                        return res.status(500).json({ error: 'An error occurred while updating product quantities.' });
+                    }
+                }
+                    return res.json({ status: true });
             }
+
         }
     } catch (error) {
         console.error(error.message + " insertAddress");
         return res.status(500).json({ error: 'An error occurred while processing your request.' });
     }
 };
+
+const loadMyProfile = async (req, res) => {
+    try {
+        const userData = req.session.userData
+        // console.log(userData)
+        res.render("user/myProfile", { userData: userData })
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+const insertMyProfile = async (req, res) => {
+    try {
+        const userId = req.session.userData._id;
+        const { firstName, lastName, email, phone, oldPassword, newPassword } = req.body;
+
+        // Update the user's profile directly using findByIdAndUpdate
+        const updatedUserData = await userModel.findByIdAndUpdate(
+            userId,
+            {
+                $set: {
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    phone: phone
+                }
+            },
+            { new: true } // To return the updated document
+        );
+
+        // Update the session data with the updated user details
+        req.session.userData = updatedUserData;
+        req.session.save();
+
+        // Change Password Logic
+        const passwordCompare = await bcrypt.compare(oldPassword, updatedUserData.password);
+        if (passwordCompare) {
+            const hashedPassword = await bcrypt.hash(newPassword, 10);
+            const updatedUserPassword = await userModel.findByIdAndUpdate(
+                userId,
+                {
+                    $set: {
+                        password: hashedPassword
+                    }
+                },
+                { new: true } // To return the updated document
+            );
+            
+            req.session.userData = updatedUserPassword;
+            req.session.save();
+            return res.json({ statusChangePasswordMyProfile: true });
+        }else{
+            return res.json({err:"invalid password"})
+        }
+
+        // Respond with the updated user data or perform additional actions
+        return res.json({ statusEditMyProfile: true });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: 'Error updating profile' });
+    }
+};
+
+
 
 module.exports = {
     loadLanding,
@@ -396,5 +485,8 @@ module.exports = {
     loadProductDetail,
     loadAddress,
     loadCheckOut,
-    insertAddress
+    insertAddress,
+
+    loadMyProfile,
+    insertMyProfile
 };

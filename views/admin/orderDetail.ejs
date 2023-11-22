@@ -9,7 +9,7 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
-  <base href="/"> 
+  <base href="/">
   <!-- Favicons -->
   <link href="admin/img/favicon.png" rel="icon">
   <link href="admin/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -96,13 +96,13 @@
       <!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav"  href="/admin/product">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" href="/admin/product">
           <i class="bi bi-menu-button-wide"></i><span>Products</span>
         </a>
       </li><!-- End Components Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav"  href="/admin/category">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" href="/admin/category">
           <i class="bi bi-journal-text"></i><span>category</span>
         </a>
       </li><!-- End Forms Nav -->
@@ -162,7 +162,7 @@
       <!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed"  href="user/logout">
+        <a class="nav-link collapsed" href="user/logout">
           <i class="bi bi-question-circle"></i>
           <span>Logout</span>
         </a>
@@ -177,138 +177,122 @@
       <h1>Products</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a >Home</a></li>
-          <li class="breadcrumb-item active">products</li>
+          <li class="breadcrumb-item"><a>Home</a></li>
+          <li class="breadcrumb-item active">orders</li>
         </ol>
       </nav>
     </div>
     <!-- End Page Title -->
-    <div class="row">
-      <div class="col-12 col-md-2 mb-3 mb-md-0">
-        <!-- Left Button -->
-        <!-- Button trigger modal -->
-        <a href="admin/add-product">
-          <button type="button" class="btn bg-success ">
-            <span class="add">Add Product</span>
-          </button>
-        </a>
 
-      </div>
-
-    </div>
-    <section class="section dashboard mt-4">
+    <div class="container">
       <div class="row">
         <div class="col-12">
           <div class="table-responsive">
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">PRODUCT NAME</th>
-                  <th scope="col">IMAGE</th>
-                  <th scope="col">CATEGORY</th>
+                  <th scope="col">PRODUCT</th>
+                  <th scope="col">QUANTITY</th>
                   <th scope="col">PRICE</th>
-                  <th scope="col">STATUS</th>
-                  <th scope="col">ADDED ON</th>
-                  <th scope="col">EDIT</th>
-                  <th scope="col">DELETE</th>
+                  <th scope="col">SUB-TOTAL</th>
                 </tr>
               </thead>
               <tbody>
-                <%if(product.length>0){
-                  product.forEach((element)=>{%>
-
-
+                <%if(orderData){ orderData.products.forEach((element)=>{%>
                   <tr>
                     <td>
-                      <%=element.productName%>
-                    </td>
-                    <td><img src="http://localhost:8080/<%= element.imageURL[0].productImage1%>"
-                        style="height: 50px; width:50px;" alt=""></td>
-                    <td>
-                      <%=element.category%>
+                      <img src="http://localhost:8080<%=element.productId.imageURL[0].productImage1%>" width="100px"
+                        height="100px">
                     </td>
                     <td>
-                      <%=element.price%>
+                      <%=element.quantity%>
                     </td>
                     <td>
-                      <%=element.status%>
+                      <%=element.productId.price%>
                     </td>
                     <td>
-                      <%=element.productAdded%>
+                      <%=element.quantity*element.productId.price%>
                     </td>
-                    <td>
-                      <a href="/admin/edit-product?id=<%=element._id%>"><i class="fa-solid fa-pen-to-square"></i></a>
-                    </td>
-                    <%if(element.isdeleted){%>
-                      <td><i class="fa-solid fa-trash-can" data-toggle="modal" data-target="#exampleModalCenterdelete"></i></td>
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModalCenterdelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Product</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            Are you sure you want to Delete this Product?
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
-                            <a href="/admin/delete-product?id=<%=element._id%>"><button type="button" class="btn btn-danger">Delete</button></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                      <%}else{%>
-                        <td><a ><i class="fa-solid fa-rotate-right" data-toggle="modal" data-target="#exampleModalCenterrecover"></i></a></td>
-                        <!-- Modal -->
-                    <div class="modal fade" id="exampleModalCenterrecover" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Recover Product</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            Are you sure you want to Recover this Product?
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                            <a href="/admin/recover-product?id=<%=element._id%>"><button type="button" class="btn btn-success">Recover</button></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                        <%}%>
                   </tr>
-                  <%})}else{%>
-                    <td colspan="5">Product Not Found</td>
-                    <%}%>
+                  <%})}%>
               </tbody>
             </table>
-
           </div>
-
         </div>
-
       </div>
-      </div><!-- End Recent Sales -->
-
-
+      <div class="row border">
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+        <div class="col-4">
+          <h5>TOTAL : <%=orderData.totalAmount%>
+          </h5>
+        </div>
       </div>
-      </div><!-- End Left side columns -->
-
-
-
-
-
-
+      <div class="row mt-4 border">
+        <div class="col-6 ">
+          <h3>Shipping details</h3>
+          <h4><span>
+              <%=orderData.shippingAddress[0].firstName%>
+            </span><span>
+              <%=orderData.shippingAddress[0].lastName%>
+            </span></h4>
+          <h5><span>
+              <%=orderData.shippingAddress[0].address%>
+            </span><span>, <%=orderData.shippingAddress[0].city%></span></h5>
+          <h5><span>
+              <%=orderData.shippingAddress[0].state%>
+            </span><span>, <%=orderData.shippingAddress[0].postCode%></span></h5>
+          <h5><span>Phone number:</span><span>
+              <%=orderData.shippingAddress[0].phone%>
+            </span></h5>
+        </div>
+        <div class="col-6">
+          <div class="row border">
+            <div class="col-6 ">
+              <h5>User Id:</h5>
+              <h5>Order Status:</h5>
+              <h5>Ordered Date:</h5>
+              <h5>payment Status:</h5>
+              <h5>payment Method:</h5>
+            </div>
+            <div class="col-6 ">
+              <h5>
+                <%=orderData.userId._id%>
+              </h5>
+              <h5>
+                <select name="orderstatus" id="orderStatus">
+                  <option value="ordered" <%=orderData.orderStatus==="ordered" ? "selected" : "" %>>ordered</option>
+                  <option value="shipped" <%=orderData.orderStatus==="shipped" ? "selected" : "" %>>shipped</option>
+                  <option value="delivered" <%=orderData.orderStatus==="delivered" ? "selected" : "" %>>delivered
+                  </option>
+                  <option value="out for delivery" <%=orderData.orderStatus==="out for delivery" ? "selected" : "" %>
+                    >out for delivery</option>
+                  <option value="cancelled" <%=orderData.orderStatus==="cancelled" ? "selected" : "" %>>cancelled
+                  </option>
+                  <option value="returned" <%=orderData.orderStatus==="returned" ? "selected" : "" %>>returned</option>
+                </select>
+              </h5>
+              <h5>
+                <%=orderData.orderDat%>www
+              </h5>
+              <h5>
+                <select name="paymentStatus" id="paymentStatus">
+                  <option value="pending" <%=orderData.paymentStatus==="pending" ? "selected" : "" %>>pending</option>
+                  <option value="paid" <%=orderData.paymentStatus==="paid" ? "selected" : "" %>>paid</option>
+                  <option value="cancelled" <%=orderData.paymentStatus==="cancelled" ? "selected" : "" %>>cancelled
+                  </option>
+                </select>
+              </h5>
+              <h5>
+                <%=orderData.paymentMethod%>
+              </h5>
+              <button class="btn bg-success" onclick="editOrderDetail('<%=orderData._id%>')">save change</button>
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
+
 
   </main><!-- End #main -->
 
@@ -328,17 +312,21 @@
   <script src="admin/vendor/tinymce/tinymce.min.js"></script>
   <script src="admin/vendor/php-email-form/validate.js"></script>
 
-  
+
   <!-- Template Main JS File -->
   <script src="admin/js/main.js"></script>
-  
+
   <!---    bootstrap   -->
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
+  <!--swal cdn-->
+  <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
+  
   <!-------validation------>
-  <script src="javaScript/product.js"></script
+  <script src="javaScript/orderDetail.js"></script
 </body>
 
 </html>

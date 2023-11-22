@@ -3,6 +3,7 @@ const adminRoute=express()
 const adminController=require("../controller/CategoryController")
 const productController=require("../controller/productController")
 const userMangementController=require("../controller/userManagmentController")
+const orderMangementController=require("../controller/orderMangementController")
 const path = require("path");
 const upload=require("../midddleware/multer")
 const adminAuth=require("../midddleware/adminAuth")
@@ -39,4 +40,10 @@ adminRoute.get("/recover-product",adminAuth.verifyAdmin,productController.recove
 adminRoute.get("/user",adminAuth.verifyAdmin,userMangementController.loadUser)
 adminRoute.get("/block-user",adminAuth.verifyAdmin,userMangementController.blockUser)
 adminRoute.get("/unblock-user",adminAuth.verifyAdmin,userMangementController.unBlockUser)
+
+//.....................orderRoute...........................................
+adminRoute.get("/order",adminAuth.verifyAdmin,orderMangementController.loadOrder)
+adminRoute.get("/order/detail/:orderId",adminAuth.verifyAdmin,orderMangementController.loadOrderDetail)
+adminRoute.post("/order/detail/:orderId",adminAuth.verifyAdmin,orderMangementController.insertOrderDetail)
+
 module.exports=adminRoute

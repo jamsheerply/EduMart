@@ -48,7 +48,12 @@ userRoute.post("/check-out",userAuth.verifyUser,userController.insertAddress)
 //...................order........................................
 userRoute.get("/order/confirmation",userAuth.verifyUser,orderController.loadOrderConfirmation)
 userRoute.get("/order/list",userAuth.verifyUser,orderController.loadOrderList)
-userRoute.get("/order/detail/:id",userAuth.verifyUser,orderController.loadOrderDetail)
+userRoute.get("/order/detail/:OrderId",userAuth.verifyUser,orderController.loadOrderDetail)
+userRoute.post("/order/detail/:orderId",userAuth.verifyUser,orderController.updateOrderDetail)
+
+//...............userProfile..................................
+userRoute.get("/my-profile",userAuth.verifyUser,userController.loadMyProfile)
+userRoute.post("/my-profile",userAuth.verifyUser,userController.insertMyProfile)
 
 
 // userRoute.post("/admin/insert",userController.adminInsert)
