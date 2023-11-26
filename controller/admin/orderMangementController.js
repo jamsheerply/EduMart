@@ -1,4 +1,5 @@
-const orderModel=require("../model/orderModel")
+const orderModel=require("../../model/orderModel")
+
 const loadOrder=async(req,res)=>{
     try {
         const orderData=await orderModel.find({}).sort({ orderDate: -1 }).populate("userId");

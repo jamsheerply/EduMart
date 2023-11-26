@@ -360,7 +360,7 @@
                                                     </tr>
                                                     <tr class="order-total">
                                                         <th>Order Total</th>
-                                                        <td><strong><span class="amount">&#8377 <%=subtotal%>
+                                                        <td><strong><span class="amount" id="orderTotal" >&#8377 <%=subtotal%>
                                                                 </span></strong></td>
                                                     </tr>
                                                 </tfoot>
@@ -374,17 +374,18 @@
                                                 <input type="radio" name="paymentMethod" value="COD" class="paymentMethod" style="flex-shrink: 0; margin-right: 10px; width: 4% !important;">
                                                 <h5 class="panel-title" style="margin: 0;">Cash on Delivery</h5>
                                             </div>
-                                            <!-- <div class="card-header" id="#payment-2" style="display: flex; align-items: center;">
+                                            <div class="card-header" id="#payment-2" style="display: flex; align-items: center;">
                                                 <input type="radio" name="paymentMethod" value="online" class="paymentMethod" style="flex-shrink: 0; margin-right: 10px; width: 4% !important;">
                                                 <h5 class="panel-title" style="margin: 0;">Online Payment</h5>
-                                            </div> -->
+                                            </div>
                                             <div>
                                                 <p id="paymentMethodError" style="color: red;"></p>
                                             </div> 
                                         </div>
                                         <div class="order-button-payment">
-                                            <input value="Place Order" type="submit" onclick="insertAddress()">
+                                            <input value="Place Order" type="submit" id="rzp-button1">
                                         </div>
+                                        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
                                     </div>
                                 </div>
                             </div>
@@ -606,7 +607,7 @@
         <!-- Main/Activator js -->
         <script src="user/js/main.js"></script>
         <!-------validation------>
-        <script src="javaScript/checkout.js"></script>
+        <script src="javaScript/user/checkout.js"></script>
 </body>
 
 <!-- checkout31:27-->

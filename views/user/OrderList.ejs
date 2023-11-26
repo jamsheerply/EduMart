@@ -106,8 +106,8 @@
                                     <!-- Header Mini Cart Area End Here -->
                                     <!-- Begin user Area -->
                                     <li class="hm-wishlist">
-                                        <a>
-                                            <i class="fa-solid fa-user"></i>
+                                        <a href="user/logout">
+                                            <i class="fa-solid fa-right-from-bracket"></i>
                                         </a>
                                     </li>
                                     <!-- Header Mini Cart Area End Here -->
@@ -179,30 +179,28 @@
                                 <th scope="col">ORDER ID</th>
                                 <th scope="col">STATUS</th>
                                 <th scope="col">DATE</th>
-                                <th scope="col">QUANTITY</th>
+                                <th scope="col">ITEAMS</th>
                                 <th scope="col">ACTION</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <% orderData.forEach(order => {
-                                order.products.forEach(product => { %>
-                                    <tr>
-                                        <th scope="row"><%= order._id %></th>
-                                        <td><%= order.orderStatus %></td>
-                                        <td><%= order.orderDate %></td>
-                                        <td><%= product.quantity %></td>
-                                        <td><a href="/user/order/detail/<%= order._id %>" style="color: black !important">View Details</a></td>
-                                    </tr>
-                                <% });
-                            }); %>
+                            <% orderData.forEach(order => { %>
+                                <tr>
+                                    <th scope="row"><%= order._id %></th>
+                                    <td><%= order.orderStatus %></td>
+                                    <td><%= order.orderDate %></td>
+                                    <td><%= order.products.length %></td> <!-- Display the number of products in the order -->
+                                    <td><a href="/user/order/detail/<%= order._id %>" style="color: black !important">View Details</a></td>
+                                </tr>
+                            <% }); %>
                         </tbody>
                     </table>
                 <% } else { %>
                     <!-- Handle case when orderData is empty or undefined -->
                     <h1>No orders found</h1>
                 <% } %>
-                
             </div>
+            
         </div>
         <!-- Error 404 Area End -->
         <!-- Begin Footer Area -->

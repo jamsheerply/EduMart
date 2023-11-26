@@ -50,8 +50,21 @@
         <img src="admin/img/logo.png" alt="">
         <span class="d-none d-lg-block">SAFAT EDUMART</span>
       </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
+      <i class="bi bi-list toggle-sidebar-btn" style="display: none;"></i>
     </div><!-- End Logo -->
+    <script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+    // Wait for the DOM content to load
+    const sidebarButton = document.querySelector('.toggle-sidebar-btn');
+
+    // Check if the sidebar button exists and is initially hidden
+    if (sidebarButton && sidebarButton.style.display === 'none') {
+        // Simulate a click event
+        sidebarButton.click();
+    }
+});
+
+    </script>
 
     <div class="search-bar">
       <form class="search-form d-flex align-items-center" method="POST" action="#">
@@ -83,7 +96,7 @@
   </header><!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
+  <!-- <aside id="sidebar" class="sidebar"> -->
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
@@ -95,23 +108,25 @@
       </li> -->
       <!-- End Dashboard Nav -->
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" href="/admin/product">
           <i class="bi bi-menu-button-wide"></i><span>Products</span>
         </a>
-      </li><!-- End Components Nav -->
+      </li> -->
+      <!-- End Components Nav -->
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" href="/admin/category">
           <i class="bi bi-journal-text"></i><span>category</span>
         </a>
-      </li><!-- End Forms Nav -->
+      </li> -->
+      <!-- End Forms Nav -->
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#tables-nav" href="/admin/order">
           <i class="bi bi-layout-text-window-reverse"></i><span>Orders</span>
         </a>
-      </li>
+      </li> -->
       <!-- End Tables Nav -->
 
       <!-- <li class="nav-item">
@@ -134,7 +149,7 @@
       </li> -->
       <!-- End Icons Nav -->
 
-      <li class="nav-heading">User Management</li>
+      <!-- <li class="nav-heading">User Management</li> -->
 
       <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#">
@@ -144,14 +159,15 @@
       </li> -->
       <!-- End Profile Page Nav -->
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="/admin/user">
           <i class="bi bi-question-circle"></i>
           <span>Users</span>
         </a>
-      </li><!-- End F.A.Q Page Nav -->
+      </li> -->
+      <!-- End F.A.Q Page Nav -->
 
-      <li class="nav-heading">Others</li>
+      <!-- <li class="nav-heading">Others</li> -->
 
       <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="users-profile.html">
@@ -161,12 +177,13 @@
       </li> -->
       <!-- End Profile Page Nav -->
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="user/logout">
           <i class="bi bi-question-circle"></i>
           <span>Logout</span>
         </a>
-      </li><!-- End F.A.Q Page Nav -->
+      </li> -->
+      <!-- End F.A.Q Page Nav -->
     </ul>
 
   </aside><!-- End Sidebar-->
@@ -177,8 +194,9 @@
       <h1>Products</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a>Home</a></li>
-          <li class="breadcrumb-item active">orders</li>
+          <li class="breadcrumb-item"><a href="admin/dashboard">Home</a></li>
+          <li class="breadcrumb-item"><a href="admin/orders">Orders</a></li>
+          <li class="breadcrumb-item active">order Details</li>
         </ol>
       </nav>
     </div>
@@ -252,6 +270,7 @@
               <h5>User Id:</h5>
               <h5>Order Status:</h5>
               <h5>Ordered Date:</h5>
+              <h5>&nbsp;</h5>
               <h5>payment Status:</h5>
               <h5>payment Method:</h5>
             </div>
@@ -273,7 +292,7 @@
                 </select>
               </h5>
               <h5>
-                <%=orderData.orderDat%>www
+                <%=orderData.orderDate%>
               </h5>
               <h5>
                 <select name="paymentStatus" id="paymentStatus">

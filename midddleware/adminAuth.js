@@ -13,7 +13,7 @@ const verifyAdmin= async (req, res, next) => {
 const adminExist= async (req, res, next) => {
     try {
         if (req.session.adminLogged) {
-            res.redirect("/admin/product")
+            res.redirect("/admin/dashboard")
         } else {
             next()
         }

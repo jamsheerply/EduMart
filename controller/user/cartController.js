@@ -1,6 +1,6 @@
-const cartModel = require("../model/cartModel");
-const productModel = require("../model/productModel");
-const produdctModel = require("../model/productModel")
+const cartModel = require("../../model/cartModel");
+const productModel = require("../../model/productModel");
+const produdctModel = require("../../model/productModel")
 
 const loadShopingCart = async (req, res) => {
     try {

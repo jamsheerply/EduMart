@@ -3,20 +3,10 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const path=require("path")
 const cookieParser = require("cookie-parser");
-// const cors = require('cors');
 require('dotenv').config();
 const app = express();
 require("./config/dataBase")
-  
-// const corsOptions = {
-//     origin: 'http://127.0.0.1:8080', // Replace with your frontend's URL
-//     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-//     credentials: true, // If you're using cookies or sessions
-//     optionsSuccessStatus: 204, // Some legacy browsers choke on 204
-// };
-
-// app.use(cors(corsOptions));
-
+const moment=require("moment")
 
 // Initialization
 app.use(cookieParser());
@@ -48,7 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const userAuth=require("./midddleware/UserAuth")
 const adminAuth=require("./midddleware/adminAuth")
-const userController = require("./controller/userController");
+const userController = require("./controller/user/userController");
 app.get("/",userAuth.userExist,adminAuth.adminExist,userController.loadLanding)
 
 app.all('*', (req, res) => { 

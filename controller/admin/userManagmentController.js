@@ -1,4 +1,4 @@
-const userMOdel=require("../model/userModel")
+const userMOdel=require("../../model/userModel")
 const loadUser=async(req,res)=>{
     try {
         const userData=await userMOdel.find({})

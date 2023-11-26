@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
+    orderId:{type:String},
     userId: { type: mongoose.Schema.Types.ObjectId ,ref:'User'},
     products: [{
         productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
-        quantity: { type: Number }
+        quantity: { type: Number },
+        price:{type:Number}
     }],
     orderStatus: { type: String, enum: ['ordered', 'shipped', 'delivered', 'out for delivery', 'cancelled', 'returned'] },
     totalAmount: { type: Number },
@@ -16,13 +18,13 @@ const orderSchema = new mongoose.Schema({
     postCode: { type: String,required: true, },
     email: { type: String,required: true, },
     phone: { type: String,required: true, } }],
-    orderDate: { type: Date },
+    orderDate: { type: String },
     paymentStatus: { type: String, enum: ['pending', 'paid', 'cancelled'] },
     paymentMethod: { type: String, enum: ['COD', 'online', 'wallet'] },
     billNumber: { type: String },
-    deliveryDate: { type: Date },
+    deliveryDate: { type: String },
     activity: [{
-        date: { type: Date },
+        date: { type: String },
         status: { type: String },
     }],
     coupon: { type: mongoose.Schema.Types.ObjectId }

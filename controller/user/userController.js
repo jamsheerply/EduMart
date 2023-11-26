@@ -1,8 +1,13 @@
-const userModel = require("../model/userModel");
-const otpVerification = require("../model/otpVerification")
-const adminModel = require("../model/adminModel")
-const productModel = require("../model/productModel")
-const orderModel = require("../model/orderModel")
+const nodemailer = require("nodemailer");
+const userModel = require("../../model/userModel");
+// const otpVerification = require("../../model/otpVerification")
+const otpModel = require("../../model/otpModel")
+const adminModel = require("../../model/adminModel")
+const productModel = require("../../model/productModel")
+const orderModel = require("../../model/orderModel")
+const cartModel = require("../../model/cartModel");
+const razorpay = require("razorpay")
+const moment = require("moment")
 require('dotenv').config();
 
 
@@ -18,44 +23,44 @@ const securePassword = async (password) => {
 }
 
 //.................nodeMailer......................
-const nodemailer = require("nodemailer");
-const { name } = require("ejs");
-const cartModel = require("../model/cartModel");
+
 const sendVerifyMail = async (name, email) => {
     try {
-        const otp = Math.floor(1000 + Math.random() * 9000)
+        console.log(email);
+        console.log(name);
+        const otp = Math.floor(1000 + Math.random() * 9000);
+
         const transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
             port: 587,
             secure: false,
             requireTLS: true,
             auth: {
-                user: process.env.SMTP_EMAIL,   //need to setup this in your google account
+                user: process.env.SMTP_EMAIL,
                 pass: process.env.SMTP_PASS,
             },
         });
+
         const mailOptions = {
             from: 'safatedumartpayyoli@gmail.com',
             to: email,
             subject: "for verification mail for safat edumart payyoli",
-            html: "<h2>hi " + name + " </h2>" + "<h2>OTP for account verification is </h2>" + "<h1 style='font-weight:bold;'>" + otp + "</h1>" // html body
-        }
-        await new otpVerification({
+            html: `<h2>hi ${name} </h2><h2>OTP for account verification is </h2><h1 style='font-weight:bold;'>${otp}</h1>`,
+        };
+
+        // Save OTP details to your database (assuming 'otpVerification' model)
+        await new otpModel({
             email: email,
             otp: otp,
         }).save();
-        transporter.sendMail(mailOptions, function (error, info) {
-            if (error) {
-                console.log(error)
-            } else {
-                // console.log("email has been sent", info.response)
-            }
-        })
 
+        // Send mail using async/await
+        const info = await transporter.sendMail(mailOptions);
+        console.log("Email has been sent:", info.accepted);
     } catch (error) {
-        console.log(error.message + " sendVerifyMail")
+        console.error("Error in sending verification mail:", error.message);
     }
-}
+};
 
 //............loadLanding..........................
 const loadLanding = async (req, res) => {
@@ -74,8 +79,8 @@ const loadRegister = async (req, res) => {
     }
 };
 
-//.................insertuser..........................
-const insertUser = async (req, res) => {
+//.................insertRegister..........................
+const insertRegister = async (req, res) => {
     try {
         const email = req.body.email.toLowerCase()
         const spassword = await securePassword(req.body.password);
@@ -126,7 +131,7 @@ const verifyOtp = async (req, res) => {
         const strOtp = digitOne + digitTwo + digitThree + digitFour;
 
         const email = req.session.userData.email;
-        let storedOtp = await otpVerification.findOne({ email: email });
+        let storedOtp = await otpModel.findOne({ email: email });
 
         if (strOtp == storedOtp.otp) {
             const userData = req.session.userData;
@@ -153,7 +158,7 @@ const resendOtp = async (req, res) => {
     try {
         const email = req.session.userData.email;
         const firstName = req.session.userData.firstName
-        let storedOtp = await otpVerification.findOne({ email: email });
+        let storedOtp = await otpModel.findOne({ email: email });
         if (!storedOtp) {
             sendVerifyMail(firstName, email)
             res.render("user/otp", { message: "New  otp has been sent to email" })
@@ -167,8 +172,6 @@ const resendOtp = async (req, res) => {
 const loadHome = async (req, res) => {
     try {
         req.session.email = req.session.userData.email
-
-
         const productData = await productModel.find({ isdeleted: true, status: "published" })
         const biographiesData = await productModel.find({ isdeleted: true, category: "Biographies", status: "published" })
         const crimeAndThrillerData = await productModel.find({ isdeleted: true, category: "Crime and Thriller", status: "published" })
@@ -211,7 +214,7 @@ const verifyLogin = async (req, res) => {
             if (req.password === adminData.password) {
                 // req.session.email= userData.email
                 req.session.adminLogged = true
-                res.redirect("/admin/product")
+                res.redirect("/admin/dashboard")
             } else {
                 res.render("user/login", { message: "Email and password is incorrect" })
             }
@@ -256,7 +259,7 @@ const userLogout = async (req, res) => {
 const loadProductList = async (req, res) => {
     try {
         const productData = await productModel.find({ isdeleted: true, quantity: { $gt: 0 } });
-        console.log(productData);
+        // console.log(productData);
         res.render("user/productList", { product: productData });
     } catch (error) {
         console.log(error.message + " loadProductList");
@@ -280,7 +283,7 @@ const loadAddress = async (req, res) => {
         const userId = req.session.userData._id;
 
         const userData = await userModel.findById(userId)
-        req.session.userData=userData
+        req.session.userData = userData
         req.session.save()
 
         res.render("user/address", { userData: userData })
@@ -303,16 +306,22 @@ const loadCheckOut = async (req, res) => {
             const userId = req.session.userData._id;
             const addresData = await userModel.findById(userId)
         }
+if(req.session.cartData){
+    const userData = req.session.userData
+    const addressIdToFind = req.params.addressId
+    const addressData = userData.address.find(element => element._id.toString() === addressIdToFind);
 
-        const userData = req.session.userData
-        const addressIdToFind = req.params.addressId
-        const addressData = userData.address.find(element => element._id.toString() === addressIdToFind);
+    res.render("user/checkout", { cartData: cartData, subtotal: subtotal, addressData: addressData })
+}else{
+    res.redirect("/user/home")
+}
 
-        res.render("user/checkout", { cartData: cartData, subtotal: subtotal, addressData: addressData })
     } catch (error) {
         console.log(error.message + " loadCheckOut")
     }
 }
+
+//inserAdreess and create order
 const insertAddress = async (req, res) => {
     try {
         const userId = req.session.userData._id;
@@ -338,7 +347,7 @@ const insertAddress = async (req, res) => {
                 quantity: item.quantity
 
             }));
-            
+
 
             // Define the shipping address object
             const shippingAddress = {
@@ -351,16 +360,17 @@ const insertAddress = async (req, res) => {
                 email: email,
                 phone: phone
             };
+
             const orderData = new orderModel({
                 userId: req.session.userData._id,
                 products: products,
                 orderStatus: 'ordered',
                 totalAmount: req.session.subtotal,
                 shippingAddress: [shippingAddress],
-                orderDate: new Date(),
+                orderDate: moment().format('Do MMMM  YYYY, h:mm:ss a'),
                 paymentStatus: 'pending',
                 paymentMethod: paymentMethod,
-                deliveryDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+                deliveryDate: moment().add(7, 'days').format('Do MMMM YYYY, h:mm:ss a'),
                 activity: [{
                     date: new Date(),
                     status: 'ordered'
@@ -375,7 +385,6 @@ const insertAddress = async (req, res) => {
             req.session.orderId = orderData._id
             req.session.shippingAddress = shippingAddress
             req.session.save()
-           
 
             // Check if the order was successfully saved
             if (savedOrder) {
@@ -390,26 +399,96 @@ const insertAddress = async (req, res) => {
                             element.productId,
                             { $inc: { quantity: -element.quantity } }
                         );
-                        console.log(element.productId + " " + element.quantity);
+                        // console.log(element.productId + " " + element.quantity);
                     } catch (updateError) {
                         console.error(`Error updating product quantity for ID ${element.productId}: ${updateError.message}`);
                         return res.status(500).json({ error: 'An error occurred while updating product quantities.' });
                     }
                 }
-                    return res.json({ status: true });
+                delete req.session.cartData
+                return res.json({ status: true });
             }
-
         }
+
     } catch (error) {
         console.error(error.message + " insertAddress");
         return res.status(500).json({ error: 'An error occurred while processing your request.' });
     }
 };
 
+const generateRazorpay = async (req, res) => {
+    try {
+        const userId = req.session.userData._id;
+        const amount = req.session.subtotal;
+
+        const razorpayInstance = new razorpay({
+            key_id: process.env.RAZORPAY_ID_KEY,
+            key_secret: process.env.RAZORPAY_SECRET_KEY,
+        });
+
+        const options = {
+            amount: amount * 100, // Amount should be in paise
+            currency: "INR",
+            receipt: userId,
+            payment_capture: 1,
+        };
+
+        // Creating a Promise wrapper for razorpay.orders.create
+        const createOrder = () => {
+            return new Promise((resolve, reject) => {
+                razorpayInstance.orders.create(options, (error, order) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(order);
+                    }
+                });
+            });
+        };
+
+        const order = await createOrder(); // Wait for the order creation
+
+        res.json({ order });
+    } catch (error) {
+        console.log(error.message + " generateRazorpay");
+        return res.status(500).json({ error: "Razorpay order creation error" });
+    }
+};
+
+const verifyRazorpayPayment = async (req, res) => {
+    try {
+        const { orderId, paymentId } = req.body;
+        const razorpayInstance = new razorpay({
+            key_id: process.env.RAZORPAY_ID_KEY,
+            key_secret: process.env.RAZORPAY_SECRET_KEY,
+        });
+
+        razorpayInstance.payments.fetch(paymentId)
+            .then((payment) => {
+                if (payment.status === 'captured') {
+                    res.json({ status: true });
+                } else {
+                    res.status(400).json({ status: false, message: "Payment verification failed" });
+                }
+            })
+            .catch((err) => {
+                console.error("Razorpay payment verification error:", err);
+                res.status(500).json({
+                    status: false,
+                    message: "An error occurred while verifying the payment: " + err,
+                });
+            });
+    } catch (error) {
+        console.log(error.message + " verifyRazorpayPayment");
+        res.status(500).json({ status: false, message: "Error in verifying Razorpay payment" });
+    }
+};
+
+
+
 const loadMyProfile = async (req, res) => {
     try {
         const userData = req.session.userData
-        // console.log(userData)
         res.render("user/myProfile", { userData: userData })
     } catch (error) {
         console.log(error.message)
@@ -417,6 +496,7 @@ const loadMyProfile = async (req, res) => {
 }
 const insertMyProfile = async (req, res) => {
     try {
+        console.log(req.body)
         const userId = req.session.userData._id;
         const { firstName, lastName, email, phone, oldPassword, newPassword } = req.body;
 
@@ -451,12 +531,12 @@ const insertMyProfile = async (req, res) => {
                 },
                 { new: true } // To return the updated document
             );
-            
+
             req.session.userData = updatedUserPassword;
             req.session.save();
             return res.json({ statusChangePasswordMyProfile: true });
-        }else{
-            return res.json({err:"invalid password"})
+        } else {
+            return res.json({ err: "invalid password" })
         }
 
         // Respond with the updated user data or perform additional actions
@@ -468,11 +548,10 @@ const insertMyProfile = async (req, res) => {
 };
 
 
-
 module.exports = {
     loadLanding,
     loadRegister,
-    insertUser,
+    insertRegister,
     loadOtp,
     verifyOtp,
     resendOtp,
@@ -486,7 +565,10 @@ module.exports = {
     loadAddress,
     loadCheckOut,
     insertAddress,
-
+    //rezorpay
+    verifyRazorpayPayment,
+    generateRazorpay,
+    //myProfile
     loadMyProfile,
     insertMyProfile
 };

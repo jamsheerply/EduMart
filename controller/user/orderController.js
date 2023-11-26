@@ -1,6 +1,6 @@
-const orderModel = require("../model/orderModel");
-const productModel = require("../model/productModel")
-// const { render } = require("../routes/userRoute");
+const orderModel = require("../../model/orderModel");
+const productModel = require("../../model/productModel")
+const moment=require("moment")
 
 const loadOrderConfirmation = async (req, res) => {
     try {
@@ -10,9 +10,7 @@ const loadOrderConfirmation = async (req, res) => {
             const userData = await userModel.findById(userId)
         }
         const orderId=req.session.orderId
-        console.log(orderId)
         const shippingAddress=req.session.shippingAddress
-        console.log(shippingAddress)
 
         res.render("user/orderConfirmation",{orderId,shippingAddress})
     } catch (error) {
