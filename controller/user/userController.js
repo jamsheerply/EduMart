@@ -68,6 +68,7 @@ const loadLanding = async (req, res) => {
     const biographiesData = await productModel.find({ isdeleted: true, category: "Biographies", status: "published" })
     const crimeAndThrillerData = await productModel.find({ isdeleted: true, category: "Crime and Thriller", status: "published" })
     res.render("user/landing", { product: productData, biographies: biographiesData, crimeAndThriller: crimeAndThrillerData })
+    
 }
 
 // ...............loadRegister......................

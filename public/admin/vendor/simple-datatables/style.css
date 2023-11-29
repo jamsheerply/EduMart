@@ -9,6 +9,8 @@
 .datatable-top,
 .datatable-bottom {
 	padding: 8px 10px;
+	background-color: red;
+	display: none;
 }
 
 .datatable-top > nav:first-child,
@@ -161,12 +163,16 @@
 	display: inline-block;
 	height: 100%;
 	position: relative;
+	pointer-events: none;
+
 	width: 100%;
 }
 
 .datatable-sorter::before,
 .datatable-sorter::after {
 	content: "";
+	pointer-events: none;
+	display: none;
 	height: 0;
 	width: 0;
 	position: absolute;

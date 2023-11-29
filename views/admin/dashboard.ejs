@@ -10,13 +10,15 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <base href="/"> 
+  <base href="/">
   <link href="admin/img/favicon.png" rel="icon">
   <link href="admin/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -62,7 +64,7 @@
           </a>
         </li><!-- End Search Icon-->
 
-      
+
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
@@ -90,19 +92,19 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" href="admin/products">
-          <i class="bi bi-menu-button-wide"></i><span>Products</span><i ></i>
+          <i class="bi bi-menu-button-wide"></i><span>Products</span><i></i>
         </a>
       </li><!-- End Components Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" href="admin/category">
-          <i class="bi bi-journal-text"></i><span>category</span><i ></i>
+          <i class="bi bi-journal-text"></i><span>category</span><i></i>
         </a>
       </li><!-- End Forms Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#tables-nav" href="admin/orders">
-          <i class="bi bi-layout-text-window-reverse"></i><span>Orders</span><i ></i>
+          <i class="bi bi-layout-text-window-reverse"></i><span>Orders</span><i></i>
         </a>
       </li><!-- End Tables Nav -->
 
@@ -119,11 +121,11 @@
         </a>
       </li> -->
       <!-- End Icons Nav -->
-      <!-- <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#icons-nav"  href="admin/transaction">
-          <i class="bi bi-gem"></i><span>Transaction</span><i ></i>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#icons-nav"  href="admin/sales-report">
+          <i class="bi bi-gem"></i><span>Report</span><i ></i>
         </a>
-      </li> -->
+      </li>
       <!-- End Icons Nav -->
 
       <li class="nav-heading">User Management</li>
@@ -142,7 +144,7 @@
           <span>Users</span>
         </a>
       </li><!-- End F.A.Q Page Nav -->
-      
+
       <li class="nav-heading">Others</li>
 
       <!-- <li class="nav-item">
@@ -185,39 +187,80 @@
             <!-- Sales Card -->
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card sales-card">
-
                 <div class="filter">
                   <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
+                      <h6 id="clearSalesFilter" style="  cursor: pointer;"> Clear Filter</h6>
                     </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                    <li><a class="dropdown-item" id="salesWeekly">This Weekly</a></li>
+                    <li><a class="dropdown-item" id="salesMonthly">This Month</a></li>
+                    <li><a class="dropdown-item" id="salesYearly">This Year</a></li>
+                    <!-- <li><a class="dropdown-item" id="salesToday">This Today</a></li> -->
                   </ul>
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Sales <span>| Today</span></h5>
+                  <h5 class="card-title">Sales <span id="salesTitle">| Today</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-cart"></i>
+                      <i class="bi bi-currency-rupee"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>145</h6>
-                      <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
-
+                      <h6 id="salesToday">&#8377 <%=salesToday%>
+                      </h6>
                     </div>
                   </div>
                 </div>
-
               </div>
-            </div><!-- End Sales Card -->
+            </div>
 
-            <!-- Revenue Card -->
+            <script>
+              // Get the elements representing the dropdown items by their IDs
+              const weeklySalesOption = document.querySelector('#salesWeekly');
+              const monthlySalesOption = document.querySelector('#salesMonthly');
+              const yearlySalesOption = document.querySelector('#salesYearly');
+              const clearSalesFilter = document.getElementById('clearSalesFilter');
+
+              // Add click event listeners to the dropdown items
+              weeklySalesOption.addEventListener('click', function (event) {
+                event.preventDefault();
+                // Update the displayed sales value to salesWeekly
+                updateSalesDisplay('| This Weekly', '<%=salesWeekly%>');
+              });
+
+              monthlySalesOption.addEventListener('click', function (event) {
+                event.preventDefault();
+                // Update the displayed sales value to salesMonthly
+                updateSalesDisplay('| This Month', '<%=salesMonthly%>');
+              });
+
+              yearlySalesOption.addEventListener('click', function (event) {
+                event.preventDefault();
+                // Update the displayed sales value to salesyearly
+                updateSalesDisplay('| This Year', '<%=salesYearly%>');
+              });
+
+              clearSalesFilter.addEventListener('click', function (event) {
+                event.preventDefault();
+                // Update the displayed orders value for weekly orders
+                updateSalesDisplay('| This Today', '<%=salesToday%>');
+              });
+              // Function to update sales display
+              function updateSalesDisplay(title, salesValue) {
+                const salesCardTitle = document.querySelector('#salesTitle');
+                const salesAmount = document.querySelector('#salesToday');
+
+                // Update the card title and sales amount
+                salesCardTitle.textContent = title;
+                salesAmount.innerHTML = '&#8377 ' + salesValue;
+              }
+            </script>
+
+            <!-- End Sales Card -->
+
+            <!-- Orders Card -->
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card revenue-card">
 
@@ -225,24 +268,30 @@
                   <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
+                      <h6 id="clearOrdersFilter" style="  cursor: pointer;">
+                        clear Filter
+                      </h6>
                     </li>
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
+
+                    </script>
+                    <li style="  cursor: pointer;"><a class="dropdown-item" id="ordersWeekly">This Weekly</a></li>
+                    <li style="  cursor: pointer;"><a class="dropdown-item" id="ordersMonthly">This Month</a></li>
+                    <li style="  cursor: pointer;"><a class="dropdown-item" id="ordersYearly">This Year</a></li>
                   </ul>
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Orders <span>| This Month</span></h5>
+                  <h5 class="card-title">Orders <span id="ordersTitle">| This Today</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-currency-dollar"></i>
+                      <i class="bi bi-cart"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>$3,264</h6>
+                      <h6 id="ordersToday">
+                        <%=ordersToday%>
+                      </h6>
                       <!-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
 
                     </div>
@@ -250,97 +299,242 @@
                 </div>
 
               </div>
-            </div><!-- End Revenue Card -->
+            </div>
+            <!-- End orders Card -->
+            <script>
+              // Get the elements representing the dropdown items by their IDs for orders
+              const weeklyOrdersOption = document.querySelector('#ordersWeekly');
+              const monthlyOrdersOption = document.querySelector('#ordersMonthly');
+              const yearlyOrdersOption = document.querySelector('#ordersYearly');
+              const clearOrdersFilter = document.getElementById('clearOrdersFilter');
+
+
+              // Add click event listeners to the dropdown items for orders
+              weeklyOrdersOption.addEventListener('click', function (event) {
+                event.preventDefault();
+                // Update the displayed orders value for weekly orders
+                updateOrdersDisplay('| This Weekly', '<%=ordersWeekly%>');
+              });
+
+              monthlyOrdersOption.addEventListener('click', function (event) {
+                event.preventDefault();
+                // Update the displayed orders value for monthly orders
+                updateOrdersDisplay('| This Month', '<%=ordersMonthly%>');
+              });
+
+              yearlyOrdersOption.addEventListener('click', function (event) {
+                event.preventDefault();
+                // Update the displayed orders value for yearly orders
+                updateOrdersDisplay('| This Year', '<%=ordersYearly%>');
+              });
+
+              clearOrdersFilter.addEventListener('click', function (event) {
+                event.preventDefault();
+                // Update the displayed orders value for weekly orders
+                updateOrdersDisplay('| This Today', '<%=ordersToday%>');
+              });
+
+              // Function to update orders display
+              function updateOrdersDisplay(title, ordersValue) {
+                const ordersCardTitle = document.querySelector('#ordersTitle');
+                const ordersAmount = document.querySelector('#ordersToday');
+
+                // Update the card title and orders amount
+                ordersCardTitle.textContent = title;
+                ordersAmount.innerHTML = ordersValue;
+              }
+            </script>
+
 
             <!-- Customers Card -->
             <div class="col-xxl-4 col-xl-12">
-
               <div class="card info-card customers-card">
-
                 <div class="filter">
                   <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
+                      <h6 id="clearCustomersFilter" style="cursor: pointer;">Clear Filter</h6>
                     </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                    <li><a class="dropdown-item" id="customersWeekly">This Weekly</a></li>
+                    <li><a class="dropdown-item" id="customersMonthly">This Month</a></li>
+                    <li><a class="dropdown-item" id="customersYearly">This Year</a></li>
                   </ul>
                 </div>
-
                 <div class="card-body">
-                  <h5 class="card-title">Customers <span>| This Year</span></h5>
-
+                  <h5 class="card-title">Customers <span id="customersTitle">| This Today</span></h5>
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                       <i class="bi bi-people"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>1244</h6>
-                      <!-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> -->
-
+                      <h6 id="customersToday">
+                        <%=customersToday%>
+                      </h6>
                     </div>
                   </div>
-
                 </div>
               </div>
+            </div>
+            <!-- End Customers Card -->
 
-            </div><!-- End Customers Card -->
+            <script>
+              // Get the elements representing the dropdown items by their IDs for customers
+              const weeklyCustomersOption = document.querySelector('#customersWeekly');
+              const monthlyCustomersOption = document.querySelector('#customersMonthly');
+              const yearlyCustomersOption = document.querySelector('#customersYearly');
+              const clearCustomersFilter = document.getElementById('clearCustomersFilter');
+
+              // Add click event listeners to the dropdown items for customers
+              weeklyCustomersOption.addEventListener('click', function (event) {
+                event.preventDefault();
+                // Update the displayed customers value for weekly customers
+                updateCustomersDisplay('| This Weekly', '<%=customersWeekly%>');
+              });
+
+              monthlyCustomersOption.addEventListener('click', function (event) {
+                event.preventDefault();
+                // Update the displayed customers value for monthly customers
+                updateCustomersDisplay('| This Month', '<%=customersMonthly%>');
+              });
+
+              yearlyCustomersOption.addEventListener('click', function (event) {
+                event.preventDefault();
+                // Update the displayed customers value for yearly customers
+                updateCustomersDisplay('| This Year', '<%=customersYearly%>');
+              });
+
+              clearCustomersFilter.addEventListener('click', function (event) {
+                event.preventDefault();
+                // Reload the customers data for today
+                updateCustomersDisplay('| This Today', '<%=customersToday%>');
+              });
+
+              // Function to update customers display
+              function updateCustomersDisplay(title, customersValue) {
+                const customersCardTitle = document.querySelector('#customersTitle');
+                const customersAmount = document.querySelector('#customersToday');
+                // Update the card title and customers amount
+                customersCardTitle.textContent = title;
+                customersAmount.innerHTML = customersValue;
+              }
+            </script>
+
 
             <!-- Reports -->
             <div class="col-12">
               <div class="card">
-
                 <div class="filter">
                   <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
+                      <h6 id="chartSaleSClearFilter">Clear Filter</h6>
                     </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                    <li><a class="dropdown-item" id="chartSalesToday">Today</a></li>
+                    <li><a class="dropdown-item" id="chartSalesWeekly">This Week</a></li>
+                    <li><a class="dropdown-item" id="chartSalesMonthly">This Month</a></li>
                   </ul>
                 </div>
-
                 <div class="card-body">
-                  <h5 class="card-title">Reports <span>/yearly</span></h5>
-
+                  <h5 class="card-title" id="chartTitle">Sales / Last 5 years</h5> <!-- Updated title ID -->
                   <!-- Bar Chart -->
-              <div id="barChart" style="min-height: 400px;" class="echart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  echarts.init(document.querySelector("#barChart")).setOption({
-                    xAxis: {
-                      type: 'category',
-                      data: ['jan', 'feb', 'mar', 'apr', 'may', 'june', 'july',"aug","sep","oct","nov","dec"]
-                    },
-                    yAxis: {
-                      type: 'value'
-                    },
-                    series: [{
-                      data: [50, 200, 150, 80, 70, 110, 130,100,120,130,120,130],
-                      type: 'bar'
-                    }]
-                  });
-                });
-              </script>
-              <!-- End Bar Chart -->
-
+                  <div id="barChart" style="min-height: 400px;" class="echart" class="bg-danger"></div>
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      const initialYearsData = [2019, 2020, 2021, 2022, 2023]; // Yearly data for the last five years
+                      const yearlySalesData = JSON.parse('<%= JSON.stringify(salesLastFiveYears) %>'); // Replace with your sales data
+                      const chart = echarts.init(document.querySelector("#barChart"));
+            
+                      // Function to update the chart with data
+                      const updateChart = (xAxisData, seriesData) => {
+                        chart.setOption({
+                          xAxis: {
+                            type: 'category',
+                            data: xAxisData
+                          },
+                          yAxis: {
+                            type: 'value'
+                          },
+                          series: [{
+                            data: seriesData,
+                            type: 'bar'
+                          }]
+                        });
+                      };
+            
+                      // Initial chart setup with yearly data
+                      updateChart(initialYearsData, yearlySalesData);
+            
+                      const chartSalesMonthly = ['January', 'February', 'March', 'April', 'May', 'June',
+                        'July', 'August', 'September', 'October', 'November', 'December'
+                      ]; // Month names for xAxis display
+            
+                      // Update the chart with monthly data for a specific year
+                      const updateChartWithMonthlyData = (monthlySalesData) => {
+                        updateChart(chartSalesMonthly, monthlySalesData);
+                        document.getElementById('chartTitle').innerText = 'Sales / This Month'; // Update title to 'This Month'
+                      };
+            
+                      // Event listener for 'This Month' option click
+                      document.getElementById('chartSalesMonthly').addEventListener('click', () => {
+                        const selectedYearMonthlySalesData = JSON.parse('<%= JSON.stringify(chartSalesMonthly) %>'); // Replace with actual monthly sales data
+                        updateChartWithMonthlyData(selectedYearMonthlySalesData);
+                      });
+            
+                      const chartSalesHourly = [
+                        '1:00 AM', '2:00 AM', '3:00 AM', '4:00 AM', '5:00 AM', '6:00 AM',
+                        '7:00 AM', '8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM',
+                        '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM',
+                        '7:00 PM', '8:00 PM', '9:00 PM', '10:00 PM', '11:00 PM', '12:00 AM'
+                      ];
+                      const updateChartWithTodayData = (TodaySalesData) => {
+                        updateChart(chartSalesHourly, TodaySalesData);
+                        document.getElementById('chartTitle').innerText = 'Sales / Today'; // Update title to 'Today'
+                      };
+            
+                      // Event listener for 'Today' option click
+                      document.getElementById('chartSalesToday').addEventListener('click', () => {
+                        const selectedTodaySalesData = JSON.parse('<%= JSON.stringify(chartSalesHourly) %>'); // Replace with actual hourly sales data
+                        updateChartWithTodayData(selectedTodaySalesData);
+                      });
+                      // ................weekly...............................
+                      const dayNamesWeekly = JSON.parse('<%- JSON.stringify(dayNamesWeekly) %>');
+                      const updateChartWithWeeklyData = (weeklySalesData) => {
+                        updateChart(dayNamesWeekly, weeklySalesData);
+                        document.getElementById('chartTitle').innerText = 'Sales / Weekly'; // Update title to 'Today'
+                      };
+            
+                      // Event listener for 'Today' option click
+                      document.getElementById('chartSalesWeekly').addEventListener('click', () => {
+                        const selectedWeeklyData = JSON.parse('<%= JSON.stringify(chartSalesWeekly) %>'); // Replace with actual hourly sales data
+                        updateChartWithWeeklyData(selectedWeeklyData);
+                      });
+                      // ................clear Filtter...............................
+                      // const initialYearsData = [2019, 2020, 2021, 2022, 2023]; // Yearly data for the last five years
+                       // Replace with your sales data
+                      const updateChartWitLastFiveYearData = (yearlySalesData) => {
+                        updateChart(initialYearsData, yearlySalesData);
+                        document.getElementById('chartTitle').innerText = 'Sales / Last 5 years'; // Update title to 'Today'
+                      };
+            
+                      // Event listener for 'Today' option click
+                      document.getElementById('chartSaleSClearFilter').addEventListener('click', () => {
+                        const yearlySalesData = JSON.parse('<%= JSON.stringify(salesLastFiveYears) %>');
+                        updateChartWitLastFiveYearData(yearlySalesData);
+                      });
+                    });
+                  </script>
                 </div>
-
               </div>
-            </div><!-- End Reports -->
+            </div>
+            
+
+            <!-- End Reports -->
 
             <!-- Recent Sales -->
             <div class="col-12">
               <div class="card recent-sales overflow-auto">
 
-                <div class="filter">
+                <!-- <div class="filter">
                   <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <li class="dropdown-header text-start">
@@ -351,11 +545,10 @@
                     <li><a class="dropdown-item" href="#">This Month</a></li>
                     <li><a class="dropdown-item" href="#">This Year</a></li>
                   </ul>
-                </div>
-
+                </div> -->
+<!-- 
                 <div class="card-body">
                   <h5 class="card-title">Recent Sales <span>| Today</span></h5>
-
                   <table class="table table-borderless datatable">
                     <thead>
                       <tr>
@@ -372,40 +565,12 @@
                         <td>Brandon Jacob</td>
                         <td><a href="#" class="text-primary">At praesentium minu</a></td>
                         <td>$64</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2147</a></th>
-                        <td>Bridie Kessler</td>
-                        <td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td>
-                        <td>$47</td>
-                        <td><span class="badge bg-warning">Pending</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2049</a></th>
-                        <td>Ashleigh Langosh</td>
-                        <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
-                        <td>$147</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2644</a></th>
-                        <td>Angus Grady</td>
-                        <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
-                        <td>$67</td>
-                        <td><span class="badge bg-danger">Rejected</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2644</a></th>
-                        <td>Raheem Lehner</td>
-                        <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                        <td>$165</td>
-                        <td><span class="badge bg-success">Approved</span></td>
+                        <td><span class="badge bg-secondary">Approved</span></td>
                       </tr>
                     </tbody>
                   </table>
 
-                </div>
+                </div> -->
 
               </div>
             </div><!-- End Recent Sales -->
@@ -414,10 +579,10 @@
           </div>
         </div><!-- End Left side columns -->
 
-      
-          
 
-       
+
+
+
 
       </div>
     </section>
@@ -438,7 +603,8 @@
     </div>
   </footer><!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="admin/vendor/apexcharts/apexcharts.min.js"></script>
@@ -452,6 +618,7 @@
 
   <!-- Template Main JS File -->
   <script src="admin/js/main.js"></script>
+  <script src="javaScript/admin/dashboard.js"></script>
 
 </body>
 

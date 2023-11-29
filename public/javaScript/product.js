@@ -141,7 +141,7 @@ function addProduct(event) {
       .then((response) => response.json())
       .then((res) => {
         if (res.status) {
-          location.href = "/admin/product";
+          location.href = "/admin/products";
         }
         if (res.err) {
         document.getElementById("productNameError").textContent = res.err;
@@ -189,7 +189,7 @@ function editProduct(id) {
       .then((response) => response.json())
       .then((res) => {
         if (res.status) {
-          location.href = "/admin/product";
+          location.href = "/admin/products";
         }
         if (res.err) {
         document.getElementById("productNameError").textContent = res.err;

@@ -5,6 +5,7 @@ const productController=require("../controller/admin/productController")
 const userMangementController=require("../controller/admin/userManagmentController")
 const orderMangementController=require("../controller/admin/orderMangementController")
 const dashboardController=require("../controller/admin/dashboardController")
+const salesReportController=require("../controller/admin/salesReportController")
 const path = require("path");
 const upload=require("../midddleware/multer")
 const adminAuth=require("../midddleware/adminAuth")
@@ -49,5 +50,11 @@ adminRoute.post("/order/detail/:orderId",adminAuth.verifyAdmin,orderMangementCon
 
 //.......................dashboard................................................
 adminRoute.get("/dashboard",adminAuth.verifyAdmin,dashboardController.loadDashboard)
+
+//........................saleReport..............................................
+adminRoute.get("/sales-report",adminAuth.verifyAdmin,salesReportController.loadSalesReport)
+adminRoute.post("/sales-report/filler",adminAuth.verifyAdmin,salesReportController.fillterSalesReport)
+adminRoute.get("/sales-report/report_excel_download",adminAuth.verifyAdmin,salesReportController.reportExcelDownload)
+adminRoute.get("/download",adminAuth.verifyAdmin,salesReportController.download)
 
 module.exports=adminRoute
