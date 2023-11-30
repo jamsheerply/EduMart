@@ -65,7 +65,7 @@
                         <!-- Begin Header Logo Area -->
                         <div class="col-lg-3">
                             <div class="logo pb-sm-30 pb-xs-30">
-                                <a >
+                                <a>
                                     <img img src="admin/logo/2.png" alt="" width="200px" height="50px">
                                 </a>
                             </div>
@@ -74,13 +74,14 @@
                         <!-- Begin Header Middle Right Area -->
                         <div class="col-lg-9 pl-0 ml-sm-15 ml-xs-15">
                             <!-- Begin Header Middle Searchbox Area -->
-                            <form action="#" class="hm-searchbox">
-                                    <!-- <select class="nice-select select-search-category">
+                            <form class="hm-searchbox">
+                                <!-- <select class="nice-select select-search-category">
                                         <option value="0">All</option>                                            
                                     </select> -->
-                                    <input type="text" placeholder="Enter your search key ...">
-                                    <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
-                                </form>
+                                <input type="text" name="productListSearch" id="productListSearch">
+                                <button class="li-btn" type="button"><i class="fa fa-search"
+                                        onclick="productListSearch()"></i></button>
+                            </form>
                             <!-- Header Middle Searchbox Area End Here -->
                             <!-- Begin Header Middle Right Area -->
                             <div class="header-middle-right">
@@ -178,46 +179,51 @@
                                 <div class="product-view-mode">
                                     <!-- shop-item-filter-list start -->
                                     <ul class="nav shop-item-filter-list" role="tablist">
-                                            <li role="presentation"><a data-toggle="tab" role="tab" aria-controls="grid-view" href="#grid-view"><i class="fa fa-th"></i></a></li>
-                                            <li class="active" role="presentation"><a aria-selected="true" class="active show" data-toggle="tab" role="tab" aria-controls="list-view" href="#list-view"><i class="fa fa-th-list"></i></a></li>
-                                        </ul>
+                                        <li role="presentation"><a data-toggle="tab" role="tab"
+                                                aria-controls="grid-view" href="#grid-view"><i class="fa fa-th"></i></a>
+                                        </li>
+                                        <li class="active" role="presentation"><a aria-selected="true"
+                                                class="active show" data-toggle="tab" role="tab"
+                                                aria-controls="list-view" href="#list-view"><i
+                                                    class="fa fa-th-list"></i></a></li>
+                                    </ul>
                                     <!-- shop-item-filter-list end -->
                                 </div>
                                 <div class="toolbar-amount">
-                                        <span>Showing 1 to 9 of 15</span>
-                                    </div>
+                                    <span>Showing page <span id="pageNumber1">1</span></span>
+                                </div>
                             </div>
                             <!-- product-select-box start -->
                             <div class="product-select-box">
                                 <div class="product-short">
-                                        <p>Sort By:</p>
-                                        <select class="nice-select">
-                                            <option value="trending">Relevance</option>
-                                            <option value="sales">Name (A - Z)</option>
-                                            <option value="sales">Name (Z - A)</option>
-                                            <option value="rating">Price (Low &gt; High)</option>
-                                            <option value="rating">Price (High &gt; Low)</option>
-                                        </select>
-                                    </div>
+                                    <p>Sort By:</p>
+                                    <select class="nice-select" id="sortProductList" onchange="sortProductList(this)">
+                                        <option value="nameA">Name (A - Z)</option>
+                                        <option value="nameZ">Name (Z - A)</option>
+                                        <option value="priceLow">Price (Low &gt; High)</option>
+                                        <option value="priceHigh">Price (High &gt; Low)</option>
+                                    </select>
+                                </div>
                             </div>
                             <!-- product-select-box end -->
                         </div>
                         <!-- shop-top-bar end -->
                         <!-- shop-products-wrapper start -->
-                        
+
                         <div class="shop-products-wrapper">
                             <div class="tab-content">
                                 <div id="grid-view" class="tab-pane fade active" role="tabpanel">
                                     <div class="product-area shop-product-area">
-                                        <div class="row">
+                                        <div class="row" id="tableSort">
                                             <%if(product.length>0){
                                                 product.forEach((element)=>{%>
-                                            <div class="col-lg-4 col-md-4 col-sm-6 mt-40">
-                                                <!-- single-product-wrap start -->
-                                                <div class="single-product-wrap">
+                                                <div class="col-lg-4 col-md-4 col-sm-6 mt-40">
+                                                    <!-- single-product-wrap start -->
+                                                    <div class="single-product-wrap">
                                                         <div class="product-image">
                                                             <a href="/user/product-detail?id=<%=element._id%>">
-                                                                <img src="<%=element.imageURL[0].productImage1%>" alt="">
+                                                                <img src="<%=element.imageURL[0].productImage1%>"
+                                                                    alt="">
                                                             </a>
                                                             <!-- <span class="sticker">New</span> -->
                                                         </div>
@@ -225,21 +231,28 @@
                                                             <div class="product_desc_info">
                                                                 <div class="product-review">
                                                                     <h5 class="manufacturer">
-                                                                        <a><%=element.category%></a>
+                                                                        <a>
+                                                                            <%=element.category%>
+                                                                        </a>
                                                                     </h5>
                                                                     <div class="rating-box">
                                                                         <ul class="rating">
                                                                             <li><i class="fa fa-star-o"></i></li>
                                                                             <li><i class="fa fa-star-o"></i></li>
                                                                             <li><i class="fa fa-star-o"></i></li>
-                                                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                                            <li class="no-star"><i
+                                                                                    class="fa fa-star-o"></i></li>
+                                                                            <li class="no-star"><i
+                                                                                    class="fa fa-star-o"></i></li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>
-                                                                <h4><a class="product_name"><%=element.productName%></a></h4>
+                                                                <h4><a class="product_name">
+                                                                        <%=element.productName%>
+                                                                    </a></h4>
                                                                 <div class="price-box">
-                                                                    <span class="new-price">&#8377;<%=element.price%></span>
+                                                                    <span class="new-price">&#8377;<%=element.price%>
+                                                                            </span>
                                                                 </div>
                                                             </div>
                                                             <!-- <div class="add-actions">
@@ -251,26 +264,26 @@
                                                             </div> -->
                                                         </div>
                                                     </div>
-                                                <!-- single-product-wrap end -->
-                                            </div>
-                                            <%})}%>
+                                                    <!-- single-product-wrap end -->
+                                                </div>
+                                                <%})}%>
                                         </div>
                                     </div>
                                 </div>
-                                
 
-                                    <div id="list-view" class="tab-pane fade product-list-view  show"
-                                        role="tabpanel">
-                                        <div class="row">
-                                            <div class="col">
-                                                <%if(product.length>0){
-                                                    product.forEach((element)=>{%>
-                
+
+                                <div id="list-view" class="tab-pane fade product-list-view  show" role="tabpanel">
+                                    <div class="row">
+                                        <div class="col">
+                                            <%if(product.length>0){
+                                                product.forEach((element)=>{%>
+
                                                 <div class="row product-layout-list">
                                                     <div class="col-lg-3 col-md-5 ">
                                                         <div class="product-image">
                                                             <a href="/user/product-detail?id=<%=element._id%>">
-                                                                <img src="<%=element.imageURL[0].productImage1%>" alt="">
+                                                                <img src="<%=element.imageURL[0].productImage1%>"
+                                                                    alt="">
                                                             </a>
                                                             <!-- <span class="sticker">New</span> -->
                                                         </div>
@@ -280,7 +293,9 @@
                                                             <div class="product_desc_info">
                                                                 <div class="product-review">
                                                                     <h5 class="manufacturer">
-                                                                        <a><%=element.category%></a>
+                                                                        <a>
+                                                                            <%=element.category%>
+                                                                        </a>
                                                                     </h5>
                                                                     <div class="rating-box">
                                                                         <ul class="rating">
@@ -294,9 +309,12 @@
                                                                         </ul>
                                                                     </div>
                                                                 </div>
-                                                                <h4><a class="product_name"><%=element.productName%></a></h4>
+                                                                <h4><a class="product_name">
+                                                                        <%=element.productName%>
+                                                                    </a></h4>
                                                                 <div class="price-box">
-                                                                    <span class="new-price">&#8377;<%=element.price%></span>
+                                                                    <span class="new-price">&#8377;<%=element.price%>
+                                                                            </span>
                                                                 </div>
                                                                 <!-- <p><%=element.productDescription%></p> -->
                                                             </div>
@@ -314,31 +332,31 @@
                                                     </div> -->
                                                 </div>
                                                 <%})}%>
-                                                <!---end of productList -->
-                                            </div>
+                                                    <!---end of productList -->
                                         </div>
                                     </div>
+                                </div>
 
-                                   
-                                        <div class="paginatoin-area">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6">
-                                                <p>Showing 1-12 of 13 item(s)</p>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <ul class="pagination-box">
-                                                    <li><a href="#" class="Previous"><i class="fa fa-chevron-left"></i> Previous</a>
+
+                                <div class="paginatoin-area">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <p>Showing page <span id="pageNumber2">1</span></p>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <ul class="pagination-box">
+                                                <!-- <li><a href="#" class="Previous"><i class="fa fa-chevron-left"></i> Previous</a></li> -->
+                                                <%for(let i=0;i<2;i++){%>
+                                                    <li style="cursor: pointer;"
+                                                        onclick="productListPagination('<%=i+1%>')">
+                                                        <%=i+1%>&nbsp&nbsp&nbsp
                                                     </li>
-                                                    <li class="active"><a>1</a></li>
-                                                    <li><a >2</a></li>
-                                                    <li><a >3</a></li>
-                                                    <li>
-                                                      <a  class="Next"> Next <i class="fa fa-chevron-right"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                                    <%}%>
+                                                        <!-- <li><a  class="Next"> Next <i class="fa fa-chevron-right"></i></a></li> -->
+                                            </ul>
                                         </div>
                                     </div>
+                                </div>
                             </div>
                         </div>
                         <!-- shop-products-wrapper end -->
@@ -357,20 +375,18 @@
                             <!-- btn-clear-all end -->
                             <!-- filter-sub-area start -->
                             <div class="filter-sub-area">
-                                <h5 class="filter-sub-titel">Brand</h5>
+                                <h5 class="filter-sub-titel">category</h5>
                                 <div class="categori-checkbox">
-                                        <form action="#">
-                                            <ul>
-                                                <li><input type="checkbox" name="product-categori"><a href="#">Prime Video (13)</a></li>
-                                                <li><input type="checkbox" name="product-categori"><a href="#">Computers (12)</a></li>
-                                                <li><input type="checkbox" name="product-categori"><a href="#">Electronics (11)</a></li>
-                                            </ul>
-                                        </form>
-                                    </div>
+                                    <ul>
+                                        <li><input type="checkbox" name="category" value="Biographies">Biographies</li>
+                                        <li><input type="checkbox" name="category" value="Crime and Thriller">Crime and
+                                            Thriller</li>
+                                    </ul>
+                                </div>
                             </div>
                             <!-- filter-sub-area end -->
                             <!-- filter-sub-area start -->
-                            <div class="filter-sub-area pt-sm-10 pt-xs-10">
+                            <!-- <div class="filter-sub-area pt-sm-10 pt-xs-10">
                                 <h5 class="filter-sub-titel">Categories</h5>
                                 <div class="categori-checkbox">
                                     <form>
@@ -382,19 +398,18 @@
                                         </ul>
                                     </form>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- filter-sub-area end -->
                             <!-- filter-sub-area start -->
                             <div class="filter-sub-area pt-sm-10 pt-xs-10">
                                 <h5 class="filter-sub-titel">price</h5>
-                                    <div class="size-checkbox">
-                                        <form action="#">
-                                            <ul>
-                                                <li><input type="range" name="product-size"><a href="#"></a></li>
-                                                <li><input type="checkbox" name="product-size"><a href="#">M (3)</a></li>
-                                            </ul>
-                                        </form>
-                                    </div>
+                                <div class="size-checkbox">
+                                    <ul>
+                                        <li><input type="radio" name="price" value="0-200">0-200</li>
+                                        <li><input type="radio" name="price" value="200-500">200-500</li>
+                                        <li><input type="radio" name="price" value="500-1000">500-1000</li>
+                                    </ul>
+                                </div>
                             </div>
                             <!-- filter-sub-area end -->
                             <!-- filter-sub-area start -->
@@ -497,11 +512,11 @@
                                     </li>
                                     <li>
                                         <span>Phone: </span>
-                                        <a >+91 9020432432</a>
+                                        <a>+91 9020432432</a>
                                     </li>
                                     <li>
                                         <span>Email: </span>
-                                        <a >jamsheerpayyoli@gmail.com</a>
+                                        <a>jamsheerpayyoli@gmail.com</a>
                                     </li>
                                 </ul>
                             </div>
@@ -511,10 +526,10 @@
                                 <div class="footer-block">
                                     <h3 class="footer-block-title">Product</h3>
                                     <ul>
-                                        <li><a >Prices drop</a></li>
-                                        <li><a >New products</a></li>
-                                        <li><a >Best sales</a></li>
-                                        <li><a >Contact us</a></li>
+                                        <li><a>Prices drop</a></li>
+                                        <li><a>New products</a></li>
+                                        <li><a>Best sales</a></li>
+                                        <li><a>Contact us</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -524,10 +539,10 @@
                                 <div class="footer-block">
                                     <h3 class="footer-block-title">Our company</h3>
                                     <ul>
-                                        <li><a >Delivery</a></li>
-                                        <li><a >Legal Notice</a></li>
-                                        <li><a >About us</a></li>
-                                        <li><a >Contact us</a></li>
+                                        <li><a>Delivery</a></li>
+                                        <li><a>Legal Notice</a></li>
+                                        <li><a>About us</a></li>
+                                        <li><a>Contact us</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -556,9 +571,8 @@
                                 <!-- Begin Footer Newsletter Area -->
                                 <div class="footer-newsletter">
                                     <h4>Sign up to newsletter</h4>
-                                    <form  id="mc-embedded-subscribe-form"
-                                        name="mc-embedded-subscribe-form" class="footer-subscribe-form validate"
-                                        target="_blank" novalidate>
+                                    <form id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+                                        class="footer-subscribe-form validate" target="_blank" novalidate>
                                         <div id="mc_embed_signup_scroll">
                                             <div id="mc-form" class="mc-form subscribe-form form-group">
                                                 <input id="mc-email" type="email" autocomplete="off"
@@ -753,6 +767,9 @@
     <script src="user/js/scrollUp.min.js"></script>
     <!-- Main/Activator js -->
     <script src="user/js/main.js"></script>
+
+    <!--js file-->
+    <script src="javaScript/user/productList.js"></script>
 </body>
 
 <!-- shop-list31:48-->

@@ -8,7 +8,7 @@
   <title>Products</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-  <base href="/"> 
+  <base href="/">
   <!-- Favicons -->
   <link href="admin/img/favicon.png" rel="icon">
   <link href="admin/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -37,8 +37,8 @@
   <!-- Template Main CSS File -->
   <link href="admin/css/style.css" rel="stylesheet">
   <link href="StyleSheet/addProduct.css" rel="stylesheet">
-  
-  <script  src="javaScript/product.js"></script>
+
+  <script src="javaScript/product.js"></script>
 </head>
 
 <body>
@@ -47,7 +47,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a  class="logo d-flex align-items-center">
+      <a class="logo d-flex align-items-center">
         <img src="admin/img/logo.png" alt="">
         <span class="d-none d-lg-block">SAFAT EDUMART</span>
       </a>
@@ -55,15 +55,15 @@
     </div><!-- End Logo -->
     <script>
       document.addEventListener('DOMContentLoaded', (event) => {
-    // Wait for the DOM content to load
-    const sidebarButton = document.querySelector('.toggle-sidebar-btn');
+        // Wait for the DOM content to load
+        const sidebarButton = document.querySelector('.toggle-sidebar-btn');
 
-    // Check if the sidebar button exists and is initially hidden
-    if (sidebarButton && sidebarButton.style.display === 'none') {
-        // Simulate a click event
-        sidebarButton.click();
-    }
-});
+        // Check if the sidebar button exists and is initially hidden
+        if (sidebarButton && sidebarButton.style.display === 'none') {
+          // Simulate a click event
+          sidebarButton.click();
+        }
+      });
 
     </script>
 
@@ -100,93 +100,93 @@
   <!-- ======= Sidebar ======= -->
   <!-- <aside id="sidebar" class="sidebar"> -->
 
-    <ul class="sidebar-nav" id="sidebar-nav">
+  <ul class="sidebar-nav" id="sidebar-nav">
 
-      <!-- <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link " href="index.html">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li> -->
-      <!-- End Dashboard Nav -->
+    <!-- End Dashboard Nav -->
 
-      <!-- <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav"  href="admin/product">
           <i class="bi bi-menu-button-wide"></i><span>Products</span>
         </a>
       </li> -->
-      <!-- End Components Nav -->
+    <!-- End Components Nav -->
 
-      <!-- <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav"  href="admin/category">
           <i class="bi bi-journal-text"></i><span>category</span>
         </a>
       </li> -->
-      <!-- End Forms Nav -->
+    <!-- End Forms Nav -->
 
-      <!-- <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse"  href="/admin/order">
           <i class="bi bi-layout-text-window-reverse"></i><span>Orders</span>
         </a>
       </li> -->
-      <!-- End Tables Nav -->
+    <!-- End Tables Nav -->
 
-      <!-- <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-bar-chart"></i><span>Coupons</span>
         </a>
       </li> -->
-      <!-- End Charts Nav -->
+    <!-- End Charts Nav -->
 
-      <!-- <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-gem"></i><span>Banner</span>
         </a>
       </li> -->
-      <!-- End Icons Nav -->
-      <!-- <li class="nav-item">
+    <!-- End Icons Nav -->
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-gem"></i><span>Transaction</span>
         </a>
       </li> -->
-      <!-- End Icons Nav -->
+    <!-- End Icons Nav -->
 
-      <!-- <li class="nav-heading">User Management</li> -->
+    <!-- <li class="nav-heading">User Management</li> -->
 
-      <!-- <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#">
           <i class="bi bi-person"></i>
           <span>Admins</span>
         </a>
       </li> -->
-      <!-- End Profile Page Nav -->
+    <!-- End Profile Page Nav -->
 
-      <!-- <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="admin/user">
           <i class="bi bi-question-circle"></i>
           <span>Users</span>
         </a>
       </li> -->
-      <!-- End F.A.Q Page Nav -->
+    <!-- End F.A.Q Page Nav -->
 
-      <!-- <li class="nav-heading">Others</li> -->
+    <!-- <li class="nav-heading">Others</li> -->
 
-      <!-- <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="users-profile.html">
           <i class="bi bi-person"></i>
           <span>Profile</span>
         </a>
       </li> -->
-      <!-- End Profile Page Nav -->
+    <!-- End Profile Page Nav -->
 
-      <!-- <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#">
           <i class="bi bi-question-circle"></i>
           <span>Logout</span>
         </a>
       </li> -->
-      <!-- End F.A.Q Page Nav -->
-    </ul>
+    <!-- End F.A.Q Page Nav -->
+  </ul>
 
   </aside><!-- End Sidebar-->
 
@@ -206,155 +206,174 @@
 
     <!DOCTYPE html>
     <html>
+
     <head>
-        <title>Multiple Product Image Previews</title>
-        <style>
-            .preview-container {
-                text-align: center;
-                width: 100%;
-                height: 220px;
-                margin: 0 auto;
-                position: relative;
-                overflow: hidden;
-            }
-            .input-hidden {
-                display: none;
-            }
-        </style>
+      <title>Multiple Product Image Previews</title>
+      <style>
+        .preview-container {
+          text-align: center;
+          width: 100%;
+          height: 220px;
+          margin: 0 auto;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .input-hidden {
+          display: none;
+        }
+      </style>
     </head>
+
     <body>
-        <form   onsubmit="editProduct('<%=product._id%>')">
-            <div class="container">
-                <div class="grid product">
-                    <div class="column-xs-12 column-md-7">
-                        <div class="product-gallery">
-                            <label class="product-image" style="width: 650px; height: 400px; padding-bottom: 5px; display: flex; align-items: center; justify-content: center;">
-                              <input type="file" id="productImage1" accept="image/*" class="input-hidden" onchange="previewImage(this, 'imagePreview1')" name="productImage1">
-                              <img id="imagePreview1" class="image-preview" src="http://localhost:8080<%=product.imageURL[0].productImage1%>"><br>
-                              <p id="productImage1Error" style="color: red;"></p>
-                            </label>
-                            <br>
-                            <div style="width: 650px; height: 220px; display: flex; align-items: center; justify-content: center;" id="childMain">
-                                <ul class="image-list">
-                                    <li style="width: 620px; height: 220px;">
-                                      <!-- <input type="file" class="form-control"  id="childOne" style="display: none;" > -->
-                                      <label class="preview-container">
-                                            <input type="file" id="productImage2" accept="image/*" class="input-hidden" onchange="previewImage(this, 'imagePreview2')" name="productImage2">
-                                            <img id="imagePreview2" class="image-preview" src="http://localhost:8080<%=product.imageURL[0].productImage2%>">
-                                            <p id="productImage2Error" style="color: red;"></p>
-                                        </label>
-                                    </li>
-                                    <li style="width: 620px; height: 220px;">
-                                      <!-- <input type="file" class="form-control" id="childTwo" style="display: none;" > -->
-                                      <label class="preview-container">
-                                            <input type="file" id="productImage3" accept="image/*" class="input-hidden" onchange="previewImage(this, 'imagePreview3')" name="productImage3">
-                                            <img id="imagePreview3" class="image-preview" src="http://localhost:8080<%=product.imageURL[0].productImage3%>">
-                                            <p id="productImage3Error" style="color: red;"></p>
-                                        </label>
-                                    </li>
-                                    <li style="width: 620px; height: 220px;">
-                                      <!-- <input type="file" class="form-control" id="childThree" style="display: none ;"> -->
-                                      <label class="preview-container">
-                                            <input type="file" id="productImage4" accept="image/*" class="input-hidden" onchange="previewImage(this, 'imagePreview4')" name="productImage4">
-                                            <img id="imagePreview4" class="image-preview" src="http://localhost:8080<%=product.imageURL[0].productImage4%>">
-                                            <p id="productImage4Error" style="color: red;"></p>
-                                        </label>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column-xs-12 column-md-5">
-                        <div class="form-group">
-                            <label for="productName" class="label-left">Product Name</label>
-                            <input type="text" id="productName" class="input-right" style="width: 100%; " name="productName" value="<%=product.productName%>">
-                            <p id="productNameError" style="color: red;"></p>
-                        </div>
-                        <div class="form-group">
-                            <label for="productDescription" class="label-left">Product Description</label>
-                            <textarea id="productDescription" class="input-right" style="width: 100%;" rows="4" name="productDescription" ><%=product.productDescription%></textarea>
-                            <p id="productDescriptionError" style="color: red;"></p>
-                        </div>
-                        <div class="form-group">
-                            <label for="publisher" class="label-left">Publisher</label>
-                            <input type="text" id="publisher" class="input-right" style="width: 100%;" name="publisher" value="<%=product.publisher%>">
-                            <p id="publisherError" style="color: red;"></p>
-                        </div>
-                        <div class="form-group">
-                            <label for="language" class="label-left">Language</label>
-                            <input type="text" id="language" class="input-right" style="width: 100%;" name="language" value="<%=product.language%>">
-                            <p id="languageError" style="color: red;"></p>
-                        </div>
-                        <div class="form-group">
-                            <label for="price" class="label-left">Category</label>
-                            <select name="category" id="category">
-                              <% category.forEach((value)=> { %>
-                                <option value="<%=value.category%>">
-                                    <%=value.category%>
-                                </option>
-                                <%})%>
-                            </select>
-                            <p id="categoryError" style="color: red;"></p>
-                        </div>
-                        <div class="form-group">
-                            <label for="status" class="label-left" >Status</label>
-                            <select name="status" id="status">
-                              <option value="published">Published</option>
-                              <option value="draft">Draft</option>
-                              <option value="outofstock">Out of stock</option>
-                              <!-- <option value="lowquantity">Low quantity</option> -->
-                            </select>
-                            <p id="statusError" style="color: red;"></p>
-                        </div>
-                        <div class="form-group">
-                            <label for="category" class="label-left">quantity</label>
-                            <input type="text" id="quantity" class="input-right" style="width: 100%;" name="price" value="<%=product.quantity%>">
-                            <p id="quantityError" style="color: red;"></p>
-                        </div>
-                        <div class="form-group">
-                            <label for="category" class="label-left">Price</label>
-                            <input type="text" id="price" class="input-right" style="width: 100%;" name="price" value="<%=product.price%>">
-                            <p id="priceError" style="color: red;"></p>
-                        </div>
-                        <div class="form-group ">
-                            <button class="btn btn-success" type="submit">Save</button>
-                            <!-- <a href="/admin/product">
+      <form onsubmit="editProduct('<%=product._id%>')">
+        <div class="container">
+          <div class="grid product">
+            <div class="column-xs-12 column-md-7">
+              <div class="product-gallery">
+                <label class="product-image"
+                  style="width: 650px; height: 400px; padding-bottom: 5px; display: flex; align-items: center; justify-content: center;">
+                  <input type="file" id="productImage1" accept="image/*" class="input-hidden"
+                    onchange="previewImage(this, 'imagePreview1')" name="productImage1">
+                  <img id="imagePreview1" class="image-preview"
+                    src="http://localhost:8080<%=product.imageURL[0].productImage1%>"><br>
+                  <p id="productImage1Error" style="color: red;"></p>
+                </label>
+                <br>
+                <div style="width: 650px; height: 220px; display: flex; align-items: center; justify-content: center;"
+                  id="childMain">
+                  <ul class="image-list">
+                    <li style="width: 620px; height: 220px;">
+                      <!-- <input type="file" class="form-control"  id="childOne" style="display: none;" > -->
+                      <label class="preview-container">
+                        <input type="file" id="productImage2" accept="image/*" class="input-hidden"
+                          onchange="previewImage(this, 'imagePreview2')" name="productImage2">
+                        <img id="imagePreview2" class="image-preview"
+                          src="http://localhost:8080<%=product.imageURL[0].productImage2%>">
+                        <p id="productImage2Error" style="color: red;"></p>
+                      </label>
+                    </li>
+                    <li style="width: 620px; height: 220px;">
+                      <!-- <input type="file" class="form-control" id="childTwo" style="display: none;" > -->
+                      <label class="preview-container">
+                        <input type="file" id="productImage3" accept="image/*" class="input-hidden"
+                          onchange="previewImage(this, 'imagePreview3')" name="productImage3">
+                        <img id="imagePreview3" class="image-preview"
+                          src="http://localhost:8080<%=product.imageURL[0].productImage3%>">
+                        <p id="productImage3Error" style="color: red;"></p>
+                      </label>
+                    </li>
+                    <li style="width: 620px; height: 220px;">
+                      <!-- <input type="file" class="form-control" id="childThree" style="display: none ;"> -->
+                      <label class="preview-container">
+                        <input type="file" id="productImage4" accept="image/*" class="input-hidden"
+                          onchange="previewImage(this, 'imagePreview4')" name="productImage4">
+                        <img id="imagePreview4" class="image-preview"
+                          src="http://localhost:8080<%=product.imageURL[0].productImage4%>">
+                        <p id="productImage4Error" style="color: red;"></p>
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="column-xs-12 column-md-5">
+              <div class="form-group">
+                <label for="productName" class="label-left">Product Name</label>
+                <input type="text" id="productName" class="input-right" style="width: 100%; " name="productName"
+                  value="<%=product.productName%>">
+                <p id="productNameError" style="color: red;"></p>
+              </div>
+              <div class="form-group">
+                <label for="productDescription" class="label-left">Product Description</label>
+                <textarea id="productDescription" class="input-right" style="width: 100%;" rows="4"
+                  name="productDescription"><%=product.productDescription%></textarea>
+                <p id="productDescriptionError" style="color: red;"></p>
+              </div>
+              <div class="form-group">
+                <label for="publisher" class="label-left">Publisher</label>
+                <input type="text" id="publisher" class="input-right" style="width: 100%;" name="publisher"
+                  value="<%=product.publisher%>">
+                <p id="publisherError" style="color: red;"></p>
+              </div>
+              <div class="form-group">
+                <label for="language" class="label-left">Language</label>
+                <input type="text" id="language" class="input-right" style="width: 100%;" name="language"
+                  value="<%=product.language%>">
+                <p id="languageError" style="color: red;"></p>
+              </div>
+              <div class="form-group">
+                <label for="price" class="label-left">Category</label>
+                <select name="category" id="category">
+                  <% category.forEach((value)=> { %>
+                    <option value="<%=value.category%>">
+                      <%=value.category%>
+                    </option>
+                    <%})%>
+                </select>
+                <p id="categoryError" style="color: red;"></p>
+              </div>
+              <div class="form-group">
+                <label for="status" class="label-left">Status</label>
+                <select name="status" id="status">
+                  <option value="published">Published</option>
+                  <option value="draft">Draft</option>
+                  <option value="outofstock">Out of stock</option>
+                  <!-- <option value="lowquantity">Low quantity</option> -->
+                </select>
+                <p id="statusError" style="color: red;"></p>
+              </div>
+              <div class="form-group">
+                <label for="category" class="label-left">quantity</label>
+                <input type="text" id="quantity" class="input-right" style="width: 100%;" name="price"
+                  value="<%=product.quantity%>">
+                <p id="quantityError" style="color: red;"></p>
+              </div>
+              <div class="form-group">
+                <label for="category" class="label-left">Price</label>
+                <input type="text" id="price" class="input-right" style="width: 100%;" name="price"
+                  value="<%=product.price%>">
+                <p id="priceError" style="color: red;"></p>
+              </div>
+              <div class="form-group ">
+                <button class="btn btn-success" type="submit">Save</button>
+                <!-- <a href="/admin/product">
                               <button class="btn btn-danger" >cancel</button>
                             </a> -->
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
-        </form>
-        <script>
-          
-    </script>
-  <!-- ======= Footer ======= -->
+          </div>
+        </div>
+      </form>
+      <script>
+
+      </script>
+      <!-- ======= Footer ======= -->
 
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
+      <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+          class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files -->
-  <script src="admin/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="admin/vendor/chart.js/chart.umd.js"></script>
-  <script src="admin/vendor/echarts/echarts.min.js"></script>
-  <script src="admin/vendor/quill/quill.min.js"></script>
-  <script src="admin/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="admin/vendor/tinymce/tinymce.min.js"></script>
-  <script src="admin/vendor/php-email-form/validate.js"></script>
+      <!-- Vendor JS Files -->
+      <script src="admin/vendor/apexcharts/apexcharts.min.js"></script>
+      <script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="admin/vendor/chart.js/chart.umd.js"></script>
+      <script src="admin/vendor/echarts/echarts.min.js"></script>
+      <script src="admin/vendor/quill/quill.min.js"></script>
+      <script src="admin/vendor/simple-datatables/simple-datatables.js"></script>
+      <script src="admin/vendor/tinymce/tinymce.min.js"></script>
+      <script src="admin/vendor/php-email-form/validate.js"></script>
 
-  <!---    bootstrap   -->
-  <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+      <!---    bootstrap   -->
+      <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
 
-  <!-- Template Main JS File -->
-  <script src="admin/js/main.js"></script>
+      <!-- Template Main JS File -->
+      <script src="admin/js/main.js"></script>
 
-  <!-------validation------>
-  
-</body>
+      <!-------validation------>
 
-</html>
+    </body>
+
+    </html>

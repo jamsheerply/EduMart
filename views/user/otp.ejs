@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OTP</title>
-    
+
     <link rel="shortcut icon" type="image/x-icon" href="user/images/favicon.png">
     <!--Google Fonts and Icons-->
     <link
@@ -16,8 +16,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Foldit:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet" />
-        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 </head>
 <style>
     body {
@@ -206,22 +206,23 @@
                     <%= message %>
                 </div>
                 <%}%>
-            <span class="input-fields">
-                <span class="inputs">
-                    <input type="text" class="input" required pattern="[0-9]*" maxlength="1" name="digitOne"/>
-                    <input type="text" class="input" required pattern="[0-9]*" maxlength="1" name="digitTwo"/>
-                    <input type="text" class="input" required pattern="[0-9]*" maxlength="1" name="digitThree"/>
-                    <input type="text" class="input" required pattern="[0-9]*" maxlength="1"  name="digitFour"/>
-                </span>
-                <div class="timer">
-                    Didn't recieve code
-                    <a href="/user/resend-otp">
-                        <button type="button" id="resend">Click to Resend</button></a>
-                    <span class="time"></span>
-                </div>
-            </span>
-            <button type="submit" class="btn">Submit</button>
-<!-- 
+                    <span class="input-fields">
+                        <span class="inputs">
+                            <input type="text" class="input" required pattern="[0-9]*" maxlength="1" name="digitOne" />
+                            <input type="text" class="input" required pattern="[0-9]*" maxlength="1" name="digitTwo" />
+                            <input type="text" class="input" required pattern="[0-9]*" maxlength="1"
+                                name="digitThree" />
+                            <input type="text" class="input" required pattern="[0-9]*" maxlength="1" name="digitFour" />
+                        </span>
+                        <div class="timer">
+                            Didn't recieve code
+                            <a href="/user/resend-otp">
+                                <button type="button" id="resend">Click to Resend</button></a>
+                            <span class="time"></span>
+                        </div>
+                    </span>
+                    <button type="submit" class="btn">Submit</button>
+                    <!-- 
             <div class="status" id="status">
                 <span class="material-icons"> done_outlined </span>
                 <div class="title success">Hooray!</div>
@@ -241,9 +242,9 @@
                 n = n - 1;
             }, 1000);
         }
-        timer(60);
+        timer(120);
         document.getElementById("resend").onclick = function () {
-            timer(60);
+            timer(120);
         };
 
         let inputs = document.querySelectorAll(".input");

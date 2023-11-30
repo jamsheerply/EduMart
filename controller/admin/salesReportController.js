@@ -83,52 +83,52 @@ const fillterSalesReport = async (req, res) => {
             toDate.setHours(23, 59, 59, 999); // Set to 23:59:59.999
         }
 
-      
 
-            const aggregationResult = await orderModel.aggregate([
-                {
-                    $match: {
-                        date: { $gte: fromDate, $lte: toDate }
-                    }
-                },
-                {
-                    $lookup: {
-                        from: 'products',
-                        localField: 'products.productId',
-                        foreignField: '_id',
-                        as: 'populatedProducts'
-                    }
-                },
-                {
-                    $lookup: {
-                        from: 'users',
-                        localField: 'userId',
-                        foreignField: '_id',
-                        as: 'populatedUser'
-                    }
-                },
-                {
-                    $project: {
-                        date: 1,
-                        orderStatus: 1,
-                        paymentStatus: 1,
-                        populatedProducts: 1,
-                        'products.quantity': 1, // Include products.quantity
-                        populatedUser: 1,
-                        // Include other fields as needed
-                    }
-                },
-                {
-                    $sort: {
-                        date: -1 // Sort by 'date' field in descending order (recent to older)
-                    }
+
+        const aggregationResult = await orderModel.aggregate([
+            {
+                $match: {
+                    date: { $gte: fromDate, $lte: toDate }
                 }
-            ]).exec();
+            },
+            {
+                $lookup: {
+                    from: 'products',
+                    localField: 'products.productId',
+                    foreignField: '_id',
+                    as: 'populatedProducts'
+                }
+            },
+            {
+                $lookup: {
+                    from: 'users',
+                    localField: 'userId',
+                    foreignField: '_id',
+                    as: 'populatedUser'
+                }
+            },
+            {
+                $project: {
+                    date: 1,
+                    orderStatus: 1,
+                    paymentStatus: 1,
+                    populatedProducts: 1,
+                    'products.quantity': 1, // Include products.quantity
+                    populatedUser: 1,
+                    // Include other fields as needed
+                }
+            },
+            {
+                $sort: {
+                    date: -1 // Sort by 'date' field in descending order (recent to older)
+                }
+            }
+        ]).exec();
 
-            req.session.orderFilterData = aggregationResult;
-            req.session.save();
-            res.json({ data: aggregationResult })
-  
+        req.session.orderFilterData = aggregationResult;
+        req.session.save();
+        res.json({ data: aggregationResult })
+
 
     } catch (error) {
         console.log(error.message + " fillterSalesReport")
@@ -142,8 +142,8 @@ const reportExcelDownload = async (req, res) => {
         if (!dateFrom && !dateTo) {
             min = Math.ceil(10);
             max = Math.floor(20);
-            dateFrom =  Math.floor(Math.random() * (max - min + 1)) + min;
-            dateFrom =  Math.floor(Math.random() * (max - min + 3)) + min;
+            dateFrom = Math.floor(Math.random() * (max - min + 1)) + min;
+            dateFrom = Math.floor(Math.random() * (max - min + 3)) + min;
         }
         const date = Date.now()
         let grandTotal = 0

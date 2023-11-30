@@ -1,4 +1,4 @@
-const verifyAdmin= async (req, res, next) => {
+const verifyAdmin = async (req, res, next) => {
     try {
         if (req.session.adminLogged) {
             next()
@@ -6,11 +6,11 @@ const verifyAdmin= async (req, res, next) => {
             res.redirect("/user/login")
         }
     } catch (error) {
-        console.log(error.message+ "isLogin")
+        console.log(error.message + "isLogin")
     }
-    
+
 }
-const adminExist= async (req, res, next) => {
+const adminExist = async (req, res, next) => {
     try {
         if (req.session.adminLogged) {
             res.redirect("/admin/dashboard")
@@ -18,11 +18,11 @@ const adminExist= async (req, res, next) => {
             next()
         }
     } catch (error) {
-        console.log(error.message+ "isLogOut")
+        console.log(error.message + "isLogOut")
     }
-   
+
 }
-module.exports={
+module.exports = {
     verifyAdmin,
     adminExist
 }

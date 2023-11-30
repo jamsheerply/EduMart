@@ -235,7 +235,8 @@
                                 <li><a class="active" data-toggle="tab" href="#li-new-product"><span>New
                                             Arrival</span></a></li>
                                 <li><a data-toggle="tab" href="#li-bestseller-product"><span>Bestseller</span></a></li>
-                                   <li><a data-toggle="tab" href="#li-featured-product"><span>Featured Products</span></a></li>
+                                <li><a data-toggle="tab" href="#li-featured-product"><span>Featured Products</span></a>
+                                </li>
                             </ul>
                         </div>
                         <!-- Begin Li's Tab Menu Content Area -->
@@ -382,7 +383,7 @@
                                                         </a></h4>
                                                     <div class="price-box">
                                                         <span class="new-price">&#8377;<%=element.price%>
-                                                                </span>
+                                                        </span>
                                                     </div>
                                                 </div>
                                                 <!-- <div class="add-actions">
@@ -437,7 +438,9 @@
                                             <div class="product_desc">
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
-                                                        <h5 class="manufacturer"><%=element.category%></h5>
+                                                        <h5 class="manufacturer">
+                                                            <%=element.category%>
+                                                        </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
                                                                 <li><i class="fa fa-star-o"></i></li>
@@ -448,7 +451,9 @@
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    <h4><a class="product_name" > <%=element.productName%></a></h4>
+                                                    <h4><a class="product_name">
+                                                            <%=element.productName%>
+                                                        </a></h4>
                                                     <div class="price-box">
                                                         <span class="new-price">&#8377;<%=element.price%></span>
                                                     </div>
@@ -629,9 +634,8 @@
                                 <!-- Begin Footer Newsletter Area -->
                                 <div class="footer-newsletter">
                                     <h4>Sign up to newsletter</h4>
-                                    <form   id="mc-embedded-subscribe-form"
-                                        name="mc-embedded-subscribe-form" class="footer-subscribe-form validate"
-                                        target="_blank" novalidate>
+                                    <form id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+                                        class="footer-subscribe-form validate" target="_blank" novalidate>
                                         <div id="mc_embed_signup_scroll">
                                             <div id="mc-form" class="mc-form subscribe-form form-group">
                                                 <input id="mc-email" type="email" autocomplete="off"
@@ -764,7 +768,7 @@
                                         <a class="wishlist-btn" href="wishlist.html"><i class="fa fa-heart-o"></i>Add to
                                             wishlist</a>
                                         <div class="product-social-sharing pt-25"> -->
-                                            <!-- <ul>
+                                    <!-- <ul>
                                                 <li class="facebook"><a><i class="fa fa-facebook"></i>Facebook</a></li>
                                                 <li class="twitter"><a><i class="fa fa-twitter"></i>Twitter</a>
                                                 </li>
@@ -773,8 +777,6 @@
                                                 <li class="instagram"><a><i class="fa fa-instagram"></i>Instagram</a>
                                                 </li>
                                             </ul> -->
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -782,6 +784,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
     <!-- Quick View | Modal Area End Here -->
     </div>

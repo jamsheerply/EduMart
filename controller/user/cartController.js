@@ -65,9 +65,7 @@ const updateShopingCart = async (req, res) => {
         // const productID=await produdctModel.findById(productId)
         const existingCartItem = cart.items.find(item => item.productId.toString() === productId);
         const productData = await productModel.findById(productId)
-        // console.log(productData.quantity)
-        // console.log(existingCartItem.quantity)
-        console.log(count)
+
         if (count === -1) {
             if (existingCartItem) {
                 existingCartItem.quantity += count;
@@ -75,14 +73,14 @@ const updateShopingCart = async (req, res) => {
             cart.totalQuantity += count;
             await cart.save();
         } else if (productData.quantity > existingCartItem.quantity && count === 1) {
-            console.log("sucess")
+
             if (existingCartItem) {
                 existingCartItem.quantity += count;
             }
             cart.totalQuantity += count;
             await cart.save();
         } else {
-           return res.json({error:"limit exceeded"})
+            return res.json({ error: "limit exceeded" })
         }
 
         // Calculate subtotal from the updated cart directly
@@ -94,7 +92,6 @@ const updateShopingCart = async (req, res) => {
         res.json({ subtotal: subtotal })
         req.session.subtotal = subtotal
         req.session.cartData = cartData
-        // console.log(cart.items)
         req.session.cartItemData = cart.items
         req.session.save()
     } catch (error) {
@@ -105,7 +102,7 @@ const updateShopingCart = async (req, res) => {
 const deleteShopingCart = async (req, res) => {
     try {
         const cart = await cartModel.findById(req.params.cartId);
-        const productIdToFind = req.params.productId; // Define productIdToFind
+        const productIdToFind = req.params.productId;
 
         const item = cart.items.find(item => item.productId.toString() === productIdToFind);
         if (item) {
@@ -127,7 +124,6 @@ const deleteShopingCart = async (req, res) => {
         res.redirect("/user/shopping-cart");
     } catch (error) {
         console.error(error);
-        // Handle the error appropriately
     }
 };
 

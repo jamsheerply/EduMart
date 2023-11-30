@@ -408,7 +408,7 @@ const loadDashboard = async (req, res) => {
             const matchingDaySales = salesForLast7Days.find(item => item._id === formattedDate);
             chartSalesWeekly.push(matchingDaySales ? matchingDaySales.totalSales : 0);
         }
-        
+
         res.render("admin/dashboard", {
             salesToday, salesWeekly, salesMonthly, salesYearly,
             ordersToday, ordersWeekly, ordersMonthly, ordersYearly,

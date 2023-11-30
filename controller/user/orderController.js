@@ -1,6 +1,6 @@
 const orderModel = require("../../model/orderModel");
 const productModel = require("../../model/productModel")
-const moment=require("moment")
+const moment = require("moment")
 
 const loadOrderConfirmation = async (req, res) => {
     try {
@@ -9,10 +9,10 @@ const loadOrderConfirmation = async (req, res) => {
             const userId = req.session.userData._id;
             const userData = await userModel.findById(userId)
         }
-        const orderId=req.session.orderId
-        const shippingAddress=req.session.shippingAddress
+        const orderId = req.session.orderId
+        const shippingAddress = req.session.shippingAddress
 
-        res.render("user/orderConfirmation",{orderId,shippingAddress})
+        res.render("user/orderConfirmation", { orderId, shippingAddress })
     } catch (error) {
         console.log(error.message + " loadOrderConfirmation")
     }
@@ -21,7 +21,7 @@ const loadOrderList = async (req, res) => {
     try {
         const userId = req.session.userData._id;
         const orderData = await orderModel.find({ userId: userId }).sort({ orderDate: -1 }).populate("products.productId");
-        
+
         res.render("user/orderList", { orderData: orderData })
     } catch (error) {
         console.log(error.message + " loadOrderList")
@@ -31,7 +31,7 @@ const loadOrderDetail = async (req, res) => {
     try {
         const orderId = req.params.OrderId
         // console.log(orderId);
-        const orderData = await orderModel.findById({ _id:orderId}).populate("products.productId")
+        const orderData = await orderModel.findById({ _id: orderId }).populate("products.productId")
         // console.log(orderData)
         res.render("user/orderDetail", { orderData: orderData })
     } catch (error) {

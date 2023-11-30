@@ -17,7 +17,7 @@ const productSchema = new mongoose.Schema({
         type: String
     },
     productAdded: {
-        type:String
+        type: String
     },
     status: {
         type: String,
@@ -29,9 +29,9 @@ const productSchema = new mongoose.Schema({
     price: {
         type: Number
     },
-    isdeleted:{
-        type:Boolean,
-        default:true
+    isdeleted: {
+        type: Boolean,
+        default: true
     },
     imageURL: [{
         productImage1: { type: String },

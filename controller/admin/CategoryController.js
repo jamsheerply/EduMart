@@ -13,14 +13,14 @@ const loadCategory = async (req, res) => {
 const insertCategory = async (req, res) => {
     try {
         const categoryName = req.body.categoryName;
-        
+
         const categoryData = await categoryModel.find({ category: { $regex: new RegExp(req.body.category, 'i') } });
         if (categoryData.length > 0) {
-            for(element of categoryData){
-            const dbCategory = element.category.toLowerCase();
-            const inputCategory=categoryName.toLowerCase()
-                if(dbCategory===inputCategory){
-                    return res.json({err:"Category already exists."});
+            for (element of categoryData) {
+                const dbCategory = element.category.toLowerCase();
+                const inputCategory = categoryName.toLowerCase()
+                if (dbCategory === inputCategory) {
+                    return res.json({ err: "Category already exists." });
                 }
             }
         }
@@ -35,7 +35,7 @@ const insertCategory = async (req, res) => {
         const existingCategory = await categoryModel.findOne({ $or: [{ category: upCase }, { category: lowCase }] });
 
         if (existingCategory) {
-            return res.json({ err: "Category already exists."});
+            return res.json({ err: "Category already exists." });
         }
 
         const timestamp = Date.now();
@@ -69,29 +69,29 @@ const editCategory = async (req, res) => {
     try {
         const id = req.params.id
         const categoryName = req.body.category;
-        
+
         const categoryData = await categoryModel.find({ category: { $regex: new RegExp(req.body.category, 'i') } });
         if (categoryData.length > 0) {
-            for(element of categoryData){
-            const dbCategory = element.category.toLowerCase();
-            const inputCategory=categoryName.toLowerCase()
-                if(dbCategory===inputCategory){
-                    return res.json({err:"Category already exists."});
+            for (element of categoryData) {
+                const dbCategory = element.category.toLowerCase();
+                const inputCategory = categoryName.toLowerCase()
+                if (dbCategory === inputCategory) {
+                    return res.json({ err: "Category already exists." });
                 }
             }
         }
 
-            await categoryModel.updateOne({ _id: id }, {
-                $set:
-                {
-                    category: categoryName,
-                },
-            })
-            return res.json({ status: true })
+        await categoryModel.updateOne({ _id: id }, {
+            $set:
+            {
+                category: categoryName,
+            },
+        })
+        return res.json({ status: true })
 
     } catch (error) {
         console.log(error.message + " editCategory")
-        return res.json({err:"Category already exists."});
+        return res.json({ err: "Category already exists." });
     }
 }
 const deleteCategory = async (req, res) => {
@@ -126,7 +126,7 @@ const recoverCategory = async (req, res) => {
 
 
 module.exports = {
-//....category......
+    //....category......
     loadCategory,
     insertCategory,
     getEditCategoryId,

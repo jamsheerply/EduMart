@@ -122,8 +122,8 @@
       </li> -->
       <!-- End Icons Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#icons-nav"  href="admin/sales-report">
-          <i class="bi bi-gem"></i><span>Report</span><i ></i>
+        <a class="nav-link collapsed" data-bs-target="#icons-nav" href="admin/sales-report">
+          <i class="bi bi-gem"></i><span>Report</span><i></i>
         </a>
       </li>
       <!-- End Icons Nav -->
@@ -443,7 +443,7 @@
                       const initialYearsData = [2019, 2020, 2021, 2022, 2023]; // Yearly data for the last five years
                       const yearlySalesData = JSON.parse('<%= JSON.stringify(salesLastFiveYears) %>'); // Replace with your sales data
                       const chart = echarts.init(document.querySelector("#barChart"));
-            
+
                       // Function to update the chart with data
                       const updateChart = (xAxisData, seriesData) => {
                         chart.setOption({
@@ -460,26 +460,26 @@
                           }]
                         });
                       };
-            
+
                       // Initial chart setup with yearly data
                       updateChart(initialYearsData, yearlySalesData);
-            
+
                       const chartSalesMonthly = ['January', 'February', 'March', 'April', 'May', 'June',
                         'July', 'August', 'September', 'October', 'November', 'December'
                       ]; // Month names for xAxis display
-            
+
                       // Update the chart with monthly data for a specific year
                       const updateChartWithMonthlyData = (monthlySalesData) => {
                         updateChart(chartSalesMonthly, monthlySalesData);
                         document.getElementById('chartTitle').innerText = 'Sales / This Month'; // Update title to 'This Month'
                       };
-            
+
                       // Event listener for 'This Month' option click
                       document.getElementById('chartSalesMonthly').addEventListener('click', () => {
                         const selectedYearMonthlySalesData = JSON.parse('<%= JSON.stringify(chartSalesMonthly) %>'); // Replace with actual monthly sales data
                         updateChartWithMonthlyData(selectedYearMonthlySalesData);
                       });
-            
+
                       const chartSalesHourly = [
                         '1:00 AM', '2:00 AM', '3:00 AM', '4:00 AM', '5:00 AM', '6:00 AM',
                         '7:00 AM', '8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM',
@@ -490,7 +490,7 @@
                         updateChart(chartSalesHourly, TodaySalesData);
                         document.getElementById('chartTitle').innerText = 'Sales / Today'; // Update title to 'Today'
                       };
-            
+
                       // Event listener for 'Today' option click
                       document.getElementById('chartSalesToday').addEventListener('click', () => {
                         const selectedTodaySalesData = JSON.parse('<%= JSON.stringify(chartSalesHourly) %>'); // Replace with actual hourly sales data
@@ -502,7 +502,7 @@
                         updateChart(dayNamesWeekly, weeklySalesData);
                         document.getElementById('chartTitle').innerText = 'Sales / Weekly'; // Update title to 'Today'
                       };
-            
+
                       // Event listener for 'Today' option click
                       document.getElementById('chartSalesWeekly').addEventListener('click', () => {
                         const selectedWeeklyData = JSON.parse('<%= JSON.stringify(chartSalesWeekly) %>'); // Replace with actual hourly sales data
@@ -510,12 +510,12 @@
                       });
                       // ................clear Filtter...............................
                       // const initialYearsData = [2019, 2020, 2021, 2022, 2023]; // Yearly data for the last five years
-                       // Replace with your sales data
+                      // Replace with your sales data
                       const updateChartWitLastFiveYearData = (yearlySalesData) => {
                         updateChart(initialYearsData, yearlySalesData);
                         document.getElementById('chartTitle').innerText = 'Sales / Last 5 years'; // Update title to 'Today'
                       };
-            
+
                       // Event listener for 'Today' option click
                       document.getElementById('chartSaleSClearFilter').addEventListener('click', () => {
                         const yearlySalesData = JSON.parse('<%= JSON.stringify(salesLastFiveYears) %>');
@@ -526,7 +526,7 @@
                 </div>
               </div>
             </div>
-            
+
 
             <!-- End Reports -->
 
@@ -546,7 +546,7 @@
                     <li><a class="dropdown-item" href="#">This Year</a></li>
                   </ul>
                 </div> -->
-<!-- 
+                <!-- 
                 <div class="card-body">
                   <h5 class="card-title">Recent Sales <span>| Today</span></h5>
                   <table class="table table-borderless datatable">

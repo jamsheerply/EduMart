@@ -6,7 +6,7 @@ function validateProductForm() {
   const publisher = document.getElementById("publisher").value;
   const language = document.getElementById("language").value;
   const status = document.getElementById("status").value;
-  const quantity=document.getElementById("quantity").value
+  const quantity = document.getElementById("quantity").value
   const price = document.getElementById("price").value;
 
   // Reset error messages
@@ -16,7 +16,7 @@ function validateProductForm() {
   document.getElementById("publisherError").textContent = "";
   document.getElementById("languageError").textContent = "";
   document.getElementById("statusError").textContent = "";
-  document.getElementById("quantityError").textContent=""
+  document.getElementById("quantityError").textContent = ""
   document.getElementById("priceError").textContent = "";
 
   let valid = true;
@@ -54,11 +54,11 @@ function validateProductForm() {
   if (isNaN(parseFloat(price)) || parseFloat(price) <= 0) {
     document.getElementById("priceError").textContent = "Price must be a number greater than 0";
     valid = false;
-}
-  if (isNaN(parseFloat(quantity)) || parseFloat(quantity) <= 0) {
+  }
+  if (isNaN(parseFloat(quantity)) || parseFloat(quantity) < 0) {
     document.getElementById("quantityError").textContent = "quantity must be a number greater than 0";
     valid = false;
-}
+  }
 
 
   return valid;
@@ -116,7 +116,7 @@ function addProduct(event) {
     const language = document.getElementById("language").value;
     const category = document.getElementById("category").value;
     const status = document.getElementById("status").value;
-    const quantity=document.getElementById("quantity").value
+    const quantity = document.getElementById("quantity").value
     const price = document.getElementById("price").value;
 
     const formData = new FormData();
@@ -130,7 +130,7 @@ function addProduct(event) {
     formData.append("language", language);
     formData.append("category", category);
     formData.append("status", status);
-    formData.append("quantity",quantity)
+    formData.append("quantity", quantity)
     formData.append("price", price);
 
     // Make a POST request to the server
@@ -144,7 +144,7 @@ function addProduct(event) {
           location.href = "/admin/products";
         }
         if (res.err) {
-        document.getElementById("productNameError").textContent = res.err;
+          document.getElementById("productNameError").textContent = res.err;
         }
       });
   }
@@ -192,7 +192,7 @@ function editProduct(id) {
           location.href = "/admin/products";
         }
         if (res.err) {
-        document.getElementById("productNameError").textContent = res.err;
+          document.getElementById("productNameError").textContent = res.err;
         }
       });
   }
@@ -214,9 +214,9 @@ function previewImage(input, imageId) {
   }
 }
 
-function deleteImgAddProduct(input,image){
-  document.getElementById(input).value=''
-  document.getElementById(image).src='admin/testi-no-image.png'
+function deleteImgAddProduct(input, image) {
+  document.getElementById(input).value = ''
+  document.getElementById(image).src = 'admin/testi-no-image.png'
   // document.getElementById(image).style.display='none'
 }
 

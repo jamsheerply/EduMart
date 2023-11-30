@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const otpModel= new mongoose.Schema({
+const otpModel = new mongoose.Schema({
     otp: {
         type: Number,
     },

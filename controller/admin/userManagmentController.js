@@ -1,39 +1,39 @@
-const userMOdel=require("../../model/userModel")
-const loadUser=async(req,res)=>{
+const userMOdel = require("../../model/userModel")
+const loadUser = async (req, res) => {
     try {
-        const userData=await userMOdel.find({})
-        res.render("admin/user",{user:userData})
+        const userData = await userMOdel.find({})
+        res.render("admin/user", { user: userData })
     } catch (error) {
-        console.log(error.message+ " loadUser")
+        console.log(error.message + " loadUser")
     }
 }
-const blockUser=async(req,res)=>{
+const blockUser = async (req, res) => {
     try {
-        const id=req.query.id
-        const userData= await userMOdel.updateOne({_id:id},{
-            $set:{
-                status:"block"
+        const id = req.query.id
+        const userData = await userMOdel.updateOne({ _id: id }, {
+            $set: {
+                status: "block"
             }
         })
-res.redirect("/admin/user")
+        res.redirect("/admin/users")
     } catch (error) {
-        console.log(error.message+ " blockUser")
+        console.log(error.message + " blockUser")
     }
 }
-const unBlockUser=async(req,res)=>{
+const unBlockUser = async (req, res) => {
     try {
-        const id=req.query.id
-        const userData= await userMOdel.updateOne({_id:id},{
-            $set:{
-                status:"unblock"
+        const id = req.query.id
+        const userData = await userMOdel.updateOne({ _id: id }, {
+            $set: {
+                status: "unblock"
             }
         })
-res.redirect("/admin/user")
+        res.redirect("/admin/users")
     } catch (error) {
-        console.log(error.message+ "unBlockUser")
+        console.log(error.message + "unBlockUser")
     }
 }
-module.exports={
+module.exports = {
     loadUser,
     blockUser,
     unBlockUser

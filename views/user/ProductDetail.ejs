@@ -9,7 +9,7 @@
     <title>Product Details</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <base href="/"> 
+    <base href="/">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="user/images/favicon.png">
     <!-- Material Design Iconic Font-V2.2.0 -->
@@ -67,7 +67,7 @@
                         <!-- Begin Header Logo Area -->
                         <div class="col-lg-3">
                             <div class="logo pb-sm-30 pb-xs-30">
-                                <a >
+                                <a>
                                     <img img src="admin/logo/2.png" alt="" width="200px" height="50px">
                                 </a>
                             </div>
@@ -97,11 +97,11 @@
                                     <!-- Header Middle Wishlist Area End Here -->
                                     <!-- Begin Header Mini Cart Area -->
                                     <li class="hm-wishlist">
-                                            <a href="/user/shopping-cart">
-                                                <!-- <span class="cart-item-count wishlist-item-count"></span> -->
-                                                <i class="fa-solid fa-cart-shopping"></i>
-                                            </a>
-                                        </li>
+                                        <a href="/user/shopping-cart">
+                                            <!-- <span class="cart-item-count wishlist-item-count"></span> -->
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </a>
+                                    </li>
                                     <!-- Header Mini Cart Area End Here -->
                                     <!-- Begin user Area -->
                                     <li class="hm-wishlist">
@@ -200,39 +200,39 @@
                                 <div class="lg-image">
                                     <figure class="zoom" onmousemove="zoom(event)"
                                         style="background-image: url(<%=product.imageURL[0].productImage1%>)">
-            
-                                    <a class="popup-img venobox vbox-item" href="<%=product.imageURL[0].productImage1%>"
-                                        data-gall="myGallery">
-                                        <img src="<%=product.imageURL[0].productImage1%>" alt="product image">
-                                    </a>
+
+                                        <a class="popup-img venobox vbox-item"
+                                            href="<%=product.imageURL[0].productImage1%>" data-gall="myGallery">
+                                            <img src="<%=product.imageURL[0].productImage1%>" alt="product image">
+                                        </a>
                                     </figure>
                                 </div>
                                 <div class="lg-image">
                                     <figure class="zoom" onmousemove="zoom(event)"
                                         style="background-image: url(<%=product.imageURL[0].productImage4%>)">
-                                    <a class="popup-img venobox vbox-item" href="<%=product.imageURL[0].productImage4%>"
-                                        data-gall="myGallery">
-                                        <img src="<%=product.imageURL[0].productImage4%>" alt="product image">
-                                    </a>
-                                </figure>
+                                        <a class="popup-img venobox vbox-item"
+                                            href="<%=product.imageURL[0].productImage4%>" data-gall="myGallery">
+                                            <img src="<%=product.imageURL[0].productImage4%>" alt="product image">
+                                        </a>
+                                    </figure>
                                 </div>
                                 <div class="lg-image">
                                     <figure class="zoom" onmousemove="zoom(event)"
                                         style="background-image: url(<%=product.imageURL[0].productImage3%>)">
-                                    <a class="popup-img venobox vbox-item" href="<%=product.imageURL[0].productImage3%>"
-                                        data-gall="myGallery">
-                                        <img src="<%=product.imageURL[0].productImage3%>" alt="product image">
-                                    </a>
-                                </figure>
+                                        <a class="popup-img venobox vbox-item"
+                                            href="<%=product.imageURL[0].productImage3%>" data-gall="myGallery">
+                                            <img src="<%=product.imageURL[0].productImage3%>" alt="product image">
+                                        </a>
+                                    </figure>
                                 </div>
                                 <div class="lg-image">
                                     <figure class="zoom" onmousemove="zoom(event)"
                                         style="background-image: url(<%=product.imageURL[0].productImage4%>)">
-                                    <a class="popup-img venobox vbox-item" href="<%=product.imageURL[0].productImage4%>"
-                                        data-gall="myGallery">
-                                        <img src="<%=product.imageURL[0].productImage4%>" alt="product image">
-                                    </a>
-                                </figure>
+                                        <a class="popup-img venobox vbox-item"
+                                            href="<%=product.imageURL[0].productImage4%>" data-gall="myGallery">
+                                            <img src="<%=product.imageURL[0].productImage4%>" alt="product image">
+                                        </a>
+                                    </figure>
                                 </div>
 
 
@@ -255,7 +255,7 @@
                         function zoom(e) {
                             var img = document.getElementById('productImage');
                             var offsetX, offsetY, x, y;
-                    
+
                             if (e.offsetX !== undefined && e.offsetY !== undefined) {
                                 offsetX = e.offsetX;
                                 offsetY = e.offsetY;
@@ -263,16 +263,16 @@
                                 offsetX = e.touches[0].pageX - img.offsetLeft;
                                 offsetY = e.touches[0].pageY - img.offsetTop;
                             }
-                    
+
                             x = offsetX / img.offsetWidth * 100;
                             y = offsetY / img.offsetHeight * 100;
-                    
+
                             img.style.transformOrigin = x + '% ' + y + '%';
                             img.style.transform = 'scale(2)'; // Change the scale factor as needed
                         }
                     </script>
-                    
-                    
+
+
 
                     <div class="col-lg-7 col-md-6">
                         <div class="product-details-view-content pt-60">
@@ -312,7 +312,7 @@
                                     </div>
                                 </div>
                                 <div class="product-variants">
-                                    
+
                                     <div class="produt-variants-size">
                                         <label for="">language</label>
                                         <span class="new-price new-price-2">
@@ -321,7 +321,7 @@
                                     </div>
                                 </div>
                                 <div class="single-add-to-cart">
-                                    <div  class="cart-quantity">
+                                    <div class="cart-quantity">
                                         <!-- <div class="quantity">
                                             <label>Quantity</label>
                                             <div class="cart-plus-minus">
@@ -330,10 +330,11 @@
                                                 <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                             </div>
                                         </div> -->
-                                        <button class="add-to-cart" onclick="addToCart('<%=product._id%>')">Add to cart</button>
-                                    <!-- </form> -->
-                                </div>
-                                <!-- <div class="product-additional-info pt-25"> -->
+                                        <button class="add-to-cart" onclick="addToCart('<%=product._id%>')">Add to
+                                            cart</button>
+                                        <!-- </form> -->
+                                    </div>
+                                    <!-- <div class="product-additional-info pt-25"> -->
                                     <!-- <a class="wishlist-btn" ><i class="fa fa-heart-o"></i>Add to
                                         wishlist</a> -->
                                     <!-- <div class="product-social-sharing pt-25">
@@ -344,10 +345,10 @@
                                                         class="fa fa-instagram"></i>Instagram</a></li>
                                         </ul>
                                     </div> -->
-                                <!-- </div> -->
-                                <div class="block-reassurance">
-                                    <ul>
-                                        <!-- <li>
+                                    <!-- </div> -->
+                                    <div class="block-reassurance">
+                                        <ul>
+                                            <!-- <li>
                                             <div class="reassurance-item">
                                                 <div class="reassurance-icon">
                                                     <i class="fa fa-check-square-o"></i>
@@ -355,7 +356,7 @@
                                                 <p>Security policy (edit with Customer reassurance module)</p>
                                             </div>
                                         </li> -->
-                                        <!-- <li>
+                                            <!-- <li>
                                             <div class="reassurance-item">
                                                 <div class="reassurance-icon">
                                                     <i class="fa fa-truck"></i>
@@ -363,7 +364,7 @@
                                                 <p>Delivery policy (edit with Customer reassurance module)</p>
                                             </div>
                                         </li> -->
-                                        <!-- <li>
+                                            <!-- <li>
                                             <div class="reassurance-item">
                                                 <div class="reassurance-icon">
                                                     <i class="fa fa-exchange"></i>
@@ -371,32 +372,32 @@
                                                 <p> Return policy (edit with Customer reassurance module)</p>
                                             </div>
                                         </li> -->
-                                    </ul>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- content-wraper end -->
-        <!-- Begin Product Area -->
-        <div class="product-area pt-35">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- <div class="li-product-tab">
+            <!-- content-wraper end -->
+            <!-- Begin Product Area -->
+            <div class="product-area pt-35">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- <div class="li-product-tab">
                                 <ul class="nav li-product-menu">
                                    <li><a class="active" data-toggle="tab" href="#description"><span>Description</span></a></li>
                                    <li><a data-toggle="tab" href="#product-details"><span>Product Details</span></a></li>
                                    <li><a data-toggle="tab" href="#reviews"><span>Reviews</span></a></li>
                                 </ul>               
                             </div> -->
-                        <!-- Begin Li's Tab Menu Content Area -->
+                            <!-- Begin Li's Tab Menu Content Area -->
+                        </div>
                     </div>
-                </div>
-                <div class="tab-content">
-                    <!-- <div id="description" class="tab-pane active show" role="tabpanel">
+                    <div class="tab-content">
+                        <!-- <div id="description" class="tab-pane active show" role="tabpanel">
                             <div class="product-description">
                                 <span>You can enjoy yourself and release all of your inspirations and thoughts, enjoy and develop the fun that brought by drawing
                                     Also drawing with these art kits can help promote the thinking ability and creativity from little kids.<br>
@@ -404,284 +405,294 @@
                                     Also you can choose the drawing accessories as holiday gift to your family or friends at Christmas, Children’s Day, Easter, Thanksgiving and other holidays.</span>
                             </div>
                         </div> -->
-                    <div id="product-details" class="tab-pane" role="tabpanel">
-                        <div class="product-details-manufacturer">
-                            <a >
-                                <img src="user/images/product-details/1.jpg" alt="Product Manufacturer Image">
-                            </a>
-                            <p><span>Reference</span> demo_7</p>
-                            <p><span>Reference</span> demo_7</p>
+                        <div id="product-details" class="tab-pane" role="tabpanel">
+                            <div class="product-details-manufacturer">
+                                <a>
+                                    <img src="user/images/product-details/1.jpg" alt="Product Manufacturer Image">
+                                </a>
+                                <p><span>Reference</span> demo_7</p>
+                                <p><span>Reference</span> demo_7</p>
+                            </div>
                         </div>
-                    </div>
-                    <div id="reviews" class="tab-pane" role="tabpanel">
-                        <div class="product-reviews">
-                            <div class="product-details-comment-block">
-                                <div class="comment-review">
-                                    <span>Grade</span>
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star-o"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                    </ul>
-                                </div>
-                                <div class="comment-author-infos pt-25">
-                                    <span>HTML 5</span>
-                                    <em>01-12-18</em>
-                                </div>
-                                <div class="comment-details">
-                                    <h4 class="title-block">Demo</h4>
-                                    <p>Plaza</p>
-                                </div>
-                                <div class="review-btn">
-                                    <a class="review-links" href="#" data-toggle="modal" data-target="#mymodal">Write
-                                        Your Review!</a>
-                                </div>
-                                <!-- Begin Quick View | Modal Area -->
-                                <div class="modal fade modal-wrapper" id="mymodal">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <h3 class="review-page-title">Write Your Review</h3>
-                                                <div class="modal-inner-area row">
-                                                    <div class="col-lg-6">
-                                                        <div class="li-review-product">
-                                                            <img src="user/images/product/large-size/3.jpg"
-                                                                alt="Li's Product">
-                                                            <div class="li-review-product-desc">
-                                                                <p class="li-product-name">Today is a good day Framed
-                                                                    poster</p>
-                                                                <p>
-                                                                    <span>Beach Camera Exclusive Bundle - Includes Two
-                                                                        Samsung Radiant 360 R3 Wi-Fi Bluetooth Speakers.
-                                                                        Fill The Entire Room With Exquisite Sound via
-                                                                        Ring Radiator Technology. Stream And Control R3
-                                                                        Speakers Wirelessly With Your Smartphone.
-                                                                        Sophisticated, Modern Design </span>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="li-review-content">
-                                                            <!-- Begin Feedback Area -->
-                                                            <div class="feedback-area">
-                                                                <div class="feedback">
-                                                                    <h3 class="feedback-title">Our Feedback</h3>
-                                                                    <form action="#">
-                                                                        <p class="your-opinion">
-                                                                            <label>Your Rating</label>
-                                                                            <span>
-                                                                                <select class="star-rating">
-                                                                                    <option value="1">1</option>
-                                                                                    <option value="2">2</option>
-                                                                                    <option value="3">3</option>
-                                                                                    <option value="4">4</option>
-                                                                                    <option value="5">5</option>
-                                                                                </select>
-                                                                            </span>
-                                                                        </p>
-                                                                        <p class="feedback-form">
-                                                                            <label for="feedback">Your Review</label>
-                                                                            <textarea id="feedback" name="comment"
-                                                                                cols="45" rows="8"
-                                                                                aria-required="true"></textarea>
-                                                                        </p>
-                                                                        <div class="feedback-input">
-                                                                            <p class="feedback-form-author">
-                                                                                <label for="author">Name<span
-                                                                                        class="required">*</span>
-                                                                                </label>
-                                                                                <input id="author" name="author"
-                                                                                    value="" size="30"
-                                                                                    aria-required="true" type="text">
-                                                                            </p>
-                                                                            <p
-                                                                                class="feedback-form-author feedback-form-email">
-                                                                                <label for="email">Email<span
-                                                                                        class="required">*</span>
-                                                                                </label>
-                                                                                <input id="email" name="email" value=""
-                                                                                    size="30" aria-required="true"
-                                                                                    type="text">
-                                                                                <span class="required"><sub>*</sub>
-                                                                                    Required fields</span>
-                                                                            </p>
-                                                                            <div class="feedback-btn pb-15">
-                                                                                <a href="#" class="close"
-                                                                                    data-dismiss="modal"
-                                                                                    aria-label="Close">Close</a>
-                                                                                <a href="#">Submit</a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
+                        <div id="reviews" class="tab-pane" role="tabpanel">
+                            <div class="product-reviews">
+                                <div class="product-details-comment-block">
+                                    <div class="comment-review">
+                                        <span>Grade</span>
+                                        <ul class="rating">
+                                            <li><i class="fa fa-star-o"></i></li>
+                                            <li><i class="fa fa-star-o"></i></li>
+                                            <li><i class="fa fa-star-o"></i></li>
+                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="comment-author-infos pt-25">
+                                        <span>HTML 5</span>
+                                        <em>01-12-18</em>
+                                    </div>
+                                    <div class="comment-details">
+                                        <h4 class="title-block">Demo</h4>
+                                        <p>Plaza</p>
+                                    </div>
+                                    <div class="review-btn">
+                                        <a class="review-links" href="#" data-toggle="modal"
+                                            data-target="#mymodal">Write
+                                            Your Review!</a>
+                                    </div>
+                                    <!-- Begin Quick View | Modal Area -->
+                                    <div class="modal fade modal-wrapper" id="mymodal">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <h3 class="review-page-title">Write Your Review</h3>
+                                                    <div class="modal-inner-area row">
+                                                        <div class="col-lg-6">
+                                                            <div class="li-review-product">
+                                                                <img src="user/images/product/large-size/3.jpg"
+                                                                    alt="Li's Product">
+                                                                <div class="li-review-product-desc">
+                                                                    <p class="li-product-name">Today is a good day
+                                                                        Framed
+                                                                        poster</p>
+                                                                    <p>
+                                                                        <span>Beach Camera Exclusive Bundle - Includes
+                                                                            Two
+                                                                            Samsung Radiant 360 R3 Wi-Fi Bluetooth
+                                                                            Speakers.
+                                                                            Fill The Entire Room With Exquisite Sound
+                                                                            via
+                                                                            Ring Radiator Technology. Stream And Control
+                                                                            R3
+                                                                            Speakers Wirelessly With Your Smartphone.
+                                                                            Sophisticated, Modern Design </span>
+                                                                    </p>
                                                                 </div>
                                                             </div>
-                                                            <!-- Feedback Area End Here -->
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="li-review-content">
+                                                                <!-- Begin Feedback Area -->
+                                                                <div class="feedback-area">
+                                                                    <div class="feedback">
+                                                                        <h3 class="feedback-title">Our Feedback</h3>
+                                                                        <form action="#">
+                                                                            <p class="your-opinion">
+                                                                                <label>Your Rating</label>
+                                                                                <span>
+                                                                                    <select class="star-rating">
+                                                                                        <option value="1">1</option>
+                                                                                        <option value="2">2</option>
+                                                                                        <option value="3">3</option>
+                                                                                        <option value="4">4</option>
+                                                                                        <option value="5">5</option>
+                                                                                    </select>
+                                                                                </span>
+                                                                            </p>
+                                                                            <p class="feedback-form">
+                                                                                <label for="feedback">Your
+                                                                                    Review</label>
+                                                                                <textarea id="feedback" name="comment"
+                                                                                    cols="45" rows="8"
+                                                                                    aria-required="true"></textarea>
+                                                                            </p>
+                                                                            <div class="feedback-input">
+                                                                                <p class="feedback-form-author">
+                                                                                    <label for="author">Name<span
+                                                                                            class="required">*</span>
+                                                                                    </label>
+                                                                                    <input id="author" name="author"
+                                                                                        value="" size="30"
+                                                                                        aria-required="true"
+                                                                                        type="text">
+                                                                                </p>
+                                                                                <p
+                                                                                    class="feedback-form-author feedback-form-email">
+                                                                                    <label for="email">Email<span
+                                                                                            class="required">*</span>
+                                                                                    </label>
+                                                                                    <input id="email" name="email"
+                                                                                        value="" size="30"
+                                                                                        aria-required="true"
+                                                                                        type="text">
+                                                                                    <span class="required"><sub>*</sub>
+                                                                                        Required fields</span>
+                                                                                </p>
+                                                                                <div class="feedback-btn pb-15">
+                                                                                    <a href="#" class="close"
+                                                                                        data-dismiss="modal"
+                                                                                        aria-label="Close">Close</a>
+                                                                                    <a href="#">Submit</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- Feedback Area End Here -->
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- Quick View | Modal Area End Here -->
                                 </div>
-                                <!-- Quick View | Modal Area End Here -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Product Area End Here -->
-        <!-- Begin Li's Laptop Product Area -->
+            <!-- Product Area End Here -->
+            <!-- Begin Li's Laptop Product Area -->
 
-        <!-- Li's Laptop Product Area End Here -->
-        <!-- Begin Footer Area -->
-        <div class="footer">
-            <!-- Begin Footer Static Top Area -->
-            <div class="footer-static-top">
-                <div class="container">
-                    <!-- Begin Footer Shipping Area -->
-                    <div class="footer-shipping pt-60 pb-55 pb-xs-25">
-                        <div class="row">
-                            <!-- Begin Li's Shipping Inner Box Area -->
-                            <div class="col-lg-3 col-md-6 col-sm-6 pb-sm-55 pb-xs-55">
-                                <div class="li-shipping-inner-box">
-                                    <div class="shipping-icon">
-                                        <img src="user/images/shipping-icon/1.png" alt="Shipping Icon">
-                                    </div>
-                                    <div class="shipping-text">
-                                        <h2>Free Delivery</h2>
-                                        <p>And free returns. See checkout for delivery dates.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Li's Shipping Inner Box Area End Here -->
-                            <!-- Begin Li's Shipping Inner Box Area -->
-                            <div class="col-lg-3 col-md-6 col-sm-6 pb-sm-55 pb-xs-55">
-                                <div class="li-shipping-inner-box">
-                                    <div class="shipping-icon">
-                                        <img src="user/images/shipping-icon/2.png" alt="Shipping Icon">
-                                    </div>
-                                    <div class="shipping-text">
-                                        <h2>Safe Payment</h2>
-                                        <p>Pay with the world's most popular and secure payment methods.</p>
+            <!-- Li's Laptop Product Area End Here -->
+            <!-- Begin Footer Area -->
+            <div class="footer">
+                <!-- Begin Footer Static Top Area -->
+                <div class="footer-static-top">
+                    <div class="container">
+                        <!-- Begin Footer Shipping Area -->
+                        <div class="footer-shipping pt-60 pb-55 pb-xs-25">
+                            <div class="row">
+                                <!-- Begin Li's Shipping Inner Box Area -->
+                                <div class="col-lg-3 col-md-6 col-sm-6 pb-sm-55 pb-xs-55">
+                                    <div class="li-shipping-inner-box">
+                                        <div class="shipping-icon">
+                                            <img src="user/images/shipping-icon/1.png" alt="Shipping Icon">
+                                        </div>
+                                        <div class="shipping-text">
+                                            <h2>Free Delivery</h2>
+                                            <p>And free returns. See checkout for delivery dates.</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- Li's Shipping Inner Box Area End Here -->
-                            <!-- Begin Li's Shipping Inner Box Area -->
-                            <div class="col-lg-3 col-md-6 col-sm-6 pb-xs-30">
-                                <div class="li-shipping-inner-box">
-                                    <div class="shipping-icon">
-                                        <img src="user/images/shipping-icon/3.png" alt="Shipping Icon">
-                                    </div>
-                                    <div class="shipping-text">
-                                        <h2>Shop with Confidence</h2>
-                                        <p>Our Buyer Protection covers your purchasefrom click to delivery.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Li's Shipping Inner Box Area End Here -->
-                            <!-- Begin Li's Shipping Inner Box Area -->
-                            <div class="col-lg-3 col-md-6 col-sm-6 pb-xs-30">
-                                <div class="li-shipping-inner-box">
-                                    <div class="shipping-icon">
-                                        <img src="user/images/shipping-icon/4.png" alt="Shipping Icon">
-                                    </div>
-                                    <div class="shipping-text">
-                                        <h2>24/7 Help Center</h2>
-                                        <p>Have a question? Call a Specialist or chat online.</p>
+                                <!-- Li's Shipping Inner Box Area End Here -->
+                                <!-- Begin Li's Shipping Inner Box Area -->
+                                <div class="col-lg-3 col-md-6 col-sm-6 pb-sm-55 pb-xs-55">
+                                    <div class="li-shipping-inner-box">
+                                        <div class="shipping-icon">
+                                            <img src="user/images/shipping-icon/2.png" alt="Shipping Icon">
+                                        </div>
+                                        <div class="shipping-text">
+                                            <h2>Safe Payment</h2>
+                                            <p>Pay with the world's most popular and secure payment methods.</p>
+                                        </div>
                                     </div>
                                 </div>
+                                <!-- Li's Shipping Inner Box Area End Here -->
+                                <!-- Begin Li's Shipping Inner Box Area -->
+                                <div class="col-lg-3 col-md-6 col-sm-6 pb-xs-30">
+                                    <div class="li-shipping-inner-box">
+                                        <div class="shipping-icon">
+                                            <img src="user/images/shipping-icon/3.png" alt="Shipping Icon">
+                                        </div>
+                                        <div class="shipping-text">
+                                            <h2>Shop with Confidence</h2>
+                                            <p>Our Buyer Protection covers your purchasefrom click to delivery.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Li's Shipping Inner Box Area End Here -->
+                                <!-- Begin Li's Shipping Inner Box Area -->
+                                <div class="col-lg-3 col-md-6 col-sm-6 pb-xs-30">
+                                    <div class="li-shipping-inner-box">
+                                        <div class="shipping-icon">
+                                            <img src="user/images/shipping-icon/4.png" alt="Shipping Icon">
+                                        </div>
+                                        <div class="shipping-text">
+                                            <h2>24/7 Help Center</h2>
+                                            <p>Have a question? Call a Specialist or chat online.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Li's Shipping Inner Box Area End Here -->
                             </div>
-                            <!-- Li's Shipping Inner Box Area End Here -->
                         </div>
+                        <!-- Footer Shipping Area End Here -->
                     </div>
-                    <!-- Footer Shipping Area End Here -->
                 </div>
-            </div>
-            <!-- Footer Static Top Area End Here -->
-            <!-- Begin Footer Static Middle Area -->
-            <div class="footer-static-middle">
-                <div class="container">
-                    <div class="footer-logo-wrap pt-50 pb-35">
-                        <div class="row">
-                            <!-- Begin Footer Logo Area -->
-                            <div class="col-lg-4 col-md-6">
-                                <div class="footer-logo">
-                                    <img img src="admin/logo/2.png" alt="" width="200px" height="50px">
-                                    <p class="info">
-                                        We are a team of designers and developers that create high quality HTML Template
-                                        & Woocommerce, Shopify Theme.
-                                    </p>
-                                </div>
-                                <ul class="des">
-                                    <li>
-                                        <span>Address: </span>
-                                        Payyoli,Kozhikode,Kerala,673522,INDIA
-                                    </li>
-                                    <li>
-                                        <span>Phone: </span>
-                                        <a >+91 9020432432</a>
-                                    </li>
-                                    <li>
-                                        <span>Email: </span>
-                                        <a >jamsheerpayyoli@gmail.com</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- Footer Logo Area End Here -->
-                            <!-- Begin Footer Block Area -->
-                            <div class="col-lg-2 col-md-3 col-sm-6">
-                                <div class="footer-block">
-                                    <h3 class="footer-block-title">Product</h3>
-                                    <ul>
-                                        <li><a >Prices drop</a></li>
-                                        <li><a >New products</a></li>
-                                        <li><a >Best sales</a></li>
-                                        <li><a >Contact us</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- Footer Block Area End Here -->
-                            <!-- Begin Footer Block Area -->
-                            <div class="col-lg-2 col-md-3 col-sm-6">
-                                <div class="footer-block">
-                                    <h3 class="footer-block-title">Our company</h3>
-                                    <ul>
-                                        <li><a >Delivery</a></li>
-                                        <li><a >Legal Notice</a></li>
-                                        <li><a >About us</a></li>
-                                        <li><a >Contact us</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- Footer Block Area End Here -->
-                            <!-- Begin Footer Block Area -->
-                            <div class="col-lg-4">
-                                <div class="footer-block">
-                                    <h3 class="footer-block-title">Follow Us</h3>
-                                    <ul class="social-link">
-                                        <li class="facebook">
-                                            <a href="https://www.facebook.com/" data-toggle="tooltip" target="_blank"
-                                                title="Facebook">
-                                                <i class="fa fa-facebook"></i>
-                                            </a>
+                <!-- Footer Static Top Area End Here -->
+                <!-- Begin Footer Static Middle Area -->
+                <div class="footer-static-middle">
+                    <div class="container">
+                        <div class="footer-logo-wrap pt-50 pb-35">
+                            <div class="row">
+                                <!-- Begin Footer Logo Area -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="footer-logo">
+                                        <img img src="admin/logo/2.png" alt="" width="200px" height="50px">
+                                        <p class="info">
+                                            We are a team of designers and developers that create high quality HTML
+                                            Template
+                                            & Woocommerce, Shopify Theme.
+                                        </p>
+                                    </div>
+                                    <ul class="des">
+                                        <li>
+                                            <span>Address: </span>
+                                            Payyoli,Kozhikode,Kerala,673522,INDIA
                                         </li>
-                                        <li class="instagram">
-                                            <a href="https://www.instagram.com/" data-toggle="tooltip" target="_blank"
-                                                title="Instagram">
-                                                <i class="fa fa-instagram"></i>
-                                            </a>
+                                        <li>
+                                            <span>Phone: </span>
+                                            <a>+91 9020432432</a>
+                                        </li>
+                                        <li>
+                                            <span>Email: </span>
+                                            <a>jamsheerpayyoli@gmail.com</a>
                                         </li>
                                     </ul>
                                 </div>
-                                <!-- Begin Footer Newsletter Area -->
-                                <div class="footer-newsletter">
-                                    <h4>Sign up to newsletter</h4>
-                                    
+                                <!-- Footer Logo Area End Here -->
+                                <!-- Begin Footer Block Area -->
+                                <div class="col-lg-2 col-md-3 col-sm-6">
+                                    <div class="footer-block">
+                                        <h3 class="footer-block-title">Product</h3>
+                                        <ul>
+                                            <li><a>Prices drop</a></li>
+                                            <li><a>New products</a></li>
+                                            <li><a>Best sales</a></li>
+                                            <li><a>Contact us</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- Footer Block Area End Here -->
+                                <!-- Begin Footer Block Area -->
+                                <div class="col-lg-2 col-md-3 col-sm-6">
+                                    <div class="footer-block">
+                                        <h3 class="footer-block-title">Our company</h3>
+                                        <ul>
+                                            <li><a>Delivery</a></li>
+                                            <li><a>Legal Notice</a></li>
+                                            <li><a>About us</a></li>
+                                            <li><a>Contact us</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- Footer Block Area End Here -->
+                                <!-- Begin Footer Block Area -->
+                                <div class="col-lg-4">
+                                    <div class="footer-block">
+                                        <h3 class="footer-block-title">Follow Us</h3>
+                                        <ul class="social-link">
+                                            <li class="facebook">
+                                                <a href="https://www.facebook.com/" data-toggle="tooltip"
+                                                    target="_blank" title="Facebook">
+                                                    <i class="fa fa-facebook"></i>
+                                                </a>
+                                            </li>
+                                            <li class="instagram">
+                                                <a href="https://www.instagram.com/" data-toggle="tooltip"
+                                                    target="_blank" title="Instagram">
+                                                    <i class="fa fa-instagram"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- Begin Footer Newsletter Area -->
+                                    <div class="footer-newsletter">
+                                        <h4>Sign up to newsletter</h4>
+
                                         <div id="mc_embed_signup_scroll">
                                             <div id="mc-form" class="mc-form subscribe-form form-group">
                                                 <input id="mc-email" type="email" autocomplete="off"
@@ -689,113 +700,116 @@
                                                 <button class="btn" id="mc-submit">Subscribe</button>
                                             </div>
                                         </div>
-                                   
+
+                                    </div>
+                                    <!-- Footer Newsletter Area End Here -->
                                 </div>
-                                <!-- Footer Newsletter Area End Here -->
+                                <!-- Footer Block Area End Here -->
                             </div>
-                            <!-- Footer Block Area End Here -->
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Footer Static Middle Area End Here -->
-            <!-- Begin Footer Static Bottom Area -->
-            <div class="footer-static-bottom pt-55 pb-55">
+                <!-- Footer Static Middle Area End Here -->
+                <!-- Begin Footer Static Bottom Area -->
+                <div class="footer-static-bottom pt-55 pb-55">
 
+                </div>
+                <!-- Footer Static Bottom Area End Here -->
             </div>
-            <!-- Footer Static Bottom Area End Here -->
-        </div>
-        <!-- Footer Area End Here -->
-        <!-- Begin Quick View | Modal Area -->
-        <div class="modal fade modal-wrapper" id="exampleModalCenter">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <div class="modal-inner-area row">
-                            <div class="col-lg-5 col-md-6 col-sm-6">
-                                <!-- Product Details Left -->
-                                <div class="product-details-left">
-                                    <div class="product-details-user/images slider-navigation-1">
-                                        <div class="lg-image">
-                                            <img src="user/images/product/large-size/1.jpg" alt="product image">
-                                        </div>
-                                        <div class="lg-image">
-                                            <img src="user/images/product/large-size/2.jpg" alt="product image">
-                                        </div>
-                                        <div class="lg-image">
-                                            <img src="user/images/product/large-size/3.jpg" alt="product image">
-                                        </div>
-                                        <div class="lg-image">
-                                            <img src="user/images/product/large-size/4.jpg" alt="product image">
-                                        </div>
-                                        <div class="lg-image">
-                                            <img src="user/images/product/large-size/5.jpg" alt="product image">
-                                        </div>
-                                        <div class="lg-image">
-                                            <img src="user/images/product/large-size/6.jpg" alt="product image">
-                                        </div>
-                                    </div>
-                                    <div class="product-details-thumbs slider-thumbs-1">
-                                        <div class="sm-image"><img src="user/images/product/small-size/1.jpg"
-                                                alt="product image thumb"></div>
-                                        <div class="sm-image"><img src="user/images/product/small-size/2.jpg"
-                                                alt="product image thumb"></div>
-                                        <div class="sm-image"><img src="user/images/product/small-size/3.jpg"
-                                                alt="product image thumb"></div>
-                                        <div class="sm-image"><img src="user/images/product/small-size/4.jpg"
-                                                alt="product image thumb"></div>
-                                        <div class="sm-image"><img src="user/images/product/small-size/5.jpg"
-                                                alt="product image thumb"></div>
-                                        <div class="sm-image"><img src="user/images/product/small-size/6.jpg"
-                                                alt="product image thumb"></div>
-                                    </div>
-                                </div>
-                                <!--// Product Details Left -->
-                            </div>
-
-                            <div class="col-lg-7 col-md-6 col-sm-6">
-                                <div class="product-details-view-content pt-60">
-                                    <div class="product-info">
-                                        <h2>Today is a good day Framed poster</h2>
-                                        <span class="product-details-ref">Reference: demo_15</span>
-                                        <div class="rating-box pt-20">
-                                            <ul class="rating rating-with-review-item">
-                                                <li><i class="fa fa-star-o"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                                <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                <li class="review-item"><a href="#">Read Review</a></li>
-                                                <li class="review-item"><a href="#">Write Review</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="price-box pt-20">
-                                            <span class="new-price new-price-2">$57.98</span>
-                                        </div>
-                                        <div class="product-desc">
-                                            <p>
-                                                <span>100% cotton double printed dress. Black and white striped top and
-                                                    orange high waisted skater skirt bottom. Lorem ipsum dolor sit amet,
-                                                    consectetur adipisicing elit. quibusdam corporis, earum facilis et
-                                                    nostrum dolorum accusamus similique eveniet quia pariatur.
-                                                </span>
-                                            </p>
-                                        </div>
-                                        <div class="product-variants">
-                                            <div class="produt-variants-size">
-                                                <label>Dimension</label>
-                                                <select class="nice-select">
-                                                    <option value="1" title="S" selected="selected">40x60cm</option>
-                                                    <option value="2" title="M">60x90cm</option>
-                                                    <option value="3" title="L">80x120cm</option>
-                                                </select>
+            <!-- Footer Area End Here -->
+            <!-- Begin Quick View | Modal Area -->
+            <div class="modal fade modal-wrapper" id="exampleModalCenter">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <div class="modal-inner-area row">
+                                <div class="col-lg-5 col-md-6 col-sm-6">
+                                    <!-- Product Details Left -->
+                                    <div class="product-details-left">
+                                        <div class="product-details-user/images slider-navigation-1">
+                                            <div class="lg-image">
+                                                <img src="user/images/product/large-size/1.jpg" alt="product image">
+                                            </div>
+                                            <div class="lg-image">
+                                                <img src="user/images/product/large-size/2.jpg" alt="product image">
+                                            </div>
+                                            <div class="lg-image">
+                                                <img src="user/images/product/large-size/3.jpg" alt="product image">
+                                            </div>
+                                            <div class="lg-image">
+                                                <img src="user/images/product/large-size/4.jpg" alt="product image">
+                                            </div>
+                                            <div class="lg-image">
+                                                <img src="user/images/product/large-size/5.jpg" alt="product image">
+                                            </div>
+                                            <div class="lg-image">
+                                                <img src="user/images/product/large-size/6.jpg" alt="product image">
                                             </div>
                                         </div>
-                                        <div class="single-add-to-cart">
-                                            <!-- <form  class="cart-quantity"> -->
+                                        <div class="product-details-thumbs slider-thumbs-1">
+                                            <div class="sm-image"><img src="user/images/product/small-size/1.jpg"
+                                                    alt="product image thumb"></div>
+                                            <div class="sm-image"><img src="user/images/product/small-size/2.jpg"
+                                                    alt="product image thumb"></div>
+                                            <div class="sm-image"><img src="user/images/product/small-size/3.jpg"
+                                                    alt="product image thumb"></div>
+                                            <div class="sm-image"><img src="user/images/product/small-size/4.jpg"
+                                                    alt="product image thumb"></div>
+                                            <div class="sm-image"><img src="user/images/product/small-size/5.jpg"
+                                                    alt="product image thumb"></div>
+                                            <div class="sm-image"><img src="user/images/product/small-size/6.jpg"
+                                                    alt="product image thumb"></div>
+                                        </div>
+                                    </div>
+                                    <!--// Product Details Left -->
+                                </div>
+
+                                <div class="col-lg-7 col-md-6 col-sm-6">
+                                    <div class="product-details-view-content pt-60">
+                                        <div class="product-info">
+                                            <h2>Today is a good day Framed poster</h2>
+                                            <span class="product-details-ref">Reference: demo_15</span>
+                                            <div class="rating-box pt-20">
+                                                <ul class="rating rating-with-review-item">
+                                                    <li><i class="fa fa-star-o"></i></li>
+                                                    <li><i class="fa fa-star-o"></i></li>
+                                                    <li><i class="fa fa-star-o"></i></li>
+                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                    <li class="review-item"><a href="#">Read Review</a></li>
+                                                    <li class="review-item"><a href="#">Write Review</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="price-box pt-20">
+                                                <span class="new-price new-price-2">$57.98</span>
+                                            </div>
+                                            <div class="product-desc">
+                                                <p>
+                                                    <span>100% cotton double printed dress. Black and white striped top
+                                                        and
+                                                        orange high waisted skater skirt bottom. Lorem ipsum dolor sit
+                                                        amet,
+                                                        consectetur adipisicing elit. quibusdam corporis, earum facilis
+                                                        et
+                                                        nostrum dolorum accusamus similique eveniet quia pariatur.
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            <div class="product-variants">
+                                                <div class="produt-variants-size">
+                                                    <label>Dimension</label>
+                                                    <select class="nice-select">
+                                                        <option value="1" title="S" selected="selected">40x60cm</option>
+                                                        <option value="2" title="M">60x90cm</option>
+                                                        <option value="3" title="L">80x120cm</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="single-add-to-cart">
+                                                <!-- <form  class="cart-quantity"> -->
                                                 <div class="quantity">
                                                     <label>Quantity</label>
                                                     <div class="cart-plus-minus">
@@ -805,19 +819,19 @@
                                                         <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                                     </div>
                                                 </div>
-                                                <button class="add-to-cart" >Add to cart</button>
-                                            <!-- </form> -->
-                                        </div>
-                                        <div class="product-additional-info pt-25">
-                                            <a class="wishlist-btn" ><i
-                                                    class="fa fa-heart-o"></i>Add to wishlist</a>
-                                            <div class="product-social-sharing pt-25">
-                                                <ul>
-                                                    <li class="facebook"><a ><i
-                                                                class="fa fa-facebook"></i>Facebook</a></li>
-                                                    <li class="instagram"><a ><i
-                                                                class="fa fa-instagram"></i>Instagram</a></li>
-                                                </ul>
+                                                <button class="add-to-cart">Add to cart</button>
+                                                <!-- </form> -->
+                                            </div>
+                                            <div class="product-additional-info pt-25">
+                                                <a class="wishlist-btn"><i class="fa fa-heart-o"></i>Add to wishlist</a>
+                                                <div class="product-social-sharing pt-25">
+                                                    <ul>
+                                                        <li class="facebook"><a><i
+                                                                    class="fa fa-facebook"></i>Facebook</a></li>
+                                                        <li class="instagram"><a><i
+                                                                    class="fa fa-instagram"></i>Instagram</a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -827,54 +841,53 @@
                     </div>
                 </div>
             </div>
+            <!-- Quick View | Modal Area End Here -->
         </div>
-        <!-- Quick View | Modal Area End Here -->
-    </div>
-    <!-- Body Wrapper End Here -->
-    <!-- jQuery-V1.12.4 -->
-    <script src="user/js/vendor/jquery-1.12.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="user/js/vendor/popper.min.js"></script>
-    <!-- Bootstrap V4.1.3 Fremwork js -->
-    <script src="user/js/bootstrap.min.js"></script>
-    <!-- Ajax Mail js -->
-    <script src="user/js/ajax-mail.js"></script>
-    <!-- Meanmenu js -->
-    <script src="user/js/jquery.meanmenu.min.js"></script>
-    <!-- Wow.min js -->
-    <script src="user/js/wow.min.js"></script>
-    <!-- Slick Carousel js -->
-    <script src="user/js/slick.min.js"></script>
-    <!-- Owl Carousel-2 js -->
-    <script src="user/js/owl.carousel.min.js"></script>
-    <!-- Magnific popup js -->
-    <script src="user/js/jquery.magnific-popup.min.js"></script>
-    <!-- Isotope js -->
-    <script src="user/js/isotope.pkgd.min.js"></script>
-    <!-- user/imagesloaded js -->
-    <script src="user/js/imagesloaded.pkgd.min.js"></script>
-    <!-- Mixitup js -->
-    <script src="user/js/jquery.mixitup.min.js"></script>
-    <!-- Countdown -->
-    <script src="user/js/jquery.countdown.min.js"></script>
-    <!-- Counterup -->
-    <script src="user/js/jquery.counterup.min.js"></script>
-    <!-- Waypoints -->
-    <script src="user/js/waypoints.min.js"></script>
-    <!-- Barrating -->
-    <script src="user/js/jquery.barrating.min.js"></script>
-    <!-- Jquery-ui -->
-    <script src="user/js/jquery-ui.min.js"></script>
-    <!-- Venobox -->
-    <script src="user/js/venobox.min.js"></script>
-    <!-- Nice Select js -->
-    <script src="user/js/jquery.nice-select.min.js"></script>
-    <!-- ScrollUp js -->
-    <script src="user/js/scrollUp.min.js"></script>
-    <!-- Main/Activator js -->
-    <script src="user/js/main.js"></script>
-    <!--custom js-->
-    <script src="javaScript/productDetails.js"></script
+        <!-- Body Wrapper End Here -->
+        <!-- jQuery-V1.12.4 -->
+        <script src="user/js/vendor/jquery-1.12.4.min.js"></script>
+        <!-- Popper js -->
+        <script src="user/js/vendor/popper.min.js"></script>
+        <!-- Bootstrap V4.1.3 Fremwork js -->
+        <script src="user/js/bootstrap.min.js"></script>
+        <!-- Ajax Mail js -->
+        <script src="user/js/ajax-mail.js"></script>
+        <!-- Meanmenu js -->
+        <script src="user/js/jquery.meanmenu.min.js"></script>
+        <!-- Wow.min js -->
+        <script src="user/js/wow.min.js"></script>
+        <!-- Slick Carousel js -->
+        <script src="user/js/slick.min.js"></script>
+        <!-- Owl Carousel-2 js -->
+        <script src="user/js/owl.carousel.min.js"></script>
+        <!-- Magnific popup js -->
+        <script src="user/js/jquery.magnific-popup.min.js"></script>
+        <!-- Isotope js -->
+        <script src="user/js/isotope.pkgd.min.js"></script>
+        <!-- user/imagesloaded js -->
+        <script src="user/js/imagesloaded.pkgd.min.js"></script>
+        <!-- Mixitup js -->
+        <script src="user/js/jquery.mixitup.min.js"></script>
+        <!-- Countdown -->
+        <script src="user/js/jquery.countdown.min.js"></script>
+        <!-- Counterup -->
+        <script src="user/js/jquery.counterup.min.js"></script>
+        <!-- Waypoints -->
+        <script src="user/js/waypoints.min.js"></script>
+        <!-- Barrating -->
+        <script src="user/js/jquery.barrating.min.js"></script>
+        <!-- Jquery-ui -->
+        <script src="user/js/jquery-ui.min.js"></script>
+        <!-- Venobox -->
+        <script src="user/js/venobox.min.js"></script>
+        <!-- Nice Select js -->
+        <script src="user/js/jquery.nice-select.min.js"></script>
+        <!-- ScrollUp js -->
+        <script src="user/js/scrollUp.min.js"></script>
+        <!-- Main/Activator js -->
+        <script src="user/js/main.js"></script>
+        <!--custom js-->
+        <script src="javaScript/productDetails.js"></script
 </body>
 
 <!-- single-product31:32-->

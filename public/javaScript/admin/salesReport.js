@@ -63,7 +63,7 @@ function fillerDate() {
             <td>${data.populatedUser[0].firstName}</td>
             <td>${formattedDate}</td>
             <td>${data.products[0].quantity}</td>
-            <td>${product.price*data.products[0].quantity}</td>
+            <td>${product.price * data.products[0].quantity}</td>
             <td>${data.paymentStatus}</td>
             <td>${data.orderStatus}</td>
           </tr>`);
@@ -125,9 +125,9 @@ function downloadExcel() {
   fetch('/admin/sales-report/report_excel_download')
     .then(response => response.json())
     .then(data => {
-    if(data.status){
-      window.location.href="/admin/download"
-    }
+      if (data.status) {
+        window.location.href = "/admin/download"
+      }
     })
     .catch(error => {
       // Handle errors here

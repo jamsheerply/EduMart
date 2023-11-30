@@ -172,7 +172,7 @@
         <!-- Error 404 Area Start -->
         <div class="container">
             <div class="row">
-                <% if (orderData && orderData.length > 0) { %>
+                <% if (orderData && orderData.length> 0) { %>
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -184,23 +184,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <% orderData.forEach(order => { %>
+                            <% orderData.forEach(order=> { %>
                                 <tr>
-                                    <th scope="row"><%= order._id %></th>
-                                    <td><%= order.orderStatus %></td>
-                                    <td><%= order.orderDate %></td>
-                                    <td><%= order.products.length %></td> <!-- Display the number of products in the order -->
-                                    <td><a href="/user/order/detail/<%= order._id %>" style="color: black !important">View Details</a></td>
+                                    <th scope="row">
+                                        <%= order._id %>
+                                    </th>
+                                    <td>
+                                        <%= order.orderStatus %>
+                                    </td>
+                                    <td>
+                                        <%= order.orderDate %>
+                                    </td>
+                                    <td>
+                                        <%= order.products.length %>
+                                    </td> <!-- Display the number of products in the order -->
+                                    <td><a href="/user/order/detail/<%= order._id %>"
+                                            style="color: black !important">View Details</a></td>
                                 </tr>
-                            <% }); %>
+                                <% }); %>
                         </tbody>
                     </table>
-                <% } else { %>
-                    <!-- Handle case when orderData is empty or undefined -->
-                    <h1>No orders found</h1>
-                <% } %>
+                    <% } else { %>
+                        <!-- Handle case when orderData is empty or undefined -->
+                        <h1>No orders found</h1>
+                        <% } %>
             </div>
-            
+
         </div>
         <!-- Error 404 Area End -->
         <!-- Begin Footer Area -->
@@ -347,15 +356,15 @@
                                 <!-- Begin Footer Newsletter Area -->
                                 <div class="footer-newsletter">
                                     <h4>Sign up to newsletter</h4>
-                                    
-                                        <div id="mc_embed_signup_scroll">
-                                            <div id="mc-form" class="mc-form subscribe-form form-group">
-                                                <input id="mc-email" type="email" autocomplete="off"
-                                                    placeholder="Enter your email" />
-                                                <button class="btn" id="mc-submit">Subscribe</button>
-                                            </div>
+
+                                    <div id="mc_embed_signup_scroll">
+                                        <div id="mc-form" class="mc-form subscribe-form form-group">
+                                            <input id="mc-email" type="email" autocomplete="off"
+                                                placeholder="Enter your email" />
+                                            <button class="btn" id="mc-submit">Subscribe</button>
                                         </div>
-                                
+                                    </div>
+
                                 </div>
                                 <!-- Footer Newsletter Area End Here -->
                             </div>

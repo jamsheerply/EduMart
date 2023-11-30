@@ -1,23 +1,23 @@
-const orderModel=require("../../model/orderModel")
+const orderModel = require("../../model/orderModel")
 
-const loadOrder=async(req,res)=>{
+const loadOrder = async (req, res) => {
     try {
-        const orderData=await orderModel.find({}).sort({ orderDate: -1 }).populate("userId");
-        res.render("admin/order",{orderData:orderData})
+        const orderData = await orderModel.find({}).sort({ orderDate: -1 }).populate("userId");
+        res.render("admin/order", { orderData: orderData })
 
         // console.log(orderData)
     } catch (error) {
         console.log(error.message)
     }
 }
-const loadOrderDetail=async(req,res)=>{
+const loadOrderDetail = async (req, res) => {
     try {
-        const orderId=req.params.orderId
-        const orderData=await orderModel.findById(orderId).populate("userId").populate("products.productId")
+        const orderId = req.params.orderId
+        const orderData = await orderModel.findById(orderId).populate("userId").populate("products.productId")
         // console.log(orderData)
-        res.render("admin/orderDetail",{orderData:orderData})
+        res.render("admin/orderDetail", { orderData: orderData })
     } catch (error) {
-        console.log(error.message+" loadOrderDetail")
+        console.log(error.message + " loadOrderDetail")
     }
 }
 
@@ -48,7 +48,7 @@ const insertOrderDetail = async (req, res) => {
     }
 };
 
-module.exports={
+module.exports = {
     loadOrder,
     loadOrderDetail,
     insertOrderDetail

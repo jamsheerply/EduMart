@@ -23,9 +23,9 @@ const insertAddProduct = async (req, res) => {
 
         const productName = req.body.productName;
 
-        const productData = await productModel.find({  
-         productName: { $regex: new RegExp(productName, 'i') } ,   
-          });          
+        const productData = await productModel.find({
+            productName: { $regex: new RegExp(productName, 'i') },
+        });
         if (productData.length > 0) {
             for (element of productData) {
                 const dbProduct = element.productName.toLowerCase();
@@ -96,10 +96,10 @@ const updateProduct = async (req, res) => {
 
         const productData = await productModel.find({
             $and: [
-              { productName: { $regex: new RegExp(productName, 'i') } },
-              { _id: { $ne: id } }
+                { productName: { $regex: new RegExp(productName, 'i') } },
+                { _id: { $ne: id } }
             ]
-          });          
+        });
         if (productData.length > 0) {
             for (element of productData) {
                 const dbProduct = element.productName.toLowerCase();
@@ -188,7 +188,7 @@ const deleteProduct = async (req, res) => {
                 isdeleted: false
             }
         })
-        res.redirect("/admin/product")
+        res.redirect("/admin/products")
     } catch (error) {
         console.log(error.message + " deleteProduct")
     }
@@ -200,7 +200,7 @@ const recoverProduct = async (req, res) => {
             isdeleted: true
         }
     })
-    res.redirect("/admin/product")
+    res.redirect("/admin/products")
 }
 module.exports = {
     loadProduct,

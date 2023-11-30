@@ -26,8 +26,8 @@ const securePassword = async (password) => {
 
 const sendVerifyMail = async (name, email) => {
     try {
-        console.log(email);
-        console.log(name);
+        // console.log(email);
+        // console.log(name);
         const otp = Math.floor(1000 + Math.random() * 9000);
 
         const transporter = nodemailer.createTransport({
@@ -68,7 +68,7 @@ const loadLanding = async (req, res) => {
     const biographiesData = await productModel.find({ isdeleted: true, category: "Biographies", status: "published" })
     const crimeAndThrillerData = await productModel.find({ isdeleted: true, category: "Crime and Thriller", status: "published" })
     res.render("user/landing", { product: productData, biographies: biographiesData, crimeAndThriller: crimeAndThrillerData })
-    
+
 }
 
 // ...............loadRegister......................
@@ -259,11 +259,89 @@ const userLogout = async (req, res) => {
 //..................loadProductList...............................
 const loadProductList = async (req, res) => {
     try {
-        const productData = await productModel.find({ isdeleted: true, quantity: { $gt: 0 } });
-        // console.log(productData);
-        res.render("user/productList", { product: productData });
+        const productData = await productModel.find({ isdeleted: true, quantity: { $gt: 0 } }).limit(6);
+        const productDataCount = await productModel.find({ isdeleted: true, quantity: { $gt: 0 } }).count();
+        const pageCount = Math.ceil(productDataCount / 6)
+        res.render("user/productList", { product: productData, pageCount: pageCount });
     } catch (error) {
         console.log(error.message + " loadProductList");
+    }
+};
+
+const productListSort = async (req, res) => {
+    try {
+        let sortBy = req.params.sortBy;
+        let order = Number(req.params.order);
+        const productData = await productModel
+            .find({ isdeleted: true, quantity: { $gt: 0 } })
+            .sort({ [sortBy]: order }).limit(6);
+        res.json({ product: productData });
+    } catch (error) {
+        console.log(error.message + " productListSort");
+    }
+};
+
+const productListFilter = async (req, res) => {
+    try {
+        const categories = req.query.category ? req.query.category.split(",") : [];
+        const prices = req.query.price ? req.query.price.split(",") : [];
+
+        let filterQuery = {};
+
+        if (categories.length > 0) {
+            filterQuery.category = { $in: categories };
+        }
+
+        if (prices.length > 0) {
+            const [minPrice, maxPrice] = prices[0].split('-');
+            filterQuery.price = { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) };
+        }
+
+        const productData = await productModel
+            .find({ ...filterQuery, isdeleted: true, quantity: { $gt: 0 } })
+            .limit(6);
+
+        res.json({ product: productData });
+    } catch (error) {
+        console.log(error.message + " productListFilter");
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+const productListPagination = async (req, res) => {
+    try {
+        const pageNumber = Number(req.query.pageNumber);
+        const limitPage = 6;
+
+
+        const skipDocs = (pageNumber - 1) * limitPage;
+
+
+        const productData = await productModel
+            .find({ isdeleted: true, quantity: { $gt: 0 } })
+            .skip(skipDocs)
+            .limit(limitPage);
+
+
+        res.json({ product: productData, pageNumber: pageNumber });
+    } catch (error) {
+        console.log(error.message + " productPagination");
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+const ProductListSearch = async (req, res) => {
+    try {
+        const productListSearch = req.query.productListSearch;
+        const productData = await productModel.find({
+
+            productName: { $regex: new RegExp('^' + productListSearch, 'i') }
+        }).limit(6)
+
+        res.json({ product: productData });
+    } catch (error) {
+        console.log(error.message + " ProductListSearch");
+        res.status(500).json({ error: "Internal Server Error" });
     }
 };
 
@@ -307,15 +385,15 @@ const loadCheckOut = async (req, res) => {
             const userId = req.session.userData._id;
             const addresData = await userModel.findById(userId)
         }
-if(req.session.cartData){
-    const userData = req.session.userData
-    const addressIdToFind = req.params.addressId
-    const addressData = userData.address.find(element => element._id.toString() === addressIdToFind);
+        if (req.session.cartData) {
+            const userData = req.session.userData
+            const addressIdToFind = req.params.addressId
+            const addressData = userData.address.find(element => element._id.toString() === addressIdToFind);
 
-    res.render("user/checkout", { cartData: cartData, subtotal: subtotal, addressData: addressData })
-}else{
-    res.redirect("/user/home")
-}
+            res.render("user/checkout", { cartData: cartData, subtotal: subtotal, addressData: addressData })
+        } else {
+            res.redirect("/user/home")
+        }
 
     } catch (error) {
         console.log(error.message + " loadCheckOut")
@@ -562,6 +640,10 @@ module.exports = {
     userLogout,
     // adminInsert,
     loadProductList,
+    productListSort,
+    productListFilter,
+    productListPagination,
+    ProductListSearch,
     loadProductDetail,
     loadAddress,
     loadCheckOut,

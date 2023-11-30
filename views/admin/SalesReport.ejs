@@ -129,7 +129,7 @@
       </li> -->
       <!-- End Icons Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#icons-nav"  href="/admin/sales-report">
+        <a class="nav-link collapsed" data-bs-target="#icons-nav" href="/admin/sales-report">
           <i class="bi bi-gem"></i><span>Report</span>
         </a>
       </li>
@@ -206,7 +206,8 @@
           <div class="col-6 d-flex justify-content-end ">
             <!-- <i class="ri-download-line " style="cursor: pointer; "></i> -->
             <form class="date_box mx-3">
-              <label class="border border-dark" style="cursor: pointer; " onclick="downloadExcel()" > <i class="ri-download-line " style="cursor: pointer; "></i>&nbsp Excel &nbsp</label>
+              <label class="border border-dark" style="cursor: pointer; " onclick="downloadExcel()"> <i
+                  class="ri-download-line " style="cursor: pointer; "></i>&nbsp Excel &nbsp</label>
               <!-- <select name="download" id="downloadFile " style="cursor: pointer;" onchange="handleDownload(this)">
                 <option value="Pdf">PDF</option>
                 <option value="Excel">Excel</option>
@@ -299,58 +300,58 @@
                       <th>Order Status</th>
                     </tr>
                   </thead>
-                 
+
                   <tbody>
-                    <% let counter = 0; %> <!-- Initialize a counter variable -->
-                  
-                    <% if (orderData.length > 0) { %>
-                      <% orderData.forEach((data) => {
+                    <% let counter=0; %> <!-- Initialize a counter variable -->
+
+                      <% if (orderData.length> 0) { %>
+                        <% orderData.forEach((data)=> {
                           data.populatedProducts.forEach((product) => {
-                            const orderIdString = String(data._id);
-                            const lastFourDigits = orderIdString.slice(-4);
-                            const orderDate = new Date(data.date);
-                            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-                            const formattedDate = orderDate.toLocaleDateString('en-US', options);
-                            %>
-                            <tr>
-                              <td>
-                                <%= ++counter %>
-                              </td> <!-- Assuming you want 1-based indexing -->
-                              <td>
-                                <%= product.productName %>
-                              </td>
-                              <td>
-                                <%= lastFourDigits %>
-                              </td>
-                              <td>
-                                <%= data.populatedUser[0].firstName %>
-                              </td>
-                              <td>
-                                <%= formattedDate %>
-                              </td>
-                              <!-- Display other relevant fields from the order and product objects -->
-                              <td>
-                                <%= data.products[0].quantity %>
-                              </td>
-                              <td>
-                                <%= product.price * data.products[0].quantity %>
-                              </td>
-                              <td>
-                                <%= data.paymentStatus %>
-                              </td>
-                              <td>
-                                <%= data.orderStatus %>
-                              </td>
-                            </tr>
+                          const orderIdString = String(data._id);
+                          const lastFourDigits = orderIdString.slice(-4);
+                          const orderDate = new Date(data.date);
+                          const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                          const formattedDate = orderDate.toLocaleDateString('en-US', options);
+                          %>
+                          <tr>
+                            <td>
+                              <%= ++counter %>
+                            </td> <!-- Assuming you want 1-based indexing -->
+                            <td>
+                              <%= product.productName %>
+                            </td>
+                            <td>
+                              <%= lastFourDigits %>
+                            </td>
+                            <td>
+                              <%= data.populatedUser[0].firstName %>
+                            </td>
+                            <td>
+                              <%= formattedDate %>
+                            </td>
+                            <!-- Display other relevant fields from the order and product objects -->
+                            <td>
+                              <%= data.products[0].quantity %>
+                            </td>
+                            <td>
+                              <%= product.price * data.products[0].quantity %>
+                            </td>
+                            <td>
+                              <%= data.paymentStatus %>
+                            </td>
+                            <td>
+                              <%= data.orderStatus %>
+                            </td>
+                          </tr>
+                          <% }) %>
                             <% }) %>
-                        <% }) %>
-                    <% } else { %>
-                      <tr>
-                        <td colspan="9" style="text-align: center; font-size: xx-large;">Sales Not Found</td>
-                      </tr>
-                    <% } %>
+                              <% } else { %>
+                                <tr>
+                                  <td colspan="9" style="text-align: center; font-size: xx-large;">Sales Not Found</td>
+                                </tr>
+                                <% } %>
                   </tbody>
-                  
+
 
                 </table>
 

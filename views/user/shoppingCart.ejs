@@ -226,7 +226,9 @@
                                             </script> -->
                                             <%cartData.items.forEach((element)=> {%>
                                                 <tr>
-                                                    <td class="li-product-remove"><a href="user/shopping-cart/delete/<%= cartData._id %>/<%= element.productId._id%>"><i class="fa fa-times"></i></a></td>
+                                                    <td class="li-product-remove"><a
+                                                            href="user/shopping-cart/delete/<%= cartData._id %>/<%= element.productId._id%>"><i
+                                                                class="fa fa-times"></i></a></td>
                                                     <td class="li-product-thumbnail"><a><img
                                                                 src="<%= element.productId.imageURL[0].productImage1 %>"
                                                                 width="100px" height="100px"></a></td>
@@ -463,15 +465,15 @@
                                 <!-- Begin Footer Newsletter Area -->
                                 <div class="footer-newsletter">
                                     <h4>Sign up to newsletter</h4>
-                                   
-                                        <div id="mc_embed_signup_scroll">
-                                            <div id="mc-form" class="mc-form subscribe-form form-group">
-                                                <input id="mc-email" type="email" autocomplete="off"
-                                                    placeholder="Enter your email" />
-                                                <button class="btn" id="mc-submit">Subscribe</button>
-                                            </div>
+
+                                    <div id="mc_embed_signup_scroll">
+                                        <div id="mc-form" class="mc-form subscribe-form form-group">
+                                            <input id="mc-email" type="email" autocomplete="off"
+                                                placeholder="Enter your email" />
+                                            <button class="btn" id="mc-submit">Subscribe</button>
                                         </div>
-                                   
+                                    </div>
+
                                 </div>
                                 <!-- Footer Newsletter Area End Here -->
                             </div>

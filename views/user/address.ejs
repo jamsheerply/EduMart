@@ -183,26 +183,28 @@
                     <style>
                         #clickableDiv {
                             cursor: pointer;
-                            height: 400px; 
+                            height: 400px;
                         }
+
                         .dynamicDiv {
                             cursor: pointer;
-                            height: 400px; 
+                            height: 400px;
                         }
-                    
+
                         .dynamicDIv p {
                             font-size: 22px !important;
                             color: #131212;
                         }
-                    
+
                         #clickableDiv:hover {
                             background-color: rgb(178, 190, 181)
                         }
+
                         .dynamicDiv:hover {
                             background-color: rgb(178, 190, 181)
                         }
                     </style>
-                    
+
                     <div id="clickableDiv"
                         class="col-12 col-md-5 mb-5 d-flex flex-column align-items-center justify-content-center rounded">
                         <span style="font-size: 150px; text-align: center;">+</span>
@@ -247,16 +249,16 @@
                             </div>
                             <% }) %>
                                 <% } %>
-                                <script>
-                                    // Add event listener using event delegation to document.body
-                                    document.body.addEventListener('click', function (event) {
-                                        const clickedElement = event.target.closest('.dynamicDiv');
-                                        if (clickedElement) {
-                                            const elementId = clickedElement.id.split('_')[1];
-                                            window.location.href = `/user/check-out/${elementId}`;
-                                        }
-                                    });
-                                </script>
+                                    <script>
+                                        // Add event listener using event delegation to document.body
+                                        document.body.addEventListener('click', function (event) {
+                                            const clickedElement = event.target.closest('.dynamicDiv');
+                                            if (clickedElement) {
+                                                const elementId = clickedElement.id.split('_')[1];
+                                                window.location.href = `/user/check-out/${elementId}`;
+                                            }
+                                        });
+                                    </script>
 
                 </div>
             </div>
@@ -406,15 +408,15 @@
                                     <!-- Begin Footer Newsletter Area -->
                                     <div class="footer-newsletter">
                                         <h4>Sign up to newsletter</h4>
-                                        
-                                            <div id="mc_embed_signup_scroll">
-                                                <div id="mc-form" class="mc-form subscribe-form form-group">
-                                                    <input id="mc-email" type="email" autocomplete="off"
-                                                        placeholder="Enter your email" />
-                                                    <button class="btn" id="mc-submit">Subscribe</button>
-                                                </div>
+
+                                        <div id="mc_embed_signup_scroll">
+                                            <div id="mc-form" class="mc-form subscribe-form form-group">
+                                                <input id="mc-email" type="email" autocomplete="off"
+                                                    placeholder="Enter your email" />
+                                                <button class="btn" id="mc-submit">Subscribe</button>
                                             </div>
-                                       
+                                        </div>
+
                                     </div>
                                     <!-- Footer Newsletter Area End Here -->
                                 </div>
