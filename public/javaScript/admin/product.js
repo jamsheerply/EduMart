@@ -1,3 +1,5 @@
+const { response } = require("../../../routes/adminRoute");
+
 // Form validation
 function validateProductForm() {
   const productName = document.getElementById("productName").value;
@@ -220,4 +222,106 @@ function deleteImgAddProduct(input, image) {
   // document.getElementById(image).style.display='none'
 }
 
+//......................productPagination.............................
+function productPagination(productPageCount) {
+  fetch(`/admin/products/pagination/?productPageCount=${productPageCount}`)
+    .then(response => response.json())
+    .then(data => {
+      const rows = [];
+      if (data.product.length > 0) {
+        data.product.forEach((element) => {
+          rows.push(
+            `<tr>
+            <td>${element.productName}</td>
+            <td><img src="http://localhost:8080/${element.imageURL[0].productImage1}"
+                style="height: 50px; width:50px;" alt=""></td>
+            <td>${element.category}</td>
+            <td>${element.price}</td>
+            <td>${element.status}</td>
+            <td>${element.productAdded}</td>
+            <td><a href="/admin/edit-product?id=${element._id}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+            ${element.isdeleted ?
+              `<td><i class="fa-solid fa-trash-can" data-toggle="modal"
+              data-target="#exampleModalCenterdelete${element._id}"></i></td>
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModalCenterdelete${element._id}" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Delete Product</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Are you sure you want to Delete this Product?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+                      <a href="/admin/delete-product?id=${element._id}"><button type="button"
+                          class="btn btn-danger">Delete</button></a>
+                    </div>
+                  </div>
+                </div>
+              </div>` :
+              `<td><a><i class="fa-solid fa-rotate-right" data-toggle="modal"
+              data-target="#exampleModalCenterrecover${element._id}"></i></a></td>
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModalCenterrecover${element._id}" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Recover Product</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Are you sure you want to Recover this Product?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                      <a href="/admin/recover-product?id=${element._id}"><button type="button"
+                          class="btn btn-success">Recover</button></a>
+                    </div>
+                  </div>
+                </div>
+              </div>`}
+          </tr>`);
+        });
+      }
 
+      const tableContent = `
+        <div class="row">
+          <div class="col-12">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">PRODUCT NAME</th>
+                    <th scope="col">IMAGE</th>
+                    <th scope="col">CATEGORY</th>
+                    <th scope="col">PRICE</th>
+                    <th scope="col">STATUS</th>
+                    <th scope="col">ADDED ON</th>
+                    <th scope="col">EDIT</th>
+                    <th scope="col">DELETE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${rows.length > 0 ? rows.join('') : '<tr><td colspan="5">Product Not Found</td></tr>'}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>`;
+
+      document.getElementById("productTableRow").innerHTML = tableContent || '<h1>Data not found</h1>';
+      
+      if (data.productPageNumber) {
+        document.querySelector('#productPageNumber').innerHTML = data.productPageNumber;
+      }
+    });
+}

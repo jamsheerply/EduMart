@@ -3,6 +3,7 @@ const userRoute = express()
 const userController = require("../controller/user/userController")
 const cartconstroller = require("../controller/user/cartController")
 const orderController = require("../controller/user/orderController")
+const ProductListController = require("../controller/user/ProductListController")
 const userAuth = require("../midddleware/UserAuth")
 const adminAuth = require("../midddleware/adminAuth")
 
@@ -29,11 +30,11 @@ userRoute.post("/login", userController.verifyLogin)
 userRoute.get("/logout", userController.userLogout)
 
 //...................productList.............................
-userRoute.get("/product-list", userAuth.verifyUser, userController.loadProductList)
-userRoute.get("/product-list/:sortBy/:order", userAuth.verifyUser, userController.productListSort)
-userRoute.get("/product-list/filter", userAuth.verifyUser, userController.productListFilter)
-userRoute.get("/product-list/pagination", userAuth.verifyUser, userController.productListPagination)
-userRoute.get("/product-list/search", userAuth.verifyUser, userController.ProductListSearch)
+userRoute.get("/product-list", userAuth.verifyUser, ProductListController.loadProductList)
+userRoute.get("/product-list/:sortBy/:order", userAuth.verifyUser, ProductListController.productListSort)
+userRoute.get("/product-list/filter", userAuth.verifyUser, ProductListController.productListFilter)
+userRoute.get("/product-list/pagination", userAuth.verifyUser, ProductListController.productListPagination)
+userRoute.get("/product-list/search", userAuth.verifyUser, ProductListController.ProductListSearch)
 
 //...................singleProudct...........................
 userRoute.get("/product-detail", userAuth.verifyUser, userController.loadProductDetail)

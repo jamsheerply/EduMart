@@ -3,12 +3,32 @@ const productModel = require("../../model/productModel")
 
 const loadProduct = async (req, res) => {
     try {
-        const productData = await productModel.find({})
-        res.render("admin/product", { product: productData })
+        const productData = await productModel.find({}).limit(5);
+        let productDataCount = await productModel.find({}).count()
+        const productPageCount = Math.ceil(productDataCount / 5)
+
+        res.render("admin/product", { product: productData, productPageCount: productPageCount });
     } catch (error) {
-        console.log(error.message + " loadProduct")
+        console.log(error.message + " loadProduct");
     }
-}
+};
+
+const productPagination = async (req, res) => {
+    try {
+        const productPageNumber = Number(req.query.productPageCount);
+        const productLimitPage = 5;
+        const skipDocs = (productPageNumber - 1) * productLimitPage;
+        const productData = await productModel
+            .find({})
+            .skip(skipDocs)
+            .limit(productLimitPage);
+        res.json({ product: productData, productPageNumber: productPageNumber });
+    } catch (error) {
+        console.log(error.message + " productPagination");
+    }
+};
+
+
 const loadAddProduct = async (req, res) => {
     try {
         const categoryData = await categoryModel.find({})
@@ -204,6 +224,7 @@ const recoverProduct = async (req, res) => {
 }
 module.exports = {
     loadProduct,
+    productPagination,
     loadAddProduct,
     insertAddProduct,
     EditProductLoad,

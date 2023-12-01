@@ -2,12 +2,28 @@ const orderModel = require("../../model/orderModel")
 
 const loadOrder = async (req, res) => {
     try {
-        const orderData = await orderModel.find({}).sort({ orderDate: -1 }).populate("userId");
-        res.render("admin/order", { orderData: orderData })
+        const orderData = await orderModel.find({}).sort({ orderDate: -1 }).populate("userId").limit(8);
+        const orderDataCount = await orderModel.find({}).sort({ orderDate: -1 }).populate("userId").count();
+        const orderPageCount = Math.ceil(orderDataCount / 8)
+        res.render("admin/order", { orderData: orderData, orderPageCount:orderPageCount})
 
         // console.log(orderData)
     } catch (error) {
         console.log(error.message)
+    }
+}
+const orderPagination=async(req,res)=>{
+    try {
+        // console.log(req.query)
+        const orderPageNumber=Number(req.query.orderPageCount)
+        const orderLimitPage=8
+        const skiporder=(orderPageNumber-1)*orderLimitPage
+        const orderData=await orderModel
+        .find({}).sort({ orderDate: -1 }).populate("userId")
+        .skip(skiporder).limit(orderLimitPage)
+        res.json({orderData:orderData,orderPageNumber:orderPageNumber})
+    } catch (error) {
+        console.log(error.message+" orderPagination")
     }
 }
 const loadOrderDetail = async (req, res) => {
@@ -50,6 +66,7 @@ const insertOrderDetail = async (req, res) => {
 
 module.exports = {
     loadOrder,
+    orderPagination,
     loadOrderDetail,
     insertOrderDetail
 }

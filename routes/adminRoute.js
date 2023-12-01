@@ -31,6 +31,7 @@ adminRoute.get("/category/recover-category", adminAuth.verifyAdmin, categoryCont
 
 //.............................productRoute.................................
 adminRoute.get("/products", adminAuth.verifyAdmin, productController.loadProduct)
+adminRoute.get("/products/pagination", adminAuth.verifyAdmin, productController.productPagination)
 adminRoute.get("/add-product", adminAuth.verifyAdmin, productController.loadAddProduct)
 adminRoute.post("/add-product", upload.any(), productController.insertAddProduct)
 adminRoute.get("/edit-product", adminAuth.verifyAdmin, productController.EditProductLoad)
@@ -45,6 +46,7 @@ adminRoute.get("/unblock-user", adminAuth.verifyAdmin, userMangementController.u
 
 //.....................orderRoute...........................................
 adminRoute.get("/orders", adminAuth.verifyAdmin, orderMangementController.loadOrder)
+adminRoute.get("/orders/pagination", adminAuth.verifyAdmin, orderMangementController.orderPagination)
 adminRoute.get("/order/detail/:orderId", adminAuth.verifyAdmin, orderMangementController.loadOrderDetail)
 adminRoute.post("/order/detail/:orderId", adminAuth.verifyAdmin, orderMangementController.insertOrderDetail)
 

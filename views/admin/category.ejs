@@ -288,10 +288,10 @@
                           </div>
                           <%if(category[i].categorystatus){%>
                             <td><i class="fa-solid fa-trash-can" data-toggle="modal"
-                                data-target="#exampleModalCenterdelete"></i></td>
+                                data-target="#exampleModalCenterdelete<%= category[i]._id%>"></i></td>
 
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModalCenterdelete" tabindex="-1" role="dialog"
+                            <div class="modal fade" id="exampleModalCenterdelete<%= category[i]._id%>" tabindex="-1" role="dialog"
                               aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                               <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
@@ -314,9 +314,9 @@
                             </div>
                             <%}else{%>
                               <td> <i class="fa-solid fa-rotate-right" data-toggle="modal"
-                                  data-target="#exampleModalCenterrecover"></i></td>
+                                  data-target="#exampleModalCenterrecover<%= category[i]._id%>"></i></td>
                               <!-- Modal -->
-                              <div class="modal fade" id="exampleModalCenterrecover" tabindex="-1" role="dialog"
+                              <div class="modal fade" id="exampleModalCenterrecover<%= category[i]._id%>" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                   <div class="modal-content">
@@ -384,7 +384,7 @@
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 <!-------validation------>
-<script src="javaScript/category.js"></script>
+<script src="javaScript/admin/category.js"></script>
 </body>
 
 </html>

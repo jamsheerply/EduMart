@@ -155,9 +155,7 @@ document.querySelectorAll('input[name="category"],input[name="price"]').forEach(
 });
 
 function productListPagination(pageNumber) {
-    // Assuming pageNumber is passed as an argument to this function
-    // alert(pageNumber); // Display the page number (you can remove this in the final code)
-
+    
     // Make a fetch request to the server with the pageNumber parameter
     fetch(`/user/product-list/pagination/?pageNumber=${pageNumber}`)
         .then(response => {
