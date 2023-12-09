@@ -6,6 +6,7 @@ const userMangementController = require("../controller/admin/userManagmentContro
 const orderMangementController = require("../controller/admin/orderMangementController")
 const dashboardController = require("../controller/admin/dashboardController")
 const salesReportController = require("../controller/admin/salesReportController")
+const couponController=require("../controller/admin/couponController")
 const path = require("path");
 const upload = require("../midddleware/multer")
 const adminAuth = require("../midddleware/adminAuth")
@@ -58,5 +59,11 @@ adminRoute.get("/sales-report", adminAuth.verifyAdmin, salesReportController.loa
 adminRoute.post("/sales-report/filler", adminAuth.verifyAdmin, salesReportController.fillterSalesReport)
 adminRoute.get("/sales-report/report_excel_download", adminAuth.verifyAdmin, salesReportController.reportExcelDownload)
 adminRoute.get("/download", adminAuth.verifyAdmin, salesReportController.download)
+
+//..........................coupon....................................................
+adminRoute.get("/coupons",adminAuth.verifyAdmin,couponController.loadCoupon)
+adminRoute.post("/coupons",adminAuth.verifyAdmin,couponController.insertCoupon)
+adminRoute.get("/coupons/edit_coupon",adminAuth.verifyAdmin,couponController.loadEditCoupon)
+adminRoute.patch("/coupons/edit_coupon",adminAuth.verifyAdmin,couponController.insertEditCoupon)
 
 module.exports = adminRoute

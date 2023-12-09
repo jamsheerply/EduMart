@@ -1,4 +1,3 @@
-const { response } = require("../../../routes/adminRoute");
 
 // Form validation
 function validateProductForm() {

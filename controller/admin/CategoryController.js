@@ -12,7 +12,7 @@ const loadCategory = async (req, res) => {
 }
 const insertCategory = async (req, res) => {
     try {
-        const categoryName = req.body.categoryName;
+        const categoryName = req.body.categoryName; 
 
         const categoryData = await categoryModel.find({ category: { $regex: new RegExp(req.body.category, 'i') } });
         if (categoryData.length > 0) {
