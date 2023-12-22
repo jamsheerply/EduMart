@@ -12,8 +12,9 @@ const loadShopingCart = async (req, res) => {
                 return acc + (element.productId.price * element.quantity);
             }, 0);
 
-            res.render("user/shoppingCart", { cartData: cartData, subtotal: subtotal });
+            res.render("user/shoppingCart", { cartData: cartData, subtotal: subtotal,grandtotal: subtotal });
             req.session.subtotal = subtotal;
+            req.session.grandtotal = subtotal;
             req.session.cartData = cartData;
             req.session.save();
         } else {
@@ -89,8 +90,9 @@ const updateShopingCart = async (req, res) => {
             return acc + (element.productId.price * element.quantity);
         }, 0);
 
-        res.json({ subtotal: subtotal })
+        res.json({ subtotal: subtotal,grandtotal: subtotal })
         req.session.subtotal = subtotal
+        req.session.grandtotal = subtotal
         req.session.cartData = cartData
         req.session.cartItemData = cart.items
         req.session.save()

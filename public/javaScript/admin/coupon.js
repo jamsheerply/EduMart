@@ -1,6 +1,6 @@
 
 function resetAddCoupon() {
-    document.getElementById('couponName').value = '';
+    document.getElementById('productName').value = '';
     document.getElementById('couponCode').value = '';
     document.getElementById('expiryDate').value = '';
     document.getElementById('discountPercentage').value = '';
@@ -77,9 +77,6 @@ function addCouponValidation() {
     } else {
         document.getElementById('minimumOrderAmountError').style.display = 'none';
     }
-
-
-    // If all validations pass
     return true;
 
 }
@@ -130,23 +127,24 @@ function addCoupon() {
 }
 
 function loadEditCoupon(id) {
+    // alert(id)
     fetch(`admin/coupons/edit_coupon?couponId=${id}`)
         .then(response => response.json())
         .then(data => {
-            // alert(JSON.stringify(data.couponData))
+            // alert(JSON.stringify(data.couponData.couponName))
             // Update the input fields with the fetched data
-            document.getElementById('couponNameEdit').value = data.couponData.couponName;
-            document.getElementById('couponCodeEdit').value = data.couponData.couponCode;
+            document.getElementById(`couponNameEdit${id}`).value = data.couponData.couponName;
+            document.getElementById(`couponCodeEdit${id}`).value = data.couponData.couponCode;
             // Extract the date part (YYYY-MM-DD) from the received ISO 8601 formatted date
             const expiryDateISO = data.couponData.expiryDate;
             const expiryDate = expiryDateISO.split('T')[0]; // Extracts only the date part
 
             // Set the date for expiryDate input field
-            document.getElementById('expiryDateEdit').value = expiryDate;
+            document.getElementById(`expiryDateEdit${id}`).value = expiryDate;
 
-            document.getElementById('discountPercentageEdit').value = data.couponData.discountPercentage;
-            document.getElementById('usageLimitEdit').value = data.couponData.usageLimit;
-            document.getElementById('minimumOrderAmountEdit').value = data.couponData.minimumOrderAmount;
+            document.getElementById(`discountPercentageEdit${id}`).value = data.couponData.discountPercentage;
+            document.getElementById(`usageLimitEdit${id}`).value = data.couponData.usageLimit;
+            document.getElementById(`minimumOrderAmountEdit${id}`).value = data.couponData.minimumOrderAmount;
 
             // Update other elements as needed
         })
@@ -155,84 +153,76 @@ function loadEditCoupon(id) {
             // Handle errors or display error messages as needed
         });
 }
-//.................edit coupon Reset..........................
-function resetEditCoupon() {
-    document.getElementById('couponNameEdit').value = '';
-    document.getElementById('couponCodeEdit').value = '';
-    document.getElementById('expiryDateEdit').value = '';
-    document.getElementById('discountPercentageEdit').value = '';
-    document.getElementById('usageLimitEdit').value = '';
-    document.getElementById('minimumOrderAmountEdit').value = ''
-}
 
-function editCouponValidation() {
-    var couponName = document.getElementById('couponNameEdit').value;
-    var couponCode = document.getElementById('couponCodeEdit').value;
-    var expiryDate = document.getElementById('expiryDateEdit').value;
-    var discountPercentage = parseFloat(document.getElementById('discountPercentageEdit').value);
-    var usageLimit = parseInt(document.getElementById('usageLimitEdit').value);
-    var minimumOrderAmount = parseFloat(document.getElementById('minimumOrderAmountEdit').value);
+
+function editCouponValidation(id) {
+    var couponName = document.getElementById(`couponNameEdit${id}`).value;
+    var couponCode = document.getElementById(`couponCodeEdit${id}`).value;
+    var expiryDate = document.getElementById(`expiryDateEdit${id}`).value;
+    var discountPercentage = parseFloat(document.getElementById(`discountPercentageEdit${id}`).value);
+    var usageLimit = parseInt(document.getElementById(`usageLimitEdit${id}`).value);
+    var minimumOrderAmount = parseFloat(document.getElementById(`minimumOrderAmountEdit${id}`).value);
 
     // Validation for Coupon Name (checking if it's not empty and <= 30 characters)
     if (couponName.trim() === '' || couponName.length > 30) {
-        document.getElementById('couponNameEditError').style.display = 'block';
-        document.getElementById('couponNameEditError').innerText = 'Coupon Name is required and should be max 30 characters.';
+        document.getElementById(`couponNameEditError${id}`).style.display = 'block';
+        document.getElementById(`couponNameEditError${id}`).innerText = 'Coupon Name is required and should be max 30 characters.';
         return false;
     } else {
-        document.getElementById('couponNameEditError').style.display = 'none';
+        document.getElementById(`couponNameEditError${id}`).style.display = 'none';
     }
 
     // Validation for Coupon Code (checking if <= 30 characters)
     if (couponCode.trim() === '' || couponCode.length > 30) {
-        document.getElementById('couponCodeEditError').style.display = 'block';
-        document.getElementById('couponCodeEditError').innerText = 'Coupon Code is required and should be max 30 characters.';
+        document.getElementById(`couponCodeEditError${id}`).style.display = 'block';
+        document.getElementById(`couponCodeEditError${id}`).innerText = 'Coupon Code is required and should be max 30 characters.';
         return false;
     } else {
-        document.getElementById('couponCodeEditError').style.display = 'none';
+        document.getElementById(`couponCodeEditError${id}`).style.display = 'none';
     }
 
     // Validation for Expiry Date (checking if after dateNow)
     var dateNow = new Date().toISOString().split('T')[0];
     if (expiryDate < dateNow) {
-        document.getElementById('expiryDateEditError').style.display = 'block';
-        document.getElementById('expiryDateEditError').innerText = 'Expiry Date should be after today.';
+        document.getElementById(`expiryDateEditError${id}`).style.display = 'block';
+        document.getElementById(`expiryDateEditError${id}`).innerText = 'Expiry Date should be after today.';
         return false;
     } else {
-        document.getElementById('expiryDateEditError').style.display = 'none';
+        document.getElementById(`expiryDateEditError${id}`).style.display = 'none';
     }
 
     // Validation for Discount Percentage (checking if it's a valid positive number and <= 100)
-    var discountPercentage = parseFloat(document.getElementById('discountPercentageEdit').value.trim());
+    var discountPercentage = parseFloat(document.getElementById(`discountPercentageEdit${id}`).value.trim());
 
     if (isNaN(discountPercentage) || discountPercentage <= 0 || discountPercentage > 100 || !/^\d+(\.\d+)?%?$/.test(discountPercentage)) {
-        document.getElementById('discountPercentageEditError').style.display = 'block';
-        document.getElementById('discountPercentageEditError').innerText = 'Discount Percentage should be a positive number up to 100.';
+        document.getElementById(`discountPercentageEditError${id}`).style.display = 'block';
+        document.getElementById(`discountPercentageEditError${id}`).innerText = 'Discount Percentage should be a positive number up to 100.';
         return false;
     } else {
-        document.getElementById('discountPercentageEditError').style.display = 'none';
+        document.getElementById(`discountPercentageEditError${id}`).style.display = 'none';
     }
 
 
 
 
     // Validation for Usage Limit (checking if above 0 and only numbers)
-    var usageLimit = document.getElementById('usageLimitEdit').value.trim();
+    var usageLimit = document.getElementById(`usageLimitEdit${id}`).value.trim();
     if (usageLimit < 0 || isNaN(usageLimit) || !/^\d+(\.\d+)?%?$/.test(usageLimit)) {
-        document.getElementById('usageLimitEditError').style.display = 'block';
-        document.getElementById('usageLimitEditError').innerText = 'Usage Limit should be a positive whole number.';
+        document.getElementById(`usageLimitEditError${id}`).style.display = 'block';
+        document.getElementById(`usageLimitEditError${id}`).innerText = 'Usage Limit should be a positive whole number.';
         return false;
     } else {
-        document.getElementById('usageLimitEditError').style.display = 'none';
+        document.getElementById(`usageLimitEditError${id}`).style.display = 'none';
     }
 
     // Validation for Minimum Order Amount (checking if above or equal to zero and only numbers)
-    var minimumOrderAmount = document.getElementById('minimumOrderAmountEdit').value.trim();
+    var minimumOrderAmount = document.getElementById(`minimumOrderAmountEdit${id}`).value.trim();
     if (minimumOrderAmount < 0 || isNaN(minimumOrderAmount) || !/^\d+(\.\d+)?%?$/.test(minimumOrderAmount)) {
-        document.getElementById('minimumOrderAmountEditError').style.display = 'block';
-        document.getElementById('minimumOrderAmountEditError').innerText = 'Minimum Order Amount should be a non-negative whole number.';
+        document.getElementById(`minimumOrderAmountEditError${id}`).style.display = 'block';
+        document.getElementById(`minimumOrderAmountEditError${id}`).innerText = 'Minimum Order Amount should be a non-negative whole number.';
         return false;
     } else {
-        document.getElementById('minimumOrderAmountEditError').style.display = 'none';
+        document.getElementById(`minimumOrderAmountEditError${id}`).style.display = 'none';
     }
 
 
@@ -242,12 +232,12 @@ function editCouponValidation() {
 }
 
 function EditCoupon(id) {
-    var couponName = document.getElementById('couponNameEdit').value;
-    var couponCode = document.getElementById('couponCodeEdit').value;
-    var expiryDate = document.getElementById('expiryDateEdit').value;
-    var discountPercentage = parseFloat(document.getElementById('discountPercentageEdit').value);
-    var usageLimit = parseInt(document.getElementById('usageLimitEdit').value);
-    var minimumOrderAmount = parseFloat(document.getElementById('minimumOrderAmountEdit').value);
+    var couponName = document.getElementById(`couponNameEdit${id}`).value;
+    var couponCode = document.getElementById(`couponCodeEdit${id}`).value;
+    var expiryDate = document.getElementById(`expiryDateEdit${id}`).value;
+    var discountPercentage = parseFloat(document.getElementById(`discountPercentageEdit${id}`).value);
+    var usageLimit = parseInt(document.getElementById(`usageLimitEdit${id}`).value);
+    var minimumOrderAmount = parseFloat(document.getElementById(`minimumOrderAmountEdit${id}`).value);
 
     const formBody = {
         couponName: couponName,
@@ -258,11 +248,8 @@ function EditCoupon(id) {
         minimumOrderAmount: minimumOrderAmount
     };
 
-    if (editCouponValidation()) {
-        // Construct the URL with the coupon ID
-        const url = `admin/coupons/edit_coupon?couponId=${id}`;
-
-        fetch(url, {
+    if (editCouponValidation(id)) {
+        fetch(`admin/coupons/edit_coupon?couponId=${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -275,8 +262,8 @@ function EditCoupon(id) {
             if (data.status) {
                 window.location.href = '/admin/coupons';
             } else if (data.error) {
-                document.getElementById('couponNameEditError').style.display = 'block';
-                document.getElementById('couponNameEditError').innerText = data.error;
+                document.getElementById(`couponNameEditError${id}`).style.display = 'block';
+                document.getElementById(`couponNameEditError${id}`).innerText = data.error;
             }
         })
         .catch(error => {

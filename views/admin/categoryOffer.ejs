@@ -180,11 +180,11 @@
       </div>
       <%}%>
         <div class="pagetitle">
-          <h1>Coupons</h1>
+          <h1>Category Offers</h1>
           <nav>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a>Home</a></li>
-              <li class="breadcrumb-item active">Coupons</li>
+              <li class="breadcrumb-item active">Category Offers</li>
             </ol>
           </nav>
         </div>
@@ -196,58 +196,56 @@
 
 
             <!-- Button trigger modal -->
-            <button type="button" class="btn bg-success " data-toggle="modal" data-target="#addCoupon">
+            <button type="button" class="btn bg-success " data-toggle="modal" data-target="#addProuctOffer">
               <img src="/admin/images/plus.png" style=" margin-right: 10px;" alt="">
-              <span class="add">Add Coupon</span>
+              <span class="add">Add category Offer</span>
             </button>
 
             <!-- Modal -->
-            <div class="modal fade" id="addCoupon" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-              aria-hidden="true">
+            <div class="modal fade" id="addProuctOffer" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Add Coupon</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Add category Offer</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="modal-body">
                     <div class="form-group">
-                      <label for="couponName" class="col-form-label">Coupon Name</label>
-                      <input type="text" class="form-control" id="couponName">
-                      <p id="couponNameError" style="color: red;"></p>
+                        <label for="categoryName" class="col-form-label">category Name</label>
+                        <% if (categoryData.length > 0) { %>
+                            <select id="categoryName" name="category" class="form-control">
+                                <option value="" disabled selected>Select a category</option>
+                                <% categoryData.forEach(data => { %>
+                                    <option value="<%= data._id %>"><%= data.category %></option>
+                                <% }); %>
+                            </select>
+                        <% } %>
+                        <p id="categoryNameError" style="color: red;"></p>
                     </div>
                     <div class="form-group">
-                      <label for="couponCode" class="col-form-label">Coupon Code</label>
-                      <input type="text" class="form-control" id="couponCode">
-                      <p id="couponCodeError" style="color: red;"></p>
+                        <label for="startDate" class="col-form-label">Start Date</label>
+                        <input type="date" class="form-control" id="startDate">
+                        <p id="startDateError" style="color: red;"></p>
                     </div>
                     <div class="form-group">
-                      <label for="expiryDate" class="col-form-label">Expiry Date</label>
-                      <input type="date" class="form-control" id="expiryDate">
-                      <p id="expiryDateError" style="color: red;"></p>
+                        <label for="expiryDate" class="col-form-label">Expiry Date</label>
+                        <input type="date" class="form-control" id="expiryDate">
+                        <p id="expiryDateError" style="color: red;"></p>
                     </div>
                     <div class="form-group">
-                      <label for="discountPercentage" class="col-form-label">Discount Percentage %</label>
-                      <input type="text" class="form-control" id="discountPercentage">
-                      <p id="discountPercentageError" style="color: red;"></p>
-                    </div>
-                    <div class="form-group">
-                      <label for="usageLimit" class="col-form-label">Usage Limit</label>
-                      <input type="text" class="form-control" id="usageLimit">
-                      <p id="usageLimitError" style="color: red;"></p>
-                    </div>
-                    <div class="form-group">
-                      <label for="minimumOrderAmount" class="col-form-label">Minimum Order Amount</label>
-                      <input type="text" class="form-control" id="minimumOrderAmount">
-                      <p id="minimumOrderAmountError" style="color: red;"></p>
+                        <label for="discount" class="col-form-label">Discount Percentage %</label>
+                        <input type="text" class="form-control" id="discount">
+                        <p id="discountError" style="color: red;"></p>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-danger" onclick="resetAddCoupon()">Reset</button>
-                      <button type="submit" class="btn btn-success" onclick="addCoupon()">Add</button>
+                        <button type="button" class="btn btn-danger" onclick="resetAddcategoryOffer()">Reset</button>
+                        <button type="button" class="btn btn-success" onclick="addcategoryOffer()">Add</button>
                     </div>
-                  </div>
+                </div>
+                
                 </div>
               </div>
             </div>
@@ -263,10 +261,10 @@
                   <thead>
                     <tr>
                       <th scope="col">NAME</th>
-                      <th scope="col">CODE</th>
-                      <th scope="col">USAGE</th>
-                      <th scope="col">ADDED DATE</th>
+                      <th scope="col">DISCOUNT</th>
+                      <th scope="col">START DATE</th>
                       <th scope="col">EXPIRY DATE</th>
+                      <th scope="col">ADDED DATE</th>
                       <th scope="col">STATUS</th>
                       <th scope="col">EDIT</th>
                       <th scope="col">DEACTIVE</th>
@@ -274,57 +272,55 @@
                   </thead>
                   <tbody>
 
-                    <% if (couponData.length> 0) {
-                      couponData.forEach(data => { %>
+                    <% if (categoryOfferData.length> 0) {
+                      categoryOfferData.forEach(data => { %>
                       <tr>
                         <th scope="row">
-                          <%= data.couponName %>
+                          <%= data.categoryName %>
                         </th>
                         <td>
-                          <%= data.couponCode %>
+                          <%= data.discount %>
                         </td>
                         <td>
-                          <%= data.usageLimit %>
+                          <% var startDate = new Date(data.startDate); %>
+                          <%= startDate.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }); %>
                         </td>
                         <td>
-                          <% const date=new Date(data.createdAt); %>
-                            <%= date.toLocaleString('en-US', { weekday: 'short' , year: 'numeric' , month: 'short' ,
-                              day: 'numeric' }) %>
+                          <% var expiryDate = new Date(data.expiryDate); %>
+                          <%= expiryDate.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }); %>
                         </td>
                         <td>
-                          <% var expiryDate=new Date(data.expiryDate); %>
-                            <%= expiryDate.toLocaleDateString('en-US', { weekday: 'short' , year: 'numeric' ,
-                              month: 'short' , day: 'numeric' }); %>
+                          <% var createdAt = new Date(data.createdAt); %>
+                          <%= createdAt.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }); %>
                         </td>
-
                         <td>
                           <%= data.status %>
-                        </td>
-
-                        <td><i class="fa-solid fa-pen-to-square" data-toggle="modal" data-target="#editCoupon<%= data._id %>1"
-                            onclick="loadEditCoupon( '<%= data._id %>')"></i>
+                        </td>                        
+                        <td><i class="fa-solid fa-pen-to-square" data-toggle="modal"
+                            data-target="#editcategoryOffer<%= data._id %>" onclick="loadEditcategoryOffer( '<%= data._id %>')"></i>
                         </td>
                         <!-- Modal -->
-                        <div class="modal fade" id="editCoupon<%= data._id %>1" tabindex="-1" role="dialog"
+                        <div class="modal fade" id="editcategoryOffer<%= data._id %>" tabindex="-1" role="dialog"
                           aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                           <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Coupon</h5>
+                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Category Offer</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
                                 </button>
                               </div>
                               <div class="modal-body">
                                 <div class="form-group">
-                                  <label for="couponName" class="col-form-label" >Coupon Name</label>
-                                  <input type="text" class="form-control" id="couponNameEdit<%= data._id %>">
-                                  <p id="couponNameEditError<%= data._id %>" style="color: red;"></p>
+                                  <label for="couponName" class="col-form-label">category Name</label>
+                                  <input type="text" class="form-control" id="categoryNameEdit<%= data._id %>" readonly>
+                                  <p id="categoryNameEditError<%= data._id %>" style="color: red;"></p>
                                 </div>
+                                
                                 <div class="form-group">
-                                  <label for="couponCode" class="col-form-label">Coupon Code</label>
-                                  <input type="text" class="form-control" id="couponCodeEdit<%= data._id %>">
-                                  <p id="couponCodeEditError<%= data._id %>" style="color: red;"></p>
+                                  <label for="expiryDate" class="col-form-label">Start Date</label>
+                                  <input type="date" class="form-control" id="startDateEdit<%= data._id %>">
+                                  <p id="startDateEditError<%= data._id %>" style="color: red;"></p>
                                 </div>
                                 <div class="form-group">
                                   <label for="expiryDate" class="col-form-label">Expiry Date</label>
@@ -336,26 +332,18 @@
                                   <input type="text" class="form-control" id="discountPercentageEdit<%= data._id %>">
                                   <p id="discountPercentageEditError<%= data._id %>" style="color: red;"></p>
                                 </div>
-                                <div class="form-group">
-                                  <label for="usageLimit" class="col-form-label">Usage Limit</label>
-                                  <input type="text" class="form-control" id="usageLimitEdit<%= data._id %>">
-                                  <p id="usageLimitEditError<%= data._id %>" style="color: red;"></p>
-                                </div>
-                                <div class="form-group">
-                                  <label for="minimumOrderAmount" class="col-form-label">Minimum Order Amount</label>
-                                  <input type="text" class="form-control" id="minimumOrderAmountEdit<%= data._id %>">
-                                  <p id="minimumOrderAmountEditError<%= data._id %>" style="color: red;"></p>
-                                </div>
+                                
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
-                                  <button type="submit" class="btn btn-success" onclick="EditCoupon('<%= data._id %>')">Edit</button>
+                                  <button type="submit" class="btn btn-success"
+                                    onclick="editcategoryOffer('<%= data._id %>')">Edit</button>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
 
-                  
+
                         <td><i class="fa-solid fa-trash-can" data-toggle="modal"
                             data-target="#exampleModalCenterdelete<%=data._id %>"></i></td>
 
@@ -365,18 +353,18 @@
                           <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Deactive Coupon</h5>
+                                <h5 class="modal-title" id="exampleModalLongTitle">Deactivate  Category Offer</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
                                 </button>
                               </div>
                               <div class="modal-body">
-                                Are you sure you want to Deactive this Coupon?
+                                Are you sure you want to Deactivate  this Category Offer?
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
-                                <a href="/admin/coupons/deactive_coupon?couponId=<%=data._id %>"><button type="button"
-                                    class="btn btn-danger">Deactive</button></a>
+                                <a href="/admin/category_offers/deactivate?categoryOfferId=<%=data._id %>"><button type="button"
+                                    class="btn btn-danger">Deactivate </button></a>
                               </div>
                             </div>
                           </div>
@@ -386,7 +374,7 @@
                       <% }); %>
                         <% } else { %>
                           <tr>
-                            <td colspan="5">No coupons found</td>
+                            <td colspan="5">No category offer found</td>
                           </tr>
                           <% } %>
                   </tbody>
@@ -423,7 +411,7 @@
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 <!-------validation------>
-<script src="javaScript/admin/coupon.js"></script>
+<script src="javaScript/admin/categoryOffer.js"></script>
 </body>
 
 </html>

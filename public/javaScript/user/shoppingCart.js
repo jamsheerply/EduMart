@@ -31,7 +31,7 @@ function plus(cartId, productId) {
     }).then(response => response.json()).then((res) => {
         if (res.subtotal) {
             document.getElementById("Subtotal").textContent = res.subtotal;
-            document.getElementById("Total").textContent = res.subtotal;
+            document.getElementById("Total").textContent = res.grandtotal;
         }
         if (res.error) {
             alert(res.error)
@@ -77,7 +77,7 @@ function mins(cartId, productId) {
     }).then(response => response.json()).then((res) => {
         if (res.subtotal) {
             document.getElementById("Subtotal").textContent = res.subtotal;
-            document.getElementById("Total").textContent = res.subtotal;
+            document.getElementById("Total").textContent = res.grandtotal;
         }
     });
 }

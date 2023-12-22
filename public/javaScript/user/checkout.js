@@ -1,3 +1,4 @@
+
 function validateAddress() {
     const firstName = document.getElementById('firstName').value;
     const lastName = document.getElementById('lastName').value;
@@ -111,9 +112,9 @@ function insertAddress() {
         const postCode = document.getElementById('postCode').value
         const email = document.getElementById('email').value
         const phone = document.getElementById('phone').value
-        const orderTotalElement= document.getElementById('orderTotal')
-        const orderTotalValue=orderTotalElement.textContent
-       const orderTotal= parseInt(orderTotalValue.replace(/\D/g, ''), 10);
+        const grandtotalElement= document.getElementById('grandtotal')
+        const grandtotalValue=grandtotalElement.textContent
+       const grandtotal= parseInt(grandtotalValue.replace(/\D/g, ''), 10);
         // alert(orderTotal)
         // Get the selected payment method
         const paymentMethodElements = document.querySelectorAll('.paymentMethod');
@@ -222,3 +223,30 @@ function insertAddress() {
     }
 }
 
+function applyCoupon() {
+    const couponCode = document.getElementById("couponCode").value;
+    fetch(`user/apply-coupon?couponCode=${couponCode}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.discount) {
+                document.getElementById('discount').innerHTML = data.discount;
+            } 
+            if (data.grandtotal) {
+                document.getElementById('grandtotal').innerHTML = data.grandtotal;
+            }
+            if (data.error) {
+                const couponCodeError = document.getElementById("couponCodeError");
+                couponCodeError.innerHTML = data.error;
+                couponCodeError.style.color = 'red';
+            }
+            if (data.message) {
+                const couponCodeError = document.getElementById("couponCodeError");
+                couponCodeError.innerHTML = data.message;
+                couponCodeError.style.color = 'green';
+            }
+        })
+        .catch(error => {
+            console.error('Error applying coupon:', error);
+            alert('There was an error applying the coupon. Please try again.');
+        });
+}

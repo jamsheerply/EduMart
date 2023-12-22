@@ -6,6 +6,7 @@ const orderController = require("../controller/user/orderController")
 const ProductListController = require("../controller/user/ProductListController")
 const userAuth = require("../midddleware/UserAuth")
 const adminAuth = require("../midddleware/adminAuth")
+const upload = require("../midddleware/multer")
 
 //.............middleWare........................
 userRoute.use(express.json());
@@ -49,6 +50,11 @@ userRoute.get("/shopping-cart/delete/:cartId/:productId", userAuth.verifyUser, c
 userRoute.get("/address", userAuth.verifyUser, userController.loadAddress)
 userRoute.get("/check-out/:addressId", userAuth.verifyUser, userController.loadCheckOut)
 userRoute.post("/check-out", userAuth.verifyUser, userController.insertAddress)
+
+//...............................applyCoupon.................................
+userRoute.get("/show-coupon", userAuth.verifyUser, userController.loadCoupon)
+userRoute.get("/apply-coupon", userAuth.verifyUser, userController.applyCoupon)
+
 userRoute.post('/check-out/generateRazorpayPayment', userController.generateRazorpay)
 userRoute.post("/check-out/verifyrazorpaypayment", userAuth.verifyUser, userController.verifyRazorpayPayment)
 //...................order........................................
@@ -57,9 +63,14 @@ userRoute.get("/order/list", userAuth.verifyUser, orderController.loadOrderList)
 userRoute.get("/order/detail/:OrderId", userAuth.verifyUser, orderController.loadOrderDetail)
 userRoute.post("/order/detail/:orderId", userAuth.verifyUser, orderController.updateOrderDetail)
 
-//...............userProfile..................................
+//........................userProfile..................................
 userRoute.get("/my-profile", userAuth.verifyUser, userController.loadMyProfile)
 userRoute.post("/my-profile", userAuth.verifyUser, userController.insertMyProfile)
+userRoute.post("/my-profile/upload-profile-image",upload.single('file'), userAuth.verifyUser, userController.uploadProfileImage)
+
+//........................referralOffer...........................
+userRoute.get("/referral-link", userAuth.userExist, userController.referralOffer)
+
 
 
 // userRoute.post("/admin/insert",userController.adminInsert)

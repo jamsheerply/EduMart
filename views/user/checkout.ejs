@@ -168,7 +168,6 @@
             </div>
         </div>
         <!-- Li's Breadcrumb Area End Here -->
-        <!--Checkout Area Strat-->
         <div class="checkout-area pt-60 pb-30">
             <div class="container">
                 <div class="row">
@@ -178,16 +177,15 @@
                             <!--Accordion End-->
                             <!--Accordion Start-->
                             <h3>Have a coupon? <span id="showcoupon">Click here to enter your code</span></h3>
-                                <div id="checkout_coupon" class="coupon-checkout-content">
-                                    <div class="coupon-info">
-                                        <form action="#">
-                                            <p class="checkout-coupon">
-                                                <input placeholder="Coupon code" type="text">
-                                                <input value="Apply Coupon" type="submit">
-                                            </p>
-                                        </form>
-                                    </div>
+                            <div id="checkout_coupon" class="coupon-checkout-content">
+                                <div class="coupon-info">
+                                    <p class="checkout-coupon">
+                                        <input placeholder="Coupon code" type="text" id="couponCode">
+                                        <input value="Apply Coupon" onclick="applyCoupon()" type="submit">
+                                        <p id="couponCodeError" style="color: red;"></p>
+                                    </p>
                                 </div>
+                            </div>
                             <!--Accordion End-->
                         </div>
                     </div>
@@ -360,12 +358,12 @@
                                                     </tr>
                                                     <tr class="cart-subtotal">
                                                         <th>Discount</th>
-                                                        <td><span class="amount">&#8377 0</span></td>
+                                                        <td><span class="amount" id="discount">&#8377 <%=discount%></span></td>
                                                     </tr>
                                                     <tr class="order-total">
                                                         <th>Order Total</th>
-                                                        <td><strong><span class="amount" id="orderTotal">&#8377
-                                                                    <%=subtotal%>
+                                                        <td><strong><span class="amount" id="grandtotal">&#8377
+                                                                    <%=grandtotal%>
                                                                 </span></strong></td>
                                                     </tr>
                                                 </tfoot>

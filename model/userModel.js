@@ -22,6 +22,7 @@ const userSchema = new mongoose.Schema({
     role: {
         type: String, required: true, enum: ["user"], default: "user"
     },
+    profileImageUrl:{type:String},
     address: [{
         firstName: { type: String, required: true, },
         lastName: { type: String, required: true, },

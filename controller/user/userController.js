@@ -5,6 +5,7 @@ const adminModel = require("../../model/adminModel")
 const productModel = require("../../model/productModel")
 const orderModel = require("../../model/orderModel")
 const cartModel = require("../../model/cartModel");
+const couponModel = require("../../model/couponModel");
 const razorpay = require("razorpay")
 const moment = require("moment")
 require('dotenv').config();
@@ -124,33 +125,64 @@ const loadOtp = async (req, res) => {
 // ...............verifyOtp............................
 const verifyOtp = async (req, res) => {
     try {
-        const digitOne = req.body.digitOne;
-        const digitTwo = req.body.digitTwo;
-        const digitThree = req.body.digitThree;
-        const digitFour = req.body.digitFour;
+        const { digitOne, digitTwo, digitThree, digitFour } = req.body;
         const strOtp = digitOne + digitTwo + digitThree + digitFour;
 
-        const email = req.session.userData.email;
-        let storedOtp = await otpModel.findOne({ email: email });
+        // // Input Validation - Checking if OTP is valid
+        // if (!strOtp || strOtp.length !== 4 || !/^\d+$/.test(strOtp)) {
+        //     return res.render("user/otp", { message: "Invalid OTP format. Please enter a valid OTP." });
+        // }
 
-        if (strOtp == storedOtp.otp) {
-            const userData = req.session.userData;
-            const saveData = new userModel(userData);
-            await saveData.save();
-            req.session.email = userData.email
-            req.session.userLogged = true
-            req.session.emailVerifyUser = req.session.userData.email
-            req.session.save()
+        const email = req.session.userData.email;
+        const storedOtp = await otpModel.findOne({ email });
+
+        if (!storedOtp || strOtp != storedOtp.otp) {
+            return res.render("user/otp", { message: "Invalid OTP. Please try again." });
+        }
+
+        const userData = req.session.userData;
+        const saveData = new userModel(userData);
+        await saveData.save();
+
+        req.session.email = userData.email;
+        req.session.userLogged = true;
+        req.session.emailVerifyUser = req.session.userData.email;
+        req.session.save();
+
+        if (req.session.referralOffer) {
+            const couponData = await couponModel.findOne({ couponCode: "ReferAndEarn" });
+
+            if (couponData) {
+                const coupon = couponData.toObject();
+                if (!coupon.users) {
+                    coupon.users = [];
+                }
+
+                const existingUser = coupon.users.find(user => user.userId === req.session.referralUserId);
+
+                if (existingUser) {
+                    existingUser.limit += 1;
+                } else {
+                    coupon.users.push({ userId: req.session.referralUserId, count: 0, limit: 1 });
+                }
+
+                await couponModel.findOneAndUpdate(
+                    { couponCode: "ReferAndEarn" },
+                    { users: coupon.users },
+                    { new: true }
+                );
+            }
             res.redirect("/user/home");
         } else {
-            res.render("user/otp", { message: "invalid otp" })
+            res.redirect("/user/home");
         }
-        req.session.userData._id;
-
     } catch (error) {
-        console.log(error.message);
+        console.error("Error in verifyOtp:", error.message);
+        res.status(500).send("Server Error");
     }
-}
+};
+
+
 
 
 //............................resendOtp..................
@@ -255,9 +287,6 @@ const userLogout = async (req, res) => {
 //     }
 // }
 
-//..................loadProductList...............................
-
-
 //...................loadProductDetail..............................
 const loadProductDetail = async (req, res) => {
     try {
@@ -287,32 +316,41 @@ const loadAddress = async (req, res) => {
 const loadCheckOut = async (req, res) => {
     try {
         const subtotal = req.session.subtotal;
+
+        const grandtotal = req.session.grandtotal;
+
         const cartData = req.session.cartData;
 
-
-        req.session.addressId = req.params.addressId
-        req.session.save()
+        req.session.addressId = req.params.addressId;
+        req.session.save();
 
         if (!req.session.userData.address) {
             const userId = req.session.userData._id;
-            const addresData = await userModel.findById(userId)
+            const addressData = await userModel.findById(userId);
         }
+
         if (req.session.cartData) {
-            const userData = req.session.userData
-            const addressIdToFind = req.params.addressId
+            const userData = req.session.userData;
+            const addressIdToFind = req.params.addressId;
             const addressData = userData.address.find(element => element._id.toString() === addressIdToFind);
 
-            res.render("user/checkout", { cartData: cartData, subtotal: subtotal, addressData: addressData })
+            res.render("user/checkout", {
+                cartData: cartData,
+                subtotal: subtotal,
+                addressData: addressData,
+                grandtotal: grandtotal,
+                discount: req.session.discount ? req.session.discount : 0 // Corrected syntax
+            });
         } else {
-            res.redirect("/user/home")
+            res.redirect("/user/home");
         }
-
     } catch (error) {
-        console.log(error.message + " loadCheckOut")
+        console.log(error.message + " loadCheckOut");
     }
-}
+};
 
-//inserAdreess and create order
+
+//..........inserAdreess and create order............
 const insertAddress = async (req, res) => {
     try {
         const userId = req.session.userData._id;
@@ -356,7 +394,7 @@ const insertAddress = async (req, res) => {
                 userId: req.session.userData._id,
                 products: products,
                 orderStatus: 'ordered',
-                totalAmount: req.session.subtotal,
+                totalAmount: req.session.grandtotal,
                 shippingAddress: [shippingAddress],
                 orderDate: moment().format('Do MMMM  YYYY, h:mm:ss a'),
                 paymentStatus: 'pending',
@@ -372,7 +410,39 @@ const insertAddress = async (req, res) => {
 
             const savedOrder = await orderData.save();
 
+            const couponData = await couponModel.findOne({ couponCode: req.session.couponCode, status: "active" });
+
+            // Check if the couponData is valid and the coupon is active
+            if (couponData) {
+                const coupon = couponData.toObject(); // Convert Mongoose document to JavaScript object
+
+                // If the coupon doesn't have a 'users' array, create an empty one
+                if (!coupon.users) {
+                    coupon.users = [];
+                }
+
+                // Check if the current user exists in the 'users' array
+                const existingUser = coupon.users.find(user => user.userId === req.session.userData._id);
+
+                if (existingUser) {
+                    // If the user already exists, increment the count
+                    existingUser.count += 1;
+                } else {
+                    // If the user doesn't exist, add them to the 'users' array with a count of 1
+                    coupon.users.push({ userId: req.session.userData._id, count: 1 });
+                }
+
+                // Save the updated coupon data back to the database
+                await couponModel.findOneAndUpdate(
+                    { couponCode: req.session.couponCode },
+                    { users: coupon.users },
+                    { new: true }
+                );
+            }
+
+
             //storing in session in for orderConfirmations
+            req.session.discount = 0;
             req.session.orderId = orderData._id
             req.session.shippingAddress = shippingAddress
             req.session.save()
@@ -407,10 +477,72 @@ const insertAddress = async (req, res) => {
     }
 };
 
+const loadCoupon = async (req, res) => {
+    try {
+
+    } catch (error) {
+        console.error(error.message + " showCoupon")
+    }
+}
+
+const applyCoupon = async (req, res) => {
+    try {
+        const { couponCode } = req.query;
+        req.session.couponCode = couponCode;
+        req.session.save();
+
+        // Ensure 'userData' and 'subtotal' are available in the session
+        if (!req.session.userData || !req.session.subtotal) {
+            return res.status(400).json({ error: 'User data or subtotal is missing in the session.' });
+        }
+
+        const couponData = await couponModel.findOne({ couponCode: couponCode, status: "active" });
+
+        if (!couponData) {
+            return res.status(404).json({ error: 'Coupon not found or inactive.' });
+        }
+
+        if (couponCode === "ReferAndEarn") {
+            const userCoupon = couponData.users.find(user => user.userId === req.session.userData._id);
+            if (userCoupon && userCoupon.count >= userCoupon.limit) {
+                return res.status(400).json({ error: 'User has exceeded the usage limit for this coupon.' });
+            }
+        }
+
+        // Check if subtotal meets the minimum order amount required for the coupon
+        if (req.session.subtotal < couponData.minimumOrderAmount) {
+            return res.status(400).json({ error: 'Subtotal does not meet the minimum requirement for this coupon.' });
+        }
+
+        // Check usage limit of the user for the coupon
+        const userCoupon = couponData.users.find(user => user.userId === req.session.userData._id);
+        if (userCoupon && userCoupon.count >= couponData.usageLimit) {
+            return res.status(400).json({ error: 'User has exceeded the usage limit for this coupon.' });
+        }
+
+        // Reset session variables before applying the coupon
+        req.session.discount = 0;
+        req.session.grandtotal = req.session.subtotal;
+
+        // Calculate the discount and update session variables
+        req.session.discount = req.session.grandtotal * (couponData.discountPercentage / 100);
+        req.session.grandtotal = req.session.subtotal - req.session.discount;
+
+        // Send a success response back to the client
+        res.status(200).json({ message: 'Coupon applied successfully.', discount: req.session.discount, grandtotal: req.session.grandtotal });
+    } catch (error) {
+        console.error(error.message + " applyCoupon");
+        res.status(500).json({ error: 'Server Error' });
+    }
+};
+
+
+
+
 const generateRazorpay = async (req, res) => {
     try {
         const userId = req.session.userData._id;
-        const amount = req.session.subtotal;
+        const amount = req.session.grandtotal;
 
         const razorpayInstance = new razorpay({
             key_id: process.env.RAZORPAY_ID_KEY,
@@ -446,6 +578,9 @@ const generateRazorpay = async (req, res) => {
     }
 };
 
+
+
+
 const verifyRazorpayPayment = async (req, res) => {
     try {
         const { orderId, paymentId } = req.body;
@@ -479,7 +614,7 @@ const verifyRazorpayPayment = async (req, res) => {
 
 const loadMyProfile = async (req, res) => {
     try {
-        const userData = req.session.userData
+        const userData = await userModel.findById(req.session.userData._id)
         res.render("user/myProfile", { userData: userData })
     } catch (error) {
         console.log(error.message)
@@ -502,7 +637,7 @@ const insertMyProfile = async (req, res) => {
                     phone: phone
                 }
             },
-            { new: true } // To return the updated document
+            { new: true }
         );
 
         // Update the session data with the updated user details
@@ -520,7 +655,7 @@ const insertMyProfile = async (req, res) => {
                         password: hashedPassword
                     }
                 },
-                { new: true } // To return the updated document
+                { new: true }
             );
 
             req.session.userData = updatedUserPassword;
@@ -538,7 +673,45 @@ const insertMyProfile = async (req, res) => {
     }
 };
 
+const uploadProfileImage = async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).send('No file uploaded'); // Handle case where no file is uploaded
+        }
 
+        const { filename } = req.file;
+        const profileImageUrl = "/imageUpload/products/" + filename;
+        const userId = req.session.userData._id;
+
+        const updateProfileImage = await userModel.findByIdAndUpdate(
+            userId,
+            { profileImageUrl: profileImageUrl },
+            { new: true } // To get the updated user data after the update operation
+        );
+        // console.log(updateProfileImage)
+        // if (!updateProfileImage) {
+        //     return res.status(404).send('User not found'); // Handle case where user ID doesn't exist
+        // }
+
+        // res.status(200).send('Profile image uploaded successfully');
+    } catch (error) {
+        console.error(error.message + " uploadProfileImage");
+        res.status(500).send('Error uploading profile image'); // Handle other errors
+    }
+};
+
+const referralOffer = async (req, res) => {
+    try {
+        // console.log(req.query)
+        const { userId } = req.query
+        req.session.referralOffer = true
+        req.session.referralUserId = userId
+        // console.log(req.session.referralUserId)
+        res.redirect("/user/register")
+    } catch (error) {
+        console.error(error.message + " referralOffer")
+    }
+}
 module.exports = {
     loadLanding,
     loadRegister,
@@ -555,10 +728,17 @@ module.exports = {
     loadAddress,
     loadCheckOut,
     insertAddress,
+    //coupon
+    loadCoupon,
+    applyCoupon,
     //rezorpay
     verifyRazorpayPayment,
     generateRazorpay,
     //myProfile
     loadMyProfile,
-    insertMyProfile
+    insertMyProfile,
+    uploadProfileImage,
+    //referral
+    referralOffer
+
 };
