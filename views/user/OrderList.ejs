@@ -184,7 +184,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <% orderData.forEach(order=> { %>
+                            <% orderData.forEach(order => { %>
                                 <tr>
                                     <th scope="row">
                                         <%= order._id %>
@@ -193,16 +193,22 @@
                                         <%= order.orderStatus %>
                                     </td>
                                     <td>
-                                        <%= order.orderDate %>
+                                        <% const orderDate = new Date(order.orderDate); %>
+                                        <% const options = { day: '2-digit', month: 'long', year: 'numeric' }; %>
+                                        <% const formattedDate = orderDate.toLocaleDateString('en-US', options); %>
+                                        <% const [month,day , year] = formattedDate.split(' '); %>
+                                        <%= `${day}${month},${year}` %>
                                     </td>
                                     <td>
                                         <%= order.products.length %>
-                                    </td> <!-- Display the number of products in the order -->
-                                    <td><a href="/user/order/detail/<%= order._id %>"
-                                            style="color: black !important">View Details</a></td>
+                                    </td>
+                                    <td>
+                                        <a href="/user/order/detail/<%= order._id %>" style="color: black !important">View Details</a>
+                                    </td>
                                 </tr>
-                                <% }); %>
+                            <% }); %>
                         </tbody>
+                        
                     </table>
                     <% } else { %>
                         <!-- Handle case when orderData is empty or undefined -->

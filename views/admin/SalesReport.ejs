@@ -94,13 +94,6 @@
       </li>
       <!-- End Dashboard Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" href="admin/products">
-          <i class="bi bi-menu-button-wide"></i><span>Products</span>
-        </a>
-      </li>
-      <!-- End Components Nav -->
-
       <li class="nav-item ">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" href="admin/category">
           <i class="bi bi-journal-text"></i><span>category</span>
@@ -109,24 +102,45 @@
       <!-- End Forms Nav -->
 
       <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" href="admin/products">
+          <i class="bi bi-menu-button-wide"></i><span>Products</span>
+        </a>
+      </li>
+      <!-- End Components Nav -->
+
+
+      <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#tables-nav" href="/admin/orders">
           <i class="bi bi-layout-text-window-reverse"></i><span>Orders</span>
         </a>
       </li>
       <!-- End Tables Nav -->
 
-      <!-- <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-bar-chart"></i><span>Coupons</span>
+     <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#charts-nav"  href="admin/coupons">
+          <i class="bi bi-bar-chart"></i><span>Coupons</span><i ></i>
         </a>
-      </li> -->
-      <!-- End Charts Nav -->
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#charts-nav"  href="admin/product_offers">
+          <i class="bi bi-bag"></i><span>Product Offers</span><i ></i>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#charts-nav"  href="admin/category_offers">
+          <i class="bi bi-tag"></i><span>Category Offers</span><i ></i>
+        </a>
+      </li>
+
       <!-- 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-gem"></i><span>Banner</span>
         </a>
       </li> -->
+      
       <!-- End Icons Nav -->
       <li class="nav-item">
         <a class="nav-link " data-bs-target="#icons-nav" href="/admin/sales-report">
@@ -303,10 +317,13 @@
 
                   <tbody>
                     <% let counter=0; %> <!-- Initialize a counter variable -->
+                    <!-- Initialize a counter variable -->
+
 
                       <% if (orderData.length> 0) { %>
-                        <% orderData.forEach((data)=> {
-                          data.populatedProducts.forEach((product) => {
+                        <% orderData.forEach((data)=> {%>
+                          <% let i=0; %>
+                          <%data.populatedProducts.forEach((product) => {
                           const orderIdString = String(data._id);
                           const lastFourDigits = orderIdString.slice(-4);
                           const orderDate = new Date(data.date);
@@ -331,10 +348,10 @@
                             </td>
                             <!-- Display other relevant fields from the order and product objects -->
                             <td>
-                              <%= data.products[0].quantity %>
+                              <%= data.products[i].quantity %>
                             </td>
                             <td>
-                              <%= product.price * data.products[0].quantity %>
+                              <%=data.products[i].price*data.products[i].quantity %>
                             </td>
                             <td>
                               <%= data.paymentStatus %>
@@ -343,8 +360,9 @@
                               <%= data.orderStatus %>
                             </td>
                           </tr>
-                          <% }) %>
-                            <% }) %>
+                          <%i++%>
+                          <%})  %>
+                            <%  }) %>
                               <% } else { %>
                                 <tr>
                                   <td colspan="9" style="text-align: center; font-size: xx-large;">Sales Not Found</td>

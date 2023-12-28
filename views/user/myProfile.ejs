@@ -174,16 +174,19 @@
             <div class="row bg-warning">
                 <div class="col-4 d-flex align-items-center justify-content-center flex-column">
                     <div class="bg-warning">
-                        <img id="previewImage" src="<%= userData.profileImageUrl ? userData.profileImageUrl : '/imageUpload/products/1703142604540-c72f2e-No_image_available.svg.png' %>" alt="" width="100px" height="100px">
+                        <img id="previewImage"
+                            src="<%= userData.profileImageUrl ? userData.profileImageUrl : '/imageUpload/products/1703142604540-c72f2e-No_image_available.svg.png' %>"
+                            alt="" width="100px" height="100px">
                     </div>
                     <div>
                         <label for="uploadImage" class="btn btn-primary">
                             Change Image
-                            <input type="file" id="uploadImage" accept="image/" hidden onchange="previewSelectedImage(event)">
+                            <input type="file" id="uploadImage" accept="image/" hidden
+                                onchange="previewSelectedImage(event)">
                         </label>
                     </div>
                 </div>
-                
+
                 <script>
                     function previewSelectedImage(event) {
                         const file = event.target.files[0];
@@ -196,18 +199,18 @@
                             uploadProfileImage(file);
                         }
                     }
-                
+
                     async function uploadProfileImage(file) {
                         try {
                             const formData = new FormData();
                             formData.append('file', file);
-                
+
                             const response = await fetch('/user/my-profile/upload-profile-image', {
                                 method: 'POST',
                                 body: formData
                                 // You might need to set headers and other configurations based on your server's requirements
                             });
-                
+
                             if (response.ok) {
                                 // Handle success, if needed
                                 console.log('File uploaded successfully');
@@ -220,7 +223,7 @@
                         }
                     }
                 </script>
-                
+
 
                 <div class="col-8">
                     <div class="row">
@@ -257,9 +260,146 @@
             </div>
             <div class="row mt-4 bg-danger">
                 <div class="col-4 mb-3 bg-success">
-                    
-                    <h1>gu</h1>
+                    <style>
+                        .coupon {
+                            border-radius: 12px;
+                            box-shadow: 5px 8px 10px #d6d5d533;
+                        }
+
+                        body {
+                            background: rgb(251, 253, 255);
+                        }
+
+                        .code:hover {
+                            background: green;
+                            color: #fff;
+                            cursor: pointer;
+                        }
+                    </style>
+                    <!-- Large modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target=".bd-example-modal-lg">coupons</button>
+
+                    <!-- Modal -->
+                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+                        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container mt-5">
+                                        <div class="d-flex justify-content-center row">
+                                            <% if (couponData.length> 0) {
+                                                couponData.forEach(data => { %>
+                                                <div class="col-md-10 d-flex justify-content-center border">
+                                                    <div class="col-md-6 border-right">
+                                                        <div class="d-flex flex-column align-items-center">
+                                                            <h1>
+                                                                <%= data.couponName %>
+                                                            </h1>
+                                                            <span class="d-block">Expiry Date:
+                                                                <% const expiryDate=new Date(data.expiryDate); const
+                                                                    formattedDate=expiryDate.toLocaleDateString('en-US',
+                                                                    { year: 'numeric' , month: 'short' , day: 'numeric'
+                                                                    }); %>
+                                                                    <%= formattedDate %>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div>
+                                                            <div class="d-flex flex-row justify-content-end off">
+                                                                <h1>
+                                                                    <%= data.discountPercentage %>%
+                                                                </h1>
+                                                                <span>OFF</span>
+                                                            </div>
+                                                            <div
+                                                                class="d-flex flex-row justify-content-between off px-3 p-2">
+                                                                <span>Promo code:</span>
+                                                                <span class="border border-success px-3 rounded code">
+                                                                    <%= data.couponCode %>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <% }); } else { %>
+                                                    <div class="col-md-10 d-flex justify-content-center border">
+                                                        <h1>No coupons available</h1>
+                                                    </div>
+                                                    <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                        .copy-container {
+                            display: flex;
+                            align-items: center;
+                        }
+
+                        #copyIcon {
+                            cursor: pointer;
+                        }
+                    </style>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#exampleModalCenter">referreral code</button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="copy-container">
+                                        <input id="copyText"
+                                            value="http://localhost:8080/user/referral-link?userId=<%=userData._id%>"
+                                            readonly>
+                                        </i>
+                                        <i id="copyIcon" class="fa fa-copy" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        // Wait for the DOM to be fully loaded
+                        document.addEventListener('DOMContentLoaded', function () {
+                            // Add a click event listener to the icon
+                            document.getElementById('copyIcon').addEventListener('click', () => {
+                                var copyText = document.getElementById("copyText");
+
+                                // Select the text field
+                                copyText.select();
+                                copyText.setSelectionRange(0, 99999); // For mobile devices
+
+                                // Copy the text inside the text field
+                                navigator.clipboard.writeText(copyText.value);
+
+                                // Alert the copied text
+                                alert('Referral link has been copied to the clipboard!');
+                            });
+                        });
+                    </script>
+
                 </div>
+
                 <div class="col-8">
                     <div>
                         <label for="oldPassword">Old Password</label>

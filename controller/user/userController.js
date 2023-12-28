@@ -7,8 +7,8 @@ const orderModel = require("../../model/orderModel")
 const cartModel = require("../../model/cartModel");
 const couponModel = require("../../model/couponModel");
 const razorpay = require("razorpay")
-const moment = require("moment")
 require('dotenv').config();
+const fs = require('fs');
 
 
 //............passwordHashing.......................
@@ -18,7 +18,7 @@ const securePassword = async (password) => {
         const passwordHash = await bcrypt.hash(password, 10)
         return passwordHash
     } catch (error) {
-        console.log(error.message + " bcrypt")
+        console.error(error.message + " bcrypt")
     }
 }
 
@@ -26,8 +26,6 @@ const securePassword = async (password) => {
 
 const sendVerifyMail = async (name, email) => {
     try {
-        // console.log(email);
-        // console.log(name);
         const otp = Math.floor(1000 + Math.random() * 9000);
 
         const transporter = nodemailer.createTransport({
@@ -56,7 +54,7 @@ const sendVerifyMail = async (name, email) => {
 
         // Send mail using async/await
         const info = await transporter.sendMail(mailOptions);
-        console.log("Email has been sent:", info.accepted);
+        console.info("Email has been sent:", info.accepted);
     } catch (error) {
         console.error("Error in sending verification mail:", error.message);
     }
@@ -76,7 +74,7 @@ const loadRegister = async (req, res) => {
     try {
         res.render("user/register");
     } catch (error) {
-        console.log(error.message + " loadUser");
+        console.error(error.message + " loadUser");
     }
 };
 
@@ -106,10 +104,10 @@ const insertRegister = async (req, res) => {
                 return res.json({ status: true });
             }
         } else {
-            console.log("Data insertion in user failed");
+            console.error("Data insertion in user failed");
         }
     } catch (error) {
-        console.log(error.message + " insertUser");
+        console.error(error.message + " insertUser");
     }
 }
 
@@ -118,7 +116,7 @@ const loadOtp = async (req, res) => {
     try {
         res.render("user/otp")
     } catch (error) {
-        console.log(error.message + " loadOTp")
+        console.error(error.message + " loadOTp")
     }
 }
 
@@ -196,7 +194,7 @@ const resendOtp = async (req, res) => {
             res.render("user/otp", { message: "New  otp has been sent to email" })
         }
     } catch (error) {
-        console.log(error.message + " resendOtp")
+        console.error(error.message + " resendOtp")
     }
 }
 
@@ -210,7 +208,7 @@ const loadHome = async (req, res) => {
         res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
         res.render("user/home", { product: productData, biographies: biographiesData, crimeAndThriller: crimeAndThrillerData })
     } catch (error) {
-        console.log(error.message + "loadHome")
+        console.error(error.message + "loadHome")
     }
 }
 
@@ -220,7 +218,7 @@ const loadLogin = async (req, res) => {
         res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
         res.render("user/login")
     } catch (error) {
-        console.log(error.message + "loadLogin")
+        console.error(error.message + "loadLogin")
     }
 }
 
@@ -235,7 +233,6 @@ const verifyLogin = async (req, res) => {
             const passwordCompare = await bcrypt.compare(password, userData.password)
             if (passwordCompare) {
                 req.session.emailVerifyUser = req.body.email
-                // console.log(req.session.emailVerifyUser)
                 req.session.userLogged = true
                 req.session.userData = userData
                 res.redirect("/user/home")
@@ -254,7 +251,7 @@ const verifyLogin = async (req, res) => {
             res.render("user/login", { message: "User not found" })
         }
     } catch (error) {
-        console.log(error.message + " verifyLogin")
+        console.error(error.message + " verifyLogin")
     }
 }
 
@@ -262,11 +259,10 @@ const verifyLogin = async (req, res) => {
 //..............logOut.......................
 const userLogout = async (req, res) => {
     try {
-        // console.log("hi")
         req.session.destroy();
         res.redirect("/");
     } catch (error) {
-        console.log(error.message + " userLogout")
+        console.error(error.message + " userLogout")
     }
 }
 
@@ -283,7 +279,7 @@ const userLogout = async (req, res) => {
 //             res.send("inserted")
 //         }
 //     } catch (error) {
-//         console.log(error.message + " adiminInsert")
+//         console.error(error.message + " adiminInsert")
 //     }
 // }
 
@@ -294,7 +290,7 @@ const loadProductDetail = async (req, res) => {
         const productData = await productModel.findById(id)
         res.render("user/productDetail", { product: productData })
     } catch (error) {
-        console.log(error.message + " loadProductDetails")
+        console.error(error.message + " loadProductDetails")
     }
 }
 
@@ -309,7 +305,7 @@ const loadAddress = async (req, res) => {
         res.render("user/address", { userData: userData })
 
     } catch (error) {
-        console.log(error.message + "loadAddress")
+        console.error(error.message + "loadAddress")
     }
 }
 
@@ -345,7 +341,7 @@ const loadCheckOut = async (req, res) => {
             res.redirect("/user/home");
         }
     } catch (error) {
-        console.log(error.message + " loadCheckOut");
+        console.error(error.message + " loadCheckOut");
     }
 };
 
@@ -367,15 +363,26 @@ const insertAddress = async (req, res) => {
 
         // Adding to order model
         const cartId = req.session.cartData._id;
-        const cartData = await cartModel.findById(cartId);
+        const cartData = await cartModel.findById(cartId).populate("items.productId");;
 
         if (cartData) {
             // Define the products  object
-            const products = cartData.items.map(item => ({
-                productId: item.productId,
-                quantity: item.quantity
+            const products = cartData.items.map(item => {
+                let itemPrice = item.productId.price;
 
-            }));
+                if (item.productId.productOffer || item.productId.categoryOffer) {
+                    const offerPercentage = Math.max(item.productId.productOffer || 0, item.productId.categoryOffer || 0);
+                    const originalPrice = item.productId.price;
+                    const discountAmount = (originalPrice * offerPercentage) / 100;
+                    itemPrice = originalPrice - discountAmount;
+                }
+
+                return {
+                    productId: item.productId,
+                    quantity: item.quantity,
+                    price: itemPrice
+                };
+            });
 
 
             // Define the shipping address object
@@ -390,26 +397,32 @@ const insertAddress = async (req, res) => {
                 phone: phone
             };
 
+            const orderDate = new Date();
+            const deliveryDate = new Date();
+            deliveryDate.setDate(deliveryDate.getDate() + 7); // Adding 7 days to the current date
+
             const orderData = new orderModel({
                 userId: req.session.userData._id,
                 products: products,
                 orderStatus: 'ordered',
                 totalAmount: req.session.grandtotal,
                 shippingAddress: [shippingAddress],
-                orderDate: moment().format('Do MMMM  YYYY, h:mm:ss a'),
+                orderDate: orderDate,
                 paymentStatus: 'pending',
                 paymentMethod: paymentMethod,
-                deliveryDate: moment().add(7, 'days').format('Do MMMM YYYY, h:mm:ss a'),
+                deliveryDate: deliveryDate,
                 activity: [{
-                    date: new Date(),
+                    date: orderDate,
                     status: 'ordered'
                 }]
             });
+
 
             // Save orderData to the database
 
             const savedOrder = await orderData.save();
 
+        
             const couponData = await couponModel.findOne({ couponCode: req.session.couponCode, status: "active" });
 
             // Check if the couponData is valid and the coupon is active
@@ -460,7 +473,7 @@ const insertAddress = async (req, res) => {
                             element.productId,
                             { $inc: { quantity: -element.quantity } }
                         );
-                        // console.log(element.productId + " " + element.quantity);
+                       
                     } catch (updateError) {
                         console.error(`Error updating product quantity for ID ${element.productId}: ${updateError.message}`);
                         return res.status(500).json({ error: 'An error occurred while updating product quantities.' });
@@ -477,13 +490,7 @@ const insertAddress = async (req, res) => {
     }
 };
 
-const loadCoupon = async (req, res) => {
-    try {
 
-    } catch (error) {
-        console.error(error.message + " showCoupon")
-    }
-}
 
 const applyCoupon = async (req, res) => {
     try {
@@ -573,7 +580,7 @@ const generateRazorpay = async (req, res) => {
 
         res.json({ order });
     } catch (error) {
-        console.log(error.message + " generateRazorpay");
+        console.error(error.message + " generateRazorpay");
         return res.status(500).json({ error: "Razorpay order creation error" });
     }
 };
@@ -605,7 +612,7 @@ const verifyRazorpayPayment = async (req, res) => {
                 });
             });
     } catch (error) {
-        console.log(error.message + " verifyRazorpayPayment");
+        console.error(error.message + " verifyRazorpayPayment");
         res.status(500).json({ status: false, message: "Error in verifying Razorpay payment" });
     }
 };
@@ -615,14 +622,14 @@ const verifyRazorpayPayment = async (req, res) => {
 const loadMyProfile = async (req, res) => {
     try {
         const userData = await userModel.findById(req.session.userData._id)
-        res.render("user/myProfile", { userData: userData })
+        const couponData = await couponModel.find({ status: "active" })
+        res.render("user/myProfile", { userData: userData, couponData })
     } catch (error) {
-        console.log(error.message)
+        console.error(error.message)
     }
 }
 const insertMyProfile = async (req, res) => {
     try {
-        console.log(req.body)
         const userId = req.session.userData._id;
         const { firstName, lastName, email, phone, oldPassword, newPassword } = req.body;
 
@@ -675,38 +682,46 @@ const insertMyProfile = async (req, res) => {
 
 const uploadProfileImage = async (req, res) => {
     try {
-        if (!req.file) {
-            return res.status(400).send('No file uploaded'); // Handle case where no file is uploaded
-        }
-
         const { filename } = req.file;
         const profileImageUrl = "/imageUpload/products/" + filename;
         const userId = req.session.userData._id;
 
+        const userData = await userModel.findById(userId)
+        const oldImageUrl = `public${userData.profileImageUrl}`;
+
         const updateProfileImage = await userModel.findByIdAndUpdate(
             userId,
             { profileImageUrl: profileImageUrl },
-            { new: true } // To get the updated user data after the update operation
+            { new: true }
         );
-        // console.log(updateProfileImage)
-        // if (!updateProfileImage) {
-        //     return res.status(404).send('User not found'); // Handle case where user ID doesn't exist
-        // }
 
-        // res.status(200).send('Profile image uploaded successfully');
+        if (oldImageUrl != "publicundefined") {
+            fs.unlink(oldImageUrl, (unlinkErr) => {
+                if (unlinkErr) {
+                    console.error('File unlink error:', unlinkErr);
+                    // Handle error if unlinking fails
+                    res.status(500).send('Error deleting old profile image');
+                } else {
+                    console.error('File deleted successfully');
+                    // Additional logic or response if needed
+                    res.status(200).send('Profile image updated successfully');
+                }
+            });
+        } else {
+            console.error("no image")
+        }
     } catch (error) {
         console.error(error.message + " uploadProfileImage");
         res.status(500).send('Error uploading profile image'); // Handle other errors
     }
 };
 
+
 const referralOffer = async (req, res) => {
     try {
-        // console.log(req.query)
         const { userId } = req.query
         req.session.referralOffer = true
         req.session.referralUserId = userId
-        // console.log(req.session.referralUserId)
         res.redirect("/user/register")
     } catch (error) {
         console.error(error.message + " referralOffer")
@@ -723,21 +738,25 @@ module.exports = {
     loadLogin,
     verifyLogin,
     userLogout,
+
     // adminInsert,
     loadProductDetail,
     loadAddress,
     loadCheckOut,
     insertAddress,
+
     //coupon
-    loadCoupon,
     applyCoupon,
+
     //rezorpay
     verifyRazorpayPayment,
     generateRazorpay,
+
     //myProfile
     loadMyProfile,
     insertMyProfile,
     uploadProfileImage,
+
     //referral
     referralOffer
 

@@ -6,9 +6,8 @@ const cookieParser = require("cookie-parser");
 require('dotenv').config();
 const app = express();
 require("./config/dataBase")
-// const moment = require("moment")
 
-// Initialization
+// ..........session..................
 app.use(cookieParser());
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -16,31 +15,31 @@ app.use(session({
     resave: true
 }));
 
-
 // ..........set port, listen for requests........
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
     console.log(`Server is running on port  http://127.0.0.1:${PORT}`);
 });
 
-
-//for user routes
+//........for user routes............
 const userRoute = require("./routes/userRoute")
 app.use("/user", userRoute)
 
-//for admin routes
+//......for admin routes........
 const adminRoute = require("./routes/adminRoute")
 app.use("/admin", adminRoute)
 
-//........landingPage.....................
+//............ejs...........................
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 
+//........landingPage.......................
 const userAuth = require("./midddleware/UserAuth")
 const adminAuth = require("./midddleware/adminAuth")
 const userController = require("./controller/user/userController");
 app.get("/", userAuth.userExist, adminAuth.adminExist, userController.loadLanding)
 
+//..........load4o4Page............
 app.all('*', (req, res) => {
     res.render("user/404")
 });

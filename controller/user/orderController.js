@@ -14,7 +14,7 @@ const loadOrderConfirmation = async (req, res) => {
 
         res.render("user/orderConfirmation", { orderId, shippingAddress })
     } catch (error) {
-        console.log(error.message + " loadOrderConfirmation")
+        console.error(error.message + " loadOrderConfirmation")
     }
 }
 const loadOrderList = async (req, res) => {
@@ -24,18 +24,16 @@ const loadOrderList = async (req, res) => {
 
         res.render("user/orderList", { orderData: orderData })
     } catch (error) {
-        console.log(error.message + " loadOrderList")
+        console.error(error.message + " loadOrderList")
     }
 }
 const loadOrderDetail = async (req, res) => {
     try {
         const orderId = req.params.OrderId
-        // console.log(orderId);
         const orderData = await orderModel.findById({ _id: orderId }).populate("products.productId")
-        // console.log(orderData)
         res.render("user/orderDetail", { orderData: orderData })
     } catch (error) {
-        console.log(error.message + "orderDetail")
+        console.error(error.message + "orderDetail")
     }
 }
 

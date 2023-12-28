@@ -226,10 +226,10 @@
                       <%=element.quantity%>
                     </td>
                     <td>
-                      <%=element.productId.price%>
+                      <%=element.price%>
                     </td>
                     <td>
-                      <%=element.quantity*element.productId.price%>
+                      <%=element.quantity*element.price%>
                     </td>
                   </tr>
                   <%})}%>
@@ -292,7 +292,11 @@
                 </select>
               </h5>
               <h5>
-                <%=orderData.orderDate%>
+                <% const orderDate = new Date(orderData.orderDate); %>
+                <% const options = { day: '2-digit', month: 'long', year: 'numeric' }; %>
+                <% const formattedDate = orderDate.toLocaleDateString('en-US', options); %>
+                <% const [month,day , year] = formattedDate.split(' '); %>
+                <%= `${day}${month},${year}` %>
               </h5>
               <h5>
                 <select name="paymentStatus" id="paymentStatus">

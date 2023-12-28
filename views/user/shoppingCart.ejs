@@ -204,8 +204,8 @@
         <div class="Shopping-cart-area pt-60 pb-60">
             <div class="container">
                 <div class="row">
-                    <div class="col-12">
-                        <form>
+                    <div class="col-12"  id="cartRow">
+                        <form >
                             <div class="table-content table-responsive">
                                 <% if (cartData && cartData.items.length> 0) {%>
                                     <table class="table">
@@ -221,9 +221,6 @@
                                         </thead>
                                         <style></style>
                                         <tbody>
-                                            <!-- <script>
-                                                console.log(<%= JSON.stringify(cartData) %>);
-                                            </script> -->
                                             <%cartData.items.forEach((element)=> {%>
                                                 <tr>
                                                     <td class="li-product-remove"><a
@@ -235,9 +232,21 @@
                                                     <td class="li-product-name"><a>
                                                             <%= element.productId.productName %>
                                                         </a></td>
-                                                    <td class="li-product-price"><span class="amount"
-                                                            id="<%= element.productId._id%>UnitPrice">&#8377 <%=
-                                                                element.productId.price %></span></td>
+                                                        <% if (element.productId.productOffer || element.productId.categoryOffer) { %>
+                                                            <% const offerPercentage = Math.max(element.productId.productOffer || 0, element.productId.categoryOffer || 0); %>
+                                                            <% const originalPrice = element.productId.price; %>
+                                                            <% const discountAmount = (originalPrice * offerPercentage) / 100; %>
+                                                            <% const discountedPrice = originalPrice - discountAmount; %>
+                                                            <td class="li-product-price">
+                                                                <span class="amount" id="<%= element.productId._id %>_UnitPrice">&#8377;<%= discountedPrice.toFixed(2) %></span>
+                                                            </td>
+                                                        <% } else { %>
+                                                            <td class="li-product-price">
+                                                                <span class="amount" id="<%= element.productId._id %>_UnitPrice">&#8377;<%= element.productId.price %></span>
+                                                            </td>
+                                                        <% } %>
+                                                        
+                                                   
                                                     <td class="quantity">
                                                         <div class="number">
                                                             <span class="minus"
@@ -249,11 +258,21 @@
 
                                                         </div>
                                                     </td>
-                                                    <td class="product-subtotal"><span class="amount"
-                                                            id="<%= element.productId._id%>total">&#8377
-                                                            <%=element.productId.price*element.quantity %>
-                                                        </span>
-                                                    </td>
+                                                    <% if (element.productId.productOffer || element.productId.categoryOffer) { %>
+                                                        <% const offerPercentage = Math.max(element.productId.productOffer || 0, element.productId.categoryOffer || 0); %>
+                                                        <% const originalPrice = element.productId.price; %>
+                                                        <% const discountAmount = (originalPrice * offerPercentage) / 100; %>
+                                                        <% const discountedPrice = (originalPrice - discountAmount) * element.quantity; %>
+                                                        <td class="product-subtotal">
+                                                            <span class="amount" id="<%= element.productId._id %>_total">&#8377;<%= discountedPrice.toFixed(2) %></span>
+                                                        </td>
+                                                    <% } else { %>
+                                                        <% const subtotal = element.productId.price * element.quantity; %>
+                                                        <td class="product-subtotal">
+                                                            <span class="amount" id="<%= element.productId._id %>_total">&#8377;<%= subtotal.toFixed(2) %></span>
+                                                        </td>
+                                                    <% } %>                                                    
+                                                    
                                                 </tr>
                                                 <% }) %>
                                         </tbody>
@@ -268,19 +287,7 @@
                                         </tr>
                                         <% } %>
                             </div>
-                            <div class="row">
-                                <!-- <div class="col-12">
-                                        <div class="coupon-all">
-                                            <div class="coupon">
-                                                <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code" type="text">
-                                                <input class="button" name="apply_coupon" value="Apply coupon" type="submit">
-                                            </div>
-                                            <div class="coupon2">
-                                                <input class="button" name="update_cart" value="Update cart" type="submit">
-                                            </div>
-                                        </div>
-                                    </div> -->
-                            </div>
+                            
                             <% if (cartData && cartData.items.length> 0) {%>
                                 <div class="row">
                                     <div class="col-md-5 ml-auto">
@@ -298,6 +305,7 @@
                         </form>
                     </div>
                 </div>
+                <!--ROW ENDS-->
             </div>
         </div>
 

@@ -50,7 +50,6 @@ const insertCoupon = async (req, res) => {
 const loadEditCoupon = async (req, res) => {
     try {
         const { couponId } = req.query;
-        // console.log(couponId)
         const couponData = await couponModel.findOne({ _id: couponId });
         res.json({ couponData: couponData });
     } catch (error) {
@@ -72,7 +71,6 @@ const insertEditCoupon = async (req, res) => {
             minimumOrderAmount
         } = req.body;
 
-        // console.log(couponId+"hiii")
         // Convert couponName and couponCode to lowercase for case-insensitive comparison
         const normalizedCouponName = couponName.toLowerCase();
         const normalizedCouponCode = couponCode.toLowerCase();
@@ -86,7 +84,6 @@ const insertEditCoupon = async (req, res) => {
         });
         
 
-        // console.log(existingCoupon)
 
         if (existingCoupon && existingCoupon._id.toString() !== couponId) {
             return res.json({ error: 'Coupon code or name already exists.' });
@@ -139,7 +136,7 @@ const deactivateCoupon = async (req, res) => {
 // Function to check coupon expiry and update status
 const checkCouponExpiry = async () => {
     try {
-        console.log("checkCouponExpiry")
+        console.error("checkCouponExpiry")
         // Find all active coupons
         const activeCoupons = await couponModel.find({ status: 'active' });
 
@@ -161,7 +158,7 @@ const checkCouponExpiry = async () => {
 
         // Log expired coupon names
         if (expiredCouponNames.length > 0) {
-            console.log('Expired Coupon Names:', expiredCouponNames);
+            console.error('Expired Coupon Names:', expiredCouponNames);
         }
     } catch (error) {
         console.error('Error checking coupon expiry:', error);

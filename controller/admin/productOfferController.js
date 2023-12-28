@@ -34,6 +34,11 @@ const AddProductOffer = async (req, res) => {
         });
 
         await newProductOffer.save();
+        const updateProduct=await productModel.findByIdAndUpdate(
+            productId,{
+                productOffer:discount
+            }, { new: true }
+        )
         res.status(200).json({ message: 'Product offer added successfully', status: true });
     } catch (error) {
         console.error(error.message + " AddProductOffer");
@@ -78,6 +83,12 @@ const insertEditProductOffer = async (req, res) => {
                 status: "active"
             }, { new: true }
         );
+        const updateProduct = await productModel.findOneAndUpdate(
+            { productName: productName },
+            { productOffer: discount },
+            { new: true }
+        );
+        
         res.status(200).json({ status: true });
 
     } catch (error) {
@@ -86,20 +97,29 @@ const insertEditProductOffer = async (req, res) => {
 }
 const deactivateProductOffer = async (req, res) => {
     try {
-        const { productOfferId } = req.query;
+        const { productOfferId ,productName} = req.query;
         const updateProductOffer = await productOfferModel.findByIdAndUpdate(
             productOfferId,
             { status: "deactive" }
         );
+
+        const updateProduct = await productModel.findOneAndUpdate(
+            { productName: productName }, 
+            { $unset: { productOffer: 1 } }, 
+            { new: true }
+        );
+        
+
         res.redirect("/admin/product_offers");
     } catch (error) {
         console.error(error.message + " deactivateProductOffer");
     }
 };
 
+
 const checkProductOfferExpiry = async () => {
     try {
-        console.log("checkProductOfferExpiry");
+        console.error("checkProductOfferExpiry");
 
         // Find all active product offers
         const activeProductOffers = await productOfferModel.find({ status: 'active' });
@@ -117,13 +137,18 @@ const checkProductOfferExpiry = async () => {
             if (expiryDate < currentDate) {
                 // Expired, update status to 'expired'
                 await productOfferModel.findByIdAndUpdate(productOffer._id, { status: 'expired' });
+                const updateProduct = await productModel.findOneAndUpdate(
+                    { productName: productOffer.productName }, // Filtering criteria
+                    { $unset: { productOffer: 1 } }, // Unset the ProductOffer field
+                    { new: true }
+                );
                 expiredProductOfferNames.push(productOffer.productName); // Push expired product offer name to the array
             }
         }
 
         // Log expired product offer names
         if (expiredProductOfferNames.length > 0) {
-            console.log('Expired Product Offer Names:', expiredProductOfferNames);
+            console.error('Expired Product Offer Names:', expiredProductOfferNames);
         }
     } catch (error) {
         console.error(error.message + " checkProductOfferExpiry");

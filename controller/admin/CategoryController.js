@@ -7,7 +7,7 @@ const loadCategory = async (req, res) => {
         const categoryData = await categoryModel.find({})
         res.render("admin/category", { category: categoryData })
     } catch (error) {
-        console.log(error.message + " loadcategory")
+        console.error(error.message + " loadcategory")
     }
 }
 const insertCategory = async (req, res) => {
@@ -62,7 +62,7 @@ const getEditCategoryId = async (req, res) => {
         res.json({ categoryData })
 
     } catch (error) {
-        console.log(error.message + " getEditCategoryId")
+        console.error(error.message + " getEditCategoryId")
     }
 }
 const editCategory = async (req, res) => {
@@ -90,7 +90,7 @@ const editCategory = async (req, res) => {
         return res.json({ status: true })
 
     } catch (error) {
-        console.log(error.message + " editCategory")
+        console.error(error.message + " editCategory")
         return res.json({ err: "Category already exists." });
     }
 }
@@ -105,7 +105,7 @@ const deleteCategory = async (req, res) => {
         })
         res.redirect("/admin/category");
     } catch (error) {
-        console.log(error.message + " deleteCategory")
+        console.error(error.message + " deleteCategory")
     }
 }
 const recoverCategory = async (req, res) => {
@@ -119,7 +119,7 @@ const recoverCategory = async (req, res) => {
         })
         res.redirect("/admin/category");
     } catch (error) {
-        console.log(error.message + " recoverCategory")
+        console.error(error.message + " recoverCategory")
     }
 }
 

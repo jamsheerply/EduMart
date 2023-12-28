@@ -9,7 +9,7 @@ const loadProduct = async (req, res) => {
 
         res.render("admin/product", { product: productData, productPageCount: productPageCount });
     } catch (error) {
-        console.log(error.message + " loadProduct");
+        console.error(error.message + " loadProduct");
     }
 };
 
@@ -24,7 +24,7 @@ const productPagination = async (req, res) => {
             .limit(productLimitPage);
         res.json({ product: productData, productPageNumber: productPageNumber });
     } catch (error) {
-        console.log(error.message + " productPagination");
+        console.error(error.message + " productPagination");
     }
 };
 
@@ -34,7 +34,7 @@ const loadAddProduct = async (req, res) => {
         const categoryData = await categoryModel.find({})
         res.render("admin/addProduct", { category: categoryData })
     } catch (error) {
-        console.log(error.message + "loadAddProduct")
+        console.error(error.message + "loadAddProduct")
     }
 }
 const insertAddProduct = async (req, res) => {
@@ -89,7 +89,7 @@ const insertAddProduct = async (req, res) => {
         await newProduct.save()
         return res.json({ status: true });
     } catch (error) {
-        console.log(error.message)
+        console.error(error.message)
         return res.json({ err: "Product name already exists." });
     }
 }
@@ -105,7 +105,7 @@ const EditProductLoad = async (req, res) => {
             res.redirect("admin/product")
         }
     } catch (error) {
-        console.log(error.message + " getEditProductId")
+        console.error(error.message + " getEditProductId")
     }
 }
 
@@ -196,7 +196,7 @@ const updateProduct = async (req, res) => {
 
         return res.json({ status: true })
     } catch (error) {
-        console.log(error.message + " updateProduct")
+        console.error(error.message + " updateProduct")
         return res.json({ err: "Product name already exists." });
     }
 }
@@ -210,7 +210,7 @@ const deleteProduct = async (req, res) => {
         })
         res.redirect("/admin/products")
     } catch (error) {
-        console.log(error.message + " deleteProduct")
+        console.error(error.message + " deleteProduct")
     }
 }
 const recoverProduct = async (req, res) => {

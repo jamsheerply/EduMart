@@ -232,11 +232,9 @@
                     <div class="col-lg-12">
                         <div class="li-product-tab">
                             <ul class="nav li-product-menu">
-                                <li><a class="active" data-toggle="tab" href="#li-new-product"><span>New
-                                            Arrival</span></a></li>
-                                <li><a data-toggle="tab" href="#li-bestseller-product"><span>Bestseller</span></a></li>
-                                <li><a data-toggle="tab" href="#li-featured-product"><span>Featured Products</span></a>
-                                </li>
+                                <li><a class="active" data-toggle="tab"><span>New Arrival</span></a></li>
+                                <!-- <li><a data-toggle="tab" href="#li-bestseller-product"><span>Bestseller</span></a></li> -->
+                                <!-- <li><a data-toggle="tab" href="#li-featured-product"><span>Featured Products</span></a></li> -->
                             </ul>
                         </div>
                         <!-- Begin Li's Tab Menu Content Area -->
@@ -262,7 +260,11 @@
                                                     <img src="<%=element.imageURL[0].productImage1%>"
                                                         alt="Li's Product Image">
                                                 </a>
-                                                <span class="sticker">New</span>
+                                                <% if (element.productOffer || element.categoryOffer) { %>
+                                                    <span class="sticker">
+                                                        <%= Math.max(element.productOffer || 0,element.categoryOffer||0) %>% OFF
+                                                    </span>
+                                                <% } %>
                                             </div>
                                             <div class="product_desc">
                                                 <div class="product_desc_info">
@@ -284,7 +286,16 @@
                                                             <%=element.productName%>
                                                         </a></h4>
                                                     <div class="price-box">
-                                                        <span class="new-price">&#8377;<%=element.price%></span>
+                                                        <% if (element.productOffer || element.categoryOffer) { %>
+                                                            <span class="new-price"><del>&#8377;<%= element.price %></del></span>
+                                                            <% const offerPercentage = Math.max(element.productOffer || 0, element.categoryOffer || 0); %>
+                                                            <% const originalPrice = element.price; %>
+                                                            <% const discountAmount = (originalPrice * offerPercentage) / 100; %>
+                                                            <% const discountedPrice = originalPrice - discountAmount; %>
+                                                            <span class="new-price">&#8377;<%= discountedPrice.toFixed(2) %></span>
+                                                        <% } else { %>
+                                                            <span class="new-price">&#8377;<%= element.price %></span>
+                                                        <% } %> 
                                                     </div>
                                                 </div>
                                                 <!-- <div class="add-actions">
@@ -360,7 +371,11 @@
                                                     <img src="<%=element.imageURL[0].productImage1%>"
                                                         alt="Li's Product Image">
                                                 </a>
-                                                <!-- <span class="sticker">New</span> -->
+                                                <% if (element.productOffer || element.categoryOffer) { %>
+                                                    <span class="sticker">
+                                                        <%= Math.max(element.productOffer || 0,element.categoryOffer||0) %>% OFF
+                                                    </span>
+                                                <% } %>
                                             </div>
                                             <div class="product_desc">
                                                 <div class="product_desc_info">
@@ -382,8 +397,16 @@
                                                             <%=element.productName%>
                                                         </a></h4>
                                                     <div class="price-box">
-                                                        <span class="new-price">&#8377;<%=element.price%>
-                                                        </span>
+                                                        <% if (element.productOffer || element.categoryOffer) { %>
+                                                            <span class="new-price"><del>&#8377;<%= element.price %></del></span>
+                                                            <% const offerPercentage = Math.max(element.productOffer || 0, element.categoryOffer || 0); %>
+                                                            <% const originalPrice = element.price; %>
+                                                            <% const discountAmount = (originalPrice * offerPercentage) / 100; %>
+                                                            <% const discountedPrice = originalPrice - discountAmount; %>
+                                                            <span class="new-price">&#8377;<%= discountedPrice.toFixed(2) %></span>
+                                                        <% } else { %>
+                                                            <span class="new-price">&#8377;<%= element.price %></span>
+                                                        <% } %> 
                                                     </div>
                                                 </div>
                                                 <!-- <div class="add-actions">
@@ -433,7 +456,11 @@
                                                     <img src="<%=element.imageURL[0].productImage1%>"
                                                         alt="Li's Product Image">
                                                 </a>
-                                                <!-- <span class="sticker">New</span> -->
+                                                <% if (element.productOffer || element.categoryOffer) { %>
+                                                    <span class="sticker">
+                                                        <%= Math.max(element.productOffer || 0,element.categoryOffer||0) %>% OFF
+                                                    </span>
+                                                <% } %>
                                             </div>
                                             <div class="product_desc">
                                                 <div class="product_desc_info">
@@ -455,7 +482,16 @@
                                                             <%=element.productName%>
                                                         </a></h4>
                                                     <div class="price-box">
-                                                        <span class="new-price">&#8377;<%=element.price%></span>
+                                                        <% if (element.productOffer || element.categoryOffer) { %>
+                                                            <span class="new-price"><del>&#8377;<%= element.price %></del></span>
+                                                            <% const offerPercentage = Math.max(element.productOffer || 0, element.categoryOffer || 0); %>
+                                                            <% const originalPrice = element.price; %>
+                                                            <% const discountAmount = (originalPrice * offerPercentage) / 100; %>
+                                                            <% const discountedPrice = originalPrice - discountAmount; %>
+                                                            <span class="new-price">&#8377;<%= discountedPrice.toFixed(2) %></span>
+                                                        <% } else { %>
+                                                            <span class="new-price">&#8377;<%= element.price %></span>
+                                                        <% } %> 
                                                     </div>
                                                 </div>
                                                 <!-- <div class="add-actions">

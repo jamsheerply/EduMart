@@ -153,7 +153,6 @@ const loadDashboard = async (req, res) => {
             }
         ]);
         const ordersYearly = ordersAggregateLastYearly.length > 0 ? ordersAggregateLastYearly[0].totalOrders : 0;
-        // console.log(ordersYearly)
 
         //.....................................///
         //...............customerCOunt...........//
@@ -416,7 +415,7 @@ const loadDashboard = async (req, res) => {
             salesLastFiveYears, chartSalesMonthly, chartSalesHourly, dayNamesWeekly, chartSalesWeekly
         })
     } catch (error) {
-        console.log(error.message + " loadDashboard")
+        console.error(error.message + " loadDashboard")
     }
 }
 

@@ -1,21 +1,24 @@
-// const { response } = require("../../routes/adminRoute");
+
 //.....................add-validateForm.......................
 function AddvalidateForm() {
-    //get form inputs
     const categoryname = document.getElementById("categoryname").value;
-    //define regualar expressions
-
-
-    //reset error messages
-    document.getElementById("categorynameError").textContent = ""
+   
+    // Reset error messages
+    document.getElementById("categorynameError").textContent = "";
 
     let valid = true;
+
     if (categoryname.trim() === "") {
-        document.getElementById("categorynameError").textContent = "category Name is required";
-        valid = false
+        document.getElementById("categorynameError").textContent = "Category Name is required";
+        valid = false;
+    } else if (categoryname.length > 32) {
+        document.getElementById("categorynameError").textContent = "Category Name should not exceed 32 characters";
+        valid = false;
     }
+
     return valid;
 }
+
 
 //....................addCategory...........................
 function addCategory(event) {

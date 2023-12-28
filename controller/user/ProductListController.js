@@ -7,7 +7,7 @@ const loadProductList = async (req, res) => {
         const pageCount = Math.ceil(productDataCount / 6)
         res.render("user/productList", { product: productData, pageCount: pageCount });
     } catch (error) {
-        console.log(error.message + " loadProductList");
+        console.error(error.message + " loadProductList");
     }
 };
 
@@ -20,7 +20,7 @@ const productListSort = async (req, res) => {
             .sort({ [sortBy]: order }).limit(6);
         res.json({ product: productData });
     } catch (error) {
-        console.log(error.message + " productListSort");
+        console.error(error.message + " productListSort");
     }
 };
 
@@ -46,7 +46,7 @@ const productListFilter = async (req, res) => {
 
         res.json({ product: productData });
     } catch (error) {
-        console.log(error.message + " productListFilter");
+        console.error(error.message + " productListFilter");
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
@@ -68,7 +68,7 @@ const productListPagination = async (req, res) => {
 
         res.json({ product: productData, pageNumber: pageNumber });
     } catch (error) {
-        console.log(error.message + " productPagination");
+        console.error(error.message + " productPagination");
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
@@ -83,7 +83,7 @@ const ProductListSearch = async (req, res) => {
 
         res.json({ product: productData });
     } catch (error) {
-        console.log(error.message + " ProductListSearch");
+        console.error(error.message + " ProductListSearch");
         res.status(500).json({ error: "Internal Server Error" });
     }
 };

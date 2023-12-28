@@ -32,23 +32,23 @@ const loadSalesReport = async (req, res) => {
                     orderStatus: 1,
                     paymentStatus: 1,
                     populatedProducts: 1,
-                    'products.quantity': 1, // Include products.quantity
+                    'products.quantity': 1, 
+                    'products.price': 1, 
                     populatedUser: 1,
-                    // Include other fields as needed
                 }
             },
             {
                 $sort: {
-                    date: -1 // Sort by 'date' field in descending order (recent to older)
+                    date: -1
                 }
             }
         ]).exec();
         req.session.orderFilterData = aggregationResult;
         req.session.save();
-        // console.log(orderData)
+   
         res.render("admin/salesReport", { orderData: aggregationResult })
     } catch (error) {
-        console.log(error.message + " loadSalesReport")
+        console.error(error.message + " loadSalesReport")
     }
 }
 const fillterSalesReport = async (req, res) => {
@@ -62,7 +62,6 @@ const fillterSalesReport = async (req, res) => {
             dateTo: dateTo
         }
         req.session.save()
-        // console.log('Original toDate:', toDate);
 
         const currentDate = new Date();
         const currentDateMidnight = new Date(
@@ -72,7 +71,7 @@ const fillterSalesReport = async (req, res) => {
             0, 0, 0, 0
         );
 
-        // console.log('Current Date:', currentDateMidnight);
+       
 
         const toDateFormat = `${toDate.getFullYear()}-${toDate.getMonth() + 1}-${toDate.getDate()}`;
         const currentDateFormat = `${currentDateMidnight.getFullYear()}-${currentDateMidnight.getMonth() + 1}-${currentDateMidnight.getDate()}`;
@@ -113,14 +112,13 @@ const fillterSalesReport = async (req, res) => {
                     orderStatus: 1,
                     paymentStatus: 1,
                     populatedProducts: 1,
-                    'products.quantity': 1, // Include products.quantity
+                    'products.quantity': 1, 
                     populatedUser: 1,
-                    // Include other fields as needed
                 }
             },
             {
                 $sort: {
-                    date: -1 // Sort by 'date' field in descending order (recent to older)
+                    date: -1 
                 }
             }
         ]).exec();
@@ -131,7 +129,7 @@ const fillterSalesReport = async (req, res) => {
 
 
     } catch (error) {
-        console.log(error.message + " fillterSalesReport")
+        console.error(error.message + " fillterSalesReport")
     }
 }
 const reportExcelDownload = async (req, res) => {
@@ -167,9 +165,9 @@ const reportExcelDownload = async (req, res) => {
         let totalSalesAmount = 0;
         let counter = 0;
         orderFilterData.forEach(data => {
-            // console.log(order);
+           
             data.populatedProducts.forEach(product => {
-                // console.log(product);
+           
                 let orderIdString = String(data._id);
                 let lastFourDigits = orderIdString.slice(-4);
                 let orderDate = new Date(data.date);
@@ -220,14 +218,14 @@ const download = async (req, res) => {
                         console.error('File unlink error:', unlinkErr);
                         // Handle error if unlinking fails
                     } else {
-                        console.log('File deleted successfully');
+                        console.error('File deleted successfully');
                         // Additional logic or response if needed
                     }
                 });
             }
         });
     } catch (error) {
-        console.log(error.message + " download")
+        console.error(error.message + " download")
     }
 }
 module.exports = {

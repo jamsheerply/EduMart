@@ -345,9 +345,20 @@
                                                                 class="product-quantity"> ×<%=element.quantity%>
                                                             </strong>
                                                     </td>
+                                                    <% if (element.productId.productOffer || element.productId.categoryOffer) { %>
+                                                        <% const offerPercentage = Math.max(element.productId.productOffer || 0, element.productId.categoryOffer || 0); %>
+                                                        <% const originalPrice = element.productId.price; %>
+                                                        <% const discountAmount = (originalPrice * offerPercentage) / 100; %>
+                                                        <% const discountedPrice = (originalPrice - discountAmount) * element.quantity; %>
+
+                                                    <td class="cart-product-total"><span class="amount">&#8377
+                                                            <%=discountedPrice.toFixed(2) %>
+                                                        </span></td>
+                                                        <% } else { %>  
                                                     <td class="cart-product-total"><span class="amount">&#8377
                                                             <%=element.productId.price*element.quantity %>
                                                         </span></td>
+                                                        <% } %>  
                                                 </tr>
                                             </tbody>
                                             <% }) }%>

@@ -203,6 +203,7 @@ function editProduct(id) {
 
 //..............image preview.........
 function previewImage(input, imageId) {
+
   const file = input.files[0];
   if (file) {
     const reader = new FileReader();

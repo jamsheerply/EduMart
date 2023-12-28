@@ -252,25 +252,15 @@
                         <!--// Product Details Left -->
                     </div>
                     <script type="text/javascript">
-                        function zoom(e) {
-                            var img = document.getElementById('productImage');
-                            var offsetX, offsetY, x, y;
-
-                            if (e.offsetX !== undefined && e.offsetY !== undefined) {
-                                offsetX = e.offsetX;
-                                offsetY = e.offsetY;
-                            } else { // For touch events
-                                offsetX = e.touches[0].pageX - img.offsetLeft;
-                                offsetY = e.touches[0].pageY - img.offsetTop;
-                            }
-
-                            x = offsetX / img.offsetWidth * 100;
-                            y = offsetY / img.offsetHeight * 100;
-
-                            img.style.transformOrigin = x + '% ' + y + '%';
-                            img.style.transform = 'scale(2)'; // Change the scale factor as needed
+                        function zoom(e){
+                          var zoomer = e.currentTarget;
+                          e.offsetX ? offsetX = e.offsetX : offsetX = e.touches[0].pageX
+                          e.offsetY ? offsetY = e.offsetY : offsetX = e.touches[0].pageX
+                          x = offsetX/zoomer.offsetWidth*100
+                          y = offsetY/zoomer.offsetHeight*100
+                          zoomer.style.backgroundPosition = x + '% ' + y + '%';
                         }
-                    </script>
+                        </script>
 
 
 
@@ -292,9 +282,18 @@
                                         <li class="no-star"><i class="fa fa-star-o"></i></li>
                                 </div>
                                 <div class="price-box pt-20">
-                                    <span class="new-price new-price-2">
-                                        &#8377;<%=product.price%>
-                                    </span>
+                                   
+                                    <% if (product.productOffer || product.categoryOffer) { %>
+                                        <span class="new-price"><del>&#8377;<%= product.price %></del></span>
+                                        <% const offerPercentage = Math.max(product.productOffer || 0, product.categoryOffer || 0); %>
+                                        <% const originalPrice = product.price; %>
+                                        <% const discountAmount = (originalPrice * offerPercentage) / 100; %>
+                                        <% const discountedPrice = originalPrice - discountAmount; %>
+                                        <span class="new-price">&#8377;<%= discountedPrice.toFixed(2) %></span>
+                                    <% } else { %>
+                                        <span class="new-price">&#8377;<%= product.price %></span>
+                                    <% } %>
+                                    
                                 </div>
                                 <div class="product-desc">
                                     <p>

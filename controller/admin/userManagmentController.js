@@ -4,7 +4,7 @@ const loadUser = async (req, res) => {
         const userData = await userMOdel.find({})
         res.render("admin/user", { user: userData })
     } catch (error) {
-        console.log(error.message + " loadUser")
+        console.error(error.message + " loadUser")
     }
 }
 const blockUser = async (req, res) => {
@@ -17,7 +17,7 @@ const blockUser = async (req, res) => {
         })
         res.redirect("/admin/users")
     } catch (error) {
-        console.log(error.message + " blockUser")
+        console.error(error.message + " blockUser")
     }
 }
 const unBlockUser = async (req, res) => {
@@ -30,7 +30,7 @@ const unBlockUser = async (req, res) => {
         })
         res.redirect("/admin/users")
     } catch (error) {
-        console.log(error.message + "unBlockUser")
+        console.error(error.message + "unBlockUser")
     }
 }
 module.exports = {

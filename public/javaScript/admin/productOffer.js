@@ -149,7 +149,7 @@ function EditProductOffer(id) {
         discount: discountPercentageEdit
     };
     if (editProductOfferValidation(id)) {
-        fetch(`/admin/category_offers/edit?categoryOfferId=${id}`, {
+        fetch(`/admin/product_offers/edit_product_offers?productOfferId=${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'

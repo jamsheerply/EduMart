@@ -52,7 +52,6 @@ userRoute.get("/check-out/:addressId", userAuth.verifyUser, userController.loadC
 userRoute.post("/check-out", userAuth.verifyUser, userController.insertAddress)
 
 //...............................applyCoupon.................................
-userRoute.get("/show-coupon", userAuth.verifyUser, userController.loadCoupon)
 userRoute.get("/apply-coupon", userAuth.verifyUser, userController.applyCoupon)
 
 userRoute.post('/check-out/generateRazorpayPayment', userController.generateRazorpay)
