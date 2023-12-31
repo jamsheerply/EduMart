@@ -3,6 +3,8 @@ const productModel = require("../../model/productModel")
 const userModel = require("../../model/userModel")
 const exceljs = require('exceljs');
 const fs = require('fs');
+
+//.............................loadSalesReport......................................
 const loadSalesReport = async (req, res) => {
     try {
         const aggregationResult = await orderModel.aggregate([
@@ -51,6 +53,8 @@ const loadSalesReport = async (req, res) => {
         console.error(error.message + " loadSalesReport")
     }
 }
+
+//..................................fillterSalesReport..............................
 const fillterSalesReport = async (req, res) => {
     try {
         const { dateFrom, dateTo } = req.body;
@@ -132,6 +136,8 @@ const fillterSalesReport = async (req, res) => {
         console.error(error.message + " fillterSalesReport")
     }
 }
+
+//....................................reportExcelDownload.............................
 const reportExcelDownload = async (req, res) => {
     try {
         const orderFilterData = req.session.orderFilterData
@@ -204,6 +210,8 @@ const reportExcelDownload = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 };
+
+//...........................download...........................
 const download = async (req, res) => {
     try {
         const excelFilePath = req.session.excelFilePath

@@ -1,5 +1,6 @@
 const productModel = require("../../model/productModel")
 
+//.................................loadProductList............................
 const loadProductList = async (req, res) => {
     try {
         const productData = await productModel.find({ isdeleted: true, quantity: { $gt: 0 } }).limit(6);
@@ -11,6 +12,7 @@ const loadProductList = async (req, res) => {
     }
 };
 
+//............................productListSort.....................................
 const productListSort = async (req, res) => {
     try {
         let sortBy = req.params.sortBy;
@@ -24,6 +26,7 @@ const productListSort = async (req, res) => {
     }
 };
 
+//.....................................productListFilter............................
 const productListFilter = async (req, res) => {
     try {
         const categories = req.query.category ? req.query.category.split(",") : [];
@@ -51,6 +54,7 @@ const productListFilter = async (req, res) => {
     }
 };
 
+//............................productListPagination.......................................
 const productListPagination = async (req, res) => {
     try {
         const pageNumber = Number(req.query.pageNumber);
@@ -73,6 +77,7 @@ const productListPagination = async (req, res) => {
     }
 };
 
+//.........................ProductListSearch...................................
 const ProductListSearch = async (req, res) => {
     try {
         const productListSearch = req.query.productListSearch;

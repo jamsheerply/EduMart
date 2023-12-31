@@ -1,4 +1,6 @@
 const userMOdel = require("../../model/userModel")
+
+//......................loadUser.........................
 const loadUser = async (req, res) => {
     try {
         const userData = await userMOdel.find({})
@@ -7,6 +9,8 @@ const loadUser = async (req, res) => {
         console.error(error.message + " loadUser")
     }
 }
+
+//.........................blockUser...........................
 const blockUser = async (req, res) => {
     try {
         const id = req.query.id
@@ -20,6 +24,8 @@ const blockUser = async (req, res) => {
         console.error(error.message + " blockUser")
     }
 }
+
+//...........................unBlockUser..........................
 const unBlockUser = async (req, res) => {
     try {
         const id = req.query.id

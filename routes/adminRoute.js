@@ -6,9 +6,9 @@ const userMangementController = require("../controller/admin/userManagmentContro
 const orderMangementController = require("../controller/admin/orderMangementController")
 const dashboardController = require("../controller/admin/dashboardController")
 const salesReportController = require("../controller/admin/salesReportController")
-const couponController=require("../controller/admin/couponController")
-const productOfferController=require("../controller/admin/productOfferController")
-const categoryOfferController=require("../controller/admin/categoryOfferController")
+const couponController = require("../controller/admin/couponController")
+const productOfferController = require("../controller/admin/productOfferController")
+const categoryOfferController = require("../controller/admin/categoryOfferController")
 // const path = require("path");
 const upload = require("../midddleware/multer")
 const adminAuth = require("../midddleware/adminAuth")
@@ -63,24 +63,24 @@ adminRoute.get("/sales-report/report_excel_download", adminAuth.verifyAdmin, sal
 adminRoute.get("/download", adminAuth.verifyAdmin, salesReportController.download)
 
 //..........................coupon....................................................
-adminRoute.get("/coupons",adminAuth.verifyAdmin,couponController.loadCoupon)
-adminRoute.post("/coupons",adminAuth.verifyAdmin,couponController.insertCoupon)
-adminRoute.get("/coupons/edit_coupon",adminAuth.verifyAdmin,couponController.loadEditCoupon)
-adminRoute.patch("/coupons/edit_coupon",adminAuth.verifyAdmin,couponController.insertEditCoupon)
-adminRoute.get("/coupons/deactive_coupon",adminAuth.verifyAdmin,couponController.deactivateCoupon)
+adminRoute.get("/coupons", adminAuth.verifyAdmin, couponController.loadCoupon)
+adminRoute.post("/coupons", adminAuth.verifyAdmin, couponController.insertCoupon)
+adminRoute.get("/coupons/edit_coupon", adminAuth.verifyAdmin, couponController.loadEditCoupon)
+adminRoute.patch("/coupons/edit_coupon", adminAuth.verifyAdmin, couponController.insertEditCoupon)
+adminRoute.get("/coupons/deactive_coupon", adminAuth.verifyAdmin, couponController.deactivateCoupon)
 
 //..........................productOffer....................................................
-adminRoute.get("/product_offers",adminAuth.verifyAdmin,productOfferController.loadProductOffer)
-adminRoute.post("/product_offers",adminAuth.verifyAdmin,productOfferController.AddProductOffer)
-adminRoute.get("/product_offers/edit_product_offers",adminAuth.verifyAdmin,productOfferController.loadEditProductOffer)
-adminRoute.patch("/product_offers/edit_product_offers",adminAuth.verifyAdmin,productOfferController.insertEditProductOffer)
-adminRoute.get("/product_offers/deactive_product_offers",adminAuth.verifyAdmin,productOfferController.deactivateProductOffer)
+adminRoute.get("/product_offers", adminAuth.verifyAdmin, productOfferController.loadProductOffer)
+adminRoute.post("/product_offers", adminAuth.verifyAdmin, productOfferController.AddProductOffer)
+adminRoute.get("/product_offers/edit_product_offers", adminAuth.verifyAdmin, productOfferController.loadEditProductOffer)
+adminRoute.patch("/product_offers/edit_product_offers", adminAuth.verifyAdmin, productOfferController.insertEditProductOffer)
+adminRoute.get("/product_offers/deactive_product_offers", adminAuth.verifyAdmin, productOfferController.deactivateProductOffer)
 
 //...............................categoryOffer.....................................................
-adminRoute.get("/category_offers",adminAuth.verifyAdmin,categoryOfferController.loadCategoryOffer)
-adminRoute.post("/category_offers",adminAuth.verifyAdmin,categoryOfferController.insertAddCategoryOffer)
-adminRoute.get("/category_offers/edit",adminAuth.verifyAdmin,categoryOfferController.loadEditCategoryOffer)
-adminRoute.patch("/category_offers/edit",adminAuth.verifyAdmin,categoryOfferController.insertEditCategoryOffer)
-adminRoute.get("/category_offers/deactivate",adminAuth.verifyAdmin,categoryOfferController.deactivateCategoryOffer)
+adminRoute.get("/category_offers", adminAuth.verifyAdmin, categoryOfferController.loadCategoryOffer)
+adminRoute.post("/category_offers", adminAuth.verifyAdmin, categoryOfferController.insertAddCategoryOffer)
+adminRoute.get("/category_offers/edit", adminAuth.verifyAdmin, categoryOfferController.loadEditCategoryOffer)
+adminRoute.patch("/category_offers/edit", adminAuth.verifyAdmin, categoryOfferController.insertEditCategoryOffer)
+adminRoute.get("/category_offers/deactivate", adminAuth.verifyAdmin, categoryOfferController.deactivateCategoryOffer)
 
 module.exports = adminRoute

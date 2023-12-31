@@ -1,4 +1,6 @@
 const couponModel = require("../../model/couponModel")
+
+//.........................loadCoupon.............................
 const loadCoupon = async (req, res) => {
     try {
         const couponData = await couponModel.find({})
@@ -9,6 +11,7 @@ const loadCoupon = async (req, res) => {
     }
 }
 
+//..............................addCoupon............................
 const insertCoupon = async (req, res) => {
     try {
         const { couponName, couponCode, expiryDate, discountPercentage, usageLimit, minimumOrderAmount } = req.body;
@@ -47,6 +50,8 @@ const insertCoupon = async (req, res) => {
         res.status(500).json({ error: 'Server error.' });
     }
 };
+
+//....................loadEditCoupon...........................
 const loadEditCoupon = async (req, res) => {
     try {
         const { couponId } = req.query;
@@ -58,9 +63,10 @@ const loadEditCoupon = async (req, res) => {
     }
 };
 
+//......................insertEditCoupon................................
 const insertEditCoupon = async (req, res) => {
     try {
-        const { couponId } = req.query; // Assuming the couponId is obtained from the query
+        const { couponId } = req.query;
 
         const {
             couponName,
@@ -101,7 +107,7 @@ const insertEditCoupon = async (req, res) => {
                 usageLimit: usageLimit,
                 minimumOrderAmount: minimumOrderAmount
             },
-            { new: true } // To get the updated document
+            { new: true }
         );
 
         if (!updatedCoupon) {
@@ -114,6 +120,8 @@ const insertEditCoupon = async (req, res) => {
         res.status(500).json({ error: 'Server Error,Coupon code or name already exists' });
     }
 };
+
+//...........................deactivateCoupon................................
 const deactivateCoupon = async (req, res) => {
     try {
         const { couponId } = req.query;
@@ -133,7 +141,7 @@ const deactivateCoupon = async (req, res) => {
     }
 }
 
-// Function to check coupon expiry and update status
+//......................deactivateCoupon.......................
 const checkCouponExpiry = async () => {
     try {
         console.error("checkCouponExpiry")
@@ -152,7 +160,7 @@ const checkCouponExpiry = async () => {
             if (coupon.expiryDate < currentDate) {
                 // Expired, update status to 'expired'
                 await couponModel.findByIdAndUpdate(coupon._id, { status: 'expired' });
-                expiredCouponNames.push(coupon.couponName); // Push expired coupon name to the array
+                expiredCouponNames.push(coupon.couponName);
             }
         });
 
@@ -165,7 +173,7 @@ const checkCouponExpiry = async () => {
     }
 };
 
-// Function to start the expiration check when the server starts
+//....................startCouponExpiryCheck.............................
 const startCouponExpiryCheck = async () => {
     try {
         // Run the check immediately when the server starts
@@ -178,7 +186,6 @@ const startCouponExpiryCheck = async () => {
     }
 };
 
-// Call the function to start the expiration check process when the server starts
 startCouponExpiryCheck();
 
 

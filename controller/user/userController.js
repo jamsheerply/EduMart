@@ -180,9 +180,6 @@ const verifyOtp = async (req, res) => {
     }
 };
 
-
-
-
 //............................resendOtp..................
 const resendOtp = async (req, res) => {
     try {
@@ -255,7 +252,6 @@ const verifyLogin = async (req, res) => {
     }
 }
 
-
 //..............logOut.......................
 const userLogout = async (req, res) => {
     try {
@@ -294,6 +290,7 @@ const loadProductDetail = async (req, res) => {
     }
 }
 
+//....................loadAddress..................................
 const loadAddress = async (req, res) => {
     try {
         const userId = req.session.userData._id;
@@ -309,6 +306,7 @@ const loadAddress = async (req, res) => {
     }
 }
 
+//....................loadCheckOut................................
 const loadCheckOut = async (req, res) => {
     try {
         const subtotal = req.session.subtotal;
@@ -490,15 +488,13 @@ const insertAddress = async (req, res) => {
     }
 };
 
-
-
+//.......................applyCoupon............................................
 const applyCoupon = async (req, res) => {
     try {
         const { couponCode } = req.query;
         req.session.couponCode = couponCode;
         req.session.save();
 
-        // Ensure 'userData' and 'subtotal' are available in the session
         if (!req.session.userData || !req.session.subtotal) {
             return res.status(400).json({ error: 'User data or subtotal is missing in the session.' });
         }
@@ -542,8 +538,6 @@ const applyCoupon = async (req, res) => {
         res.status(500).json({ error: 'Server Error' });
     }
 };
-
-
 
 
 const generateRazorpay = async (req, res) => {

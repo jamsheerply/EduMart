@@ -2,6 +2,7 @@ const cartModel = require("../../model/cartModel");
 const productModel = require("../../model/productModel");
 const produdctModel = require("../../model/productModel")
 
+//........................loadShopingCart.........................
 const loadShopingCart = async (req, res) => {
     try {
         const userId = req.session.userData._id;
@@ -40,7 +41,7 @@ const loadShopingCart = async (req, res) => {
     }
 };
 
-
+//..................................insertShopingCart.............................
 const insertShopingCart = async (req, res) => {
     try {
         const userId = req.session.userData._id;
@@ -55,12 +56,18 @@ const insertShopingCart = async (req, res) => {
                 userId: userId
             });
         }
+        
+        const productData = await productModel.findById(productId);
 
         const existingCartItem = cart.items.find(item => item.productId.toString() === productId);
-        if (existingCartItem) {
-            existingCartItem.quantity += 1;
+        if (!existingCartItem || productData.quantity > existingCartItem.quantity) {
+            if (existingCartItem) {
+                existingCartItem.quantity += 1;
+            } else {
+                cart.items.push({ productId: productId, quantity: 1 });
+            }
         } else {
-            cart.items.push({ productId: productId, quantity: 1 });
+            return res.json({ err: "limit exceeded" });
         }
 
         cart.totalQuantity += 1;
@@ -72,6 +79,8 @@ const insertShopingCart = async (req, res) => {
     }
 };
 
+
+//.............................updateShopingCart..................................
 const updateShopingCart = async (req, res) => {
     try {
         const { cartId, productId, count } = req.body;
@@ -133,7 +142,7 @@ const updateShopingCart = async (req, res) => {
     }
 };
 
-
+//.......................................deleteShopingCart...............................
 const deleteShopingCart = async (req, res) => {
     try {
         const cart = await cartModel.findById(req.params.cartId);

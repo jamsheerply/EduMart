@@ -2,6 +2,7 @@ const categoryModel = require("../../model/categoryModel")
 const categoryOfferModel = require("../../model/categoryOfferModel")
 const productModel = require("../../model/productModel")
 
+//..................loadCategoryOffer...........................
 const loadCategoryOffer = async (req, res) => {
     try {
         const categoryOfferData = await categoryOfferModel.find({})
@@ -12,6 +13,7 @@ const loadCategoryOffer = async (req, res) => {
     }
 }
 
+//........................addCategoryOffer.............................
 const insertAddCategoryOffer = async (req, res) => {
     try {
         const {
@@ -47,7 +49,7 @@ const insertAddCategoryOffer = async (req, res) => {
     }
 };
 
-
+//................................loadEditCategoryOffer.....................................
 const loadEditCategoryOffer = async (req, res) => {
     try {
         const { categoryOfferId } = req.query
@@ -58,6 +60,7 @@ const loadEditCategoryOffer = async (req, res) => {
     }
 }
 
+//...........................editCategoryOffer...............................................
 const insertEditCategoryOffer = async (req, res) => {
     try {
         const { categoryOfferId } = req.query
@@ -84,6 +87,7 @@ const insertEditCategoryOffer = async (req, res) => {
     }
 }
 
+//.....................deactivateCategoryOffer................................
 const deactivateCategoryOffer = async (req, res) => {
     try {
         const { categoryOfferId,categoryName } = req.query
@@ -98,6 +102,7 @@ const deactivateCategoryOffer = async (req, res) => {
     }
 }
 
+//..............................checkCategoryOfferExpiry................................................
 const checkCategoryOfferExpiry = async () => {
     try {
         console.error("checkCategoryOfferExpiry");
@@ -134,6 +139,7 @@ const checkCategoryOfferExpiry = async () => {
     }
 };
 
+//.......................startCategoryOfferExpiryCheck.................................
 const startCategoryOfferExpiryCheck = async () => {
     try {
         // Run the check immediately when the server starts

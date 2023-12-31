@@ -1,5 +1,6 @@
 const orderModel = require("../../model/orderModel")
 
+//...........................loadOrder...........................
 const loadOrder = async (req, res) => {
     try {
         const orderData = await orderModel.find({}).sort({ orderDate: -1 }).populate("userId").limit(8);
@@ -11,6 +12,8 @@ const loadOrder = async (req, res) => {
         console.error(error.message)
     }
 }
+
+//.........................orderPagination............................
 const orderPagination=async(req,res)=>{
     try {
         const orderPageNumber=Number(req.query.orderPageCount)
@@ -24,6 +27,8 @@ const orderPagination=async(req,res)=>{
         console.error(error.message+" orderPagination")
     }
 }
+
+//......................loadOrderDetail........................................
 const loadOrderDetail = async (req, res) => {
     try {
         const orderId = req.params.orderId
@@ -34,6 +39,7 @@ const loadOrderDetail = async (req, res) => {
     }
 }
 
+//...................................insertOrderDetail............................
 const insertOrderDetail = async (req, res) => {
     try {
         const { orderStatus, paymentStatus } = req.body;

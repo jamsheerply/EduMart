@@ -1,6 +1,7 @@
 const categoryModel = require("../../model/categoryModel")
 const productModel = require("../../model/productModel")
 
+//...........................loadProduct.........................
 const loadProduct = async (req, res) => {
     try {
         const productData = await productModel.find({}).limit(5);
@@ -13,6 +14,7 @@ const loadProduct = async (req, res) => {
     }
 };
 
+//...........................productPagination..............................
 const productPagination = async (req, res) => {
     try {
         const productPageNumber = Number(req.query.productPageCount);
@@ -28,7 +30,7 @@ const productPagination = async (req, res) => {
     }
 };
 
-
+//.........................loadAddProduct......................................
 const loadAddProduct = async (req, res) => {
     try {
         const categoryData = await categoryModel.find({})
@@ -37,12 +39,11 @@ const loadAddProduct = async (req, res) => {
         console.error(error.message + "loadAddProduct")
     }
 }
+
+//...........................insertAddProduct............................................
 const insertAddProduct = async (req, res) => {
     try {
-
-
         const productName = req.body.productName;
-
         const productData = await productModel.find({
             productName: { $regex: new RegExp(productName, 'i') },
         });
@@ -94,6 +95,7 @@ const insertAddProduct = async (req, res) => {
     }
 }
 
+//............................EditProductLoad........................
 const EditProductLoad = async (req, res) => {
     try {
         const id = req.query.id;
@@ -109,6 +111,7 @@ const EditProductLoad = async (req, res) => {
     }
 }
 
+//.............................updateProduct.................................
 const updateProduct = async (req, res) => {
     try {
         const id = req.params.id;
@@ -200,6 +203,8 @@ const updateProduct = async (req, res) => {
         return res.json({ err: "Product name already exists." });
     }
 }
+
+//........................................deleteProduct............................
 const deleteProduct = async (req, res) => {
     try {
         const id = req.query.id
@@ -213,6 +218,8 @@ const deleteProduct = async (req, res) => {
         console.error(error.message + " deleteProduct")
     }
 }
+
+//.........................................recoverProduct................................
 const recoverProduct = async (req, res) => {
     const id = req.query.id
     await productModel.updateOne({ _id: id }, {

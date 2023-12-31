@@ -1,6 +1,7 @@
 const productOfferModel = require("../../model/productOfferModel")
 const productModel = require("../../model/productModel")
 
+//...................................loadProductOffer.................................
 const loadProductOffer = async (req, res) => {
     try {
         const productData = await productModel.find({ quantity: { $gt: 0 } });
@@ -11,6 +12,7 @@ const loadProductOffer = async (req, res) => {
     }
 };
 
+//...............................AddProductOffer........................................
 const AddProductOffer = async (req, res) => {
     try {
         const {
@@ -46,6 +48,7 @@ const AddProductOffer = async (req, res) => {
     }
 };
 
+//.......................................loadEditProductOffer.......................................
 const loadEditProductOffer = async (req, res) => {
     try {
         const { productOfferId } = req.query;
@@ -66,6 +69,7 @@ const loadEditProductOffer = async (req, res) => {
     }
 };
 
+//..............................insertEditProductOffer..................................................
 const insertEditProductOffer = async (req, res) => {
     try {
         let { productOfferId } = req.query
@@ -95,6 +99,8 @@ const insertEditProductOffer = async (req, res) => {
         console.error(error.message + " insertEditProductOffer")
     }
 }
+
+//...........................deactivateProductOffer....................................
 const deactivateProductOffer = async (req, res) => {
     try {
         const { productOfferId ,productName} = req.query;
@@ -116,7 +122,7 @@ const deactivateProductOffer = async (req, res) => {
     }
 };
 
-
+//...................................checkProductOfferExpiry.............................
 const checkProductOfferExpiry = async () => {
     try {
         console.error("checkProductOfferExpiry");
@@ -155,6 +161,7 @@ const checkProductOfferExpiry = async () => {
     }
 };
 
+//.......................................startProductOfferExpiryCheck.................................
 const startProductOfferExpiryCheck = async () => {
     try {
         // Run the check immediately when the server starts

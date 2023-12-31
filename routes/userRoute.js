@@ -37,40 +37,40 @@ userRoute.get("/product-list/filter", userAuth.verifyUser, ProductListController
 userRoute.get("/product-list/pagination", userAuth.verifyUser, ProductListController.productListPagination)
 userRoute.get("/product-list/search", userAuth.verifyUser, ProductListController.ProductListSearch)
 
-//...................singleProudct...........................
+//............................singleProudct................................................
 userRoute.get("/product-detail", userAuth.verifyUser, userController.loadProductDetail)
 
-//...................shopping-cart...........................
+//...........................shopping-cart.................................................
 userRoute.get("/shopping-cart", userAuth.verifyUser, cartconstroller.loadShopingCart)
 userRoute.post("/shopping-cart", userAuth.verifyUser, cartconstroller.insertShopingCart)
 userRoute.post("/shopping-cart/update", userAuth.verifyUser, cartconstroller.updateShopingCart)
 userRoute.get("/shopping-cart/delete/:cartId/:productId", userAuth.verifyUser, cartconstroller.deleteShopingCart)
 
-//.......................check-out............................
+//...................................check-out..............................................
 userRoute.get("/address", userAuth.verifyUser, userController.loadAddress)
 userRoute.get("/check-out/:addressId", userAuth.verifyUser, userController.loadCheckOut)
 userRoute.post("/check-out", userAuth.verifyUser, userController.insertAddress)
 
-//...............................applyCoupon.................................
+//...................................applyCoupon............................................
 userRoute.get("/apply-coupon", userAuth.verifyUser, userController.applyCoupon)
 
+//...................................razorPay................................................
 userRoute.post('/check-out/generateRazorpayPayment', userController.generateRazorpay)
 userRoute.post("/check-out/verifyrazorpaypayment", userAuth.verifyUser, userController.verifyRazorpayPayment)
-//...................order........................................
+
+//..........................order...........................................................
 userRoute.get("/order/confirmation", userAuth.verifyUser, orderController.loadOrderConfirmation)
 userRoute.get("/order/list", userAuth.verifyUser, orderController.loadOrderList)
 userRoute.get("/order/detail/:OrderId", userAuth.verifyUser, orderController.loadOrderDetail)
 userRoute.post("/order/detail/:orderId", userAuth.verifyUser, orderController.updateOrderDetail)
 
-//........................userProfile..................................
+//...........................userProfile......................................................
 userRoute.get("/my-profile", userAuth.verifyUser, userController.loadMyProfile)
 userRoute.post("/my-profile", userAuth.verifyUser, userController.insertMyProfile)
-userRoute.post("/my-profile/upload-profile-image",upload.single('file'), userAuth.verifyUser, userController.uploadProfileImage)
+userRoute.post("/my-profile/upload-profile-image", upload.single('file'), userAuth.verifyUser, userController.uploadProfileImage)
 
 //........................referralOffer...........................
 userRoute.get("/referral-link", userAuth.userExist, userController.referralOffer)
-
-
 
 // userRoute.post("/admin/insert",userController.adminInsert)
 

@@ -10,6 +10,8 @@ const loadCategory = async (req, res) => {
         console.error(error.message + " loadcategory")
     }
 }
+
+//...................addCategory.......................................
 const insertCategory = async (req, res) => {
     try {
         const categoryName = req.body.categoryName; 
@@ -55,6 +57,8 @@ const insertCategory = async (req, res) => {
         return res.json({ err: "Category already exists." });
     }
 };
+
+//................................loadCategory.............................
 const getEditCategoryId = async (req, res) => {
     try {
         const id = req.params.id;
@@ -65,6 +69,8 @@ const getEditCategoryId = async (req, res) => {
         console.error(error.message + " getEditCategoryId")
     }
 }
+
+//.............................editCategory...............................
 const editCategory = async (req, res) => {
     try {
         const id = req.params.id
@@ -94,6 +100,8 @@ const editCategory = async (req, res) => {
         return res.json({ err: "Category already exists." });
     }
 }
+
+//................deleteCategory...................................
 const deleteCategory = async (req, res) => {
     try {
         const id = req.query.id;
@@ -108,6 +116,8 @@ const deleteCategory = async (req, res) => {
         console.error(error.message + " deleteCategory")
     }
 }
+
+//..............recoverCategory..........................................
 const recoverCategory = async (req, res) => {
     try {
         const id = req.query.id;
@@ -126,7 +136,6 @@ const recoverCategory = async (req, res) => {
 
 
 module.exports = {
-    //....category......
     loadCategory,
     insertCategory,
     getEditCategoryId,

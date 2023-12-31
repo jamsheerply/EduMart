@@ -49,6 +49,8 @@
     <link rel="stylesheet" href="user/css/responsive.css">
     <!-- Modernizr js -->
     <script src="user/js/vendor/modernizr-2.8.3.min.js"></script>
+    <!-- custom css-->
+    <link rel="stylesheet" href="css/user/myProfile.css">
 </head>
 
 <body>
@@ -171,7 +173,7 @@
         <!-- Li's Breadcrumb Area End Here -->
         <!-- Error 404 Area Start -->
         <div class="container">
-            <div class="row bg-warning">
+            <div class="row ">
                 <div class="col-4 d-flex align-items-center justify-content-center flex-column">
                     <div class="bg-warning">
                         <img id="previewImage"
@@ -253,32 +255,19 @@
                 </div>
 
             </div>
-            <div class="row justify-content-end mt-3 bg-success"> <!-- Apply margin-top here and align items -->
+            <div class="row justify-content-end mt-3 ">
+                 <!-- Apply margin-top here and align items -->
                 <div class="col-auto mb-5">
                     <button class="btn bg-success" onclick="editMyProfile()">change save</button>
                 </div>
+                
             </div>
-            <div class="row mt-4 bg-danger">
-                <div class="col-4 mb-3 bg-success">
-                    <style>
-                        .coupon {
-                            border-radius: 12px;
-                            box-shadow: 5px 8px 10px #d6d5d533;
-                        }
-
-                        body {
-                            background: rgb(251, 253, 255);
-                        }
-
-                        .code:hover {
-                            background: green;
-                            color: #fff;
-                            cursor: pointer;
-                        }
-                    </style>
-                    <!-- Large modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                        data-target=".bd-example-modal-lg">coupons</button>
+            <div class="row  ">
+                <div class="col-4  bg- d-flex flex-column align-items-center">
+                    <div class="bg-danger">
+                        <button class="btn btn-primary border" data-toggle="modal"
+                            data-target=".bd-example-modal-lg">coupon codes</button>
+                    </div>
 
                     <!-- Modal -->
                     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
@@ -341,19 +330,11 @@
                             </div>
                         </div>
                     </div>
-                    <style>
-                        .copy-container {
-                            display: flex;
-                            align-items: center;
-                        }
 
-                        #copyIcon {
-                            cursor: pointer;
-                        }
-                    </style>
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                        data-target="#exampleModalCenter">referreral code</button>
+                    <div class="bg-success mt-4" >
+                        <span  class="btn btn-primary border" data-toggle="modal"
+                            data-target="#exampleModalCenter">referreral code</span>
+                    </div>
 
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
@@ -397,7 +378,6 @@
                             });
                         });
                     </script>
-
                 </div>
 
                 <div class="col-8">

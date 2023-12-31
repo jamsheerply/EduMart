@@ -1,7 +1,8 @@
 const orderModel = require("../../model/orderModel");
 const productModel = require("../../model/productModel")
-const moment = require("moment")
+// const moment = require("moment")
 
+//...................................loadOrderConfirmation.........................
 const loadOrderConfirmation = async (req, res) => {
     try {
         const userId = req.session.userData._id;
@@ -17,6 +18,8 @@ const loadOrderConfirmation = async (req, res) => {
         console.error(error.message + " loadOrderConfirmation")
     }
 }
+
+//....................................loadOrderList............................
 const loadOrderList = async (req, res) => {
     try {
         const userId = req.session.userData._id;
@@ -27,6 +30,8 @@ const loadOrderList = async (req, res) => {
         console.error(error.message + " loadOrderList")
     }
 }
+
+//.................................loadOrderDetail..................................
 const loadOrderDetail = async (req, res) => {
     try {
         const orderId = req.params.OrderId
@@ -37,6 +42,7 @@ const loadOrderDetail = async (req, res) => {
     }
 }
 
+//......................................updateOrderDetail............................
 const updateOrderDetail = async (req, res) => {
     try {
         const { orderId } = req.params;
