@@ -1,6 +1,6 @@
 const express = require("express")
 const adminRoute = express()
-const categoryController = require("../controller/admin/CategoryController")
+const categoryController = require("../controller/admin/categoryController")
 const productController = require("../controller/admin/productController")
 const userMangementController = require("../controller/admin/userManagmentController")
 const orderMangementController = require("../controller/admin/orderMangementController")
