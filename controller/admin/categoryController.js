@@ -140,5 +140,9 @@ module.exports = {
     editCategory,
     deleteCategory,
     recoverCategory,
+<<<<<<< HEAD:controller/admin/CategoryController.js
     
 }
+=======
+}
+>>>>>>> f80184909faf74f29ee13efc1264cbc4fb2d065b:controller/admin/categoryController.js
