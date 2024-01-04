@@ -539,7 +539,6 @@ const applyCoupon = async (req, res) => {
     }
 };
 
-
 const generateRazorpay = async (req, res) => {
     try {
         const userId = req.session.userData._id;

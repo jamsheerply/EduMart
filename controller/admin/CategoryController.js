@@ -133,8 +133,6 @@ const recoverCategory = async (req, res) => {
     }
 }
 
-
-
 module.exports = {
     loadCategory,
     insertCategory,
