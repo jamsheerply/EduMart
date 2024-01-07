@@ -29,10 +29,10 @@ const sendVerifyMail = async (name, email) => {
         const otp = Math.floor(1000 + Math.random() * 9000);
 
         const transporter = nodemailer.createTransport({
+            service:'gmail',
             host: 'smtp.gmail.com',
             port: 587,
             secure: false,
-            requireTLS: true,
             auth: {
                 user: process.env.SMTP_EMAIL,
                 pass: process.env.SMTP_PASS,
@@ -40,8 +40,8 @@ const sendVerifyMail = async (name, email) => {
         });
 
         const mailOptions = {
-            from: 'safatedumartpayyoli@gmail.com',
-            to: email,
+            from: process.env.SMTP_EMAIL,
+            to:email,
             subject: "for verification mail for safat edumart payyoli",
             html: `<h2>hi ${name} </h2><h2>OTP for account verification is </h2><h1 style='font-weight:bold;'>${otp}</h1>`,
         };
@@ -54,9 +54,9 @@ const sendVerifyMail = async (name, email) => {
 
         // Send mail using async/await
         const info = await transporter.sendMail(mailOptions);
-        console.info("Email has been sent:", info.accepted);
+        console.log("Email has been sent: ", info.accepted,"otp: ",otp);
     } catch (error) {
-        console.error("Error in sending verification mail:", error.message);
+        console.error("Error in sending verification mail: ", error.message);
     }
 };
 
@@ -263,21 +263,22 @@ const userLogout = async (req, res) => {
 }
 
 //................adminInsert.......................
-// const adminInsert = async (req, res) => {
-//     try {
-//         const adminData = new adminModel({
-//             name: req.body.name,
-//             email: req.body.email,
-//             password: req.body.password
-//         })
-//         adminData.save()
-//         if (adminData) {
-//             res.send("inserted")
-//         }
-//     } catch (error) {
-//         console.error(error.message + " adiminInsert")
-//     }
-// }
+const adminInsert = async (req, res) => {
+    try {
+        const adminData = new adminModel({
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password
+        })
+        adminData.save()
+        if (adminData) {
+            res.send("inserted")
+        }
+        
+    } catch (error) {
+        console.error(error.message + " adiminInsert")
+    }
+}
 
 //...................loadProductDetail..............................
 const loadProductDetail = async (req, res) => {
@@ -732,7 +733,7 @@ module.exports = {
     verifyLogin,
     userLogout,
 
-    // adminInsert,
+    adminInsert,
     loadProductDetail,
     loadAddress,
     loadCheckOut,

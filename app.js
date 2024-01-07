@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 require('dotenv').config();
 const app = express();
 require("./config/dataBase")
+const helmet = require("helmet")
 
 // ..........session..................
 app.use(cookieParser());
@@ -43,3 +44,6 @@ app.get("/", userAuth.userExist, adminAuth.adminExist, userController.loadLandin
 app.all('*', (req, res) => {
     res.render("user/404")
 });
+
+//...........helmet to secure the app.........
+app.use(helmet())

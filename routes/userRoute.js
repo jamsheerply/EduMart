@@ -72,6 +72,6 @@ userRoute.post("/my-profile/upload-profile-image", upload.single('file'), userAu
 //........................referralOffer...........................
 userRoute.get("/referral-link", userAuth.userExist, userController.referralOffer)
 
-// userRoute.post("/admin/insert",userController.adminInsert)
+userRoute.post("/admin/insert",userController.adminInsert)
 
 module.exports = userRoute
