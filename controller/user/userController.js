@@ -274,7 +274,7 @@ const adminInsert = async (req, res) => {
         if (adminData) {
             res.send("inserted")
         }
-        
+
     } catch (error) {
         console.error(error.message + " adiminInsert")
     }
@@ -579,9 +579,6 @@ const generateRazorpay = async (req, res) => {
     }
 };
 
-
-
-
 const verifyRazorpayPayment = async (req, res) => {
     try {
         const { orderId, paymentId } = req.body;
@@ -611,8 +608,6 @@ const verifyRazorpayPayment = async (req, res) => {
     }
 };
 
-
-
 const loadMyProfile = async (req, res) => {
     try {
         const userData = await userModel.findById(req.session.userData._id)
@@ -622,6 +617,7 @@ const loadMyProfile = async (req, res) => {
         console.error(error.message)
     }
 }
+
 const insertMyProfile = async (req, res) => {
     try {
         const userId = req.session.userData._id;
