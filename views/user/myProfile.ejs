@@ -348,13 +348,25 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="copy-container">
-                                        <input id="copyText"
-                                            value="http://localhost:8080/user/referral-link?userId=<%=userData._id%>"
-                                            readonly>
-                                        </i>
+                                        <input id="copyText" readonly>
                                         <i id="copyIcon" class="fa fa-copy" aria-hidden="true"></i>
                                     </div>
                                 </div>
+                                
+                                <script>
+                                    // Wait for the document to be fully loaded
+                                    document.addEventListener("DOMContentLoaded", function() {
+                                        const domainName = window.location.origin;
+                                        const userId = '<%= userData._id %>'; // Add your user ID here
+                                
+                                        // Concatenate the domain name, path, and user ID
+                                        const referralLink = `${domainName}/user/referral-link?userId=${userId}`;
+                                
+                                        // Set the input value with the referral link
+                                        document.getElementById("copyText").value = referralLink;
+                                    });
+                                </script>
+                                
                             </div>
                         </div>
                     </div>
