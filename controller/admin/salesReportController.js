@@ -37,6 +37,7 @@ const loadSalesReport = async (req, res) => {
                     'products.quantity': 1, 
                     'products.price': 1, 
                     populatedUser: 1,
+                    orderNumber:1
                 }
             },
             {
@@ -118,6 +119,7 @@ const fillterSalesReport = async (req, res) => {
                     populatedProducts: 1,
                     'products.quantity': 1, 
                     populatedUser: 1,
+                    orderNumber:1
                 }
             },
             {
@@ -182,7 +184,7 @@ const reportExcelDownload = async (req, res) => {
                 worksheet.addRow({
                     no: ++counter,
                     productName: product.productName,
-                    OrderId: lastFourDigits,
+                    OrderId: data.orderNumber,
                     userName: data.populatedUser[0].firstName,
                     OrderDate: formattedDate,
                     quantity: data.products[0].quantity,

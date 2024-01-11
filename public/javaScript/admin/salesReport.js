@@ -59,7 +59,7 @@ function fillerDate() {
           <tr>
             <td>${++counter}</td> <!-- Increment the counter for each row -->
             <td>${product.productName}</td>
-            <td>${lastFourDigits}</td>
+            <td>${data.orderNumber}</td>
             <td>${data.populatedUser[0].firstName}</td>
             <td>${formattedDate}</td>
             <td>${data.products[0].quantity}</td>

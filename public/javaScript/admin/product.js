@@ -233,7 +233,7 @@ function productPagination(productPageCount) {
           rows.push(
             `<tr>
             <td>${element.productName}</td>
-            <td><img src="http://localhost:8080/${element.imageURL[0].productImage1}"
+            <td><img src="${element.imageURL[0].productImage1}"
                 style="height: 50px; width:50px;" alt=""></td>
             <td>${element.category}</td>
             <td>${element.price}</td>
