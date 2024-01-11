@@ -10,8 +10,8 @@ const couponSchema=new mongoose.Schema({
     usageLimit:{type:Number},
     users:[{userId:{type:String},count:{type:Number},limit:{type:Number}}],
     status:{type:String,enum:["active","expired","deactive"],default:"active"},
-    minimumOrderAmount:{type:Number}
-
+    minimumOrderAmount:{type:Number},
+    maximumDiscountAmount:{type:Number}
 })
 
 module.exports = mongoose.model("coupon", couponSchema);

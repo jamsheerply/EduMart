@@ -29,7 +29,7 @@ const sendVerifyMail = async (name, email) => {
         const otp = Math.floor(1000 + Math.random() * 9000);
 
         const transporter = nodemailer.createTransport({
-            service:'gmail',
+            service: 'gmail',
             host: 'smtp.gmail.com',
             port: 587,
             secure: false,
@@ -41,7 +41,7 @@ const sendVerifyMail = async (name, email) => {
 
         const mailOptions = {
             from: process.env.SMTP_EMAIL,
-            to:email,
+            to: email,
             subject: "for verification mail for safat edumart payyoli",
             html: `<h2>hi ${name} </h2><h2>OTP for account verification is </h2><h1 style='font-weight:bold;'>${otp}</h1>`,
         };
@@ -54,7 +54,7 @@ const sendVerifyMail = async (name, email) => {
 
         // Send mail using async/await
         const info = await transporter.sendMail(mailOptions);
-        console.log("Email has been sent: ", info.accepted,"otp: ",otp);
+        console.log("Email has been sent: ", info.accepted, "otp: ", otp);
     } catch (error) {
         console.error("Error in sending verification mail: ", error.message);
     }
@@ -400,6 +400,26 @@ const insertAddress = async (req, res) => {
             const deliveryDate = new Date();
             deliveryDate.setDate(deliveryDate.getDate() + 7); // Adding 7 days to the current date
 
+            //create unique order Number
+            function generateUniqueID(length = 16) {
+                let result = 'SE';
+                const numbers = '0123456789';
+                const numbersLength = numbers.length;
+
+                // Generate random numbers for the remaining length after 'SE'
+                for (let i = 0; i < length - 2; i++) {
+                    result += numbers.charAt(Math.floor(Math.random() * numbersLength));
+                }
+
+                return result;
+            }
+            const orderNumber = generateUniqueID()
+            const existingOrderNumber = await orderModel.find({ orderNumber: orderNumber })
+            if (existingOrderNumber) {
+                generateUniqueID()
+            }
+            console.log(orderNumber)
+
             const orderData = new orderModel({
                 userId: req.session.userData._id,
                 products: products,
@@ -410,6 +430,7 @@ const insertAddress = async (req, res) => {
                 paymentStatus: 'pending',
                 paymentMethod: paymentMethod,
                 deliveryDate: deliveryDate,
+                orderNumber:orderNumber,
                 activity: [{
                     date: orderDate,
                     status: 'ordered'
@@ -421,7 +442,7 @@ const insertAddress = async (req, res) => {
 
             const savedOrder = await orderData.save();
 
-        
+
             const couponData = await couponModel.findOne({ couponCode: req.session.couponCode, status: "active" });
 
             // Check if the couponData is valid and the coupon is active
@@ -455,7 +476,7 @@ const insertAddress = async (req, res) => {
 
             //storing in session in for orderConfirmations
             req.session.discount = 0;
-            req.session.orderId = orderData._id
+            req.session.orderId = orderData.orderNumber
             req.session.shippingAddress = shippingAddress
             req.session.save()
 
@@ -472,7 +493,7 @@ const insertAddress = async (req, res) => {
                             element.productId,
                             { $inc: { quantity: -element.quantity } }
                         );
-                       
+
                     } catch (updateError) {
                         console.error(`Error updating product quantity for ID ${element.productId}: ${updateError.message}`);
                         return res.status(500).json({ error: 'An error occurred while updating product quantities.' });
@@ -527,9 +548,14 @@ const applyCoupon = async (req, res) => {
         // Reset session variables before applying the coupon
         req.session.discount = 0;
         req.session.grandtotal = req.session.subtotal;
+        const discount = req.session.grandtotal * (couponData.discountPercentage / 100)
 
         // Calculate the discount and update session variables
-        req.session.discount = req.session.grandtotal * (couponData.discountPercentage / 100);
+        if (discount > couponData.maximumDiscountAmount) {
+            req.session.discount = couponData.maximumDiscountAmount
+        } else {
+            req.session.discount = discount
+        }
         req.session.grandtotal = req.session.subtotal - req.session.discount;
 
         // Send a success response back to the client

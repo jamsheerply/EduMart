@@ -6,6 +6,7 @@ function resetAddCoupon() {
     document.getElementById('discountPercentage').value = '';
     document.getElementById('usageLimit').value = '';
     document.getElementById('minimumOrderAmount').value = ''
+    document.getElementById('maximumDiscountAmount').value = ''
 }
 
 function addCouponValidation() {
@@ -15,6 +16,7 @@ function addCouponValidation() {
     var discountPercentage = parseFloat(document.getElementById('discountPercentage').value);
     var usageLimit = parseInt(document.getElementById('usageLimit').value);
     var minimumOrderAmount = parseFloat(document.getElementById('minimumOrderAmount').value);
+    var maximumDiscountAmount = parseFloat(document.getElementById('maximumDiscountAmount').value);
 
     // Validation for Coupon Name (checking if it's not empty and <= 30 characters)
     if (couponName.trim() === '' || couponName.length > 30) {
@@ -77,6 +79,15 @@ function addCouponValidation() {
     } else {
         document.getElementById('minimumOrderAmountError').style.display = 'none';
     }
+    // Validation for maximumDiscountAmount (checking if above or equal to zero and only numbers)
+    var maximumDiscountAmount = document.getElementById('maximumDiscountAmount').value.trim();
+    if (maximumDiscountAmount <=0 || isNaN(maximumDiscountAmount) || !/^\d+(\.\d+)?%?$/.test(maximumDiscountAmount)) {
+        document.getElementById('maximumDiscountAmountError').style.display = 'block';
+        document.getElementById('maximumDiscountAmountError').innerText = 'Maximum Discount Amount should be a non-negative whole number.';
+        return false;
+    } else {
+        document.getElementById('maximumDiscountAmountError').style.display = 'none';
+    }
     return true;
 
 }
@@ -88,6 +99,7 @@ function addCoupon() {
     var discountPercentage = parseFloat(document.getElementById('discountPercentage').value);
     var usageLimit = parseInt(document.getElementById('usageLimit').value);
     var minimumOrderAmount = parseFloat(document.getElementById('minimumOrderAmount').value);
+    var maximumDiscountAmount = parseFloat(document.getElementById('maximumDiscountAmount').value);
 
     const formBody = {
         couponName: couponName,
@@ -95,7 +107,8 @@ function addCoupon() {
         expiryDate: expiryDate,
         discountPercentage: discountPercentage,
         usageLimit: usageLimit,
-        minimumOrderAmount: minimumOrderAmount
+        minimumOrderAmount: minimumOrderAmount,
+        maximumDiscountAmount:maximumDiscountAmount
     }
 
     if (addCouponValidation()) {
@@ -120,9 +133,6 @@ function addCoupon() {
                 // Handle fetch errors
                 console.error('There was a problem with the fetch operation:', error);
             });
-    } else {
-        // Handle validation errors
-        console.error('Validation failed. Please correct the input.');
     }
 }
 
@@ -145,6 +155,7 @@ function loadEditCoupon(id) {
             document.getElementById(`discountPercentageEdit${id}`).value = data.couponData.discountPercentage;
             document.getElementById(`usageLimitEdit${id}`).value = data.couponData.usageLimit;
             document.getElementById(`minimumOrderAmountEdit${id}`).value = data.couponData.minimumOrderAmount;
+            document.getElementById(`maximumDiscountAmountEdit${id}`).value = data.couponData.maximumDiscountAmount;
 
             // Update other elements as needed
         })
@@ -225,6 +236,16 @@ function editCouponValidation(id) {
         document.getElementById(`minimumOrderAmountEditError${id}`).style.display = 'none';
     }
 
+    // Validation for maxmium discount Amount (checking if above or equal to zero and only numbers)
+    var maximumDiscountAmountEdit = document.getElementById(`maximumDiscountAmountEdit${id}`).value.trim();
+    if (maximumDiscountAmountEdit <= 0 || isNaN(maximumDiscountAmountEdit) || !/^\d+(\.\d+)?%?$/.test(maximumDiscountAmountEdit)) {
+        document.getElementById(`maximumDiscountAmountEditError${id}`).style.display = 'block';
+        document.getElementById(`maximumDiscountAmountEditError${id}`).innerText = 'maximum discount Amount should be a non-negative whole number.';
+        return false;
+    } else {
+        document.getElementById(`maximumDiscountAmountEditError${id}`).style.display = 'none';
+    }
+
 
     // If all validations pass
     return true;
@@ -238,6 +259,7 @@ function EditCoupon(id) {
     var discountPercentage = parseFloat(document.getElementById(`discountPercentageEdit${id}`).value);
     var usageLimit = parseInt(document.getElementById(`usageLimitEdit${id}`).value);
     var minimumOrderAmount = parseFloat(document.getElementById(`minimumOrderAmountEdit${id}`).value);
+    var maximumDiscountAmount = parseFloat(document.getElementById(`maximumDiscountAmountEdit${id}`).value);
 
     const formBody = {
         couponName: couponName,
@@ -245,7 +267,8 @@ function EditCoupon(id) {
         expiryDate: expiryDate,
         discountPercentage: discountPercentage,
         usageLimit: usageLimit,
-        minimumOrderAmount: minimumOrderAmount
+        minimumOrderAmount: minimumOrderAmount,
+        maximumDiscountAmount:maximumDiscountAmount
     };
 
     if (editCouponValidation(id)) {

@@ -25,6 +25,7 @@ const orderSchema = new mongoose.Schema({
     paymentStatus: { type: String, enum: ['pending', 'paid', 'cancelled'] },
     paymentMethod: { type: String, enum: ['COD', 'online', 'wallet'] },
     billNumber: { type: String },
+    orderNumber:{type: String},
     deliveryDate: { type: String },
     activity: [{
         date: { type: String },

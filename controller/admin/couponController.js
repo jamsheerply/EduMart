@@ -14,7 +14,7 @@ const loadCoupon = async (req, res) => {
 //..............................addCoupon............................
 const insertCoupon = async (req, res) => {
     try {
-        const { couponName, couponCode, expiryDate, discountPercentage, usageLimit, minimumOrderAmount } = req.body;
+        const { couponName, couponCode, expiryDate, discountPercentage, usageLimit, minimumOrderAmount,maximumDiscountAmount } = req.body;
 
         // Convert couponName and couponCode to lowercase for case-insensitive comparison
         const normalizedCouponName = couponName.toLowerCase();
@@ -38,7 +38,8 @@ const insertCoupon = async (req, res) => {
             expiryDate,
             discountPercentage,
             usageLimit,
-            minimumOrderAmount
+            minimumOrderAmount,
+            maximumDiscountAmount
         });
 
         await newCoupon.save();
@@ -74,7 +75,8 @@ const insertEditCoupon = async (req, res) => {
             expiryDate,
             discountPercentage,
             usageLimit,
-            minimumOrderAmount
+            minimumOrderAmount,
+            maximumDiscountAmount
         } = req.body;
 
         // Convert couponName and couponCode to lowercase for case-insensitive comparison
@@ -105,7 +107,8 @@ const insertEditCoupon = async (req, res) => {
                 status: "active",
                 discountPercentage: discountPercentage,
                 usageLimit: usageLimit,
-                minimumOrderAmount: minimumOrderAmount
+                minimumOrderAmount: minimumOrderAmount,
+                maximumDiscountAmount:maximumDiscountAmount
             },
             { new: true }
         );

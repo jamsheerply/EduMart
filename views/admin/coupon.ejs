@@ -256,6 +256,11 @@
                       <input type="text" class="form-control" id="minimumOrderAmount">
                       <p id="minimumOrderAmountError" style="color: red;"></p>
                     </div>
+                    <div class="form-group">
+                      <label for="maximumDiscountAmount" class="col-form-label">maximum Discount Amount</label>
+                      <input type="text" class="form-control" id="maximumDiscountAmount">
+                      <p id="maximumDiscountAmountError" style="color: red;"></p>
+                    </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-danger" onclick="resetAddCoupon()">Reset</button>
                       <button type="submit" class="btn btn-success" onclick="addCoupon()">Add</button>
@@ -358,6 +363,11 @@
                                   <label for="minimumOrderAmount" class="col-form-label">Minimum Order Amount</label>
                                   <input type="text" class="form-control" id="minimumOrderAmountEdit<%= data._id %>">
                                   <p id="minimumOrderAmountEditError<%= data._id %>" style="color: red;"></p>
+                                </div>
+                                <div class="form-group">
+                                  <label for="maximumDiscountAmount" class="col-form-label">maximum Discount Amount</label>
+                                  <input type="text" class="form-control" id="maximumDiscountAmountEdit<%= data._id %>">
+                                  <p id="maximumDiscountAmountEditError<%= data._id %>" style="color: red;"></p>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
