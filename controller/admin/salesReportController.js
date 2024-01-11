@@ -199,7 +199,7 @@ const reportExcelDownload = async (req, res) => {
 
         worksheet.addRow({ orderStatus: 'Total Sales Amount', price: totalSalesAmount.toFixed(2) });
 
-        const excelFilePath = `/salesReport/excel/sales-report-${dateFrom}-${dateTo}-${date}.xlsx`;
+        const excelFilePath = `public/salesReport/excel/sales-report-${dateFrom}-${dateTo}-${date}.xlsx`;
 
         // Write the Excel file
         await workbook.xlsx.writeFile(excelFilePath);
