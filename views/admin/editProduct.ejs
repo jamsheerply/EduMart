@@ -304,21 +304,23 @@
               </div>
               <div class="form-group">
                 <label for="price" class="label-left">Category</label>
+                
                 <select name="category" id="category">
-                  <% category.forEach((value)=> { %>
-                    <option value="<%=value.category%>">
-                      <%=value.category%>
+                  <% category.forEach((value) => { %>
+                    <option value="<%= value.category %>" <%= product.category === value.category ? "selected" : "" %>>
+                      <%= value.category %>
                     </option>
-                    <%})%>
+                  <% }) %>
                 </select>
+
                 <p id="categoryError" style="color: red;"></p>
               </div>
               <div class="form-group">
                 <label for="status" class="label-left">Status</label>
                 <select name="status" id="status">
-                  <option value="published">Published</option>
-                  <option value="draft">Draft</option>
-                  <option value="outofstock">Out of stock</option>
+                  <option value="published" <%=product.status==="published" ? "selected" : "" %>>Published</option>
+                  <option value="draft" <%=product.status==="draft" ? "selected" : "" %>>Draft</option>
+                  <option value="outofstock" <%=product.status==="outofstock" ? "selected" : "" %>>Out of stock</option>
                   <!-- <option value="lowquantity">Low quantity</option> -->
                 </select>
                 <p id="statusError" style="color: red;"></p>

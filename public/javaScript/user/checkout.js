@@ -54,7 +54,7 @@ function validateAddress() {
         document.getElementById("addressError").textContent = "Address is required";
         valid = false;
     }else if (address.length > 32) {
-        document.getElementById("addressError").textContent = "Address should not exceed 20 characters";
+        document.getElementById("addressError").textContent = "Address should not exceed 32 characters";
         valid = false;
     }
 
@@ -90,6 +90,9 @@ function validateAddress() {
     if (!emailRegex.test(email)) {
         document.getElementById("emailError").textContent = "Invalid Email Format";
         valid = false;
+    }else if (email.length > 20) {
+        document.getElementById("emailError").textContent = "Email  should not exceed 20 characters";
+        valid = false;
     }
 
     // Validation for Phone
@@ -97,8 +100,8 @@ function validateAddress() {
     if (!phoneRegex.test(phone)) {
         document.getElementById("phoneError").textContent = "Phone must be a 10-digit number";
         valid = false;
-    }else if (lastName.length > 20) {
-        document.getElementById("lastNameError").textContent = "Last Name should not exceed 20 characters";
+    }else if (phone.length > 10) {
+        document.getElementById("phoneError").textContent = "Phone should not exceed 20 characters";
         valid = false;
     }
 

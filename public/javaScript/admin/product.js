@@ -25,10 +25,16 @@ function validateProductForm() {
   if (productName.trim() === "") {
     document.getElementById("productNameError").textContent = "Product Name is required";
     valid = false;
+  } else if (productName.length > 50) {
+    document.getElementById("productNameError").textContent = "Product Name should not exceed 50 characters";
+    valid = false;
   }
 
   if (productDescription.trim() === "") {
     document.getElementById("productDescriptionError").textContent = "Product Description is required";
+    valid = false;
+  } else if (productDescription.length > 1000) {
+    document.getElementById("productDescriptionError").textContent = "Product should not exceed 1000 characters";
     valid = false;
   }
 
@@ -40,10 +46,16 @@ function validateProductForm() {
   if (publisher.trim() === "") {
     document.getElementById("publisherError").textContent = "Publisher is required";
     valid = false;
+  } else if (publisher.length > 32) {
+    document.getElementById("publisherError").textContent = "Publisher should not exceed 32 characters";
+    valid = false;
   }
 
   if (language.trim() === "") {
     document.getElementById("languageError").textContent = "Language is required";
+    valid = false;
+  } else if (language.length > 20) {
+    document.getElementById("languageError").textContent = "Language should not exceed 20 characters";
     valid = false;
   }
 
@@ -55,9 +67,16 @@ function validateProductForm() {
   if (isNaN(parseFloat(price)) || parseFloat(price) <= 0) {
     document.getElementById("priceError").textContent = "Price must be a number greater than 0";
     valid = false;
+  } else if (price.length > 10) {
+    document.getElementById("priceError").textContent = "Price should not exceed 10 characters";
+    valid = false;
   }
+
   if (isNaN(parseFloat(quantity)) || parseFloat(quantity) < 0) {
     document.getElementById("quantityError").textContent = "quantity must be a number greater than 0";
+    valid = false;
+  }else if (quantity.length > 5) {
+    document.getElementById("quantityError").textContent = "quantity should not exceed 10 characters";
     valid = false;
   }
 
@@ -319,7 +338,7 @@ function productPagination(productPageCount) {
         </div>`;
 
       document.getElementById("productTableRow").innerHTML = tableContent || '<h1>Data not found</h1>';
-      
+
       if (data.productPageNumber) {
         document.querySelector('#productPageNumber').innerHTML = data.productPageNumber;
       }
