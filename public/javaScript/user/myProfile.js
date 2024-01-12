@@ -18,13 +18,19 @@ function validateForm() {
     if (!firstName || firstName.trim() === "") {
         document.getElementById("firstNameError").textContent = "First Name is required.";
         valid = false;
-    }
+    }else if (firstName.length > 32) {
+        document.getElementById("firstNameError").textContent = "First Name should not exceed 32 characters";
+        valid = false;
+      }
 
     // Validate last name
     if (!lastName || lastName.trim() === "") {
         document.getElementById("lastNameError").textContent = "Last Name is required.";
         valid = false;
-    }
+    }else if (lastName.length > 20) {
+        document.getElementById("lastNameError").textContent = "Last Name should not exceed 20 characters";
+        valid = false;
+      }
 
     // Validate email
     if (!email) {
@@ -42,7 +48,10 @@ function validateForm() {
     } else if (isNaN(phone) || phone.length !== 10) {
         document.getElementById("phoneError").textContent = "Phone number should be a 10-digit number.";
         valid = false;
-    }
+    }else if (phone.length > 10) {
+        document.getElementById("phoneError").textContent = "Phone number should not exceed 10 Numbers";
+        valid = false;
+      }
 
 
     return valid;
@@ -106,7 +115,10 @@ function formValidation() {
     } else if (!strongPasswordRegex.test(newPassword)) {
         document.getElementById("passwordError").textContent = "New Password must be at least 8 characters long and include letters, digits, and special characters.";
         valid = false;
-    }
+    }else if (newPassword.length > 32) {
+        document.getElementById("passwordError").textContent = "New Password should not exceed 32 characters";
+        valid = false;
+      }
 
     if (newPassword !== confirmPassword) {
         document.getElementById("passwordMatchStatus").textContent = "Passwords do not match.";
