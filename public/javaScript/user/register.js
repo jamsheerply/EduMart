@@ -24,11 +24,17 @@ function validateForm() {
     if (!firstName || firstName.trim() === "") {
         document.getElementById("firstNameError").textContent = "First Name is required.";
         valid = false;
+    }else if (firstName.length > 32) {
+        document.getElementById("firstNameError").textContent = "Frist Name should not exceed 32 characters";
+        valid = false;
     }
 
     // Validate last name
     if (!lastName|| lastName.trim() === "") {
         document.getElementById("lastNameError").textContent = "Last Name is required.";
+        valid = false;
+    }else if (lastName.length > 20) {
+        document.getElementById("lastNameError").textContent = "Last Name should not exceed 20 characters";
         valid = false;
     }
 

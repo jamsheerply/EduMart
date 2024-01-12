@@ -35,11 +35,17 @@ function validateAddress() {
     if (firstName.trim() === "") {
         document.getElementById("firstNameError").textContent = "First Name is required";
         valid = false;
+    }else if (firstName.length > 32) {
+        document.getElementById("firstNameError").textContent = "Frist Name should not exceed 32 characters";
+        valid = false;
     }
 
     // Validation for Last Name
     if (lastName.trim() === "") {
         document.getElementById("lastNameError").textContent = "Last Name is required";
+        valid = false;
+    }else if (lastName.length > 20) {
+        document.getElementById("lastNameError").textContent = "Last Name should not exceed 20 characters";
         valid = false;
     }
 
@@ -47,11 +53,17 @@ function validateAddress() {
     if (address.trim() === "") {
         document.getElementById("addressError").textContent = "Address is required";
         valid = false;
+    }else if (address.length > 32) {
+        document.getElementById("addressError").textContent = "Address should not exceed 20 characters";
+        valid = false;
     }
 
     // Validation for City
     if (city.trim() === "") {
         document.getElementById("cityError").textContent = "City is required";
+        valid = false;
+    }else if (city.length > 20) {
+        document.getElementById("cityError").textContent = "City should not exceed 20 characters";
         valid = false;
     }
 
@@ -59,11 +71,17 @@ function validateAddress() {
     if (state.trim() === "") {
         document.getElementById("stateError").textContent = "State is required";
         valid = false;
+    }else if (state.length > 20) {
+        document.getElementById("stateError").textContent = "State should not exceed 20 characters";
+        valid = false;
     }
 
     // Validation for Post Code
     if (isNaN(postCode) || postCode.trim() === "" || postCode.length !== 6) {
         document.getElementById("postCodeError").textContent = "Post Code must be a 6-digit number";
+        valid = false;
+    }else if (lastName.length > 20) {
+        document.getElementById("lastNameError").textContent = "Post Code should not exceed 20 characters";
         valid = false;
     }
 
@@ -78,6 +96,9 @@ function validateAddress() {
     const phoneRegex = /^[0-9]{10}$/;
     if (!phoneRegex.test(phone)) {
         document.getElementById("phoneError").textContent = "Phone must be a 10-digit number";
+        valid = false;
+    }else if (lastName.length > 20) {
+        document.getElementById("lastNameError").textContent = "Last Name should not exceed 20 characters";
         valid = false;
     }
 
