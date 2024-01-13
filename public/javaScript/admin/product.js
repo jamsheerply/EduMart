@@ -46,8 +46,8 @@ function validateProductForm() {
   if (publisher.trim() === "") {
     document.getElementById("publisherError").textContent = "Publisher is required";
     valid = false;
-  } else if (publisher.length > 32) {
-    document.getElementById("publisherError").textContent = "Publisher should not exceed 32 characters";
+  } else if (publisher.length > 50) {
+    document.getElementById("publisherError").textContent = "Publisher should not exceed 50 characters";
     valid = false;
   }
 
