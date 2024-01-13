@@ -25,8 +25,8 @@ function validateProductForm() {
   if (productName.trim() === "") {
     document.getElementById("productNameError").textContent = "Product Name is required";
     valid = false;
-  } else if (productName.length > 50) {
-    document.getElementById("productNameError").textContent = "Product Name should not exceed 50 characters";
+  } else if (productName.length > 150) {
+    document.getElementById("productNameError").textContent = "Product Name should not exceed 150 characters";
     valid = false;
   }
 
