@@ -1,3 +1,12 @@
+# Node modules directory
 node_modules/
+
+# Environment variables
 *.env
+
+# Vercel configuration files
 .vercel
+
+# VS Code configuration files
+.vscode/
+
