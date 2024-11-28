@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const path = require("path");
+const fetch = require("node-fetch");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const app = express();
@@ -60,3 +61,20 @@ app.all("*", (req, res) => {
 
 //...........helmet to secure the app.........
 app.use(helmet());
+
+//..........for run in render every time
+
+const fetchApiData = async () => {
+  try {
+    const response = await fetch("https://edumart.onrender.com");
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    console.log("API Response:", response.status);
+  } catch (error) {
+    console.error("Error fetching API data:", error);
+  }
+};
+
+const intervalId = setInterval(fetchApiData, 14000);
