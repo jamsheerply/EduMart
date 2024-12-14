@@ -64,17 +64,17 @@ app.use(helmet());
 
 //..........for run in render every time
 
-const fetchApiData = async () => {
-  try {
-    const response = await fetch("https://edumart.onrender.com");
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
+// const fetchApiData = async () => {
+//   try {
+//     const response = await fetch("https://edumart.onrender.com");
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! Status: ${response.status}`);
+//     }
 
-    console.log("API Response:", response.status);
-  } catch (error) {
-    console.error("Error fetching API data:", error);
-  }
-};
+//     console.log("API Response:", response.status);
+//   } catch (error) {
+//     console.error("Error fetching API data:", error);
+//   }
+// };
 
-const intervalId = setInterval(fetchApiData, 14000);
+// const intervalId = setInterval(fetchApiData, 14000);
