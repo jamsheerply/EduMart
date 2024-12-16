@@ -4,12 +4,11 @@ WORKDIR /server
 
 COPY package.*json .
 
-RUN npm install
 
 COPY . .
 
-RUN ls -al 
+RUN npm install
 
-EXPOSE 5000
+EXPOSE 9000
 
 CMD [ "npm", "start" ]
