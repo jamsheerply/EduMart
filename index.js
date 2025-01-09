@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const path = require("path");
-const fetch = require("node-fetch");
+// const fetch = require("node-fetch");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const app = express();
